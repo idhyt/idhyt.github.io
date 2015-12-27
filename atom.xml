@@ -3,9 +3,9 @@
   <title><![CDATA[idhyt's blog]]></title>
   <subtitle><![CDATA[风轻云淡]]></subtitle>
   <link href="/atom.xml" rel="self"/>
-  <link href="http://blog.idhyt.xyz/"/>
+  <link href="http://blog.idhyt.com/"/>
   <updated>2015-12-27T10:00:37.000Z</updated>
-  <id>http://blog.idhyt.xyz/</id>
+  <id>http://blog.idhyt.com/</id>
   
   <author>
     <name><![CDATA[idhyt]]></name>
@@ -16,11 +16,11 @@
   
   <entry>
     <title><![CDATA[安卓注入框架Xposed用法详解]]></title>
-    <link href="http://blog.idhyt.xyz/2015/11/28/4-android-injection-xposed-usage/"/>
-    <id>http://blog.idhyt.xyz/2015/11/28/4-android-injection-xposed-usage/</id>
+    <link href="http://blog.idhyt.com/2015/11/28/4-android-injection-xposed-usage/"/>
+    <id>http://blog.idhyt.com/2015/11/28/4-android-injection-xposed-usage/</id>
     <published>2015-11-27T17:11:11.000Z</published>
     <updated>2015-12-27T10:00:37.000Z</updated>
-    <content type="html"><![CDATA[<p>&#160;&#160;&#160;&#160;之前<a href="http://blog.idhyt.xyz/2015/09/25/4-android-injection-xposed/">安卓注入框架Xposed分析与简单应用</a>只是简单的了解了一下xposed框架，知道如何hook函数，并没有深入去使用，也不知道这个框架能用到哪种程度，最近详细的总结了下，简单来说就是，没有hook不到的地方，只有你想不到的地方。</p>
+    <content type="html"><![CDATA[<p>&#160;&#160;&#160;&#160;之前<a href="http://blog.idhyt.xyz/2015/09/25/4-android-injection-xposed/" target="_blank" rel="external">安卓注入框架Xposed分析与简单应用</a>只是简单的了解了一下xposed框架，知道如何hook函数，并没有深入去使用，也不知道这个框架能用到哪种程度，最近详细的总结了下，简单来说就是，没有hook不到的地方，只有你想不到的地方。</p>
 <h2 id="接管系统所有广播包">接管系统所有广播包</h2><p>&#160;&#160;&#160;&#160;在Android四大组件中，Broadcast是一种广泛运用的在应用程序之间传输信息的机制。而BroadcastReceiver 是对发送出来的Broadcast进行过滤接受并响应的一类组件。应用通过BroadcastReceiver对一个外部的事件做出响应，这是非常有意思的，当开机，锁屏等外部事件到来的时候，可以利用BroadcastReceiver进行相应的处理。如果你能接管所有的广播包，基本上就接管了整个系统的信息传输过程。广播包也是频繁唤醒手机的一个重要原因，通过管理这些广播包，可以达到省电效果。</p>
 <p>通过阅读源代码中<br><a href="http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/5.1.1_r1/com/android/server/firewall/IntentFirewall.java#IntentFirewall" target="_blank" rel="external">IntentFirewall</a>这个类，126行代码开始有一些以<code>check</code>开头的方法，说明如下:</p>
 <pre><code>This is called from ActivityManager to<span class="instruction"> check </span>if a start activity intent should be allowed. It is assumed the caller is already holding the global ActivityManagerService lock.
@@ -62,19 +62,19 @@
 <h2 id="总结">总结</h2><p>&#160;&#160;&#160;&#160;xposed框架不仅能够hook任意你想hook的函数，并且自身也有一个很大的特点，就是一旦用户安装并启用，你所有的操作都不需要任何权限就可实现。基于xposed框架的优秀应用也特别多，比如著名的省电应用<code>绿色守护</code>。再如有一些app对敏感数据进行加密，加密算法又很复杂，那么通过hook解密函数就可以轻松的拿到明文。xposed框架的奇妙之处远远不仅于此，国外也有人对其进行二次封装作出了更神奇的用法，例如<a href="https://github.com/seebye/XClasses" target="_blank" rel="external">XClasses</a>，如果你有什么奇淫技巧，我只想对你说四个字，请带上我！</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>&#160;&#160;&#160;&#160;之前<a href="http://blog.idhyt.xyz/2015/09/25/4-android-injection-xposed/">安卓注入框架Xposed分析与简单应用</a>只是简单的了解了一下xposed框]]>
+    <![CDATA[<p>&#160;&#160;&#160;&#160;之前<a href="http://blog.idhyt.xyz/2015/09/25/4-android-injection-xposed/" target="_blank" rel="external">安卓注入框架Xpo]]>
     </summary>
     
-      <category term="xposed" scheme="http://blog.idhyt.xyz/tags/xposed/"/>
+      <category term="xposed" scheme="http://blog.idhyt.com/tags/xposed/"/>
     
-      <category term="android" scheme="http://blog.idhyt.xyz/categories/android/"/>
+      <category term="android" scheme="http://blog.idhyt.com/categories/android/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[adb shell常用命令]]></title>
-    <link href="http://blog.idhyt.xyz/2015/10/31/4-android-adb-shell-command/"/>
-    <id>http://blog.idhyt.xyz/2015/10/31/4-android-adb-shell-command/</id>
+    <link href="http://blog.idhyt.com/2015/10/31/4-android-adb-shell-command/"/>
+    <id>http://blog.idhyt.com/2015/10/31/4-android-adb-shell-command/</id>
     <published>2015-10-31T03:45:11.000Z</published>
     <updated>2015-12-27T09:44:20.000Z</updated>
     <content type="html"><![CDATA[<ul>
@@ -265,16 +265,16 @@
 <li><p>查看模拟器/设施的当前状态:]]>
     </summary>
     
-      <category term="adb" scheme="http://blog.idhyt.xyz/tags/adb/"/>
+      <category term="adb" scheme="http://blog.idhyt.com/tags/adb/"/>
     
-      <category term="android" scheme="http://blog.idhyt.xyz/categories/android/"/>
+      <category term="android" scheme="http://blog.idhyt.com/categories/android/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[安卓注入框架Xposed分析与简单应用]]></title>
-    <link href="http://blog.idhyt.xyz/2015/09/25/4-android-injection-xposed/"/>
-    <id>http://blog.idhyt.xyz/2015/09/25/4-android-injection-xposed/</id>
+    <link href="http://blog.idhyt.com/2015/09/25/4-android-injection-xposed/"/>
+    <id>http://blog.idhyt.com/2015/09/25/4-android-injection-xposed/</id>
     <published>2015-09-24T18:29:11.000Z</published>
     <updated>2015-12-27T09:59:35.000Z</updated>
     <content type="html"><![CDATA[<h3 id="概述">概述</h3><p>Xposed是针对Android平台的动态劫持项目，源码<a href="https://github.com/rovo89" target="_blank" rel="external">github</a></p>
@@ -343,23 +343,23 @@
 <p>整个工程目录如下所示:<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-3e.jpg" alt="project-dir"></p>
 <p>7.运行之后 会在虚拟机中看到我们的插件已经安装到xposed模块里边，然后勾选重启系统。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-4.jpg" alt="install-ok"></p>
 <p>8.重启过后，加入过滤规则“loaded app”，在logcat窗口会看到我们的输出日志信息，你打开应用也会显示加载的应用包名。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-5.jpg" alt="logcat-out"></p>
-<h3 id="xposed用法详解">xposed用法详解</h3><p>移步：<a href="http://blog.idhyt.xyz/2015/11/28/4-android-injection-xposed-usage/">安卓注入框架Xposed用法详解</a></p>
+<h3 id="xposed用法详解">xposed用法详解</h3><p>移步：<a href="http://blog.idhyt.xyz/2015/11/28/4-android-injection-xposed-usage/" target="_blank" rel="external">安卓注入框架Xposed用法详解</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="概述">概述</h3><p>Xposed是针对Android平台的动态劫持项目，源码<a href="https://github.com/rovo89" target="_blank" rel="external">github</a></p>
 <h4 id="]]>
     </summary>
     
-      <category term="xposed" scheme="http://blog.idhyt.xyz/tags/xposed/"/>
+      <category term="xposed" scheme="http://blog.idhyt.com/tags/xposed/"/>
     
-      <category term="android" scheme="http://blog.idhyt.xyz/categories/android/"/>
+      <category term="android" scheme="http://blog.idhyt.com/categories/android/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[生活碎碎念]]></title>
-    <link href="http://blog.idhyt.xyz/2015/08/22/1-diary-2015-08-22/"/>
-    <id>http://blog.idhyt.xyz/2015/08/22/1-diary-2015-08-22/</id>
+    <link href="http://blog.idhyt.com/2015/08/22/1-diary-2015-08-22/"/>
+    <id>http://blog.idhyt.com/2015/08/22/1-diary-2015-08-22/</id>
     <published>2015-08-22T07:06:11.000Z</published>
     <updated>2015-09-20T14:47:19.000Z</updated>
     <content type="html"><![CDATA[<p>&#160; &#160; &#160; &#160;生活好简单呢，还是生活本来就应该这样，由一些简单的事情组成，做任何事情不期望的那么复杂，吃饭睡觉工作，有人一起也是极好的，没人一起也还是按照自己的想法去做就好。最近最上心的一件事情就是学会了游泳，每晚自己会去游一会，刚开始去的时候跟着里边的小朋友学，有天晚上一个热心的大哥告诉我怎么游，然后试了两个晚上就会了，有时候回来的路上会边走边唱歌，然后四周张望下能不能碰到熟人。<br><a id="more"></a></p>
@@ -375,16 +375,16 @@
     
     </summary>
     
-      <category term="diary" scheme="http://blog.idhyt.xyz/tags/diary/"/>
+      <category term="diary" scheme="http://blog.idhyt.com/tags/diary/"/>
     
-      <category term="无法描述" scheme="http://blog.idhyt.xyz/categories/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
+      <category term="无法描述" scheme="http://blog.idhyt.com/categories/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[python challenge 21-27]]></title>
-    <link href="http://blog.idhyt.xyz/2015/08/13/5-python-challenge-21-27/"/>
-    <id>http://blog.idhyt.xyz/2015/08/13/5-python-challenge-21-27/</id>
+    <link href="http://blog.idhyt.com/2015/08/13/5-python-challenge-21-27/"/>
+    <id>http://blog.idhyt.com/2015/08/13/5-python-challenge-21-27/</id>
     <published>2015-08-13T13:55:11.000Z</published>
     <updated>2015-12-27T08:54:21.000Z</updated>
     <content type="html"><![CDATA[<p>继续斗智斗勇中。已经开始谷歌大法好了。。</p>
@@ -416,16 +416,16 @@
 <h3 id="python_challenge_21"><a href="">python challenge 21</a></h3><p><code>invader.zip</code><br><figure class]]>
     </summary>
     
-      <category term="challenge" scheme="http://blog.idhyt.xyz/tags/challenge/"/>
+      <category term="challenge" scheme="http://blog.idhyt.com/tags/challenge/"/>
     
-      <category term="python" scheme="http://blog.idhyt.xyz/categories/python/"/>
+      <category term="python" scheme="http://blog.idhyt.com/categories/python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[python challenge 11-20]]></title>
-    <link href="http://blog.idhyt.xyz/2015/08/10/5-python-challenge-11-20/"/>
-    <id>http://blog.idhyt.xyz/2015/08/10/5-python-challenge-11-20/</id>
+    <link href="http://blog.idhyt.com/2015/08/10/5-python-challenge-11-20/"/>
+    <id>http://blog.idhyt.com/2015/08/10/5-python-challenge-11-20/</id>
     <published>2015-08-10T09:34:11.000Z</published>
     <updated>2015-12-27T08:54:38.000Z</updated>
     <content type="html"><![CDATA[<p>接上边继续斗智斗勇中。越来越觉得智商不够用了。。</p>
@@ -482,16 +482,16 @@
 <h3 id="python_challenge_11"><a href="http://www.pythonchallenge.com/pc/return/5808.html" target="_blank" re]]>
     </summary>
     
-      <category term="challenge" scheme="http://blog.idhyt.xyz/tags/challenge/"/>
+      <category term="challenge" scheme="http://blog.idhyt.com/tags/challenge/"/>
     
-      <category term="python" scheme="http://blog.idhyt.xyz/categories/python/"/>
+      <category term="python" scheme="http://blog.idhyt.com/categories/python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[python challenge 0-10]]></title>
-    <link href="http://blog.idhyt.xyz/2015/08/07/5-python-challenge-0-10/"/>
-    <id>http://blog.idhyt.xyz/2015/08/07/5-python-challenge-0-10/</id>
+    <link href="http://blog.idhyt.com/2015/08/07/5-python-challenge-0-10/"/>
+    <id>http://blog.idhyt.com/2015/08/07/5-python-challenge-0-10/</id>
     <published>2015-08-07T08:06:11.000Z</published>
     <updated>2015-12-27T08:54:08.000Z</updated>
     <content type="html"><![CDATA[<p>最近闲下来了四处看资料，然后找到了这个python challenge网页闯关游戏。<br>这个游戏需要通过一些提示找出下一关的网页地址，链接：<a href="http://www.pythonchallenge.com/" target="_blank" rel="external">http://www.pythonchallenge.com/</a><br>题目出的也是充满想象力，斗智斗勇中。。。<br>解题代码整理在我的 <a href="https://github.com/idhyt/python_challenge" target="_blank" rel="external">github</a></p>
@@ -567,16 +567,16 @@
     <![CDATA[<p>最近闲下来了四处看资料，然后找到了这个python challenge网页闯关游戏。<br>这个游戏需要通过一些提示找出下一关的网页地址，链接：<a href="http://www.pythonchallenge.com/" target="_blank" rel="ex]]>
     </summary>
     
-      <category term="challenge" scheme="http://blog.idhyt.xyz/tags/challenge/"/>
+      <category term="challenge" scheme="http://blog.idhyt.com/tags/challenge/"/>
     
-      <category term="python" scheme="http://blog.idhyt.xyz/categories/python/"/>
+      <category term="python" scheme="http://blog.idhyt.com/categories/python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[安卓逆向学习笔记-ClickButton]]></title>
-    <link href="http://blog.idhyt.xyz/2015/05/11/4-android-reverse-clickbutton/"/>
-    <id>http://blog.idhyt.xyz/2015/05/11/4-android-reverse-clickbutton/</id>
+    <link href="http://blog.idhyt.com/2015/05/11/4-android-reverse-clickbutton/"/>
+    <id>http://blog.idhyt.com/2015/05/11/4-android-reverse-clickbutton/</id>
     <published>2015-05-11T09:45:11.000Z</published>
     <updated>2015-12-27T08:55:44.000Z</updated>
     <content type="html"><![CDATA[<p>安卓逆向笔记,熟悉smali语法和函数调用<br>一个按钮程序,实现功能：点击 - 弹窗 - 退出</p>
@@ -654,16 +654,16 @@ Lpackage/name/ObjectName;表示类型，MethodName是方法名。III为参数（
 <figure class="highlight plain"><table><tr><td clas]]>
     </summary>
     
-      <category term="smali" scheme="http://blog.idhyt.xyz/tags/smali/"/>
+      <category term="smali" scheme="http://blog.idhyt.com/tags/smali/"/>
     
-      <category term="android" scheme="http://blog.idhyt.xyz/categories/android/"/>
+      <category term="android" scheme="http://blog.idhyt.com/categories/android/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Netbeans动态调试smali文件]]></title>
-    <link href="http://blog.idhyt.xyz/2015/05/08/4-android-netbeans-debug-smali/"/>
-    <id>http://blog.idhyt.xyz/2015/05/08/4-android-netbeans-debug-smali/</id>
+    <link href="http://blog.idhyt.com/2015/05/08/4-android-netbeans-debug-smali/"/>
+    <id>http://blog.idhyt.com/2015/05/08/4-android-netbeans-debug-smali/</id>
     <published>2015-05-08T13:11:11.000Z</published>
     <updated>2015-12-27T08:55:30.000Z</updated>
     <content type="html"><![CDATA[<p>通过修改apk包来实现动态调试smali文件。</p>
@@ -705,16 +705,16 @@ java -jar <span class="string">"%~dp0signapk.jar"</span> <span class="string">"%
 <h2 id="调试工具">调试工具</h2><p><a href="https://netbeans.org/features/java/index.html" target="_blank" rel="extern]]>
     </summary>
     
-      <category term="debug" scheme="http://blog.idhyt.xyz/tags/debug/"/>
+      <category term="debug" scheme="http://blog.idhyt.com/tags/debug/"/>
     
-      <category term="android" scheme="http://blog.idhyt.xyz/categories/android/"/>
+      <category term="android" scheme="http://blog.idhyt.com/categories/android/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[SQL注入测试思路]]></title>
-    <link href="http://blog.idhyt.xyz/2015/04/21/2-sql-inject/"/>
-    <id>http://blog.idhyt.xyz/2015/04/21/2-sql-inject/</id>
+    <link href="http://blog.idhyt.com/2015/04/21/2-sql-inject/"/>
+    <id>http://blog.idhyt.com/2015/04/21/2-sql-inject/</id>
     <published>2015-04-21T06:46:11.000Z</published>
     <updated>2015-12-27T08:56:25.000Z</updated>
     <content type="html"><![CDATA[<p>SQL注入测试思路整理<a id="more"></a></p>
@@ -816,16 +816,16 @@ and (select count(*)</span> <span class="keyword">from</span> msysobjects)&gt;<s
     
     </summary>
     
-      <category term="inject" scheme="http://blog.idhyt.xyz/tags/inject/"/>
+      <category term="inject" scheme="http://blog.idhyt.com/tags/inject/"/>
     
-      <category term="web" scheme="http://blog.idhyt.xyz/categories/web/"/>
+      <category term="web" scheme="http://blog.idhyt.com/categories/web/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[WebView组件远程代码执行漏洞]]></title>
-    <link href="http://blog.idhyt.xyz/2015/04/09/2-abusing-webview/"/>
-    <id>http://blog.idhyt.xyz/2015/04/09/2-abusing-webview/</id>
+    <link href="http://blog.idhyt.com/2015/04/09/2-abusing-webview/"/>
+    <id>http://blog.idhyt.com/2015/04/09/2-abusing-webview/</id>
     <published>2015-04-09T03:30:21.000Z</published>
     <updated>2015-04-11T03:11:11.000Z</updated>
     <content type="html"><![CDATA[<p>&#160; &#160; &#160; &#160;在android的sdk中封装了webView控件,在webView下有一个非常特殊的接口函数addJavascriptInterface,利用这个接口函数可实现穿透webkit控制android 本机。<br><a id="more"></a></p>
@@ -870,16 +870,16 @@ and (select count(*)</span> <span class="keyword">from</span> msysobjects)&gt;<s
     
     </summary>
     
-      <category term="webview" scheme="http://blog.idhyt.xyz/tags/webview/"/>
+      <category term="webview" scheme="http://blog.idhyt.com/tags/webview/"/>
     
-      <category term="android" scheme="http://blog.idhyt.xyz/categories/android/"/>
+      <category term="android" scheme="http://blog.idhyt.com/categories/android/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[无法描述]]></title>
-    <link href="http://blog.idhyt.xyz/2015/03/23/1-essay-record/"/>
-    <id>http://blog.idhyt.xyz/2015/03/23/1-essay-record/</id>
+    <link href="http://blog.idhyt.com/2015/03/23/1-essay-record/"/>
+    <id>http://blog.idhyt.com/2015/03/23/1-essay-record/</id>
     <published>2015-03-23T13:46:33.000Z</published>
     <updated>2015-09-20T14:47:19.000Z</updated>
     <content type="html"><![CDATA[<ul>
@@ -921,16 +921,16 @@ and (select count(*)</span> <span class="keyword">from</span> msysobjects)&gt;<s
     
     </summary>
     
-      <category term="joke" scheme="http://blog.idhyt.xyz/tags/joke/"/>
+      <category term="joke" scheme="http://blog.idhyt.com/tags/joke/"/>
     
-      <category term="无法描述" scheme="http://blog.idhyt.xyz/categories/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
+      <category term="无法描述" scheme="http://blog.idhyt.com/categories/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[git使用总结]]></title>
-    <link href="http://blog.idhyt.xyz/2015/01/16/2-git-conclusion/"/>
-    <id>http://blog.idhyt.xyz/2015/01/16/2-git-conclusion/</id>
+    <link href="http://blog.idhyt.com/2015/01/16/2-git-conclusion/"/>
+    <id>http://blog.idhyt.com/2015/01/16/2-git-conclusion/</id>
     <published>2015-01-16T13:46:33.000Z</published>
     <updated>2015-09-20T14:47:19.000Z</updated>
     <content type="html"><![CDATA[<p>windows下git使用总结<a id="more"></a></p>
@@ -1016,16 +1016,16 @@ Are you sure you want to continue connecting (yes/no)?
     
     </summary>
     
-      <category term="git" scheme="http://blog.idhyt.xyz/tags/git/"/>
+      <category term="git" scheme="http://blog.idhyt.com/tags/git/"/>
     
-      <category term="技术" scheme="http://blog.idhyt.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://blog.idhyt.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[我逝去的2014]]></title>
-    <link href="http://blog.idhyt.xyz/2015/01/02/1-annual-summary-2014/"/>
-    <id>http://blog.idhyt.xyz/2015/01/02/1-annual-summary-2014/</id>
+    <link href="http://blog.idhyt.com/2015/01/02/1-annual-summary-2014/"/>
+    <id>http://blog.idhyt.com/2015/01/02/1-annual-summary-2014/</id>
     <published>2015-01-01T19:51:11.000Z</published>
     <updated>2015-09-20T14:47:19.000Z</updated>
     <content type="html"><![CDATA[<p>&#160; &#160; &#160; &#160;12点，看着别人都是带着wife跨年，先不说这wife是不是自己的，可是我连个wifi都没有，网都连不上，完全不给刷存在感的机会，好心塞。跨年这种事吧，两种情况下才能有气氛，一种是情侣，先不说情侣是不是自己的（又来。。），另一种是身边还有一种单身的人一起热闹，第一种是个人问题，好吧，我个人有问题，第二种吧到了这种年纪，都是在晒孩子的，出了校门哪还有这群闲人啊，想想也是醉了。自己呆着打打游戏吧，总觉得有点可惜，出去看看吧，看的是别人在热闹，一个字，冷暖自知（威虎山还不错）。<br><a id="more"></a></p>
@@ -1051,16 +1051,16 @@ Are you sure you want to continue connecting (yes/no)?
     
     </summary>
     
-      <category term="diary" scheme="http://blog.idhyt.xyz/tags/diary/"/>
+      <category term="diary" scheme="http://blog.idhyt.com/tags/diary/"/>
     
-      <category term="无法描述" scheme="http://blog.idhyt.xyz/categories/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
+      <category term="无法描述" scheme="http://blog.idhyt.com/categories/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[xss bypass]]></title>
-    <link href="http://blog.idhyt.xyz/2014/10/15/2-xss-bypass/"/>
-    <id>http://blog.idhyt.xyz/2014/10/15/2-xss-bypass/</id>
+    <link href="http://blog.idhyt.com/2014/10/15/2-xss-bypass/"/>
+    <id>http://blog.idhyt.com/2014/10/15/2-xss-bypass/</id>
     <published>2014-10-15T03:56:24.000Z</published>
     <updated>2015-12-27T08:56:19.000Z</updated>
     <content type="html"><![CDATA[<p>xss绕过技巧整理<a id="more"></a></p>
@@ -1090,16 +1090,16 @@ Are you sure you want to continue connecting (yes/no)?
     
     </summary>
     
-      <category term="xss" scheme="http://blog.idhyt.xyz/tags/xss/"/>
+      <category term="xss" scheme="http://blog.idhyt.com/tags/xss/"/>
     
-      <category term="web" scheme="http://blog.idhyt.xyz/categories/web/"/>
+      <category term="web" scheme="http://blog.idhyt.com/categories/web/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[病毒分析-haimianbaobao流氓驱动]]></title>
-    <link href="http://blog.idhyt.xyz/2014/09/10/3-virus-malware-driver-hmbb/"/>
-    <id>http://blog.idhyt.xyz/2014/09/10/3-virus-malware-driver-hmbb/</id>
+    <link href="http://blog.idhyt.com/2014/09/10/3-virus-malware-driver-hmbb/"/>
+    <id>http://blog.idhyt.com/2014/09/10/3-virus-malware-driver-hmbb/</id>
     <published>2014-09-10T09:52:11.000Z</published>
     <updated>2015-09-20T14:47:19.000Z</updated>
     <content type="html"><![CDATA[<p>haimianbaobao流氓驱动行为分析以及溯源追查<a id="more"></a></p>
@@ -1153,16 +1153,16 @@ Are you sure you want to continue connecting (yes/no)?
     
     </summary>
     
-      <category term="virus" scheme="http://blog.idhyt.xyz/tags/virus/"/>
+      <category term="virus" scheme="http://blog.idhyt.com/tags/virus/"/>
     
-      <category term="逆向" scheme="http://blog.idhyt.xyz/categories/%E9%80%86%E5%90%91/"/>
+      <category term="逆向" scheme="http://blog.idhyt.com/categories/%E9%80%86%E5%90%91/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[病毒分析-驱动过滤]]></title>
-    <link href="http://blog.idhyt.xyz/2014/09/02/3-virus-malware-driver-filter/"/>
-    <id>http://blog.idhyt.xyz/2014/09/02/3-virus-malware-driver-filter/</id>
+    <link href="http://blog.idhyt.com/2014/09/02/3-virus-malware-driver-filter/"/>
+    <id>http://blog.idhyt.com/2014/09/02/3-virus-malware-driver-filter/</id>
     <published>2014-09-02T08:54:11.000Z</published>
     <updated>2015-09-20T14:47:19.000Z</updated>
     <content type="html"><![CDATA[<p>一个流氓驱动行为简略分析<a id="more"></a></p>
@@ -1185,16 +1185,16 @@ SESID为当前系统时间
     
     </summary>
     
-      <category term="virus" scheme="http://blog.idhyt.xyz/tags/virus/"/>
+      <category term="virus" scheme="http://blog.idhyt.com/tags/virus/"/>
     
-      <category term="逆向" scheme="http://blog.idhyt.xyz/categories/%E9%80%86%E5%90%91/"/>
+      <category term="逆向" scheme="http://blog.idhyt.com/categories/%E9%80%86%E5%90%91/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[病毒分析-捆绑推广]]></title>
-    <link href="http://blog.idhyt.xyz/2014/07/24/3-virus-malware-winrar/"/>
-    <id>http://blog.idhyt.xyz/2014/07/24/3-virus-malware-winrar/</id>
+    <link href="http://blog.idhyt.com/2014/07/24/3-virus-malware-winrar/"/>
+    <id>http://blog.idhyt.com/2014/07/24/3-virus-malware-winrar/</id>
     <published>2014-07-24T06:13:11.000Z</published>
     <updated>2015-09-20T14:47:19.000Z</updated>
     <content type="html"><![CDATA[<p>捆绑安装，流氓推广<a id="more"></a></p>
@@ -1238,16 +1238,16 @@ C:<span class="command">\Program</span> Files<span class="command">\winrar</span
     
     </summary>
     
-      <category term="virus" scheme="http://blog.idhyt.xyz/tags/virus/"/>
+      <category term="virus" scheme="http://blog.idhyt.com/tags/virus/"/>
     
-      <category term="逆向" scheme="http://blog.idhyt.xyz/categories/%E9%80%86%E5%90%91/"/>
+      <category term="逆向" scheme="http://blog.idhyt.com/categories/%E9%80%86%E5%90%91/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[病毒分析-淘宝客]]></title>
-    <link href="http://blog.idhyt.xyz/2014/01/11/3-virus-troj-taobao/"/>
-    <id>http://blog.idhyt.xyz/2014/01/11/3-virus-troj-taobao/</id>
+    <link href="http://blog.idhyt.com/2014/01/11/3-virus-troj-taobao/"/>
+    <id>http://blog.idhyt.com/2014/01/11/3-virus-troj-taobao/</id>
     <published>2014-01-11T03:11:11.000Z</published>
     <updated>2015-09-20T14:47:19.000Z</updated>
     <content type="html"><![CDATA[<p>淘宝客病毒分析，附带驱动过滤<a id="more"></a></p>
@@ -1330,16 +1330,16 @@ C:<span class="command">\Program</span> Files<span class="command">\winrar</span
     
     </summary>
     
-      <category term="virus" scheme="http://blog.idhyt.xyz/tags/virus/"/>
+      <category term="virus" scheme="http://blog.idhyt.com/tags/virus/"/>
     
-      <category term="逆向" scheme="http://blog.idhyt.xyz/categories/%E9%80%86%E5%90%91/"/>
+      <category term="逆向" scheme="http://blog.idhyt.com/categories/%E9%80%86%E5%90%91/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[病毒分析-parite感染型]]></title>
-    <link href="http://blog.idhyt.xyz/2014/01/05/3-virus-infected-parite/"/>
-    <id>http://blog.idhyt.xyz/2014/01/05/3-virus-infected-parite/</id>
+    <link href="http://blog.idhyt.com/2014/01/05/3-virus-infected-parite/"/>
+    <id>http://blog.idhyt.com/2014/01/05/3-virus-infected-parite/</id>
     <published>2014-01-05T03:11:11.000Z</published>
     <updated>2015-09-20T14:47:19.000Z</updated>
     <content type="html"><![CDATA[<p>parite感染型病毒行为分析 <a id="more"></a></p>
@@ -1376,9 +1376,9 @@ C:<span class="command">\Program</span> Files<span class="command">\winrar</span
     
     </summary>
     
-      <category term="virus" scheme="http://blog.idhyt.xyz/tags/virus/"/>
+      <category term="virus" scheme="http://blog.idhyt.com/tags/virus/"/>
     
-      <category term="逆向" scheme="http://blog.idhyt.xyz/categories/%E9%80%86%E5%90%91/"/>
+      <category term="逆向" scheme="http://blog.idhyt.com/categories/%E9%80%86%E5%90%91/"/>
     
   </entry>
   
