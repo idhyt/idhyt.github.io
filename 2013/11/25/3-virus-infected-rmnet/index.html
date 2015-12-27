@@ -1,0 +1,778 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+  <meta name="google-site-verification" content="i9ah5x5ODvKLpoCyNxyAxw8p0lbULKKLPS3IBF7_Guc" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="水中月.镜中花.浮华一片苍凉.." />
+
+
+
+  <meta name="keywords" content="virus," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idhyt's blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="感染型病毒rmnet简略行为分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="病毒分析-rmnet感染型">
+<meta property="og:url" content="http://blog.idhyt.xyz/2013/11/25/3-virus-infected-rmnet/index.html">
+<meta property="og:site_name" content="idhyt's blog">
+<meta property="og:description" content="感染型病毒rmnet简略行为分析">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-1.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-2.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-6.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-7.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-8.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-9.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-10.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-3.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-4.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-5.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-11.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-12.png">
+<meta property="og:updated_time" content="2015-09-20T14:47:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="病毒分析-rmnet感染型">
+<meta name="twitter:description" content="感染型病毒rmnet简略行为分析">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 病毒分析-rmnet感染型 | idhyt's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-61722826-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5228d77c5752954f270fcca0908555af";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">风轻云淡</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'VpXUP87KQneoFZ3srxxA','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              病毒分析-rmnet感染型
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2013-11-25T11:11:11+08:00" content="2013-11-25">
+            2013-11-25
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/逆向/" itemprop="url" rel="index">
+                  <span itemprop="name">逆向</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2013/11/25/3-virus-infected-rmnet/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2013/11/25/3-virus-infected-rmnet/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>感染型病毒rmnet简略行为分析<a id="more"></a></p>
+<h2 id="调试环境">调试环境</h2><p>Windows xp sp3，Olldbg，010editor</p>
+<h2 id="病毒简介">病毒简介</h2><p>该程序运行后，先自检测是否为C\Program Files\Microsoft\DesktopLayer.exe，然后后台创建ie进程并注入，最终遍历系统磁盘和可移动盘感染后缀为exe,dll,html,htm的文件，并感染可移动磁盘（U盘）。同时与远程服务器进行通信，下载程序并执行。<br>该病毒母体文件代码被混淆，无法用ida和od调试，通过行为监控得知其注入ie进程，因此将其注入代码从ie进程中dump出来进行分析。</p>
+<h2 id="运行过程">运行过程</h2><h3 id="自检测">自检测</h3><p>检测自身是否在C\Program Files\Microsoft\DesktopLayer.exe，不是的话拷贝自身到该目录下重新运行</p>
+<h3 id="绕过防火墙">绕过防火墙</h3><p>创建IEXPLORE.EXE进程，设置为后台运行，将自身注入到IE进程中运行，因此可以绕过本地防火墙与远程服务器进行通信。</p>
+<h3 id="自启动">自启动</h3><p>创建线程Thread_1 设置自启动<br>获取注册表Software\Microsoft\Windows NT\CurrentVersion\Winlogon\userinit键值，判断自身是否在其键值中，不存在将自身写入该键值，设置开机自启动<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-1.png" alt=""></p>
+<h3 id="远程下载数据">远程下载数据</h3><p>1.线程Thread_2 测试网络链接<br>不断访问google.com:80，bing.com:80，yahoo.com:80测试网络是否正常。<br>2.线程Thread_3 记录系统时间<br>循环写入系统时间，60秒循环一次，写入文件C:\Program Files\Internet Explorer\dmlconf.dat<br>3.线程Thread_4 与远程服务器连接，下载数据<br>与远程服务器443端口，域名为fget-career.com建立通信，不断从服务器下载文件并调用ShellexecuteA执行。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-2.png" alt=""></p>
+<h3 id="Hook函数ZwWriteVirtualMemory">Hook函数ZwWriteVirtualMemory</h3><p>1.HOOK过程如下图所示<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-6.png" alt=""><br>2.之后通过函数FindFirstFileA查找文件C:\WINDOWS\system32\svchost.exe<br>3.调用CreateProcess函数创建过进程svchost.exe之后就会跳入HOOK代码中执行。</p>
+<h3 id="执行HOOK代码，注入dll">执行HOOK代码，注入dll</h3><p>1.调用函数ZwQueryInformationProcess获取进程信息，+0x8处存放进程进程信息指针PVOID ProcessInformation。</p>
+<pre><code>NTSTATUS WINAPI ZwQueryInformationProcess(
+  <span class="number">__</span><span class="keyword">in</span>          HANDLE ProcessHandle,
+  <span class="number">__</span><span class="keyword">in</span>          PROCESSINFOCLASS ProcessInformationClass,
+  <span class="number">__</span><span class="keyword">out</span>         PVOID ProcessInformation,
+  <span class="number">__</span><span class="keyword">in</span>          ULONG ProcessInformationLength,
+  <span class="number">__</span><span class="keyword">out</span><span class="number">_</span>opt     PULONG ReturnLength
+);
+</code></pre><p>2.在ProcessInformation结构中+0x4处为PEB结构。</p>
+<pre><code>typedef struct _PROCESS_BASIC_INFORMATION {
+    PVOID Reserved1<span class="comment">;</span>
+    PPEB PebBaseAddress<span class="comment">;</span>
+    PVOID Reserved2[2]<span class="comment">;</span>
+    ULONG_PTR UniqueProcessId<span class="comment">;</span>
+    PVOID Reserved3<span class="comment">;</span>
+} PROCESS_BASIC_INFORMATION<span class="comment">;</span>
+</code></pre><p>3.PEB结构+0x8处存放着进程基址。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-7.png" alt=""></p>
+<p>4.从0x10000000开始，循环在当前进程和目标进程（svchost.exe）申请相同的地址空间，每次增加0x1000，检测是否可用，直到0x30000000结束，得到相同的地址空间（0x20020000）。</p>
+<p>5.之后将注入dll在本进程中申请的空间中（0x20020000）进行区段重定位，之后直接拷贝到目标进程相同的地址空间中（0x20020000）。这样注入目标进程运行后就不需要重定位了。</p>
+<h3 id="自检测-1">自检测</h3><p>1.判断互斥体对象Global\SYSTEM_DEMETRA_MAIN是否存在，如果不存在则通过注册表找到IE路径打开IE。<br>2.恢复HOOK函数</p>
+<h3 id="注入dll">注入dll</h3><p>1.通过CreateFileMappingA函数生成一个名字为Global\SYSTEM_DEMETRA_MAIN的文件映射对象<br>2.通过MapViewOfFile() 将0x7C00大小的dll文件映射到当前进程。<br>3.之后将该dll文件注入到svchost进程中，过程同0x3和0x4。<br>4.等待10秒之后调用UnmapViewOfFile释放映射对象。</p>
+<h2 id="注入的两个DLL文件">注入的两个DLL文件</h2><p>405825.DLL和410A25.dll</p>
+<h3 id="远控">远控</h3><p>1.判断进程目录下是否存在complete.dat文件<br>2.获取固定盘卷序列号，系统版本号，平台等信息<br>3.在进程同目录下创建dmlconf.dat文件，通过GetSystemTimeAsFileTime获取系统文件时间写入文件中。<br>4.创建线程0x10008E60实现自启动。<br>创建一个死循环，1秒循环次，在注册表Software\Microsoft\WindowsNT\CurrentVersion<br>\Winlogon的Userinit键值项里数值数据C:\WINDOWS\system32\userinit.exe,后边增加新键值c:\program files\microsoft\desktoplayer.exe，无限循环。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-8.png" alt=""><br>Userinit.exe是Windows操作系统一个关键进程。用于管理不同的启动顺序。<br>5.创建线程10008858检测网络<br>5.1创建非阻塞模式的socket<br>5.2通过函数Connect不断访问链接google.com:80<br>5.3通过select函数监视网页能否被访问。<br>6.创建线程10008A51记录系统文件时间<br>创建一个死循环，1分钟循环1次，在进程同目录的dmlconf.dat文件中写入系统文件时间。<br>7.线程1000687B和10008B3F实现远程截屏，关机等操作<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-9.png" alt=""><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-10.png" alt=""></p>
+<h3 id="感染磁盘">感染磁盘</h3><h4 id="感染pe文件">感染pe文件</h4><p>线程Thread_5 感染磁盘文件，遍历系统磁盘和可移动盘，对盘符下的所有exe，dll，html，htm文件进行感染。感染之前先判断磁盘剩余空间，磁盘剩余空间大于0x80000才进行感染。<br>遍历磁盘和可移动盘，感染Exe和dll：先检测是否存在节区.rmnet，如果存在表明感染过，不进行感染。如果不存在，在最后一个节中增加增加新节.rmnet，设置块属性为0xE0000020即可写代码段，并将入口指向该节区。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-3.png" alt=""></p>
+<h4 id="感染html文件">感染html文件</h4><p>遍历磁盘和可移动盘，感染Html和Htm文件：先读取文件最后9个字节，看是否为，如果是的话表明感染过，不进行感染。如果不是则进行感染，将携带病毒自身数据的VB脚本文件写入文件最后。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-4.png" alt=""><br>一旦打开Html文件，该脚本会释放一个svchost.exe（写入的病毒自身）运行并对计算机进行感染。</p>
+<h4 id="感染可移动磁盘">感染可移动磁盘</h4><p>线程Thread_6 感染可移动磁盘，在可移动盘创建autorun.inf文件，获取其大小，如果大于3则读取其中前3个字节，如果是RmN，则表明感染过，不进行感染。<br>如果不存在，同目录下创建RECYCLER\ S-1-5-21-1454471165-515967899-682003330-1003文件目录，属性设置为只读，隐藏，在该目录下生成YBakjuc.exe文件，写入数据（病毒自身）。<br>在autorun.inf文件中写入数据，插如U盘自动运行病毒文件YBakjuc.exe。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-5.png" alt=""></p>
+<h3 id="HOOK">HOOK</h3><p>1.创建线程StartAddress,HOOK函数ZwResumeThread 和 ExitProcess。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-11.png" alt=""><br>2.创建线程0x10006606进入HOOK代码。循环判断是否存在互斥体Global\SYSTEM_DEMETRA_SHUTDOWN，如果存在恢复HOOK函数。<br>3.HOOK代码通过 OpenFileMappingA函数生成一个名字为Global\SYSTEM_DEMETRA_LIST的文件映射对象，之后将该文件注入到除自己所有的进程当中。注入方式和母体相同。<br>4.创建互斥对象Global\SYSTEM_DEMETRA_CONTROL。创建成功则创建线程0x10004523。<br>5.线程0x10004523每5秒循环一次通过Process32First和Process32Next枚举所有进程，将dll注入到除自己所有的进程中。注入方式同母体相同。<br>6.通过CreateRemoteThread函数创建远程线程在其他进程中运行。<br>7.HOOK网络传输函数<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-12.png" alt=""></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/virus/" rel="tag">#virus</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/11/29/3-virus-infected-word/" rel="prev">病毒分析-宏感染型</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/11/20/3-virus-troj-simple/" rel="next">病毒分析-简单盗号木马</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/11/25/3-virus-infected-rmnet/"
+     data-title="病毒分析-rmnet感染型"
+     data-content=""
+     data-url="http://blog.idhyt.xyz/2013/11/25/3-virus-infected-rmnet/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2013/11/25/3-virus-infected-rmnet/"
+                   data-title="病毒分析-rmnet感染型" data-url="http://blog.idhyt.xyz/2013/11/25/3-virus-infected-rmnet/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="idhyt" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">idhyt</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">水中月.镜中花.浮华一片苍凉..</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/idhyt" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1706893103" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/idhyt" target="_blank">ZhiHu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#调试环境"><span class="nav-number">1.</span> <span class="nav-text">调试环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#病毒简介"><span class="nav-number">2.</span> <span class="nav-text">病毒简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行过程"><span class="nav-number">3.</span> <span class="nav-text">运行过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自检测"><span class="nav-number">3.1.</span> <span class="nav-text">自检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过防火墙"><span class="nav-number">3.2.</span> <span class="nav-text">绕过防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自启动"><span class="nav-number">3.3.</span> <span class="nav-text">自启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程下载数据"><span class="nav-number">3.4.</span> <span class="nav-text">远程下载数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hook函数ZwWriteVirtualMemory"><span class="nav-number">3.5.</span> <span class="nav-text">Hook函数ZwWriteVirtualMemory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行HOOK代码，注入dll"><span class="nav-number">3.6.</span> <span class="nav-text">执行HOOK代码，注入dll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自检测-1"><span class="nav-number">3.7.</span> <span class="nav-text">自检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注入dll"><span class="nav-number">3.8.</span> <span class="nav-text">注入dll</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注入的两个DLL文件"><span class="nav-number">4.</span> <span class="nav-text">注入的两个DLL文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#远控"><span class="nav-number">4.1.</span> <span class="nav-text">远控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感染磁盘"><span class="nav-number">4.2.</span> <span class="nav-text">感染磁盘</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#感染pe文件"><span class="nav-number">4.2.1.</span> <span class="nav-text">感染pe文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感染html文件"><span class="nav-number">4.2.2.</span> <span class="nav-text">感染html文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感染可移动磁盘"><span class="nav-number">4.2.3.</span> <span class="nav-text">感染可移动磁盘</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HOOK"><span class="nav-number">4.3.</span> <span class="nav-text">HOOK</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2011 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idhyt</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<div class="powered-by">
+</div>
+
+<div class="theme-info">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<a class="theme-link"><span id="busuanzi_value_site_pv"></span></a>次
+    </span>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"idhyt"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
+  
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

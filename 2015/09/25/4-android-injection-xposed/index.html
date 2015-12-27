@@ -1,0 +1,808 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+  <meta name="google-site-verification" content="i9ah5x5ODvKLpoCyNxyAxw8p0lbULKKLPS3IBF7_Guc" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="水中月.镜中花.浮华一片苍凉.." />
+
+
+
+  <meta name="keywords" content="xposed," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idhyt's blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="概述Xposed是针对Android平台的动态劫持项目，源码github
+主要模块说明如下：Xposed：Xposed的C++部分，主要是用来替换/system/bin/app_process，并为XposedBridge提供JNI方法。
+XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且提供对基于Xposed框架的Modules的管理。在安装XposedIn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓注入框架Xposed分析与简单应用">
+<meta property="og:url" content="http://blog.idhyt.xyz/2015/09/25/4-android-injection-xposed/index.html">
+<meta property="og:site_name" content="idhyt's blog">
+<meta property="og:description" content="概述Xposed是针对Android平台的动态劫持项目，源码github
+主要模块说明如下：Xposed：Xposed的C++部分，主要是用来替换/system/bin/app_process，并为XposedBridge提供JNI方法。
+XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且提供对基于Xposed框架的Modules的管理。在安装XposedIn">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-1.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-2.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-3e.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-4.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-5.jpg">
+<meta property="og:updated_time" content="2015-12-26T07:45:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓注入框架Xposed分析与简单应用">
+<meta name="twitter:description" content="概述Xposed是针对Android平台的动态劫持项目，源码github
+主要模块说明如下：Xposed：Xposed的C++部分，主要是用来替换/system/bin/app_process，并为XposedBridge提供JNI方法。
+XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且提供对基于Xposed框架的Modules的管理。在安装XposedIn">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 安卓注入框架Xposed分析与简单应用 | idhyt's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-61722826-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5228d77c5752954f270fcca0908555af";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">风轻云淡</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'VpXUP87KQneoFZ3srxxA','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              安卓注入框架Xposed分析与简单应用
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-09-25T02:29:11+08:00" content="2015-09-25">
+            2015-09-25
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/android/" itemprop="url" rel="index">
+                  <span itemprop="name">android</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/09/25/4-android-injection-xposed/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/25/4-android-injection-xposed/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h3 id="概述">概述</h3><p>Xposed是针对Android平台的动态劫持项目，源码<a href="https://github.com/rovo89" target="_blank" rel="external">github</a></p>
+<h4 id="主要模块说明如下：">主要模块说明如下：</h4><p><strong>Xposed</strong>：Xposed的C++部分，主要是用来替换/system/bin/app_process，并为XposedBridge提供JNI方法。</p>
+<p><strong>XposedInstaller</strong>：Xposed的安装包，负责配置Xposed工作的环境并且提供对基于Xposed框架的Modules的管理。在安装XposedInstaller之后，app_process与XposedBridge.jar放置在了/data/data/de.robv.android.xposed.installer。</p>
+<p><strong>XposedBridge.jar</strong>：XposedBridge.jar是Xposed提供的jar文件，负责在Native层与FrameWork层进行交互。/system/bin/app_process进程启动过程中会加载该jar包，其它的Modules的开发与运行都是基于该jar包的。注意：XposedBridge.jar文件本质上是由XposedBridge生成的APK文件更名而来，查看该工程目录下的install.bat</p>
+<pre><code><span class="label">cd</span> /d %~dp0
+<span class="label">dir</span> <span class="keyword">bin\XposedBridge.apk
+</span><span class="label">adb</span> <span class="keyword">push </span><span class="keyword">bin\XposedBridge.apk </span>/<span class="preprocessor">data</span>/<span class="preprocessor">data</span>/de.robv.<span class="keyword">android.xposed.installer/bin/XposedBridge.jar.newversion
+</span><span class="label">pause</span>
+</code></pre><p><strong>XposedMods</strong>：使用Xposed开发的一些Modules，其中AppSettings是一个可以进行权限动态管理的应用</p>
+<h4 id="Xposed框架的基本运行环境如下：">Xposed框架的基本运行环境如下：</h4><table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th>RequireMent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Root Access</td>
+<td>因为Xposed工作原理是在/system/bin目录下替换文件，在install的时候需要root权限，但是运行时不需要root权限</td>
+</tr>
+<tr>
+<td>版本要求</td>
+<td>需要在Android 4.0以上版本的机器中</td>
+</tr>
+</tbody>
+</table>
+<h3 id="源码分析">源码分析</h3><h4 id="XposedInstaller">XposedInstaller</h4><p>通过<code>/XposedInstaller/AndroidManifest.xml</code>看出主activity为WelcomeActivity，<br>主要实现了界面加载，添加功能图标和描述信息Item，如Install, Modules, Download等。<br>选择Framework后进入界面<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-1.jpg" alt="android-xposed-1"></p>
+<p>我们直接找到install代码，install代码定位的简单方法：<br>先点击install进入安装界面，然后在输入adb命令查看当前最顶层activity，就可以定位到代码。</p>
+<p>adb 查看最上层成activity名字<br>linux: <code>adb shell dumpsys activity | grep &quot;mFocusedActivity&quot;</code><br>windows: <code>adb shell dumpsys activity | findstr &quot;mFocusedActivity&quot;</code></p>
+<p>最后定位到install代码位于InstallerFragment中，代码及注释如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 该代码的功能就是替换了app_process文件</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">install</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 获取安装的方式，直接写入 or 使用 recovery进行安装</span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> installMode = getInstallMode();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查获取Root权限</span></span><br><span class="line">    <span class="keyword">if</span> (!startShell())</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; messages = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">    <span class="keyword">boolean</span> showAlert = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        messages.add(getString(R.string.sdcard_location, XposedApp.getInstance().getExternalFilesDir(<span class="keyword">null</span>)));</span><br><span class="line">        messages.add(<span class="string">""</span>);</span><br><span class="line"></span><br><span class="line">        messages.add(getString(R.string.file_copying, <span class="string">"Xposed-Disabler-Recovery.zip"</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 把Xposed-Disabler-Recovery.zip文件 从asset copy到sdcard中</span></span><br><span class="line">        <span class="keyword">if</span> (AssetUtil.writeAssetToSdcardFile(<span class="string">"Xposed-Disabler-Recovery.zip"</span>, <span class="number">00644</span>) == <span class="keyword">null</span>) &#123;</span><br><span class="line">            messages.add(<span class="string">""</span>);</span><br><span class="line">            messages.add(getString(R.string.file_extract_failed, <span class="string">"Xposed-Disabler-Recovery.zip"</span>));</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将编译后的app_process二进制文件，从asset文件夹中，copy到/data/data/de.robv.android.xposed.installer/bin/app_process</span></span><br><span class="line">        File appProcessFile = AssetUtil.writeAssetToFile(APP_PROCESS_NAME, <span class="keyword">new</span> File(XposedApp.BASE_DIR + <span class="string">"bin/app_process"</span>), <span class="number">00700</span>);</span><br><span class="line">        <span class="keyword">if</span> (appProcessFile == <span class="keyword">null</span>) &#123;</span><br><span class="line">            showAlert(getString(R.string.file_extract_failed, <span class="string">"app_process"</span>));</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (installMode == INSTALL_MODE_NORMAL) &#123;</span><br><span class="line">            <span class="comment">// 普通安装模式</span></span><br><span class="line">            <span class="comment">// 重新挂载/system为rw模式</span></span><br><span class="line">            <span class="comment">// Normal installation</span></span><br><span class="line">            messages.add(getString(R.string.file_mounting_writable, <span class="string">"/system"</span>));</span><br><span class="line">            <span class="keyword">if</span> (mRootUtil.executeWithBusybox(<span class="string">"mount -o remount,rw /system"</span>, messages) != <span class="number">0</span>) &#123;</span><br><span class="line">                messages.add(getString(R.string.file_mount_writable_failed, <span class="string">"/system"</span>));</span><br><span class="line">                messages.add(getString(R.string.file_trying_to_continue));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 查看原有的app_process文件是否已经备份，如果没有备份，现将原有的app_process文件备份一下</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">new</span> File(<span class="string">"/system/bin/app_process.orig"</span>).exists()) &#123;</span><br><span class="line">                messages.add(getString(R.string.file_backup_already_exists, <span class="string">"/system/bin/app_process.orig"</span>));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (mRootUtil.executeWithBusybox(<span class="string">"cp -a /system/bin/app_process /system/bin/app_process.orig"</span>, messages) != <span class="number">0</span>) &#123;</span><br><span class="line">                    messages.add(<span class="string">""</span>);</span><br><span class="line">                    messages.add(getString(R.string.file_backup_failed, <span class="string">"/system/bin/app_process"</span>));</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    messages.add(getString(R.string.file_backup_successful, <span class="string">"/system/bin/app_process.orig"</span>));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                mRootUtil.executeWithBusybox(<span class="string">"sync"</span>, messages);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将项目中的自定义app_process文件copy覆盖系统的app_process,修改权限</span></span><br><span class="line">            messages.add(getString(R.string.file_copying, <span class="string">"app_process"</span>));</span><br><span class="line">            <span class="keyword">if</span> (mRootUtil.executeWithBusybox(<span class="string">"cp -a "</span> + appProcessFile.getAbsolutePath() + <span class="string">" /system/bin/app_process"</span>, messages) != <span class="number">0</span>) &#123;</span><br><span class="line">                messages.add(<span class="string">""</span>);</span><br><span class="line">                messages.add(getString(R.string.file_copy_failed, <span class="string">"app_process"</span>, <span class="string">"/system/bin"</span>));</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (mRootUtil.executeWithBusybox(<span class="string">"chmod 755 /system/bin/app_process"</span>, messages) != <span class="number">0</span>) &#123;</span><br><span class="line">                messages.add(<span class="string">""</span>);</span><br><span class="line">                messages.add(getString(R.string.file_set_perms_failed, <span class="string">"/system/bin/app_process"</span>));</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (mRootUtil.executeWithBusybox(<span class="string">"chown root:shell /system/bin/app_process"</span>, messages) != <span class="number">0</span>) &#123;</span><br><span class="line">                messages.add(<span class="string">""</span>);</span><br><span class="line">                messages.add(getString(R.string.file_set_owner_failed, <span class="string">"/system/bin/app_process"</span>));</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (installMode == INSTALL_MODE_RECOVERY_AUTO) &#123;</span><br><span class="line">            <span class="comment">// 自动进入Recovery</span></span><br><span class="line">            <span class="keyword">if</span> (!prepareAutoFlash(messages, <span class="string">"Xposed-Installer-Recovery.zip"</span>))</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (installMode == INSTALL_MODE_RECOVERY_MANUAL) &#123;</span><br><span class="line">            <span class="comment">// 手动进入Recovery</span></span><br><span class="line">            <span class="keyword">if</span> (!prepareManualFlash(messages, <span class="string">"Xposed-Installer-Recovery.zip"</span>))</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        File blocker = <span class="keyword">new</span> File(XposedApp.BASE_DIR + <span class="string">"conf/disabled"</span>);</span><br><span class="line">        <span class="keyword">if</span> (blocker.exists()) &#123;</span><br><span class="line">            messages.add(getString(R.string.file_removing, blocker.getAbsolutePath()));</span><br><span class="line">            <span class="keyword">if</span> (mRootUtil.executeWithBusybox(<span class="string">"rm "</span> + blocker.getAbsolutePath(), messages) != <span class="number">0</span>) &#123;</span><br><span class="line">                messages.add(<span class="string">""</span>);</span><br><span class="line">                messages.add(getString(R.string.file_remove_failed, blocker.getAbsolutePath()));</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// copy XposedBridge.jar 到私有目录，XposedBridge.jar是Xposed提供的jar文件，负责在Native层与FrameWork层进行交互</span></span><br><span class="line">        messages.add(getString(R.string.file_copying, <span class="string">"XposedBridge.jar"</span>));</span><br><span class="line">        File jarFile = AssetUtil.writeAssetToFile(<span class="string">"XposedBridge.jar"</span>, <span class="keyword">new</span> File(JAR_PATH_NEWVERSION), <span class="number">00644</span>);</span><br><span class="line">        <span class="keyword">if</span> (jarFile == <span class="keyword">null</span>) &#123;</span><br><span class="line">            messages.add(<span class="string">""</span>);</span><br><span class="line">            messages.add(getString(R.string.file_extract_failed, <span class="string">"XposedBridge.jar"</span>));</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">       <span class="comment">// 将有关文件系统的存储器常驻信息送入物理介质内，在暂停系统之前,比如要重新启动机器,一定要去执行sync命令</span></span><br><span class="line">        mRootUtil.executeWithBusybox(<span class="string">"sync"</span>, messages);</span><br><span class="line"></span><br><span class="line">        showAlert = <span class="keyword">false</span>;</span><br><span class="line">        messages.add(<span class="string">""</span>);</span><br><span class="line">        <span class="keyword">if</span> (installMode == INSTALL_MODE_NORMAL)</span><br><span class="line">            offerReboot(messages);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            offerRebootToRecovery(messages, <span class="string">"Xposed-Installer-Recovery.zip"</span>, installMode);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="comment">// 删除busybox 工具库</span></span><br><span class="line">        AssetUtil.removeBusybox();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (showAlert)</span><br><span class="line">            showAlert(TextUtils.join(<span class="string">"\n"</span>, messages).trim());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="为什么要替换app_process">为什么要替换app_process</h4><p>在android的源码中的init.rc文件可以看到</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">service zygote /system/bin/app_process -Xzygote /system/bin –zygote –start-system-server</span><br><span class="line">socket zygote stream <span class="number">666</span> </span><br><span class="line">onrestart write /sys/android_power/request_state wake</span><br><span class="line">onrestart write /sys/power/state on</span><br><span class="line">onrestart restart media</span><br><span class="line">onrestart restart netd</span><br></pre></td></tr></table></figure>
+<p>app_process是andriod app的启动程序，该注入框架通过替换/system/bin/app_process程序控制zygote进程，使得app_process在启动过程中会加载XposedBridge.jar这个jar包，从而完成对Zygote进程及其创建的Dalvik虚拟机的劫持。与采取传统的Inhook方式<a href="http://www.mulliner.org/android/feed/mulliner_dbi_hitb_kul2013.pdf" target="_blank" rel="external">Dynamic Dalvik Instrumentation</a>相比，Xposed在开机的时候完成对所有的Hook Function的劫持，在原Function执行的前后加上自定义代码。</p>
+<h4 id="为什么要控制zygote进程">为什么要控制zygote进程</h4><p>在Android系统中，应用程序进程都是由Zygote进程孵化出来的，而Zygote进程是由Init进程启动的。Zygote进程在启动时会创建一个Dalvik虚拟机实例，每当它孵化一个新的应用程序进程时，都会将这个Dalvik虚拟机实例复制到新的应用程序进程里面去，从而使得每一个应用程序进程都有一个独立的Dalvik虚拟机实例。所以如果选择对Zygote进程Hook，则能够达到针对系统上所有的应用程序进程Hook，即一个全局Hook。这也是Xposed选择替换app_process的原因。如下图所示：<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-2.jpg" alt="hook-before-after"></p>
+<p>Zygote进程在启动的过程中，除了会创建一个Dalvik虚拟机实例之外，还会将Java运行时库加载到进程中来，以及注册一些Android核心类的JNI方法来前面创建的Dalvik虚拟机实例中去。注意，一个应用程序进程被Zygote进程孵化出来的时候，不仅会获得Zygote进程中的Dalvik虚拟机实例拷贝，还会与Zygote一起共享Java运行时库。这也就是可以将XposedBridge这个jar包加载到每一个Android应用程序中的原因。XposedBridge有一个私有的Native（JNI）方法hookMethodNative，这个方法也在app_process中使用。这个函数提供一个方法对象利用Java的Reflection机制来对内置方法覆写。</p>
+<h4 id="Hook/Replace">Hook/Replace</h4><p>Xposed 框架中真正起作用的是对方法的hook。在Repackage技术中，如果要对APK做修改，则需要修改Smali代码中的指令。而另一种动态修改指令的技术需要在程序运行时基于匹配搜索来替换smali代码，但因为方法声明的多样性与复杂性，这种方法也比较复杂。</p>
+<p>总结Hook运行过程如下：</p>
+<ol>
+<li><p>在Android系统启动的时候，zygote进程加载XposedBridge将所有需要替换的Method通过JNI方法hookMethodNative指向Native方法xposedCallHandler，xposedCallHandler在转入handleHookedMethod这个Java方法执行用户规定的Hook Func。</p>
+</li>
+<li><p>在hookMethodNative的实现中,会调用XposedBridge中的handleHookedMethod这个方法来传递参数;<br>XposedBridge这个jar包含有一个私有的本地方法：hookMethodNative，该方法在附加的app_process程序中也得到了实现。它将一个方法对象作为输入参数（你可以使用Java的反射机制来获取这个方法）并且改变Dalvik虚拟机中对于该方法的定义。它将该方法的类型改变为native并且将这个方法的实现链接到它的本地的通用类的方法。换言之，当调用那个被hook的方法时候，通用的类方法会被调用而不会对调用者有任何的影响。</p>
+</li>
+<li><p>handleHookedMethod这个方法类似于一个统一调度的Dispatch例程,其对应的底层的C++函数是xposedCallHandler;</p>
+</li>
+<li><p>handleHookedMethod实现里面会根据一个全局结构hookedMethodCallbacks来选择相应的hook函数,并调用他们的before,after函数;</p>
+</li>
+<li><p>当多模块同时Hook一个方法的时候，Xposed会自动根据Module的优先级来排序，调用顺序如下：<br>A.before -&gt; B.before -&gt; original method -&gt; B.after -&gt; A.after</p>
+</li>
+</ol>
+<h4 id="Xposed代码分析">Xposed代码分析</h4><p>详见<a href="http://blog.csdn.net/wxyyxc1992/article/details/17320911" target="_blank" rel="external">Android Hook框架Xposed原理与源代码分析</a></p>
+<h3 id="Xposed插件编写">Xposed插件编写</h3><p>创建一个插件XposedExample，hook掉系统handleLoadPackage，在系统调用之前打印出加载app的package name，工程用eclipse编写，android studio略有不同。</p>
+<p>1.创建一个Blank Activity的android项目</p>
+<p>2.工程目录新建lib文件夹，添加文件<a href="http://forum.xda-developers.com/xposed/xposed-api-changelog-developer-news-t2714067" target="_blank" rel="external">XposedBridgeApi-54.jar</a>，然后右键-Build path。</p>
+<p>3.修改AndroidManifest.xml，插入xposed元数据。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta-data</span></span><br><span class="line">            <span class="attribute">android:name</span>=<span class="value">"xposedmodule"</span></span><br><span class="line">            <span class="attribute">android:value</span>=<span class="value">"true"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">meta-data</span></span><br><span class="line">            <span class="attribute">android:name</span>=<span class="value">"xposeddescription"</span></span><br><span class="line">            <span class="attribute">android:value</span>=<span class="value">"Xposed Example"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">meta-data</span></span><br><span class="line">            <span class="attribute">android:name</span>=<span class="value">"xposedminversion"</span></span><br><span class="line">            <span class="attribute">android:value</span>=<span class="value">"54"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果不想让插件在系统中显示图标，就把activity给注释掉。</p>
+<p>4.完整的的AndroidManifest.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">manifest</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attribute">package</span>=<span class="value">"com.idhyt.xposedexample"</span></span><br><span class="line">    <span class="attribute">android:versionCode</span>=<span class="value">"1"</span></span><br><span class="line">    <span class="attribute">android:versionName</span>=<span class="value">"1.0"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">uses-sdk</span></span><br><span class="line">        <span class="attribute">android:minSdkVersion</span>=<span class="value">"8"</span></span><br><span class="line">        <span class="attribute">android:targetSdkVersion</span>=<span class="value">"21"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">application</span></span><br><span class="line">        <span class="attribute">android:allowBackup</span>=<span class="value">"true"</span></span><br><span class="line">        <span class="attribute">android:icon</span>=<span class="value">"@drawable/ic_launcher"</span></span><br><span class="line">        <span class="attribute">android:label</span>=<span class="value">"@string/app_name"</span></span><br><span class="line">        <span class="attribute">android:theme</span>=<span class="value">"@style/AppTheme"</span> &gt;</span></span><br><span class="line">        </span><br><span class="line">         <span class="tag">&lt;<span class="title">activity</span></span><br><span class="line">            <span class="attribute">android:name</span>=<span class="value">".XposedExample"</span></span><br><span class="line">            <span class="attribute">android:label</span>=<span class="value">"@string/app_name"</span> &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.action.MAIN"</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">category</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.category.LAUNCHER"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">activity</span>&gt;</span></span><br><span class="line">      </span><br><span class="line">        <span class="tag">&lt;<span class="title">meta-data</span></span><br><span class="line">            <span class="attribute">android:name</span>=<span class="value">"xposedmodule"</span></span><br><span class="line">            <span class="attribute">android:value</span>=<span class="value">"true"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">meta-data</span></span><br><span class="line">            <span class="attribute">android:name</span>=<span class="value">"xposeddescription"</span></span><br><span class="line">            <span class="attribute">android:value</span>=<span class="value">"Xposed Example"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">meta-data</span></span><br><span class="line">            <span class="attribute">android:name</span>=<span class="value">"xposedminversion"</span></span><br><span class="line">            <span class="attribute">android:value</span>=<span class="value">"54"</span> /&gt;</span> //和XposedBridgeApi-54.jar版本对应</span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;/<span class="title">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>5.编写插件代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.idhyt.xposedexample;</span><br><span class="line"><span class="keyword">import</span> de.robv.android.xposed.IXposedHookLoadPackage;</span><br><span class="line"><span class="keyword">import</span> de.robv.android.xposed.XposedBridge;</span><br><span class="line"><span class="keyword">import</span> de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XposedExample</span> <span class="keyword">implements</span> <span class="title">IXposedHookLoadPackage</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleLoadPackage</span><span class="params">(<span class="keyword">final</span> LoadPackageParam lpparam)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        XposedBridge.log(<span class="string">"Loaded app: "</span> + lpparam.packageName);</span><br><span class="line">        XposedBridge.log(<span class="string">"this is a test by idhyt"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>6.在assets文件夹(如果不存在就创建)下新建file写入插件启动入口:<br><code>com.idhyt.xposedexample.XposedExample</code></p>
+<p>整个工程目录如下所示:<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-3e.jpg" alt="project-dir"></p>
+<p>7.运行之后 会在虚拟机中看到我们的插件已经安装到xposed模块里边，然后勾选重启系统。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-4.jpg" alt="install-ok"></p>
+<p>8.重启过后，加入过滤规则“loaded app”，在logcat窗口会看到我们的输出日志信息，你打开应用也会显示加载的应用包名。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-5.jpg" alt="logcat-out"></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/xposed/" rel="tag">#xposed</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/28/4-android-injection-xposed-usage/" rel="prev">安卓注入框架Xposed用法详解</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/22/1-diary-2015-08-22/" rel="next">生活碎碎念</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/09/25/4-android-injection-xposed/"
+     data-title="安卓注入框架Xposed分析与简单应用"
+     data-content=""
+     data-url="http://blog.idhyt.xyz/2015/09/25/4-android-injection-xposed/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2015/09/25/4-android-injection-xposed/"
+                   data-title="安卓注入框架Xposed分析与简单应用" data-url="http://blog.idhyt.xyz/2015/09/25/4-android-injection-xposed/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="idhyt" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">idhyt</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">水中月.镜中花.浮华一片苍凉..</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/idhyt" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1706893103" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/idhyt" target="_blank">ZhiHu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要模块说明如下："><span class="nav-number">1.1.</span> <span class="nav-text">主要模块说明如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Xposed框架的基本运行环境如下："><span class="nav-number">1.2.</span> <span class="nav-text">Xposed框架的基本运行环境如下：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码分析"><span class="nav-number">2.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XposedInstaller"><span class="nav-number">2.1.</span> <span class="nav-text">XposedInstaller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要替换app_process"><span class="nav-number">2.2.</span> <span class="nav-text">为什么要替换app_process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要控制zygote进程"><span class="nav-number">2.3.</span> <span class="nav-text">为什么要控制zygote进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hook/Replace"><span class="nav-number">2.4.</span> <span class="nav-text">Hook/Replace</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Xposed代码分析"><span class="nav-number">2.5.</span> <span class="nav-text">Xposed代码分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xposed插件编写"><span class="nav-number">3.</span> <span class="nav-text">Xposed插件编写</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2011 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idhyt</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<div class="powered-by">
+</div>
+
+<div class="theme-info">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<a class="theme-link"><span id="busuanzi_value_site_pv"></span></a>次
+    </span>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"idhyt"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
+  
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

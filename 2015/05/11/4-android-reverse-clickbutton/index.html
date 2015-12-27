@@ -1,0 +1,807 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+  <meta name="google-site-verification" content="i9ah5x5ODvKLpoCyNxyAxw8p0lbULKKLPS3IBF7_Guc" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="水中月.镜中花.浮华一片苍凉.." />
+
+
+
+  <meta name="keywords" content="android," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idhyt's blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="安卓逆向笔记,熟悉smali语法和函数调用一个按钮程序,实现功能：点击 - 弹窗 - 退出
+源码主功能代码
+1@Override&amp;#10;protected void onCreate(Bundle savedInstanceState) &amp;#123;&amp;#10;    super.onCreate(savedInstanceState);&amp;#10;    setContentView(R.layo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓逆向学习笔记-ClickButton">
+<meta property="og:url" content="http://blog.idhyt.xyz/2015/05/11/4-android-reverse-clickbutton/index.html">
+<meta property="og:site_name" content="idhyt's blog">
+<meta property="og:description" content="安卓逆向笔记,熟悉smali语法和函数调用一个按钮程序,实现功能：点击 - 弹窗 - 退出
+源码主功能代码
+1@Override&amp;#10;protected void onCreate(Bundle savedInstanceState) &amp;#123;&amp;#10;    super.onCreate(savedInstanceState);&amp;#10;    setContentView(R.layo">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-reverse-clickbutton_1.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-reverse-clickbutton_2.png">
+<meta property="og:updated_time" content="2015-12-26T07:46:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓逆向学习笔记-ClickButton">
+<meta name="twitter:description" content="安卓逆向笔记,熟悉smali语法和函数调用一个按钮程序,实现功能：点击 - 弹窗 - 退出
+源码主功能代码
+1@Override&amp;#10;protected void onCreate(Bundle savedInstanceState) &amp;#123;&amp;#10;    super.onCreate(savedInstanceState);&amp;#10;    setContentView(R.layo">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 安卓逆向学习笔记-ClickButton | idhyt's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-61722826-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5228d77c5752954f270fcca0908555af";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">风轻云淡</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'VpXUP87KQneoFZ3srxxA','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              安卓逆向学习笔记-ClickButton
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-05-11T17:45:11+08:00" content="2015-05-11">
+            2015-05-11
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/android/" itemprop="url" rel="index">
+                  <span itemprop="name">android</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/05/11/4-android-reverse-clickbutton/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/11/4-android-reverse-clickbutton/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>安卓逆向笔记,熟悉smali语法和函数调用<br>一个按钮程序,实现功能：点击 - 弹窗 - 退出</p>
+<h2 id="源码">源码</h2><p>主功能代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Override&#10;protected void onCreate(Bundle savedInstanceState) &#123;&#10;    super.onCreate(savedInstanceState);&#10;    setContentView(R.layout.activity_click_button);&#10;    Button button = (Button)findViewById(R.id.click_me);&#10;    button.setOnClickListener(new View.OnClickListener() &#123;&#10;        @Override&#10;        public void onClick(View v) &#123;&#10;            AlertDialog.Builder alert = new AlertDialog.Builder(ClickButton.this);&#10;            alert.setTitle(&#34;hello world&#34;);&#10;            alert.setPositiveButton(&#34;exit&#34;, new DialogInterface.OnClickListener() &#123;&#10;                @Override&#10;                public void onClick(DialogInterface dialog, int which) &#123;&#10;                    dialog.dismiss();&#10;                    ClickButton.this.finish();&#10;                &#125;&#10;            &#125;);&#10;            alert.show();&#10;        &#125;&#10;    &#125;);&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>点击 - 弹窗 - 退出, 功能如下图所示：</p>
+<p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-reverse-clickbutton_1.png" alt=""></p>
+<p>xml布局</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;RelativeLayout xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;&#10;    xmlns:tools=&#34;http://schemas.android.com/tools&#34; android:layout_width=&#34;match_parent&#34;&#10;    android:layout_height=&#34;match_parent&#34; android:paddingLeft=&#34;@dimen/activity_horizontal_margin&#34;&#10;    android:paddingRight=&#34;@dimen/activity_horizontal_margin&#34;&#10;    android:paddingTop=&#34;@dimen/activity_vertical_margin&#34;&#10;    android:paddingBottom=&#34;@dimen/activity_vertical_margin&#34; tools:context=&#34;.HelloWorld&#34;&#62;&#10;    &#60;TextView&#10;        android:text=&#34;@string/hello_world&#34;&#10;        android:layout_width=&#34;wrap_content&#34;&#10;        android:layout_height=&#34;wrap_content&#34;&#10;        android:id=&#34;@+id/textView&#34; /&#62;&#10;    &#60;Button&#10;        android:id = &#34;@+id/click_me&#34;&#10;        android:text=&#34;@string/click_me&#34;&#10;        android:layout_width=&#34;wrap_content&#34;&#10;        android:layout_height=&#34;wrap_content&#34;&#10;        android:layout_below=&#34;@+id/textView&#34; /&#62;&#10;&#60;/RelativeLayout&#62;</span><br></pre></td></tr></table></figure>
+<h2 id="反编译">反编译</h2><p>apktool反编译成smali文件或者直接用apkIDE(apk改之理)打开，会自动进行反编译，如下图所示<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-reverse-clickbutton_2.png" alt=""></p>
+<p>主要看主类ClickButton.smali，还有ClickButton$1.smali, ClickButton$1$1.smali两个文件。<br>这两个文件是匿名内部类的Smali代码，由于没有名字，所以编译后只能用$XXX来区分。</p>
+<h2 id="逆向分析">逆向分析</h2><h3 id="主类文件头部分">主类文件头部分</h3><p>1-3行定义的是基本信息，参照着前边的源码，很容易对应起来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.class public Lcom/reverse/idhyt/androidreverse/ClickButton;&#10;.super Landroid/app/Activity;&#10;.source &#34;ClickButton.java&#34;</span><br></pre></td></tr></table></figure>
+<p>这是一个由ClickButton.java编译得到的smali文件（第3行），<br>它是com.reverse.idhyt.androidreverse这个package下的一个类（第1行），<br>继承自android.app.Activity，即父类为android.app.Activity（第2行）</p>
+<h3 id="定位入口函数">定位入口函数</h3><p>找到onCreate函数，定位启动代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># virtual methods&#10;.method protected onCreate(Landroid/os/Bundle;)V&#10;    .locals 2&#10;    .param p1, &#34;savedInstanceState&#34;    # Landroid/os/Bundle;&#10;    .prologue&#10;    .line 18&#10;    invoke-super &#123;p0, p1&#125;, Landroid/app/Activity;-&#62;onCreate(Landroid/os/Bundle;)V&#10;    .line 19&#10;    const v1, 0x7f040017&#10;    invoke-virtual &#123;p0, v1&#125;, Lcom/reverse/idhyt/androidreverse/ClickButton;-&#62;setContentView(I)V&#10;    .line 20&#10;    const v1, 0x7f090040&#10;    invoke-virtual &#123;p0, v1&#125;, Lcom/reverse/idhyt/androidreverse/ClickButton;-&#62;findViewById(I)Landroid/view/View;&#10;    move-result-object v0&#10;    check-cast v0, Landroid/widget/Button;&#10;    .line 21&#10;    .local v0, &#34;button&#34;:Landroid/widget/Button;&#10;    new-instance v1, Lcom/reverse/idhyt/androidreverse/ClickButton$1;&#10;    invoke-direct &#123;v1, p0&#125;, Lcom/reverse/idhyt/androidreverse/ClickButton$1;-&#62;&#60;init&#62;(Lcom/reverse/idhyt/androidreverse/ClickButton;)V&#10;    invoke-virtual &#123;v0, v1&#125;, Landroid/widget/Button;-&#62;setOnClickListener(Landroid/view/View$OnClickListener;)V&#10;    .line 36&#10;    return-void&#10;.end method</span><br></pre></td></tr></table></figure>
+<h3 id="翻译smali代码">翻译smali代码</h3><p>第1行：</p>
+<pre><code><span class="preprocessor"># virtual methods 注释后是虚方法</span>
+</code></pre><p>第2行：</p>
+<pre><code>.<span class="keyword">method</span> protected onCreate(<span class="type">Landroid</span>/os/<span class="type">Bundle</span>;)V
+</code></pre><p>这里先简单了解一下alvik字节码，详细参考：<a href="http://pallergabor.uw.hu/androidblog/dalvik_opcodes.html" target="_blank" rel="external">dalvik_opcodes</a></p>
+<p>alvik字节码有类型两种，原始类型和引用类型。对象和数组是引用类型，其它都是原始类型。</p>
+<pre><code>V    <span class="keyword">void</span>，只能用于返回值类型
+Z    <span class="keyword">boolean</span>
+B    <span class="keyword">byte</span>
+S    <span class="keyword">short</span>
+C    <span class="keyword">char</span>
+I    <span class="keyword">int</span>
+J    <span class="keyword">long</span>（<span class="number">64</span>位）
+F    <span class="keyword">float</span>
+D    <span class="keyword">double</span>(<span class="number">64</span>位)
+</code></pre><p>对象以Lpackage/name/ObjectName;的表示形式。前面的L表示这是一个对象类型，package/name/是该对象所在的包，ObjectName是对象的名字，“;”表示对象名称的结束。相当于java中的package.name.ObjectName。</p>
+<p>了解了这些再看第2行代码：<br>onCreate函数参数为一个对象类型，对象名为Bundle， 该对象所在的包为android/os，对应java中android.os.Bundle</p>
+<p>第3行：</p>
+<pre><code><span class="class">.locals</span> <span class="number">2</span>
+</code></pre><p>标明了你在这个函数中最少要用到的本地寄存器的个数为2，即指定了使用的局部变量的个数</p>
+<p>第4行：</p>
+<pre><code>.<span class="built_in">param</span> p1, <span class="string">"savedInstanceState"</span>    <span class="comment"># Landroid/os/Bundle;</span>
+</code></pre><p>“.parameter”指定了方法的参数，每个”.parameter”指令表明使用一个参数，比如方法中有使用到3个参数，那么就会出现3条“.parameter”指令。</p>
+<p>第6-7行：</p>
+<pre><code>“<span class="class">.prologue</span>” <span class="class">.line</span>
+</code></pre><p>“.prologue”指定了代码的开始处，混淆过的代码可能去掉了该指令。<br>“.line”指定了该处指令在源代码中的行号，同样的，混淆过的代码可能去除了行号信息。</p>
+<p>第8行：</p>
+<pre><code>invoke-<span class="keyword">super</span> {p0, p1}, Landroid<span class="regexp">/app/</span>Activity;-&gt;onCreate(Landroid<span class="regexp">/os/</span>Bundle;)V
+</code></pre><p>这里先了解一下寄存器和函数调用方法</p>
+<h4 id="寄存器">寄存器</h4><p>在smali里的所有操作都必须经过寄存器来进行</p>
+<p>本地寄存器用v开头数字结尾的符号来表示，如v0、v1、v2、…<br>参数寄存器则使用p开头数字结尾的符号来表示，如p0、p1、p2、…<br>特别注意的是，p0不一定是函数中的第一个参数<br>在非static函数中，p0代指“this”，p1表示函数的第一个参数，p2代表函数中的第二个参数…<br>而在static函数中p0才对应第一个参数（因为Java的static方法中没有this方法）<br>本地寄存器没有限制，理论上是可以任意使用的。</p>
+<p>再看代码，这里寄存器p1 = “savedInstanceState”，后边将用作传参</p>
+<h4 id="函数">函数</h4><p>smali中的函数和成员变量一样也分为两种类型，但是不同成员变量中的static和instance之分，而是direct和virtual之分。<br>那么direct method和virtual method有什么区别呢？直白地讲，direct method就是private函数，其余的public和protected函数都属于virtual method。</p>
+<p>表示形式</p>
+<pre><code>Lpackage/name/ObjectName;-&gt;MethodName(III)Z
+Lpackage/name/ObjectName;表示类型，MethodName是方法名。III为参数（在此是<span class="number">3</span>个整型参数），Z是返回类型（<span class="keyword">bool</span>型）。
+方法的参数是一个接一个的，中间没有隔开。
+</code></pre><p>调用方式</p>
+<p>调用函数时，有invoke-direct，invoke-virtual，另外还有invoke-static、invoke-super以及invoke-interface等几种不同的指令。<br>当然其实还有invoke-XXX/range 指令的，这是参数多于4个的时候调用的指令，比较少见，了解下即可。<br>invoke-static：顾名思义就是调用static函数的，因为是static函数，所以比起其他调用少一个参数this指针。<br>invoke-super：调用父类方法用的指令，在onCreate、onDestroy等方法都能看到。<br>invoke-direct：调用private函数的。<br>invoke-virtual：用于调用protected或public函数，同样注意修改smali时不要错用invoke-direct或invoke-static<br>invoke-xxxxx/range：当方法的参数多于5个时（含5个），不能直接使用以上的指令，而是在后面加上“/range”</p>
+<p>再看代码，调用父类android.app.Activity的onCreate方法，参数为p1 = “savedInstanceState” 类型为android.os.Bundle，返回类型为void型，其中p0为this指针</p>
+<h2 id="完整注释">完整注释</h2><p>主类代码详细注释如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># virtual methods&#10;.method protected onCreate(Landroid/os/Bundle;)V&#10;    .locals 2&#10;    # &#26631;&#26126;&#20102;&#20320;&#22312;&#36825;&#20010;&#20989;&#25968;&#20013;&#26368;&#23569;&#35201;&#29992;&#21040;&#30340;&#26412;&#22320;&#23492;&#23384;&#22120;&#30340;&#20010;&#25968;&#10;    .param p1, &#34;savedInstanceState&#34;    # Landroid/os/Bundle;&#10;    # &#25351;&#23450;&#20102;&#26041;&#27861;&#30340;&#21442;&#25968;&#10;    .prologue&#10;    # &#20195;&#30721;&#30340;&#24320;&#22987;&#22788;&#10;    .line 18&#10;    # &#35813;&#22788;&#25351;&#20196;&#22312;&#28304;&#20195;&#30721;&#20013;&#30340;&#34892;&#21495;&#10;    invoke-super &#123;p0, p1&#125;, Landroid/app/Activity;-&#62;onCreate(Landroid/os/Bundle;)V&#10;    # &#35843;&#29992;&#29238;&#31867;android.app.Activity&#30340;onCreate&#26041;&#27861;&#65292;&#21442;&#25968;&#20026;p1 = &#34;savedInstanceState&#34; &#31867;&#22411;&#20026;android.os.Bundle, &#36820;&#22238;&#31867;&#22411;&#20026;void&#22411;&#12290;&#20854;&#20013;p0&#20026;this&#24341;&#29992;&#10;    .line 19&#10;    const v1, 0x7f040017&#10;    # &#20351;&#29992;&#20102;v1&#26412;&#22320;&#23492;&#23384;&#22120;&#65292;&#24182;&#25226;&#20540;0x7f040017&#23384;&#21040;v1&#20013;&#10;    invoke-virtual &#123;p0, v1&#125;, Lcom/reverse/idhyt/androidreverse/ClickButton;-&#62;setContentView(I)V&#10;    # &#35843;&#29992;&#20102;public com.reverse.idhyt.androidreverse.ClickButton&#30340;setContentView&#26041;&#27861;&#65292; &#21442;&#25968;&#20026;v1 = 0x7f040017(&#21442;&#32771;&#28304;&#30721;&#21487;&#30693;&#35813;&#20540;&#34920;&#31034;&#24067;&#23616;&#25991;&#20214;), &#36820;&#22238;&#31867;&#22411;&#20026;void&#22411;&#10;    .line 20&#10;    const v1, 0x7f090040&#10;    # &#20351;&#29992;&#20102;v1&#26412;&#22320;&#23492;&#23384;&#22120;&#65292;&#24182;&#25226;&#20540;0x7f090040&#23384;&#21040;v1&#20013;&#10;    invoke-virtual &#123;p0, v1&#125;, Lcom/reverse/idhyt/androidreverse/ClickButton;-&#62;findViewById(I)Landroid/view/View;&#10;    # &#35843;&#29992;&#20102;public com.reverse.idhyt.androidreverse.ClickButton&#30340;findViewById&#26041;&#27861;&#65292; &#21442;&#25968;&#20026;v1 = 0x7f090040(&#21442;&#32771;&#28304;&#30721;&#21487;&#30693;&#35813;&#20540;&#34920;&#31034;&#19968;&#20010;button&#25353;&#38062;), &#36820;&#22238;&#31867;&#22411;&#20026;void&#22411;&#10;    move-result-object v0&#10;    # &#23558;findViewById&#30340;&#36820;&#22238;&#23545;&#35937;&#23384;&#20837;&#23492;&#23384;&#22120;v0&#20013;&#65292;&#29992;&#27861;&#21442;&#32771;-&#62;&#20989;&#25968;&#36820;&#22238;&#32467;&#26524;&#10;    check-cast v0, Landroid/widget/Button;&#10;    # &#26816;&#27979;v0&#30340;&#23545;&#35937;&#24341;&#29992;&#26159;&#21542;&#21487;&#23454;&#20363;&#21270;&#10;    # Dalvik opcodes &#10;    # Opcode name: check-cast vx, type_id&#10;    # Explanation: Checks whether the object reference in vx can be cast to an instance of a class referenced by type_id. Throws ClassCastException if the cast is not possible, continues execution otherwise.&#10;    .line 21&#10;    .local v0, &#34;button&#34;:Landroid/widget/Button;&#10;    # v0 = &#34;button&#34;(&#28304;&#30721;&#20013;&#23450;&#20041;&#30340;&#21464;&#37327;&#21517;) &#31867;&#22411; android/widget/Button&#10;    new-instance v1, Lcom/reverse/idhyt/androidreverse/ClickButton$1;&#10;    # &#21019;&#24314;&#31867;&#23454;&#20363; vi = com.reverse.idhyt.androidreverse.ClickButton$1 &#21363;&#31867;ClickButton$1&#23454;&#20363;&#21270;&#10;    invoke-direct &#123;v1, p0&#125;, Lcom/reverse/idhyt/androidreverse/ClickButton$1;-&#62;&#60;init&#62;(Lcom/reverse/idhyt/androidreverse/ClickButton;)V&#10;    # &#35843;&#29992;&#31867;ClickButton$1&#30340;private&#20989;&#25968;init, &#21442;&#25968;&#20026;p0 &#31867;&#22411;&#20026;com.reverse.idhyt.androidreverse.ClickButton, &#20854;&#20013;v1&#20026;&#31867;&#23545;&#35937;&#26412;&#36523;&#65292;&#21363;this&#10;    invoke-virtual &#123;v0, v1&#125;, Landroid/widget/Button;-&#62;setOnClickListener(Landroid/view/View$OnClickListener;)V&#10;    # &#35843;&#29992;&#31867;android.widget.Button&#20013;&#23450;&#20041;&#30340;&#19968;&#20010;pravite&#20989;&#25968;setOnClickListener&#10;    # &#21442;&#25968;v0&#20026;android.widget.Button, v1&#20026;&#20256;&#36882;&#32473;setOnClickListener&#26041;&#27861;&#30340;Landroid/view/View$OnClickListener&#21442;&#25968;&#10;    # &#21363;&#20026;button&#25353;&#38062;&#28155;&#21152;&#20102;&#19968;&#20010;&#28857;&#20987;&#30417;&#21548;&#20107;&#20214;&#65292;&#20854;&#23454;&#29616;&#20195;&#30721;&#22312;v1 = ClickButton$1&#20013;</span><br></pre></td></tr></table></figure>
+<p>button点击事件代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># virtual methods&#10;.method public onClick(Landroid/view/View;)V&#10;    .locals 3&#10;    .param p1, &#34;v&#34;    # Landroid/view/View;&#10;    .prologue&#10;    .line 24&#10;    new-instance v0, Landroid/app/AlertDialog$Builder;&#10;    # v0 = this &#23545;&#29031;&#28304;&#30721;&#65306;new AlertDialog.Builder()&#10;    iget-object v1, p0, Lcom/reverse/idhyt/androidreverse/ClickButton$1;-&#62;this$0:Lcom/reverse/idhyt/androidreverse/ClickButton;&#10;    # &#35843;&#29992;&#23545;&#35937; ClickButton.this &#23545;&#29031;&#28304;&#30721; new AlertDialog.Builder(ClickButton.this)&#10;    invoke-direct &#123;v0, v1&#125;, Landroid/app/AlertDialog$Builder;-&#62;&#60;init&#62;(Landroid/content/Context;)V&#10;    # &#21021;&#22987;&#21270;Context&#10;    .line 25&#10;    .local v0, &#34;alert&#34;:Landroid/app/AlertDialog$Builder;&#10;    # v0 = &#34;alert&#34; &#31867;&#22411;&#65306;android/app/AlertDialog$Builder&#10;    const-string v1, &#34;hello world&#34;&#10;    # v1 = &#34;hello world&#34;&#10;    invoke-virtual &#123;v0, v1&#125;, Landroid/app/AlertDialog$Builder;-&#62;setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;&#10;    # &#35843;&#29992;v0&#30340;setTitle&#26041;&#27861;&#65292;&#36820;&#22238;&#31867;&#22411;&#20026;android/app/AlertDialog$Builder&#65292;&#23545;&#24212;&#28304;&#30721;alert.setTitle(&#34;hello world&#34;)&#10;    .line 26&#10;    const-string v1, &#34;exit&#34;&#10;    # v1 = &#34;exit&#34;&#10;    new-instance v2, Lcom/reverse/idhyt/androidreverse/ClickButton$1$1;&#10;    # &#37325;&#26032;&#23454;&#20363;&#21270;&#19968;&#20010;clickButton&#31867;&#10;    invoke-direct &#123;v2, p0&#125;, Lcom/reverse/idhyt/androidreverse/ClickButton$1$1;-&#62;&#60;init&#62;(Lcom/reverse/idhyt/androidreverse/ClickButton$1;)V&#10;    # ClickButton$1$1&#21021;&#22987;&#21270;&#65292;&#20854;&#29238;&#31867;&#20026;ClickButton$1&#10;    invoke-virtual &#123;v0, v1, v2&#125;, Landroid/app/AlertDialog$Builder;-&#62;setPositiveButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;&#10;    # &#35843;&#29992;v0&#30340;setPositiveButton&#26041;&#27861;&#65292;&#21442;&#25968;&#20026;v1, v2, v1 =&#34;exit&#34;, v2 = DialogInterface$OnClickListener,&#21363;&#22312;exit&#25353;&#38062;&#19978;&#28155;&#21152;&#20102;&#19968;&#20010;&#30417;&#21548;&#20107;&#20214;v2:ClickButton$1$1&#10;    .line 33&#10;    invoke-virtual &#123;v0&#125;, Landroid/app/AlertDialog$Builder;-&#62;show()Landroid/app/AlertDialog;&#10;    # &#35843;&#29992;v0&#30340;show&#26041;&#27861;&#10;    .line 34&#10;    return-void&#10;.end method</span><br></pre></td></tr></table></figure>
+<p>exit退出事件代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># virtual methods&#10;.method public onClick(Landroid/content/DialogInterface;I)V&#10;    .locals 1&#10;    .param p1, &#34;dialog&#34;    # Landroid/content/DialogInterface;&#10;    .param p2, &#34;which&#34;    # I&#10;    # &#20256;&#21442; p1, p2, #&#21518;&#36793;&#20026;&#21442;&#25968;&#31867;&#22411;&#10;    .prologue&#10;    .line 29&#10;    invoke-interface &#123;p1&#125;, Landroid/content/DialogInterface;-&#62;dismiss()V&#10;    # &#35843;&#29992;dialog&#20013;&#30340;dismiss()&#25509;&#21475;&#10;    .line 30&#10;    iget-object v0, p0, Lcom/reverse/idhyt/androidreverse/ClickButton$1$1;-&#62;this$1:Lcom/reverse/idhyt/androidreverse/ClickButton$1;&#10;    iget-object v0, v0, Lcom/reverse/idhyt/androidreverse/ClickButton$1;-&#62;this$0:Lcom/reverse/idhyt/androidreverse/ClickButton;&#10;    invoke-virtual &#123;v0&#125;, Lcom/reverse/idhyt/androidreverse/ClickButton;-&#62;finish()V&#10;    # &#20197;&#19978;&#19977;&#34892;&#25214;&#21040;&#39030;&#32423;&#29238;&#31867;&#23545;&#35937;&#65292;&#24182;&#35843;&#29992;finish&#20851;&#38381;Activity&#10;    .line 31&#10;    return-void&#10;.end method</span><br></pre></td></tr></table></figure>
+<h2 id="其他">其他</h2><h3 id="函数返回结果">函数返回结果</h3><p>在Java代码中调用函数和返回函数结果是一条语句完成的，而在smali里则需要分开来完成，在使用上述指令后，如果调用的函数返回非void，那么还需要用到move-result（返回基本数据类型）和move-result-object（返回对象）指令</p>
+<h3 id="数组的表示形式">数组的表示形式</h3><p>[I——表示一个整型一维数组，相当于java中的int[]。<br>对于多维数组，只要增加[就行了。[[I相当于int[][]，[[[I相当于int[][][]。注意每一维的最多255个。<br>对象数组的表示：[Ljava/lang/String;表示一个String对象数组。</p>
+<h3 id="字段的表示形式：">字段的表示形式：</h3><p>Lpackage/name/ObjectName;-&gt;FieldName:Ljava/lang/String;<br>即包名，字段名和各字段类型。</p>
+<h3 id="寄存器-1">寄存器</h3><p>在dalvik字节码中，寄存器都是32位的，能够支持任何类型。64位类型（Long和Double型）用2个寄存器表示。<br>有两种方式指定一个方法中有多少寄存器是可用的,.registers指令指定了方法中寄存器的总数,.locals指令表明了方法中非参寄存器的数量。</p>
+<p>方法的传参<br>1.当一个方法被调用的时候，方法的参数被置于最后N个寄存器中。如果一个方法有2个参数，5个寄存器（v0-v4），那么参数将置于最后2个寄存器——v3和v4。</p>
+<p>2.非静态方法中的第一个参数总是调用该方法的对象。<br>例如，非静态方法LMyObject;-&gt;callMe(II)V有2个整型参数，另外还有一个隐含的LMyObject;参数，所以总共有3个参数。<br>假如在该方法中指定了5个寄存器（v0-v4），以.registers方式指定5个或以.locals方式指定2个(即2个local寄存器+3个参数寄存器)。<br>当该方法被调用的时候，调用该方法的对象（即this引用）存放在v2中，第一个整型参数存放在v3中，第二个整型参数存放在v4中。</p>
+<p>3.对于静态方法除了没有隐含的this参数外其它都一样。</p>
+<h2 id="参考">参考</h2><p>1.函数调用部分参考 <a href="http://blog.csdn.net/lpohvbe/article/details/7981386" target="_blank" rel="external">APK反编译之一：基础知识</a></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag">#android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/07/5-python-challenge-0-10/" rel="prev">python challenge 0-10</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/08/4-android-netbeans-debug-smali/" rel="next">Netbeans动态调试smali文件</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/05/11/4-android-reverse-clickbutton/"
+     data-title="安卓逆向学习笔记-ClickButton"
+     data-content=""
+     data-url="http://blog.idhyt.xyz/2015/05/11/4-android-reverse-clickbutton/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2015/05/11/4-android-reverse-clickbutton/"
+                   data-title="安卓逆向学习笔记-ClickButton" data-url="http://blog.idhyt.xyz/2015/05/11/4-android-reverse-clickbutton/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="idhyt" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">idhyt</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">水中月.镜中花.浮华一片苍凉..</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/idhyt" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1706893103" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/idhyt" target="_blank">ZhiHu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反编译"><span class="nav-number">2.</span> <span class="nav-text">反编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆向分析"><span class="nav-number">3.</span> <span class="nav-text">逆向分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主类文件头部分"><span class="nav-number">3.1.</span> <span class="nav-text">主类文件头部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定位入口函数"><span class="nav-number">3.2.</span> <span class="nav-text">定位入口函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#翻译smali代码"><span class="nav-number">3.3.</span> <span class="nav-text">翻译smali代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#寄存器"><span class="nav-number">3.3.1.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数"><span class="nav-number">3.3.2.</span> <span class="nav-text">函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整注释"><span class="nav-number">4.</span> <span class="nav-text">完整注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">5.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数返回结果"><span class="nav-number">5.1.</span> <span class="nav-text">函数返回结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的表示形式"><span class="nav-number">5.2.</span> <span class="nav-text">数组的表示形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字段的表示形式："><span class="nav-number">5.3.</span> <span class="nav-text">字段的表示形式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寄存器-1"><span class="nav-number">5.4.</span> <span class="nav-text">寄存器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2011 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idhyt</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<div class="powered-by">
+</div>
+
+<div class="theme-info">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<a class="theme-link"><span id="busuanzi_value_site_pv"></span></a>次
+    </span>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"idhyt"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
+  
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,743 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+  <meta name="google-site-verification" content="i9ah5x5ODvKLpoCyNxyAxw8p0lbULKKLPS3IBF7_Guc" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="水中月.镜中花.浮华一片苍凉.." />
+
+
+
+  <meta name="keywords" content="virus," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idhyt's blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="感染型宏病毒行为分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="病毒分析-宏感染型">
+<meta property="og:url" content="http://blog.idhyt.xyz/2013/11/29/3-virus-infected-word/index.html">
+<meta property="og:site_name" content="idhyt's blog">
+<meta property="og:description" content="感染型宏病毒行为分析">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-word-1.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-word-2.png">
+<meta property="og:updated_time" content="2015-09-20T14:47:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="病毒分析-宏感染型">
+<meta name="twitter:description" content="感染型宏病毒行为分析">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 病毒分析-宏感染型 | idhyt's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-61722826-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5228d77c5752954f270fcca0908555af";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">风轻云淡</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'VpXUP87KQneoFZ3srxxA','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              病毒分析-宏感染型
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2013-11-29T11:11:11+08:00" content="2013-11-29">
+            2013-11-29
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/逆向/" itemprop="url" rel="index">
+                  <span itemprop="name">逆向</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2013/11/29/3-virus-infected-word/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2013/11/29/3-virus-infected-word/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>感染型宏病毒行为分析 <a id="more"></a></p>
+<h2 id="病毒简介">病毒简介</h2><p>病毒运行后会拷贝自身到system32目录下并提升权限注入其他进程，之后创建大量线程用于终止杀软，远程下载，感染系统正常文件。<br>1 释放自身到system32目录下，注入其他进程<br>2 终止杀软<br>3 远程下载文件不执行<br>4 添加自启动，打开word和excel宏功能<br>5 加密自身感染.doc和.xls文件<br>6 遍历系统盘，U盘，网络资源进行感染，包括.exe，.doc和.xls，删除系统备份文件.gho<br>7 隐藏进程自身</p>
+<h2 id="运行过程">运行过程</h2><p>1.获取%system32%目录生成路径system32\blackice.exe 和system32\kernel.dll.<br>2.创建互斥体 blackicemutex，如果互斥体存在，则表明病毒已运行，退出.<br>3.提升进程权限SeDebugPrivilege.<br>4.%System32%目录下查找blackice.exe和kernel.dll，找不到则拷贝自身到该目录下并重命名为blackice.exe和kernel.dll，设置系统时间，设置文件属性为只读，隐藏，系统文件.<br>5.查找进程是否存在explorer.exe和taskmgr.exe，如果存在将自身注入该进程并运行.<br>6.创建大量线程实现其功能.</p>
+<h3 id="线程1_sub_401160_结束杀软">线程1 sub_401160 结束杀软</h3><p>1.枚举当前进程获取进程名，如果找到杀软进程，则调用TerminateThread将其结束<br>2.如果结束杀软失败，则获取该杀软进程模块基址，在该进程中依次申请0x1000字节并写入0xCC，从0x1000开始到0x80000000<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-word-1.png" alt=""></p>
+<h3 id="线程2_sub_4075F0_获取系统信息远程下载">线程2 sub_4075F0 获取系统信息远程下载</h3><p>1.从URL:<a href="http://fmtwld.zj.com/blackice3/url.txt下载配置文件到system32目录下的blackice.ini" target="_blank" rel="external">http://fmtwld.zj.com/blackice3/url.txt下载配置文件到system32目录下的blackice.ini</a><br>2.如果下载失败则延时1分钟从URL: <a href="http://fmtwld.vicp.net/blackice3/url.txt继续下载" target="_blank" rel="external">http://fmtwld.vicp.net/blackice3/url.txt继续下载</a><br>3.下载成功后从配置文件读取control节url字段（远程服务器地址）的数据并删除下载的配置文件<br>4.获取的系统信息（mac地址，端口，版本等）生成新的url发送给服务器<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-word-2.png" alt=""><br>5.从远程服务器下载新的配置文件读取url节区的string字段，并删除<br>6.如果该字段数据不为“notdown” 则从该字段获取文件名，从远程服务器下载该文件到system32目录下并调用Winexec执行，最后删除下载的配置文件<br>7.如果该字段数据为“notdown”则不进行下载文件</p>
+<h3 id="线程3_sub_4082F0_自启动">线程3 sub_4082F0  自启动</h3><p>1.从系统配置文件win.ini中获取节区windows下key=run的值，如果不存在，则将该值写入c:\WINDOWS\system32\blackice.exe<br>2.获取system32目录下配置文件system.ini中boot节区下key=shell的值，如果该文件不存在，则创建该文件并写入boot节区，key=shell的值为”Explorer.exe  C:\WINDOWS\system32\blackice.exe”<br>3.检测C:\WINDOWS\system32\目录下是否存在blackice.exe和kernel.dll，如果不存在则拷贝自身为该文件</p>
+<h3 id="线程4_sub_406900_感染-doc和-xls文件">线程4 sub_406900 感染.doc和.xls文件</h3><p>1.将自身map到内存<br>2.调用函数CLSIDFromProgID获取Excel.Application标识符获取其version（11.0）和quit<br>3.将注册表HKEY_CURRENT_USER\ software\microsoft\office \11.0（version）\word\security\子键level和AccessVBOM的键值置1，启动宏功能<br>4.将注册表HKEY_CURRENT_USER\ software\microsoft\excel\11.0（version）\office \security\子键level和AccessVBOM的键值置1，启动宏功能<br>5.释放子体book1.xls和Normal.dot文件<br>5.1 申请内存，写入自身加密写入<br>5.2 获取Excel.Application的StartupPath值即Excel的启动路径C:\Documents and Settings\Admin\Application Data\Microsoft\Excel\XLSTART\<br>5.3 检测该路径下是否存在book1.xls文件，如果存在则判断lines处字节是否为&lt;!!blackice&gt;，如果是的话则说明已经感染过则不进行感染<br>5.4 如果不存在book1.xls或者该文件lines处字节不为&lt;!!blackice&gt;则获取Add和SaveAs接口创建book1.xls文件<br>5.5 调用InsertLines属性将内存中生成的感染数据插入，最后调用save和quit属性保存并退出<br>6.用相同的方法，获取word的启动路径，生成包含加密数据的Normal.dot文件。<br>7.通过该方法，当用户打开任意word文档或者xls文档即可运行病毒</p>
+<h3 id="线程5_sub_408210_感染U盘">线程5 sub_408210 感染U盘</h3><p>1.在可移动磁盘中创建AUTORUN.INF文件<br>2.写入AutoRun节区，key = open值为blackice.exe达到自动自动运行blackice.exe的目的，并设置该文件为只读隐藏系统文件<br>3.查找可移动磁盘中是否存在blackice.exe文件，如果不存在则将自身拷贝过去并重命名blackice.exe，设置为只读隐藏系统文件<br>4.遍历进程文件目录下的所有文件，如果后缀为.doc和.xls，则执行线程4中释放book1.xls和Normal.dot过程<br>5.如果是exe则将感染数据写入其资源文件<br>5.1 先将exe文件map到内存，然后将感染数据插入其资源文件<br>5.2 将感染过的exe文件map到内存，检测PE头，检测其资源数据开头是否为&lt;!!blackice&gt;，5.3 如果是的话说明写入过感染数据，则添加新节区并设置节区属性为0xE0000020u（可执行属性），将该节区指向感染数据。<br>5.4 如果不是的话说明没有写入感染数据，不添加节区操作。<br>6.如果是.gho(系统备份)则删除该文件<br>7.注册一个watchusb窗口循环接受消息和派遣消息监控U盘感染</p>
+<h3 id="线程6_sub_406F80_感染系统磁盘和网络资源">线程6 sub_406F80 感染系统磁盘和网络资源</h3><p>1.枚举当前系统所有磁盘信息，如果为固定磁盘，则按照线程5的方式进行感染<br>2.枚举网络资源，并对网络资源上的数据进行感染<br>3.获取H盘，进行感染</p>
+<h3 id="线程7_sub_4045F0_map自身到物理内存">线程7 sub_4045F0 map自身到物理内存</h3><p>1.将文件映射到物理内存<br>2.调用函数ZwOpenSection打开\Device\PhysicalMemory，如果打开失败，则修改其Acl重新打开获取其物理内存句柄<br>3.将物理内存map到当前进程中，获取其进程列表将自身进程加入其中，实现隐藏进程的目的</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/virus/" rel="tag">#virus</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/12/03/3-virus-infected-tem81/" rel="prev">病毒分析-驱动感染型</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/11/25/3-virus-infected-rmnet/" rel="next">病毒分析-rmnet感染型</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/11/29/3-virus-infected-word/"
+     data-title="病毒分析-宏感染型"
+     data-content=""
+     data-url="http://blog.idhyt.xyz/2013/11/29/3-virus-infected-word/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2013/11/29/3-virus-infected-word/"
+                   data-title="病毒分析-宏感染型" data-url="http://blog.idhyt.xyz/2013/11/29/3-virus-infected-word/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="idhyt" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">idhyt</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">水中月.镜中花.浮华一片苍凉..</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/idhyt" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1706893103" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/idhyt" target="_blank">ZhiHu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#病毒简介"><span class="nav-number">1.</span> <span class="nav-text">病毒简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行过程"><span class="nav-number">2.</span> <span class="nav-text">运行过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程1_sub_401160_结束杀软"><span class="nav-number">2.1.</span> <span class="nav-text">线程1 sub_401160 结束杀软</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程2_sub_4075F0_获取系统信息远程下载"><span class="nav-number">2.2.</span> <span class="nav-text">线程2 sub_4075F0 获取系统信息远程下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程3_sub_4082F0_自启动"><span class="nav-number">2.3.</span> <span class="nav-text">线程3 sub_4082F0  自启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程4_sub_406900_感染-doc和-xls文件"><span class="nav-number">2.4.</span> <span class="nav-text">线程4 sub_406900 感染.doc和.xls文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程5_sub_408210_感染U盘"><span class="nav-number">2.5.</span> <span class="nav-text">线程5 sub_408210 感染U盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程6_sub_406F80_感染系统磁盘和网络资源"><span class="nav-number">2.6.</span> <span class="nav-text">线程6 sub_406F80 感染系统磁盘和网络资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程7_sub_4045F0_map自身到物理内存"><span class="nav-number">2.7.</span> <span class="nav-text">线程7 sub_4045F0 map自身到物理内存</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2011 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idhyt</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<div class="powered-by">
+</div>
+
+<div class="theme-info">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<a class="theme-link"><span id="busuanzi_value_site_pv"></span></a>次
+    </span>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"idhyt"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
+  
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

