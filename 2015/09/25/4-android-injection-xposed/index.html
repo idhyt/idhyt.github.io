@@ -56,7 +56,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
 <meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-3e.jpg">
 <meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-4.jpg">
 <meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-5.jpg">
-<meta property="og:updated_time" content="2015-12-26T07:45:35.000Z">
+<meta property="og:updated_time" content="2015-12-27T09:59:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓注入框架Xposed分析与简单应用">
 <meta name="twitter:description" content="概述Xposed是针对Android平台的动态劫持项目，源码github
@@ -334,6 +334,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
 <p>整个工程目录如下所示:<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-3e.jpg" alt="project-dir"></p>
 <p>7.运行之后 会在虚拟机中看到我们的插件已经安装到xposed模块里边，然后勾选重启系统。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-4.jpg" alt="install-ok"></p>
 <p>8.重启过后，加入过滤规则“loaded app”，在logcat窗口会看到我们的输出日志信息，你打开应用也会显示加载的应用包名。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-5.jpg" alt="logcat-out"></p>
+<h3 id="xposed用法详解">xposed用法详解</h3><p>移步：<a href="http://blog.idhyt.xyz/2015/11/28/4-android-injection-xposed-usage/">安卓注入框架Xposed用法详解</a></p>
 </span>
       
     </div>
@@ -460,7 +461,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -515,7 +516,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要模块说明如下："><span class="nav-number">1.1.</span> <span class="nav-text">主要模块说明如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Xposed框架的基本运行环境如下："><span class="nav-number">1.2.</span> <span class="nav-text">Xposed框架的基本运行环境如下：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码分析"><span class="nav-number">2.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XposedInstaller"><span class="nav-number">2.1.</span> <span class="nav-text">XposedInstaller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要替换app_process"><span class="nav-number">2.2.</span> <span class="nav-text">为什么要替换app_process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要控制zygote进程"><span class="nav-number">2.3.</span> <span class="nav-text">为什么要控制zygote进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hook/Replace"><span class="nav-number">2.4.</span> <span class="nav-text">Hook/Replace</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Xposed代码分析"><span class="nav-number">2.5.</span> <span class="nav-text">Xposed代码分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xposed插件编写"><span class="nav-number">3.</span> <span class="nav-text">Xposed插件编写</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要模块说明如下："><span class="nav-number">1.1.</span> <span class="nav-text">主要模块说明如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Xposed框架的基本运行环境如下："><span class="nav-number">1.2.</span> <span class="nav-text">Xposed框架的基本运行环境如下：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码分析"><span class="nav-number">2.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XposedInstaller"><span class="nav-number">2.1.</span> <span class="nav-text">XposedInstaller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要替换app_process"><span class="nav-number">2.2.</span> <span class="nav-text">为什么要替换app_process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要控制zygote进程"><span class="nav-number">2.3.</span> <span class="nav-text">为什么要控制zygote进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hook/Replace"><span class="nav-number">2.4.</span> <span class="nav-text">Hook/Replace</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Xposed代码分析"><span class="nav-number">2.5.</span> <span class="nav-text">Xposed代码分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xposed插件编写"><span class="nav-number">3.</span> <span class="nav-text">Xposed插件编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xposed用法详解"><span class="nav-number">4.</span> <span class="nav-text">xposed用法详解</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
