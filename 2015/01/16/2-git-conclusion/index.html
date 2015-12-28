@@ -50,7 +50,7 @@
 <meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/git-conclusion-2.png">
 <meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/git-conclusion-4.png">
 <meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/git-conclusion-5.png">
-<meta property="og:updated_time" content="2015-09-20T14:47:19.000Z">
+<meta property="og:updated_time" content="2015-12-28T06:34:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git使用总结">
 <meta name="twitter:description" content="windows下git使用总结">
@@ -315,7 +315,7 @@ Are you sure you want to continue connecting (yes/no)?
 <li>vim .gitignore     #编辑文件，加入指定文件 </li>
 <li>git add . #就可以自动忽略掉指定的文件</li>
 <li>文件.gitignore的格式规范：<br>A：#为注释<br>B：可以使用shell所使用的正则表达式来进行模式匹配<br>C：匹配模式最后跟”/“说明要忽略的是目录<br>D：使用！取反（例如目录中包含  test.a，并且gitignore文件中包含  <em>.[oa]，如果在文件中加入 ！test.a   表明忽略除test.a文件以外的后缀名为.a或者.o的文件）<br>tmp.txt         //忽略tmp.txt
-</em>.log           //忽略所有log文件<br>tmp/<em>           //忽略tmp文件夹所有文件<br>log/**/</em>.log    //忽略log目录下的包括子目录下的所有log文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#19979;&#38754;&#26159;&#25105;&#30340;gitignore&#25991;&#20214;&#30340;&#20869;&#23481; &#10;#&#24573;&#30053;gitignore&#25991;&#20214; &#10;.gitignore&#10;#&#24573;&#30053;&#21518;&#32512;&#21517;&#20026;.o&#21644;.a&#30340;&#25991;&#20214; &#10;*.[oa]&#10;#&#24573;&#30053;&#21518;&#32512;&#21517;&#20026;.exe&#21644;.txt&#30340;&#25991;&#20214; &#10;*.exe&#10;*.txt&#10;#&#26174;&#31034;&#25351;&#23450;&#24573;&#30053;&#21517;&#31216;&#20026;main&#30340;&#25991;&#20214; &#10;main&#10;&#10;# eg:c++ .gitignore&#10;*.sdf&#10;.gitignore&#10;Debug/*&#10;Release/*&#10;ipch/*</span><br></pre></td></tr></table></figure>
+</em>.log           //忽略所有log文件<br>tmp/<em>           //忽略tmp文件夹所有文件<br>log/**/</em>.log    //忽略log目录下的包括子目录下的所有log文件<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#下面是我的gitignore文件的内容 </span><br><span class="line">#忽略gitignore文件 </span><br><span class="line">.gitignore</span><br><span class="line">#忽略后缀名为.o和.a的文件 </span><br><span class="line">*.[oa]</span><br><span class="line">#忽略后缀名为.exe和.txt的文件 </span><br><span class="line">*.exe</span><br><span class="line">*.txt</span><br><span class="line">#显示指定忽略名称为main的文件 </span><br><span class="line">main</span><br><span class="line"></span><br><span class="line"># eg:c++ .gitignore</span><br><span class="line">*.sdf</span><br><span class="line">.gitignore</span><br><span class="line">Debug/*</span><br><span class="line">Release/*</span><br><span class="line">ipch/*</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="更新远程仓库代码到本地">更新远程仓库代码到本地</h3><ol>

@@ -41,19 +41,22 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;在android的sdk中封装了webView控件,在webView下有一个非常特殊的接口函数addJavascriptInterface,利用这个接口函数可实现穿透webkit控制android 本机。">
+<meta name="description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;在android的sdk中封装了webView控件,在webView下有一个非常特殊的接口函数addJavascriptInterface,利用这个接口函数可实现穿透webkit控制android 本机。
+简介&amp;#160; &amp;#160; &amp;#160; &amp;#160;Webview是Android用于浏览网页的组件，它的接口函数addJavascr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebView组件远程代码执行漏洞">
-<meta property="og:url" content="http://blog.idhyt.com/2015/04/09/2-abusing-webview/index.html">
+<meta property="og:url" content="http://blog.idhyt.com/2015/04/09/4-android-abusing-webview/index.html">
 <meta property="og:site_name" content="idhyt's blog">
-<meta property="og:description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;在android的sdk中封装了webView控件,在webView下有一个非常特殊的接口函数addJavascriptInterface,利用这个接口函数可实现穿透webkit控制android 本机。">
+<meta property="og:description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;在android的sdk中封装了webView控件,在webView下有一个非常特殊的接口函数addJavascriptInterface,利用这个接口函数可实现穿透webkit控制android 本机。
+简介&amp;#160; &amp;#160; &amp;#160; &amp;#160;Webview是Android用于浏览网页的组件，它的接口函数addJavascr">
 <meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/webview-1.png">
 <meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/webview-2.png">
 <meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/webview-3.png">
 <meta property="og:updated_time" content="2015-04-11T03:11:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebView组件远程代码执行漏洞">
-<meta name="twitter:description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;在android的sdk中封装了webView控件,在webView下有一个非常特殊的接口函数addJavascriptInterface,利用这个接口函数可实现穿透webkit控制android 本机。">
+<meta name="twitter:description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;在android的sdk中封装了webView控件,在webView下有一个非常特殊的接口函数addJavascriptInterface,利用这个接口函数可实现穿透webkit控制android 本机。
+简介&amp;#160; &amp;#160; &amp;#160; &amp;#160;Webview是Android用于浏览网页的组件，它的接口函数addJavascr">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -245,8 +248,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/04/09/2-abusing-webview/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/09/2-abusing-webview/" itemprop="commentsCount"></span>
+              <a href="/2015/04/09/4-android-abusing-webview/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/09/4-android-abusing-webview/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -260,23 +263,21 @@
       
 
       
-        <span itemprop="articleBody"><p>&#160; &#160; &#160; &#160;在android的sdk中封装了webView控件,在webView下有一个非常特殊的接口函数addJavascriptInterface,利用这个接口函数可实现穿透webkit控制android 本机。<br><a id="more"></a></p>
-<p>###简介<br>&#160; &#160; &#160; &#160;Webview是Android用于浏览网页的组件，它的接口函数addJavascriptInterface可以实现网页JS与本地JAVA的交互，但是没有限制已注册JAVA类的方法调用，导致可以利用反射机制调用未注册的其它任何JAVA类。当Android用户访问恶意网页时，会被迫执行系统命令，如安装木马、盗取敏感数据等。</p>
-<p>###漏洞详情</p>
-<p>构建一个使用Webview组件的程序</p>
-<p>####1. AndroidManifest.xml添加网络访问权限<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.INTERNET"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><p>&#160; &#160; &#160; &#160;在android的sdk中封装了webView控件,在webView下有一个非常特殊的接口函数addJavascriptInterface,利用这个接口函数可实现穿透webkit控制android 本机。</p>
+<h3 id="简介">简介</h3><p>&#160; &#160; &#160; &#160;Webview是Android用于浏览网页的组件，它的接口函数addJavascriptInterface可以实现网页JS与本地JAVA的交互，但是没有限制已注册JAVA类的方法调用，导致可以利用反射机制调用未注册的其它任何JAVA类。当Android用户访问恶意网页时，会被迫执行系统命令，如安装木马、盗取敏感数据等。</p>
+<h3 id="漏洞详情">漏洞详情</h3><p>构建一个使用Webview组件的程序</p>
+<h4 id="1-_AndroidManifest-xml添加网络访问权限">1. AndroidManifest.xml添加网络访问权限</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.INTERNET"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 <p><br></p>
-<p>####2. activity_my.xml添加Webview控件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">WebView</span></span><br><span class="line">     <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">     <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">     <span class="attribute">android:id</span>=<span class="value">"@+id/webView"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="title">WebView</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>####3. MainActivity.java添加关键代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.activity_main);</span><br><span class="line">    <span class="comment">// add webview func</span></span><br><span class="line">    WebView webview = (WebView)findViewById(R.id.webView);</span><br><span class="line">    webview.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</span><br><span class="line">    webview.loadUrl(<span class="string">"http://info.idhyt.xyz/vultest/checkwebview.html"</span>);<span class="string">");</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="2-_activity_my-xml添加Webview控件">2. activity_my.xml添加Webview控件</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">WebView</span></span><br><span class="line">     <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">     <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">     <span class="attribute">android:id</span>=<span class="value">"@+id/webView"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="title">WebView</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-_MainActivity-java添加关键代码">3. MainActivity.java添加关键代码</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.activity_main);</span><br><span class="line">    <span class="comment">// add webview func</span></span><br><span class="line">    WebView webview = (WebView)findViewById(R.id.webView);</span><br><span class="line">    webview.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</span><br><span class="line">    webview.loadUrl(<span class="string">"http://info.idhyt.xyz/vultest/checkwebview.html"</span>);<span class="string">");</span></span><br></pre></td></tr></table></figure>
 <p><br></p>
-<p>####4. 测试页面<br>&#160; &#160; &#160; &#160;<a href="http://info.idhyt.xyz/vultest/checkwebview.html" target="_blank" rel="external">webview漏洞测试页面</a><br>&#160; &#160; &#160; &#160;<a href="http://info.idhyt.xyz/vultest/webviewexp.html" target="_blank" rel="external">webview漏洞利用页面</a><br><br></p>
-<p>####5. 测试结果<br>&#160; &#160; &#160; &#160;在没有使用addJavascriptInterface接口函数的情况下，<br>也会存在远程代码执行漏洞，原因是webview组件默认调用”searchBoxJavaBridge_”对象。<br>&#160; &#160; &#160; &#160;<img src="http://7xi9s3.com1.z0.glb.clouddn.com/webview-1.png" alt=""></p>
+<h4 id="4-_测试页面">4. 测试页面</h4><p>&#160; &#160; &#160; &#160;<a href="http://info.idhyt.xyz/vultest/checkwebview.html" target="_blank" rel="external">webview漏洞测试页面</a><br>&#160; &#160; &#160; &#160;<a href="http://info.idhyt.xyz/vultest/webviewexp.html" target="_blank" rel="external">webview漏洞利用页面</a><br><br></p>
+<h4 id="5-_测试结果">5. 测试结果</h4><p>&#160; &#160; &#160; &#160;在没有使用addJavascriptInterface接口函数的情况下，<br>也会存在远程代码执行漏洞，原因是webview组件默认调用”searchBoxJavaBridge_”对象。<br>&#160; &#160; &#160; &#160;<img src="http://7xi9s3.com1.z0.glb.clouddn.com/webview-1.png" alt=""></p>
 <p>&#160; &#160; &#160; &#160;当使用addJavascriptInterface接口函数时，代码改为<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">WebView webview = (WebView)findViewById(R.id.webView);</span><br><span class="line">webview.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</span><br><span class="line">webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(<span class="keyword">true</span>);</span><br><span class="line">webview.addJavascriptInterface(<span class="keyword">new</span> test(), <span class="string">"test"</span>);</span><br><span class="line">webview.loadUrl(<span class="string">"http://info.idhyt.xyz/vultest/checkwebview.html"</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">    <span class="comment">//do something...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>&#160; &#160; &#160; &#160;测试结果<br>&#160; &#160; &#160; &#160;<img src="http://7xi9s3.com1.z0.glb.clouddn.com/webview-2.png" alt=""></p>
 <p>&#160; &#160; &#160; &#160;可以看到，即便test类没有具体实现代码，也一样会触发漏洞。<br><br></p>
-<p>###漏洞检测<br>&#160; &#160; &#160; &#160;通过编写静态扫描器过滤出可能存在问题的apk，方法是通过apktool将apk文件反编译成smali,之后进行暴力搜索关键字。<br>&#160; &#160; &#160; &#160;<img src="http://7xi9s3.com1.z0.glb.clouddn.com/webview-3.png" alt=""><br><br><br>其中用到的几个关键的正则:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">获取类名</span><br><span class="line"><span class="string">r"^\.class.+(Lcom.+);"</span></span><br><span class="line">获取所有method</span><br><span class="line"><span class="string">r"(\.method[\s\S]*?\.end *method)"</span></span><br><span class="line">获取method方法类型</span><br><span class="line"><span class="string">r"^\.method.+ +(\w+) *\("</span></span><br><span class="line">获取method中的.line</span><br><span class="line"><span class="string">r"\.line([\s\S]*?)(?=(\.line))"</span></span><br><span class="line">获取指定的调用函数</span><br><span class="line"><span class="string">r"setJavaScriptEnabled|addJavascriptInterface"</span></span><br></pre></td></tr></table></figure></p>
-<p>###防范</p>
-<ul>
+<h3 id="漏洞检测">漏洞检测</h3><p>&#160; &#160; &#160; &#160;通过编写静态扫描器过滤出可能存在问题的apk，方法是通过apktool将apk文件反编译成smali,之后进行暴力搜索关键字。<br>&#160; &#160; &#160; &#160;<img src="http://7xi9s3.com1.z0.glb.clouddn.com/webview-3.png" alt=""><br><br><br>其中用到的几个关键的正则:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">获取类名</span><br><span class="line"><span class="string">r"^\.class.+(Lcom.+);"</span></span><br><span class="line">获取所有method</span><br><span class="line"><span class="string">r"(\.method[\s\S]*?\.end *method)"</span></span><br><span class="line">获取method方法类型</span><br><span class="line"><span class="string">r"^\.method.+ +(\w+) *\("</span></span><br><span class="line">获取method中的.line</span><br><span class="line"><span class="string">r"\.line([\s\S]*?)(?=(\.line))"</span></span><br><span class="line">获取指定的调用函数</span><br><span class="line"><span class="string">r"setJavaScriptEnabled|addJavascriptInterface"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="防范">防范</h3><ul>
 <li>使用removeJavascriptInterface(“searchBoxJavaBridge<em>“)移除searchBoxJavaBridge</em>对象<br>1.重构WebView控件(WebViewEx)</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.idhyt.webview;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.os.Build;</span><br><span class="line"><span class="keyword">import</span> android.util.AttributeSet;</span><br><span class="line"><span class="keyword">import</span> android.webkit.WebView;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by idhyt on 2015/4/28.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebViewEx</span> <span class="keyword">extends</span> <span class="title">WebView</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WebViewEx</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">        <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt; <span class="number">10</span> &amp;&amp; Build.VERSION.SDK_INT &lt; <span class="number">17</span>) &#123;</span><br><span class="line">            removeJavascriptInterface(<span class="string">"searchBoxJavaBridge_"</span>);</span><br><span class="line">            <span class="comment">// removeJavascriptInterface("accessibility");</span></span><br><span class="line">            <span class="comment">// removeJavascriptInterface("accessibilityTraversal");</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -290,8 +291,7 @@
 <li>对于在4.2(API 17+)系统运行的应用，使用JavascriptInterface代替addjavascriptInterface。</li>
 <li>限制对于该接口的使用来源，只允许可信来源访问该接口。例如使用WebViewClient中的shouldOverrideUrlLoading()来对加载的URL进行检查。</li>
 </ul>
-<p>###参考</p>
-<ol>
+<h3 id="参考">参考</h3><ol>
 <li><a href="http://50.56.33.56/blog/?p=314" target="_blank" rel="external">Abusing WebView JavaScript Bridges</a></li>
 <li><a href="http://drops.wooyun.org/papers/548" target="_blank" rel="external">WebView中接口隐患与手机挂马利用</a></li>
 <li><a href="http://blog.csdn.net/leehong2005/article/details/11808557" target="_blank" rel="external">Android WebView的Js对象注入漏洞解决方案</a></li>
@@ -334,10 +334,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/04/09/2-abusing-webview/"
+        <div class="ds-share flat" data-thread-key="2015/04/09/4-android-abusing-webview/"
      data-title="WebView组件远程代码执行漏洞"
      data-content=""
-     data-url="http://blog.idhyt.com/2015/04/09/2-abusing-webview/">
+     data-url="http://blog.idhyt.com/2015/04/09/4-android-abusing-webview/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -367,8 +367,8 @@
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/04/09/2-abusing-webview/"
-                   data-title="WebView组件远程代码执行漏洞" data-url="http://blog.idhyt.com/2015/04/09/2-abusing-webview/">
+              <div class="ds-thread" data-thread-key="2015/04/09/4-android-abusing-webview/"
+                   data-title="WebView组件远程代码执行漏洞" data-url="http://blog.idhyt.com/2015/04/09/4-android-abusing-webview/">
               </div>
             
           </div>
@@ -477,7 +477,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞详情"><span class="nav-number">2.</span> <span class="nav-text">漏洞详情</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-_AndroidManifest-xml添加网络访问权限"><span class="nav-number">2.1.</span> <span class="nav-text">1. AndroidManifest.xml添加网络访问权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-_activity_my-xml添加Webview控件"><span class="nav-number">2.2.</span> <span class="nav-text">2. activity_my.xml添加Webview控件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-_MainActivity-java添加关键代码"><span class="nav-number">2.3.</span> <span class="nav-text">3. MainActivity.java添加关键代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-_测试页面"><span class="nav-number">2.4.</span> <span class="nav-text">4. 测试页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-_测试结果"><span class="nav-number">2.5.</span> <span class="nav-text">5. 测试结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞检测"><span class="nav-number">3.</span> <span class="nav-text">漏洞检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#防范"><span class="nav-number">4.</span> <span class="nav-text">防范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
