@@ -51,7 +51,7 @@
 接管系统所有广播包&amp;#160;&amp;#160;&amp;#160;&amp;#160;在Android四大组件中，Broadcast是一种广">
 <meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-usage-1.jpg">
 <meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-usage-2.jpg">
-<meta property="og:updated_time" content="2015-12-27T10:00:37.000Z">
+<meta property="og:updated_time" content="2015-12-28T02:20:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓注入框架Xposed用法详解">
 <meta name="twitter:description" content="&amp;#160;&amp;#160;&amp;#160;&amp;#160;之前安卓注入框架Xposed分析与简单应用只是简单的了解了一下xposed框架，知道如何hook函数，并没有深入去使用，也不知道这个框架能用到哪种程度，最近详细的总结了下，简单来说就是，没有hook不到的地方，只有你想不到的地方。
@@ -262,7 +262,7 @@
       
 
       
-        <span itemprop="articleBody"><p>&#160;&#160;&#160;&#160;之前<a href="http://blog.idhyt.xyz/2015/09/25/4-android-injection-xposed/" target="_blank" rel="external">安卓注入框架Xposed分析与简单应用</a>只是简单的了解了一下xposed框架，知道如何hook函数，并没有深入去使用，也不知道这个框架能用到哪种程度，最近详细的总结了下，简单来说就是，没有hook不到的地方，只有你想不到的地方。</p>
+        <span itemprop="articleBody"><p>&#160;&#160;&#160;&#160;之前<a href="http://blog.idhyt.com/2015/09/25/4-android-injection-xposed/">安卓注入框架Xposed分析与简单应用</a>只是简单的了解了一下xposed框架，知道如何hook函数，并没有深入去使用，也不知道这个框架能用到哪种程度，最近详细的总结了下，简单来说就是，没有hook不到的地方，只有你想不到的地方。</p>
 <h2 id="接管系统所有广播包">接管系统所有广播包</h2><p>&#160;&#160;&#160;&#160;在Android四大组件中，Broadcast是一种广泛运用的在应用程序之间传输信息的机制。而BroadcastReceiver 是对发送出来的Broadcast进行过滤接受并响应的一类组件。应用通过BroadcastReceiver对一个外部的事件做出响应，这是非常有意思的，当开机，锁屏等外部事件到来的时候，可以利用BroadcastReceiver进行相应的处理。如果你能接管所有的广播包，基本上就接管了整个系统的信息传输过程。广播包也是频繁唤醒手机的一个重要原因，通过管理这些广播包，可以达到省电效果。</p>
 <p>通过阅读源代码中<br><a href="http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/5.1.1_r1/com/android/server/firewall/IntentFirewall.java#IntentFirewall" target="_blank" rel="external">IntentFirewall</a>这个类，126行代码开始有一些以<code>check</code>开头的方法，说明如下:</p>
 <pre><code>This is called from ActivityManager to<span class="instruction"> check </span>if a start activity intent should be allowed. It is assumed the caller is already holding the global ActivityManagerService lock.
