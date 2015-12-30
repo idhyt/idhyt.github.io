@@ -249,16 +249,11 @@
         
           
             <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <!--
-              <a href="/2015/05/11/4-android-reverse-clickbutton/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/11/4-android-reverse-clickbutton/" itemprop="commentsCount"></span>
-              </a>
-              -->
-              <a href="/2015/05/11/4-android-reverse-clickbutton/#comments" itemprop="discussionUrl">
-                <span>评论</span>
-              </a>
-            </span>
+            &nbsp; | &nbsp;
+            <a href="/2015/05/11/4-android-reverse-clickbutton/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/11/4-android-reverse-clickbutton/" itemprop="commentsCount"></span>
+            </a>
+          </span>
           
         
       </div>
@@ -504,25 +499,6 @@ Lpackage/name/ObjectName;表示类型，MethodName是方法名。III为参数（
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/05/11/4-android-reverse-clickbutton/"
-     data-title="安卓逆向学习笔记-ClickButton"
-     data-content=""
-     data-url="http://blog.idhyt.com/2015/05/11/4-android-reverse-clickbutton/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
@@ -537,8 +513,8 @@ Lpackage/name/ObjectName;表示类型，MethodName是方法名。III为参数（
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/05/11/4-android-reverse-clickbutton/"
-                   data-title="安卓逆向学习笔记-ClickButton" data-url="http://blog.idhyt.com/2015/05/11/4-android-reverse-clickbutton/">
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
               </div>
             
           </div>
@@ -723,29 +699,32 @@ Lpackage/name/ObjectName;表示类型，MethodName是方法名。III为参数（
   
   
     
+    
 
   
-    
+
+    <script type="text/javascript">
+      var disqus_shortname = 'idhyt';
+      var disqus_identifier = '2015/05/11/4-android-reverse-clickbutton/';
+      var disqus_title = '安卓逆向学习笔记-ClickButton';
+      var disqus_url = 'http://blog.idhyt.com/2015/05/11/4-android-reverse-clickbutton/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"idhyt"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-    
-     
-  	<script src="/js/ua-parser.min.js"></script>
-  	<script src="/js/hook-duoshuo.js"></script>
-  
 
-    
   
   
   <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
