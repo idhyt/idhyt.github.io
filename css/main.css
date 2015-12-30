@@ -1071,7 +1071,25 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffbe4f;
+  background: #8e427c;
+}
+.links-of-friendly a {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-bottom-color: #555;
+  font-size: 13px;
+}
+.links-of-friendly a:before {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 3px;
+  content: " ";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #edffa1;
 }
 .sidebar-nav {
   margin: 0;
