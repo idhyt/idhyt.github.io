@@ -1071,7 +1071,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f7fff5;
+  background: #ff0aab;
 }
 .links-of-friendly a {
   display: inline-block;
@@ -1089,7 +1089,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #a1ff9c;
+  background: #55ffde;
 }
 .sidebar-nav {
   margin: 0;
@@ -1595,6 +1595,9 @@ body {
 }
 .comments {
   margin-top: 60px;
+}
+#disqus_thread {
+  margin: 20px;
 }
 .tag-cloud {
   text-align: center;
