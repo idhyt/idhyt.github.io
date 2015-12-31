@@ -1,0 +1,832 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+  <meta name="google-site-verification" content="DRmBBL5LYsJ_2wCsJIYYsBfu8hVW8DQYzmpqGMp-njU" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="水中月.镜中花.浮华一片苍凉.." />
+
+
+
+  <meta name="keywords" content="盗号," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idhyt's blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="一个简单的盗号木马简略分析
+调试环境Windows xp sp3，Olldbg，010editor
+病毒简介病毒运行后会生成进91C7DF6D.cfg和91C7DF6D.dll两个文件，用作盗取用户数据发送到指定的URL地址。该过程会终止杀软进程，修改注册表信息自动运行，最后自删除。
+主要功能模块流程图
+运行过程创建线程,进入线程执行,获取开机运行时间病毒如果伪装成conime.exe，ctfmo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="病毒分析-简单盗号木马">
+<meta property="og:url" content="http://blog.idhyt.com/2013/11/20/virus-troj-simple/index.html">
+<meta property="og:site_name" content="idhyt's blog">
+<meta property="og:description" content="一个简单的盗号木马简略分析
+调试环境Windows xp sp3，Olldbg，010editor
+病毒简介病毒运行后会生成进91C7DF6D.cfg和91C7DF6D.dll两个文件，用作盗取用户数据发送到指定的URL地址。该过程会终止杀软进程，修改注册表信息自动运行，最后自删除。
+主要功能模块流程图
+运行过程创建线程,进入线程执行,获取开机运行时间病毒如果伪装成conime.exe，ctfmo">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-steal-s1-1.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-steal-s1-2.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-steal-s1-3.png">
+<meta property="og:updated_time" content="2015-12-31T11:58:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="病毒分析-简单盗号木马">
+<meta name="twitter:description" content="一个简单的盗号木马简略分析
+调试环境Windows xp sp3，Olldbg，010editor
+病毒简介病毒运行后会生成进91C7DF6D.cfg和91C7DF6D.dll两个文件，用作盗取用户数据发送到指定的URL地址。该过程会终止杀软进程，修改注册表信息自动运行，最后自删除。
+主要功能模块流程图
+运行过程创建线程,进入线程执行,获取开机运行时间病毒如果伪装成conime.exe，ctfmo">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 病毒分析-简单盗号木马 | idhyt's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71783676-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5228d77c5752954f270fcca0908555af";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">云淡风轻</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'VpXUP87KQneoFZ3srxxA','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              病毒分析-简单盗号木马
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2013-11-20T11:11:11+08:00" content="2013-11-20">
+            2013-11-20
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/virus/" itemprop="url" rel="index">
+                  <span itemprop="name">virus</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2013/11/20/virus-troj-simple/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/11/20/virus-troj-simple/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>一个简单的盗号木马简略分析</p>
+<h2 id="调试环境">调试环境</h2><p>Windows xp sp3，Olldbg，010editor</p>
+<h2 id="病毒简介">病毒简介</h2><p>病毒运行后会生成进91C7DF6D.cfg和91C7DF6D.dll两个文件，用作盗取用户数据发送到指定的URL地址。该过程会终止杀软进程，修改注册表信息自动运行，最后自删除。</p>
+<h2 id="主要功能模块流程图">主要功能模块流程图</h2><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-steal-s1-1.png" alt=""></p>
+<h2 id="运行过程">运行过程</h2><h3 id="创建线程,进入线程执行,获取开机运行时间">创建线程,进入线程执行,获取开机运行时间</h3><p>病毒如果伪装成conime.exe，ctfmon.exe，explorer.exe中任何一个进程运行，则从C:\WINDOWS\system32\dllcache找到该进程并启动[^autorun]。</p>
+<h3 id="创建91C7DF6D-cfg文件并写入数据">创建91C7DF6D.cfg文件并写入数据</h3><p>1.生成路径 C:\WINDOWS\system32\91C7DF6D.cfg 返回长度0x20<br>2.创建91C7DF6D.cfg文件。<br>3.从病毒文件偏移0x5A08处读取0x5c字节的数据，并格式化为”%02X”格式即0xB8字节将0xB8字节数据后边加上”\r\n\r\n”写入91C7DF6D.cfg文件中。</p>
+<h3 id="创建91C7DF6D-dll文件并写入数据">创建91C7DF6D.dll文件并写入数据</h3><p>1.生成路径 C:\WINDOWS\system32\91C7DF6D.dll 返回长度0x20<br>2.创建91C7DF6D.dll文件。<br>3.从病毒文件偏移0x2204处读取0x3800字节数据写入91C7DF6D.dll文件中<br> 从病毒文件偏移0x5A08处读取0x60字节数据写入91C7DF6D.dll文件中</p>
+<h3 id="写入注册表设置自启动">写入注册表设置自启动</h3><p>将91C7DF6D-AEF5-4136-9252-AF030D7A5931 添加到注册表  Software\microsoft\windows\currentversion\Explorer\shellexecutehooks\下随系统Explorer.exe启动。</p>
+<h3 id="查找game-exe进程并终止它">查找game.exe进程并终止它</h3><p>1.将系统进程枚举，之后进行MD5加密计算。<br>2.将计算值与game.exe进程MD5值AF9C0104867ED2841389167E775B8332比较，如果相同则终止它</p>
+<h3 id="删除verclsid-exe，创建注册表">删除verclsid.exe，创建注册表</h3><p>1.查找文件 C:\WINDOWS\system32\VErCLSiD.exe ，如果找到删除，防止自创建CLSID时verclsid.exe认证。<br>2.在HKEY_CLASSES_ROOT下创建注册表新子项：CLsID{91C7DF6D-AEF5-4136-9252-AF030D7A5931}\InprocServer32，值为91C7DF6D.dll和ThreadingModel<br>在Software\microsoft\windows\currentversion\Explorer\shellexecutehooks创建注册表{91C7DF6D-AEF5-4136-9252-AF030D7A5931}值为Apartment<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-steal-s1-2.png" alt=""></p>
+<h3 id="注册表操作，设置为自启动">注册表操作，设置为自启动</h3><p>1.打开注册表SOFTWARE{9184057B-D51B-4C2A-B779-EB4F548E9FDA}，如果该注册表不存在，则退出<br>2.如果该注册表存在，则枚举注册表下的所有子项并删除。<br>3.在注册表目录HKEY_LOCAL_MACHINE创建新子项SOFTWARE{9184057B-D51B-4C2A-B779-EB4F548E9FDA}<br>4.将当前进程设置为SeBackupPrivilege权限（备份注册表），删除liv<em>.tmp文件<br>5.将注册表Software\microsoft\windows\currentversion\Explorer所有项及子项备份到临时文件liv</em>.tmp文件中。<br>6.将当前进程设置为SeRestorePrivilege权限（还原注册表），从liv<em>.tmp临时文件中恢复注册表信息。<br>7.打开注册表ShellExecuteHooks\SOFTWARE{9184057B-D51B-4C2A-B779-EB4F548E9FDA}设置值的名称为｛91C7DF6D-AEF5-4136-9252-AF030D7A5931}<br>8.调用函数RegFlushKey将修改信息写入磁盘<br>9.删除临时文件liv</em>.tmp，重复一次操作确保修改注册表成功。</p>
+<h3 id="加载91C7DF6D-dll运行s200函数">加载91C7DF6D.dll运行s200函数</h3><p>1.调用函数RegQueryValueExA查看注册表Software\microsoft\windows\currentversion\Explorer\shellexecutehooks{91C7DF6D-AEF5-4136-9252-AF030D7A5931}是否存在。<br>2.如果存在，则加载91C7DF6D.dll（功能见0xD）运行s200函数(功能见0xE)。<br>3.如果不存在，重复步骤0x6中的创建注册表操作</p>
+<h3 id="自保护">自保护</h3><p>获取系统运行时间与0x61CC6C3(大约28.5分钟)，如果小于等于,重复设置自启动操作，总共重复三次，每次延时1s</p>
+<h3 id="退出线程自删除">退出线程自删除</h3><p>1.获取病毒文件本身段路径。<br>2.调用函数GetEnvironmentVariab获得cme.exe路径<br>3.调用函数ShellExecuteA以cmd命令方式删除自身。<br>cmd.exe /c del C:\DOCUME~1\Admin...\S1.exe &gt;&gt; NUL</p>
+<h3 id="91C7DF6D-dll函数功能：">91C7DF6D.dll函数功能：</h3><h4 id="结束杀软程序">结束杀软程序</h4><p>1.获取当前进程名<br>2.将进程MD5运算，然后与下列MD5值比较，如果找到就将该进程结束掉</p>
+<pre><code><span class="number">5</span>AC71A9F4372CA7377C7E0C543FBFFFA safeboxtray<span class="class">.exe</span>
+<span class="number">04</span>D1C083134C2EBECA57A9724B0855D4 <span class="number">360</span>tray<span class="class">.exe</span>
+AE33A1F2459A12A09EC75D71D14B5E89 <span class="number">360s</span>afebox<span class="class">.exe</span>
+<span class="number">3</span>ABD7CD8928FE1F3EB563F43B913CA4B <span class="number">360s</span>afe<span class="class">.exe</span>
+B9E9786EAC82378D3A6E05FCC1E15D2C smartup<span class="class">.exe</span>
+D7DB952BB0FA044F2B9A22FEADB37973 tqat.<span class="function"><span class="title">exe</span><span class="params">(网游安全模块)</span></span>
+<span class="number">1</span>C085B8E02B137AA4EAFBE38CCF3D199
+</code></pre><h4 id="判断是否为explorer-exe进程">判断是否为explorer.exe进程</h4><p>1.获取进程名MD5值与explorer.exe进程MD5值CDE09BCDF5FDE1E2EAC52C0F93362B79比较 。<br>2.如果是explorer.exe进程，调用s200函数。（功能见0xE）<br>3.如果不是explorer.exe进程，创建两个对象，一个0x5c大小(假设名字为Obj5C)，一个0x13f8大小，并进行初始化。<br>4.其中0x5c大小的对象Obj5C用作后边两个线程参数传入。该对象第一个DWORD值为函数导出表结构（0x100061dc）  第二个DWORD值为0x13f8大小的对象指针，0x18，0x24，0x30处为删除对象操作函数的指针。</p>
+<pre><code><span class="number">003</span>D26B0  FC <span class="number">61</span> <span class="number">00</span> <span class="number">10</span> D8 <span class="number">38</span> <span class="number">3</span>D <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>  黙.?=.........
+<span class="number">003</span>D26C0  FF FF FF FF <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">5</span>C <span class="number">62</span> <span class="number">00</span> <span class="number">10</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>  灋灋....\b.....
+<span class="number">003</span>D26D0  <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">5</span>C <span class="number">62</span> <span class="number">00</span> <span class="number">10</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>  ....\b.........
+<span class="number">003</span>D26E0  <span class="number">44</span> <span class="number">62</span> <span class="number">00</span> <span class="number">10</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>  Db.............
+<span class="number">003</span>D26F0  <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">32</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>  ...........<span class="number">.2</span>...
+<span class="number">003</span>D2700  <span class="number">64</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">0</span>D F0 AD BA <span class="number">0</span>D F0 AD BA
+</code></pre><h4 id="判断是否为game-exe进程">判断是否为game.exe进程</h4><p>1.计算进程MD5值并与game.exe进程的MD5值AF9C0104867ED2841389167E775B8332 进行比较。<br>2.如果是game.exe进程，则获取game.exe的目录，判断game.exe目录下是否存在fmod.dll文件。<br>3.如果存在fmod.dll文件，创建两个线程0x10002199和0x100021d9，两个线程的参数入参为之前生成的结构体struct。线程功能见0xE。</p>
+<h4 id="注册表操作,设置为自启动项">注册表操作,设置为自启动项</h4><p>该过程同母体相同。</p>
+<h3 id="S200函数功能">S200函数功能</h3><p>s200函数创建了两个线程：0x10003D94和0x10003DCF</p>
+<h4 id="线程0x10003D94功能：删除托盘图标">线程0x10003D94功能：删除托盘图标</h4><p>1.通过FindWindowEx函数找到“ToolbarWindow32”托盘窗口句柄<br>2.通过函数 GetWindowThreadProcessId 获取该句柄创建者的进程explorer.exe<br>3.通过SendMessageA获取托盘数量<br>4.遍历托盘所有窗口的MD5值是否与158D0696DC5BCD4BADEE730DEA7613D8相等，如果相等就删除托盘图标。</p>
+<h4 id="线程0x10003DCF功能：设置钩子监视消息队列">线程0x10003DCF功能：设置钩子监视消息队列</h4><p>1.获取进程的MD5值，验证进程MD5值是否为explorer.exe进程的MD5值CDE09BCDF5FDE1E2EAC52C0F93362B79<br>2.通过SetWindowsHookExA函数设置键盘钩子，监视消息队列。<br>3.设置死循环不断重复监视注册表是否设置为自启动，不过不存在就创建自启动，过程与0x8相同，2秒循环一次。</p>
+<h3 id="game-exe下创建的两个线程功能">game.exe下创建的两个线程功能</h3><h4 id="线程0x10002199功能：设置HOOK函数，盗取用户数据">线程0x10002199功能：设置HOOK函数，盗取用户数据</h4><p>1.创建9个对象，每个对象为一个hook函数，大小为0x1D8，并进行初始化。<br>2.对象的结构如下所示(标注了几个重要的数据)：</p>
+<pre><code>Object(
+    <span class="number">0x00</span>：<span class="number">0x10006248</span>  <span class="comment">//删除对象函数指针</span>
+    <span class="number">0x01</span>：********   <span class="comment">//0x100074B4处读取的数据</span>
+    ...
+    ...
+    <span class="number">0x84</span>：<span class="number">0x100037E3</span> <span class="comment">//hook地址</span>
+    <span class="number">0x88</span>：<span class="number">0x8B0000</span>  <span class="comment">//申请的堆块地址，存放着将要查找的特征值</span>
+    <span class="number">0x8c</span>：<span class="number">0x8C0000</span>  <span class="comment">//申请的堆块地址，存放着将要查找的特征值</span>
+    ...
+    <span class="number">0x9c</span>：<span class="number">0x8</span> <span class="comment">//特征值的字节数</span>
+    ...
+    <span class="number">0xB0</span>: <span class="number">1</span>   <span class="comment">//对象操作成功置1，否则为0</span>
+    ...
+    <span class="number">0x1BC</span>：<span class="number">0x400000</span>  <span class="comment">//当前进程模块基址，即game.exe进程基址</span>
+    ...
+    <span class="number">0x1D0</span>：next ObjPtr <span class="comment">//存放着下一个对象的指针</span>
+)
+</code></pre><p>3.将创建的9个对象生成单向链表结构，并初始化。然后将相关信息填写到对象Object中。</p>
+<pre><code>Object (
+    <span class="number">0x00</span>：<span class="number">0x100061fc</span>  <span class="comment">//指向一些函数导出表</span>
+    <span class="number">0x04</span>：<span class="number">0x003D38D8</span> <span class="comment">//0x13f8大小的对象指针</span>
+    <span class="number">0x08</span>：<span class="number">1</span>   <span class="comment">//标志位，初始为0，特征值查找完以后置1</span>
+    ......
+    <span class="number">0x30</span>：<span class="number">0x10006244</span>  <span class="comment">//指向删除对象函数指针</span>
+    <span class="number">0x34</span>：<span class="number">0x003D4CE8</span>  <span class="comment">//第一个对象指针</span>
+    <span class="number">0x38</span>：<span class="number">0x003D5C68</span>  <span class="comment">//最后一个对象指针</span>
+    <span class="number">0x3c</span>：nextPtr       <span class="comment">//存放下一个操作的对象指针，操作完成置0</span>
+)
+</code></pre><p>4.创建线程0x10003481<br>4.1 解密出URL：<a href="http://www.y0uku1.com/cia/bike.asp，方法同线程0x100021d9" target="_blank" rel="external">http://www.y0uku1.com/cia/bike.asp，方法同线程0x100021d9</a><br>4.2 生成新的URL：<a href="http://www.y0uku1.com/cia/mb.asp" target="_blank" rel="external">http://www.y0uku1.com/cia/mb.asp</a><br>4.3 通过函数GetComputerNameA得到计算机名字<br>4.4 按照格式”?A=%s&amp;c=%s&amp;u=%s”生成新的URL <a href="http://www.y0uku1.com/cia/mb.asp?A=putip&amp;c=TEST-D43880C7BB&amp;u=" target="_blank" rel="external">http://www.y0uku1.com/cia/mb.asp?A=putip&amp;c=TEST-D43880C7BB&amp;u=</a><br>4.5 从URL中读取数据，过程同线程0x100021d9中的0x3<br>4.6 延时10秒退出。</p>
+<p>5.在当前进程中查找特征值<br>5.1 通过IsbadReadPtr函数判断进程基址开始的0x1000字节是否具有访问权限。<br>5.2 如果具有访问权将0x1000字节的数据读到内存中，然后与特征值匹配，如果找到特征值，则返回偏移量，之后加上基址得到绝对地址。<br>5.3 如果查找不到特征值则继续从进程中拷贝数据，每次0x1000字节，知道将当前进程搜索完。</p>
+<p>6.设置Hook函数, 记录键盘数据发送的指定的链接地址。<br>该处举例子说明，如果在当前进程0x400004出找到了特征值，则将该处改为jmp 3F0000，在3F0000处代码为jmp 100037E8，这样当游戏进程启动时就会跳转到dll里边执行相应的操作，执行完之后再跳回去。如下图所示：<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-steal-s1-3.png" alt=""></p>
+<h4 id="线程0x100021d9功能：解密url，下载数据">线程0x100021d9功能：解密url，下载数据</h4><p>1.解密URL<br>1.1 读取91C7DF6D.dll文件中数据，去掉\r\n<br>1.2 DB2C93C09AD60F3BC9A2C35EDF1D148220000002200000072F18A7B04B578B3FCDA357BEAB38D0A2BAB9D6453B534ADEA82796BB1A3C81E69F572F18A7B04B578B3FCDA357BEAB38D0A2BAB9D6453B534ADEA82796BB1A3C81E69F5<br>1.3 将偏移0x18处开始的0x22个的数据分别与前0x10字节的数据相异或，再与0x37相异或得到解密的URL地址为<a href="http://www.y0uku1.com/cia/bike.asp" target="_blank" rel="external">http://www.y0uku1.com/cia/bike.asp</a></p>
+<p>2.生成最终URL<br>2.1 获取cfg文件的前六个字节数据2DB2C9进行MD5加密，得到长度为0x10，然后再按照”%02X”格式生成0x20大小的数据18CE4D37773396E1332CCEAD3196AF50<br>2.2 最后按照一定的格式生成最终的URL链接：<br><a href="http://www.y0uku1.com/cia/bike.asp?Re=&amp;s=&amp;A=&amp;P=&amp;MB=&amp;wwwww=v&amp;H=&amp;PIN=&amp;R=&amp;RG=-1&amp;M=-1&amp;M1=-1&amp;mac=&amp;RG1=-1&amp;Z=:18CE4D37773396E1332CCEAD3196AF50" target="_blank" rel="external">http://www.y0uku1.com/cia/bike.asp?Re=&amp;s=&amp;A=&amp;P=&amp;MB=&amp;wwwww=v&amp;H=&amp;PIN=&amp;R=&amp;RG=-1&amp;M=-1&amp;M1=-1&amp;mac=&amp;RG1=-1&amp;Z=:18CE4D37773396E1332CCEAD3196AF50</a></p>
+<p>3.访问链接下载数据<br>3.1 加载wininet.dll找到InternetOpenUrl函数地址<br>3.2 打开本地目录C:\Windows\System32\下的wininet.dll文件，然后从偏移0x14E5A处读取0x10字节数据，判断是否与得到的InternetOpenUrl函数地址不相同，则将InternetOpenUrl函数地址写入该处，之后调用InternetOpenUrl函数打开链接<a href="http://www.y0uku1.com/cia/mb.asp?A=putip&amp;c=TEST-D43880C7BB&amp;u=" target="_blank" rel="external">http://www.y0uku1.com/cia/mb.asp?A=putip&amp;c=TEST-D43880C7BB&amp;u=</a><br>下载数据，大小为0x104字节。<br>3.3 延时2分钟，然后循环下载数据。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/盗号/" rel="tag">#盗号</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/11/25/virus-infected-rmnet/" rel="prev">病毒分析-rmnet感染型</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/11/18/virus-download/" rel="next">病毒分析-简单下载者</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="idhyt" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">idhyt</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">水中月.镜中花.浮华一片苍凉..</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/idhyt" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1706893103" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/idhyt" target="_blank">ZhiHu</a>
+              </span>
+            
+          
+        </div>
+
+        <div class="links-of-friendly motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://idhyt.sinaapp.com/dragwall/" target="_blank">messages</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#调试环境"><span class="nav-number">1.</span> <span class="nav-text">调试环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#病毒简介"><span class="nav-number">2.</span> <span class="nav-text">病毒简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要功能模块流程图"><span class="nav-number">3.</span> <span class="nav-text">主要功能模块流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行过程"><span class="nav-number">4.</span> <span class="nav-text">运行过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建线程,进入线程执行,获取开机运行时间"><span class="nav-number">4.1.</span> <span class="nav-text">创建线程,进入线程执行,获取开机运行时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建91C7DF6D-cfg文件并写入数据"><span class="nav-number">4.2.</span> <span class="nav-text">创建91C7DF6D.cfg文件并写入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建91C7DF6D-dll文件并写入数据"><span class="nav-number">4.3.</span> <span class="nav-text">创建91C7DF6D.dll文件并写入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写入注册表设置自启动"><span class="nav-number">4.4.</span> <span class="nav-text">写入注册表设置自启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找game-exe进程并终止它"><span class="nav-number">4.5.</span> <span class="nav-text">查找game.exe进程并终止它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除verclsid-exe，创建注册表"><span class="nav-number">4.6.</span> <span class="nav-text">删除verclsid.exe，创建注册表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册表操作，设置为自启动"><span class="nav-number">4.7.</span> <span class="nav-text">注册表操作，设置为自启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载91C7DF6D-dll运行s200函数"><span class="nav-number">4.8.</span> <span class="nav-text">加载91C7DF6D.dll运行s200函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自保护"><span class="nav-number">4.9.</span> <span class="nav-text">自保护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#退出线程自删除"><span class="nav-number">4.10.</span> <span class="nav-text">退出线程自删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#91C7DF6D-dll函数功能："><span class="nav-number">4.11.</span> <span class="nav-text">91C7DF6D.dll函数功能：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#结束杀软程序"><span class="nav-number">4.11.1.</span> <span class="nav-text">结束杀软程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断是否为explorer-exe进程"><span class="nav-number">4.11.2.</span> <span class="nav-text">判断是否为explorer.exe进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断是否为game-exe进程"><span class="nav-number">4.11.3.</span> <span class="nav-text">判断是否为game.exe进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注册表操作,设置为自启动项"><span class="nav-number">4.11.4.</span> <span class="nav-text">注册表操作,设置为自启动项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#S200函数功能"><span class="nav-number">4.12.</span> <span class="nav-text">S200函数功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程0x10003D94功能：删除托盘图标"><span class="nav-number">4.12.1.</span> <span class="nav-text">线程0x10003D94功能：删除托盘图标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程0x10003DCF功能：设置钩子监视消息队列"><span class="nav-number">4.12.2.</span> <span class="nav-text">线程0x10003DCF功能：设置钩子监视消息队列</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#game-exe下创建的两个线程功能"><span class="nav-number">4.13.</span> <span class="nav-text">game.exe下创建的两个线程功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程0x10002199功能：设置HOOK函数，盗取用户数据"><span class="nav-number">4.13.1.</span> <span class="nav-text">线程0x10002199功能：设置HOOK函数，盗取用户数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程0x100021d9功能：解密url，下载数据"><span class="nav-number">4.13.2.</span> <span class="nav-text">线程0x100021d9功能：解密url，下载数据</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2011 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idhyt</span>
+
+  <div class="powered-by"></div>
+  <div class="powered-by">
+    Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  </div>
+
+</div>
+
+<!--
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+-->
+
+<!--
+<div class="powered-by"></div>
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+-->
+
+<!--
+<div class="theme-info">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<a class="theme-link"><span id="busuanzi_value_site_pv"></span></a>次
+    </span>
+</div>
+-->
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'idhyt';
+      var disqus_identifier = '2013/11/20/virus-troj-simple/';
+      var disqus_title = '病毒分析-简单盗号木马';
+      var disqus_url = 'http://blog.idhyt.com/2013/11/20/virus-troj-simple/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

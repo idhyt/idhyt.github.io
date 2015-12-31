@@ -1,0 +1,835 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+  <meta name="google-site-verification" content="DRmBBL5LYsJ_2wCsJIYYsBfu8hVW8DQYzmpqGMp-njU" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="水中月.镜中花.浮华一片苍凉.." />
+
+
+
+  <meta name="keywords" content="challenge," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idhyt's blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="最近闲下来了四处看资料，然后找到了这个python challenge网页闯关游戏。这个游戏需要通过一些提示找出下一关的网页地址，链接：http://www.pythonchallenge.com/题目出的也是充满想象力，斗智斗勇中。。。解题代码整理在我的 github
+python challenge 0http://www.pythonchallenge.com/pc/def/0.html
+1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python challenge 0-10">
+<meta property="og:url" content="http://blog.idhyt.com/2015/08/07/python-challenge-0-10/index.html">
+<meta property="og:site_name" content="idhyt's blog">
+<meta property="og:description" content="最近闲下来了四处看资料，然后找到了这个python challenge网页闯关游戏。这个游戏需要通过一些提示找出下一关的网页地址，链接：http://www.pythonchallenge.com/题目出的也是充满想象力，斗智斗勇中。。。解题代码整理在我的 github
+python challenge 0http://www.pythonchallenge.com/pc/def/0.html
+1">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-0.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-1.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-2.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-3.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-4.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-5.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-6.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-7.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-8.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-9.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-9-bull.jpg">
+<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-10.jpg">
+<meta property="og:updated_time" content="2015-12-31T12:07:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python challenge 0-10">
+<meta name="twitter:description" content="最近闲下来了四处看资料，然后找到了这个python challenge网页闯关游戏。这个游戏需要通过一些提示找出下一关的网页地址，链接：http://www.pythonchallenge.com/题目出的也是充满想象力，斗智斗勇中。。。解题代码整理在我的 github
+python challenge 0http://www.pythonchallenge.com/pc/def/0.html
+1">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> python challenge 0-10 | idhyt's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71783676-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5228d77c5752954f270fcca0908555af";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">云淡风轻</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'VpXUP87KQneoFZ3srxxA','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              python challenge 0-10
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-08-07T16:06:11+08:00" content="2015-08-07">
+            2015-08-07
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/python/" itemprop="url" rel="index">
+                  <span itemprop="name">python</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/08/07/python-challenge-0-10/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/07/python-challenge-0-10/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>最近闲下来了四处看资料，然后找到了这个python challenge网页闯关游戏。<br>这个游戏需要通过一些提示找出下一关的网页地址，链接：<a href="http://www.pythonchallenge.com/" target="_blank" rel="external">http://www.pythonchallenge.com/</a><br>题目出的也是充满想象力，斗智斗勇中。。。<br>解题代码整理在我的 <a href="https://github.com/idhyt/python_challenge" target="_blank" rel="external">github</a></p>
+<h3 id="python_challenge_0"><a href="http://www.pythonchallenge.com/pc/def/0.html" target="_blank" rel="external">python challenge 0</a></h3><p><code>http://www.pythonchallenge.com/pc/def/0.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-0.jpg" alt="0"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2的38次幂</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> ** <span class="number">38</span></span><br><span class="line">&gt;&gt;&gt; <span class="number">274877906944L</span></span><br></pre></td></tr></table></figure>
+<h3 id="python_challenge_1"><a href="http://www.pythonchallenge.com/pc/def/274877906944.html" target="_blank" rel="external">python challenge 1</a></h3><p><code>http://www.pythonchallenge.com/pc/def/274877906944.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-1.jpg" alt="1"><br>通过图片可知道，所有字符右移两位即可。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">map_</span><span class="params">()</span>:</span></span><br><span class="line">    first_alpha = chr(ord(<span class="string">"m"</span>) + <span class="number">2</span>)</span><br><span class="line">    second_alpha = chr(ord(<span class="string">"a"</span>) + <span class="number">2</span>)</span><br><span class="line">    third_alpha = chr(ord(<span class="string">"p"</span>) + <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>.join([first_alpha, second_alpha, third_alpha])</span><br><span class="line">&gt;&gt;&gt; ocr</span><br></pre></td></tr></table></figure></p>
+<h3 id="python_challenge_2"><a href="http://www.pythonchallenge.com/pc/def/ocr.html" target="_blank" rel="external">python challenge 2</a></h3><p><code>http://www.pythonchallenge.com/pc/def/ocr.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-2.jpg" alt="2"><br>查找出现次数最少的字符，先是统计出所有字符出现的次数，然后获取出现次数最早的，要注意按照原来顺序排列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ocr</span><span class="params">()</span>:</span></span><br><span class="line">    stats = &#123;&#125;</span><br><span class="line">    req = requests.get(<span class="string">"http://www.pythonchallenge.com/pc/def/ocr.html"</span>)</span><br><span class="line">    page_source = req.text</span><br><span class="line">    mess_pattern = re.compile(<span class="string">r"(%%[\s\S]+)--&gt;"</span>, re.IGNORECASE)</span><br><span class="line">    mess_content = mess_pattern.findall(page_source)[<span class="number">0</span>]</span><br><span class="line">    <span class="comment"># print mess_content</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> character <span class="keyword">in</span> mess_content:</span><br><span class="line">        <span class="keyword">if</span> character <span class="keyword">in</span> stats:</span><br><span class="line">            stats[character] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            stats[character] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> key_, value_ <span class="keyword">in</span> stats.items():</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"%s -&gt; %d"</span> % (key_, value_)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># a e i l q u t y</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>.join(re.findall(<span class="string">r"[a-z]+"</span>, mess_content))</span><br><span class="line">&gt;&gt;&gt; <span class="string">u'equality'</span></span><br></pre></td></tr></table></figure>
+<h3 id="python_challenge_3"><a href="http://www.pythonchallenge.com/pc/def/equality.html" target="_blank" rel="external">python challenge 3</a></h3><p><code>http://www.pythonchallenge.com/pc/def/equality.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-3.jpg" alt="3"><br>小写字符两边有三个大写字母,格式为aAAAaAAAa<br>AAAaAAA这种匹配是错误的，要保证两边都是三位大写字母<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">equality</span><span class="params">()</span>:</span></span><br><span class="line">    req = requests.get(<span class="string">"http://www.pythonchallenge.com/pc/def/equality.html"</span>)</span><br><span class="line">    page_source = req.text</span><br><span class="line">    mess_pattern = re.compile(<span class="string">r"kAewtloYgc[\s\S]+"</span>, re.IGNORECASE)</span><br><span class="line">    mess_content = mess_pattern.findall(page_source)[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>.join(re.findall(<span class="string">r"[a-z]&#123;1&#125;[A-Z]&#123;3&#125;([a-z]&#123;1&#125;)[A-Z]&#123;3&#125;[a-z]&#123;1&#125;"</span>, mess_content))</span><br><span class="line">&gt;&gt;&gt; <span class="string">u'linkedlist'</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="python_challenge_4"><a href="http://www.pythonchallenge.com/pc/def/linkedlist.php" target="_blank" rel="external">python challenge 4</a></h3><p><code>http://www.pythonchallenge.com/pc/def/linkedlist.php</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-4.jpg" alt="4"><br>点击图片会有提示,然后更换链接参数继续,大概200多次即可得到答案。<br>其中正则不能只写”[0-9]+”,中间有陷阱：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">There maybe misleading numbers <span class="keyword">in</span> the text. One example <span class="keyword">is</span> <span class="number">82683</span>\. Look only <span class="keyword">for</span> the next nothing <span class="keyword">and</span> the next nothing <span class="keyword">is</span> <span class="number">63579</span></span><br></pre></td></tr></table></figure>
+<p>完整代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def linkedlist(times=1, param="123456"):</span><br><span class="line">    try:</span><br><span class="line">        url = "?nothing=".join(["http://www.pythonchallenge.com/pc/def/linkedlist.php", param])</span><br><span class="line">        page_source = requests.get(url).text</span><br><span class="line">        next_param = re.findall("and the next nothing is ([0-9]+)", page_source)[0]</span><br><span class="line">        print "%d -&gt; %s" % (times, next_param)</span><br><span class="line">        times += 1</span><br><span class="line">        linkedlist(times, next_param)</span><br><span class="line">    # 匹配不到跳到异常</span><br><span class="line">    except IndexError:</span><br><span class="line">        print "the right url is : %s" % url</span><br><span class="line">        return page_source</span><br><span class="line">&gt;&gt;&gt; the right url is : http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=66831</span><br><span class="line">    peak.html</span><br></pre></td></tr></table></figure></p>
+<h3 id="python_challenge_5"><a href="http://www.pythonchallenge.com/pc/def/peak.html" target="_blank" rel="external">python challenge 5</a></h3><p><code>http://www.pythonchallenge.com/pc/def/peak.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-5.jpg" alt="5"><br>这关估计卡了不少人，从页面源码只能得到banner.p文件地址,即<a href="http://www.pythonchallenge.com/pc/def/banner.p" target="_blank" rel="external">http://www.pythonchallenge.com/pc/def/banner.p</a><br>跟我一样没有用过pickle模块的一般都解不出来，看到文件内容也是没有头绪的，通过上网查了资料才知道如何解题。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pickle模块的使用</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">peak</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">import</span> pickle</span><br><span class="line">    page_source = requests.get(<span class="string">"http://www.pythonchallenge.com/pc/def/peak.html"</span>).text</span><br><span class="line">    banner_name = re.findall(<span class="string">r""</span>, page_source)[<span class="number">0</span>]</span><br><span class="line">    banner_url = <span class="string">""</span>.join([<span class="string">"http://www.pythonchallenge.com/pc/def/"</span>, banner_name])</span><br><span class="line">    banner_content = requests.get(banner_url).text</span><br><span class="line">    <span class="comment"># print banner_content</span></span><br><span class="line">    banner_obj = pickle.loads(banner_content)</span><br><span class="line">    <span class="keyword">for</span> list_ <span class="keyword">in</span> banner_obj:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">""</span>.join([tuple_[<span class="number">0</span>] * tuple_[<span class="number">1</span>] <span class="keyword">for</span> tuple_ <span class="keyword">in</span> list_])</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">              <span class="comment">#####                                                                      ##### </span></span><br><span class="line">               <span class="comment">####                                                                       #### </span></span><br><span class="line">               <span class="comment">####                                                                       #### </span></span><br><span class="line">               <span class="comment">####                                                                       #### </span></span><br><span class="line">               <span class="comment">####                                                                       #### </span></span><br><span class="line">               <span class="comment">####                                                                       #### </span></span><br><span class="line">               <span class="comment">####                                                                       #### </span></span><br><span class="line">               <span class="comment">####                                                                       #### </span></span><br><span class="line">      <span class="comment">###      ####   ###         ###       #####   ###    #####   ###          ###       #### </span></span><br><span class="line">   <span class="comment">###   ##    #### #######     ##  ###      #### #######   #### #######     ###  ###     #### </span></span><br><span class="line">  <span class="comment">###     ###  #####    ####   ###   ####    #####    ####  #####    ####   ###     ###   #### </span></span><br><span class="line"> <span class="comment">###           ####     ####   ###    ###    ####     ####  ####     ####  ###      ####  #### </span></span><br><span class="line"> <span class="comment">###           ####     ####          ###    ####     ####  ####     ####  ###       ###  #### </span></span><br><span class="line"><span class="comment">####           ####     ####     ##   ###    ####     ####  ####     #### ####       ###  #### </span></span><br><span class="line"><span class="comment">####           ####     ####   ##########    ####     ####  ####     #### ##############  #### </span></span><br><span class="line"><span class="comment">####           ####     ####  ###    ####    ####     ####  ####     #### ####            #### </span></span><br><span class="line"><span class="comment">####           ####     #### ####     ###    ####     ####  ####     #### ####            #### </span></span><br><span class="line"> <span class="comment">###           ####     #### ####     ###    ####     ####  ####     ####  ###            #### </span></span><br><span class="line">  <span class="comment">###      ##  ####     ####  ###    ####    ####     ####  ####     ####   ###      ##   #### </span></span><br><span class="line">   <span class="comment">###    ##   ####     ####   ###########   ####     ####  ####     ####    ###    ##    #### </span></span><br><span class="line">      <span class="comment">###     ######    #####    ##    #### ######    ###########    #####      ###      ######</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="python_challenge_6"><a href="http://www.pythonchallenge.com/pc/def/channel.html" target="_blank" rel="external">python challenge 6</a></h3><p><code>http://www.pythonchallenge.com/pc/def/channel.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-6.jpg" alt="6"><br>一张拉链图片，看了源码也没有任何提示，只知道是要捐赠。。。<br>再仔细看第一行，  ，将html变zip<br>下载channel.zip文件，链接：<a href="http://www.pythonchallenge.com/pc/def/channel.zip" target="_blank" rel="external">http://www.pythonchallenge.com/pc/def/channel.zip</a><br>下载完成后解压，和第四题一样，只不过多了文件遍历操作，遍历从任意文件开始都可以。<br>我这里从os.walk遍历到的文件列表中第一个文件开始遍历。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">channel</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">    root_path = <span class="string">"D:\\downloads\\channel"</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">linked_file</span><span class="params">(times=<span class="number">1</span>, file_name=<span class="string">"123456"</span>)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            file_path = <span class="string">"\\"</span>.join([root_path, file_name])</span><br><span class="line">            file_content = open(file_path, <span class="string">"r+"</span>).read()</span><br><span class="line">            next_file_name = re.findall(<span class="string">"Next nothing is ([0-9]+)"</span>, file_content)[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"%d -&gt; %s.txt"</span> % (times, next_file_name)</span><br><span class="line">            times += <span class="number">1</span></span><br><span class="line">            linked_file(times, <span class="string">""</span>.join([next_file_name, <span class="string">".txt"</span>]))</span><br><span class="line">        <span class="comment"># 匹配不到跳到异常</span></span><br><span class="line">        <span class="keyword">except</span> IndexError:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"the right link in file : %s"</span> % file_name</span><br><span class="line">            <span class="keyword">print</span> file_content</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(root_path):</span><br><span class="line">        <span class="keyword">for</span> file_ <span class="keyword">in</span> files:</span><br><span class="line">            linked_file(<span class="number">1</span>, file_)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">&gt;&gt;&gt; the right link <span class="keyword">in</span> file : <span class="number">46145.</span>txt</span><br><span class="line">    Collect the comments.</span><br></pre></td></tr></table></figure>
+<p>坑爹的答案，让我收集注释，那么答案在哪里。。。<br>再仔细翻解压的文件，发现里边有个readme.txt !!!<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">welcome to my zipped list.</span><br><span class="line">hint1: start <span class="keyword">from</span> <span class="number">90052</span></span><br><span class="line">hint2: answer <span class="keyword">is</span> inside the zip</span><br></pre></td></tr></table></figure></p>
+<p>将代码中linked<em>file(1, file</em>)改为linked_file(1, “90052.txt”)<br>最后输出答案一样！！！</p>
+<p>难道是我的解压方式不对？！？！<br>调用zipfile模块,使用ZipInfo类获取comment<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">channel</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">import</span> zipfile</span><br><span class="line">    zf = zipfile.ZipFile(<span class="string">"D:\\downloads\\channel.zip"</span>)</span><br><span class="line">    result = []</span><br><span class="line">    begin_file_name = <span class="string">"90052.txt"</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        z_info = zf.getinfo(begin_file_name)</span><br><span class="line">        f = zf.open(z_info)</span><br><span class="line">        f_content = f.read()</span><br><span class="line">        next_file_name = re.findall(<span class="string">r"Next nothing is ([0-9]+)"</span>, f_content)</span><br><span class="line">        f.close()</span><br><span class="line">        result.append(z_info.comment)</span><br><span class="line">        <span class="keyword">if</span> next_file_name:</span><br><span class="line">            begin_file_name = <span class="string">"%s.txt"</span> % next_file_name[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> <span class="string">""</span>.join(result)</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">****************************************************************</span><br><span class="line">****************************************************************</span><br><span class="line">**                                                            **</span><br><span class="line">**   OO    OO    XX      YYYY    GG    GG  EEEEEE NN      NN  **</span><br><span class="line">**   OO    OO  XXXXXX   YYYYYY   GG   GG   EEEEEE  NN    NN   **</span><br><span class="line">**   OO    OO XXX  XXX YYY   YY  GG GG     EE       NN  NN    **</span><br><span class="line">**   OOOOOOOO XX    XX YY        GGG       EEEEE     NNNN     **</span><br><span class="line">**   OOOOOOOO XX    XX YY        GGG       EEEEE      NN      **</span><br><span class="line">**   OO    OO XXX  XXX YYY   YY  GG GG     EE         NN      **</span><br><span class="line">**   OO    OO  XXXXXX   YYYYYY   GG   GG   EEEEEE     NN      **</span><br><span class="line">**   OO    OO    XX      YYYY    GG    GG  EEEEEE     NN      **</span><br><span class="line">**                                                            **</span><br><span class="line">****************************************************************</span><br><span class="line"> **************************************************************</span><br></pre></td></tr></table></figure></p>
+<p>将url改为hockey.html，竟然有小关卡！！！<br>it’s in the air. look at the letters<br>赶紧开开脑洞，空气中是什么，氧气啊！<br>oxygen :)</p>
+<h3 id="python_challenge_7"><a href="http://www.pythonchallenge.com/pc/def/oxygen.html" target="_blank" rel="external">python challenge 7</a></h3><p><code>http://www.pythonchallenge.com/pc/def/oxygen.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-7.jpg" alt="7"><br>这个题需要解析图片，之前没有接触到因此是查资料完成。<br>1.需要安装<a href="http://www.pythonware.com/products/pil/#pil117" target="_blank" rel="external">PIL库</a><br>2.截取黑白部分<br>3.将RGBA格式的像素每个像素值按照L8位黑白像素的格式转成一个acsii码值<br>4.将最后获得的答案转换为ASCII码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">oxygen</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">    img = Image.open(<span class="string">"oxygen.png"</span>)</span><br><span class="line">    <span class="comment"># left,top,right,bottom</span></span><br><span class="line">    box = (<span class="number">0</span>, <span class="number">43</span>, <span class="number">608</span>, <span class="number">52</span>)</span><br><span class="line">    belt = img.crop(box)</span><br><span class="line">    <span class="comment"># get a sequence object containing pixel values</span></span><br><span class="line">    pixels = belt.getdata()</span><br><span class="line">    print(<span class="string">'mode: %s'</span> % img.mode)</span><br><span class="line">    print(<span class="string">'amount of pixel: %d'</span> % len(pixels))</span><br><span class="line">    <span class="comment"># print(pixels[0])</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># convert mode RGBA to mode L</span></span><br><span class="line">    l_belt = belt.convert(<span class="string">'L'</span>)</span><br><span class="line">    <span class="comment"># get a sequence object containing pixel values</span></span><br><span class="line">    l_pixels = l_belt.getdata()</span><br><span class="line"></span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">608</span>, <span class="number">7</span>):</span><br><span class="line">        result.append(chr(l_pixels[i]))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> <span class="string">''</span>.join(result)</span><br><span class="line">    </span><br><span class="line">&gt;&gt;&gt; smart guy, you made it. the next level <span class="keyword">is</span> [<span class="number">105</span>, <span class="number">110</span>, <span class="number">116</span>, <span class="number">101</span>, <span class="number">103</span>, <span class="number">114</span>, <span class="number">105</span>, <span class="number">116</span>, <span class="number">121</span>]</span><br></pre></td></tr></table></figure>
+<p>最后将[105, 110, 116, 101, 103, 114, 105, 116, 121]转为ascii即为答案:integrity</p>
+<h3 id="python_challenge_8"><a href="http://www.pythonchallenge.com/pc/def/integrity.html" target="_blank" rel="external">python challenge 8</a></h3><p><code>http://www.pythonchallenge.com/pc/def/integrity.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-8.jpg" alt="8"><br>点击中间的蜜蜂弹出要求输入用户名和密码<br>然后看下源码，找到了用户名密码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">un: <span class="string">'BZh91AY&amp;SYA\xaf\x82\r\x00\x00\x01\x01\x80\x02\xc0\x02\x00 \x00!\x9ah3M\x07&lt;]\xc9\x14\xe1BA\x06\xbe\x084'</span></span><br><span class="line">pw: <span class="string">'BZh91AY&amp;SY\x94$|\x0e\x00\x00\x00\x81\x00\x03$ \x00!\x9ah3M\x13&lt;]\xc9\x14\xe1BBP\x91\xf08'</span></span><br></pre></td></tr></table></figure></p>
+<p>看下加密字符串特征BZ开头，猜测是否为bz2压缩，尝试成功。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">integrity</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">import</span> bz2</span><br><span class="line">    un = <span class="string">'BZh91AY&amp;SYA\xaf\x82\r\x00\x00\x01\x01\x80\x02\xc0\x02\x00 \x00!\x9ah3M\x07&lt;]\xc9\x14\xe1BA\x06\xbe\x084'</span></span><br><span class="line">    pw = <span class="string">'BZh91AY&amp;SY\x94$|\x0e\x00\x00\x00\x81\x00\x03$ \x00!\x9ah3M\x13&lt;]\xc9\x14\xe1BBP\x91\xf08'</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">": "</span>.join([<span class="string">"username"</span>, bz2.decompress(un)])</span><br><span class="line">    <span class="keyword">print</span> <span class="string">": "</span>.join([<span class="string">"password"</span>, bz2.decompress(pw)])</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">    username: huge</span><br><span class="line">    password: file</span><br></pre></td></tr></table></figure></p>
+<h3 id="python_challenge_9"><a href="http://www.pythonchallenge.com/pc/return/good.html" target="_blank" rel="external">python challenge 9</a></h3><p><code>http://www.pythonchallenge.com/pc/return/good.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-9.jpg" alt="9"><br>查看下源码找到最下边注释部分，和8题页面源码部分是不是很相似，应该是绘制图片的RGB值。<br>替换过去试试看，鼠标移动，发现浮现了一头牛的图案。<br>下边通过代码将这个图片完整的绘制出来。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">good</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageDraw</span><br><span class="line">    im = Image.new(<span class="string">'RGB'</span>, (<span class="number">500</span>, <span class="number">500</span>))</span><br><span class="line">    draw = ImageDraw.Draw(im)</span><br><span class="line"></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">"Authorization"</span>: <span class="string">"Basic aHVnZTpmaWxl"</span></span><br><span class="line">    &#125;</span><br><span class="line">    page_source = requests.get(<span class="string">"http://www.pythonchallenge.com/pc/return/good.html"</span>, headers=headers).text</span><br><span class="line">    result = re.findall(<span class="string">r"first:\s([\s\S]+)second:\s([\s\S]+)--&gt;"</span>, page_source)</span><br><span class="line">    <span class="keyword">if</span> len(result) &gt; <span class="number">0</span> <span class="keyword">and</span> len(result[<span class="number">0</span>]) == <span class="number">2</span>:</span><br><span class="line">        first, second = result[<span class="number">0</span>][<span class="number">0</span>], result[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line">        first_points = list(eval(first.replace(<span class="string">"\n"</span>, <span class="string">""</span>)))</span><br><span class="line">        second_points = list(eval(second.replace(<span class="string">"\n"</span>, <span class="string">""</span>)))</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(first_points), <span class="number">2</span>):</span><br><span class="line">            draw.line(first_points[i:i + <span class="number">4</span>], fill=<span class="string">'white'</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(second_points), <span class="number">2</span>):</span><br><span class="line">            draw.line(second_points[i:i + <span class="number">4</span>], fill=<span class="string">'white'</span>)</span><br><span class="line">        im.save(<span class="string">'img/09.jpg'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>最后打印出来：<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-9-bull.jpg" alt="9-bull"><br>看到牛先想到单词cow，然后进去试试看，发现有新的提示：<br>hmm. it’s a male.<br>那就是公牛喽，换成bull,成功。</p>
+<h3 id="python_challenge_10"><a href="http://www.pythonchallenge.com/pc/return/bull.html" target="_blank" rel="external">python challenge 10</a></h3><p><code>http://www.pythonchallenge.com/pc/return/bull.html</code><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/python-challenge-10.jpg" alt="10"><br>这个题的图片赫然就是我们绘制的那头牛哇，感觉萌萌哒。<br>看下边len(a[30])=? 要知道这个答案，肯定要得到a这个序列。<br>查看下页面源码，点开里边的sequence.txt内容为(点击牛也会跳出)：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">11</span>, <span class="number">21</span>, <span class="number">1211</span>, <span class="number">111221</span>,</span><br></pre></td></tr></table></figure></p>
+<p>显然，要得到的答案就是这里了，下边找规律吧。</p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th style="text-align:left">look</th>
+<th style="text-align:left">say</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td>1</td>
+<td style="text-align:left">第0项有 1个1</td>
+<td style="text-align:left">11</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:left">第1项有 2个1</td>
+<td style="text-align:left">21</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:left">第2项有 1个2 1个1</td>
+<td style="text-align:left">1211</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:left">第3项有 1个1 1个2 2个1</td>
+<td style="text-align:left">111221</td>
+</tr>
+<tr>
+<td>5</td>
+<td style="text-align:left">…</td>
+<td style="text-align:left">…</td>
+</tr>
+</tbody>
+</table>
+<p>规律找到，编写代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bull</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_next_item</span><span class="params">(str_item=<span class="string">""</span>)</span>:</span></span><br><span class="line">        item = []</span><br><span class="line">        <span class="keyword">if</span> len(str_item) == <span class="number">0</span>:</span><br><span class="line">            item.append(<span class="string">"1"</span>)</span><br><span class="line">        <span class="keyword">elif</span> len(str_item) &gt; <span class="number">0</span>:</span><br><span class="line">            cur_list = list(str_item)</span><br><span class="line">            same_count = <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> len(cur_list) == <span class="number">1</span>:</span><br><span class="line">                item.append(<span class="string">""</span>.join([str(same_count), cur_list[<span class="number">0</span>]]))</span><br><span class="line">            <span class="keyword">elif</span> len(cur_list) &gt; <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> range(len(cur_list)):</span><br><span class="line">                    <span class="keyword">if</span> i + <span class="number">1</span> &gt;= len(cur_list):</span><br><span class="line">                        item.append(<span class="string">""</span>.join([str(same_count), cur_list[i]]))</span><br><span class="line">                    <span class="keyword">elif</span> i + <span class="number">1</span> &lt; len(cur_list):</span><br><span class="line">                        <span class="keyword">if</span> cur_list[i] == cur_list[i+<span class="number">1</span>]:</span><br><span class="line">                            same_count += <span class="number">1</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            item.append(<span class="string">""</span>.join([str(same_count), cur_list[i]]))</span><br><span class="line">                            same_count = <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>.join(item)</span><br><span class="line"></span><br><span class="line">    index = <span class="number">0</span></span><br><span class="line">    cur_item = <span class="string">""</span></span><br><span class="line">    <span class="keyword">while</span> index &lt; <span class="number">31</span>:</span><br><span class="line">        cur_item = get_next_item(cur_item)</span><br><span class="line">        index += <span class="number">1</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"len(a[%d]) = %d"</span> % (index-<span class="number">1</span>, len(cur_item))</span><br><span class="line">    </span><br><span class="line">&gt;&gt;&gt; len(a[<span class="number">30</span>]) = <span class="number">5808</span></span><br></pre></td></tr></table></figure></p>
+<p>网上看下别人的答案，找到一种更简单的实现方式，调用groupby函数，一行代码即可实现。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bull_ex</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">from</span> itertools <span class="keyword">import</span> groupby</span><br><span class="line">    a = <span class="string">'1'</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">30</span>):</span><br><span class="line">        a = <span class="string">''</span>.join(str(len(list(v))) + k <span class="keyword">for</span> k, v <span class="keyword">in</span> groupby(a))</span><br><span class="line">    <span class="keyword">print</span> len(a)</span><br></pre></td></tr></table></figure></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/challenge/" rel="tag">#challenge</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/10/python-challenge-11-20/" rel="prev">python challenge 11-20</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/11/android-reverse-clickbutton/" rel="next">安卓逆向学习笔记-ClickButton</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="idhyt" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">idhyt</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">水中月.镜中花.浮华一片苍凉..</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/idhyt" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1706893103" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/idhyt" target="_blank">ZhiHu</a>
+              </span>
+            
+          
+        </div>
+
+        <div class="links-of-friendly motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://idhyt.sinaapp.com/dragwall/" target="_blank">messages</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python_challenge_0"><span class="nav-number">1.</span> <span class="nav-text">python challenge 0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python_challenge_1"><span class="nav-number">2.</span> <span class="nav-text">python challenge 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python_challenge_2"><span class="nav-number">3.</span> <span class="nav-text">python challenge 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python_challenge_3"><span class="nav-number">4.</span> <span class="nav-text">python challenge 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python_challenge_4"><span class="nav-number">5.</span> <span class="nav-text">python challenge 4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python_challenge_5"><span class="nav-number">6.</span> <span class="nav-text">python challenge 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python_challenge_6"><span class="nav-number">7.</span> <span class="nav-text">python challenge 6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python_challenge_7"><span class="nav-number">8.</span> <span class="nav-text">python challenge 7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python_challenge_8"><span class="nav-number">9.</span> <span class="nav-text">python challenge 8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python_challenge_9"><span class="nav-number">10.</span> <span class="nav-text">python challenge 9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python_challenge_10"><span class="nav-number">11.</span> <span class="nav-text">python challenge 10</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2011 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idhyt</span>
+
+  <div class="powered-by"></div>
+  <div class="powered-by">
+    Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  </div>
+
+</div>
+
+<!--
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+-->
+
+<!--
+<div class="powered-by"></div>
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+-->
+
+<!--
+<div class="theme-info">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<a class="theme-link"><span id="busuanzi_value_site_pv"></span></a>次
+    </span>
+</div>
+-->
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'idhyt';
+      var disqus_identifier = '2015/08/07/python-challenge-0-10/';
+      var disqus_title = 'python challenge 0-10';
+      var disqus_url = 'http://blog.idhyt.com/2015/08/07/python-challenge-0-10/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

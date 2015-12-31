@@ -2,112 +2,232 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.idhyt.com/2015/11/28/4-android-injection-xposed-usage/</loc>
+    <loc>http://blog.idhyt.com/categories/index.html</loc>
+    <lastmod>2015-12-31T12:17:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/08/13/python-challenge-21-27/</loc>
+    <lastmod>2015-12-31T12:08:27.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/08/10/python-challenge-11-20/</loc>
+    <lastmod>2015-12-31T12:07:34.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/08/07/python-challenge-0-10/</loc>
+    <lastmod>2015-12-31T12:07:21.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/01/09/expolit-nvidia-elevate-privilege/</loc>
+    <lastmod>2015-12-31T12:00:41.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/07/01/expolit-cve-2013-0422/</loc>
+    <lastmod>2015-12-31T12:00:28.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/03/21/expolit-cve-2013-0641/</loc>
+    <lastmod>2015-12-31T11:59:52.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2012/11/20/expolit-cve-2011-0609/</loc>
+    <lastmod>2015-12-31T11:59:41.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/11/20/virus-troj-simple/</loc>
+    <lastmod>2015-12-31T11:58:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/12/19/virus-troj-mutil/</loc>
+    <lastmod>2015-12-31T11:58:10.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2014/07/24/virus-malware-winrar/</loc>
+    <lastmod>2015-12-31T11:57:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2014/09/10/virus-malware-driver-hmbb/</loc>
+    <lastmod>2015-12-31T11:57:52.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/11/29/virus-infected-word/</loc>
+    <lastmod>2015-12-31T11:57:34.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/12/03/virus-infected-tem81/</loc>
+    <lastmod>2015-12-31T11:57:28.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/11/25/virus-infected-rmnet/</loc>
+    <lastmod>2015-12-31T11:57:22.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2014/01/05/virus-infected-parite/</loc>
+    <lastmod>2015-12-31T11:57:14.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/12/27/virus-infected-dnf/</loc>
+    <lastmod>2015-12-31T11:57:08.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/11/18/virus-download/</loc>
+    <lastmod>2015-12-31T11:57:00.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2012/12/18/technic-alphanumeric-shellcode/</loc>
+    <lastmod>2015-12-31T11:56:10.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2011/06/12/diary-wait-for-you/</loc>
+    <lastmod>2015-12-31T11:55:40.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2014/10/15/technic-xss-bypass/</loc>
+    <lastmod>2015-12-31T11:53:23.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/04/21/technic-sql-inject/</loc>
+    <lastmod>2015-12-31T11:53:10.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/01/16/technic-git-conclusion/</loc>
+    <lastmod>2015-12-31T11:52:09.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2011/06/27/diary-to-be-old/</loc>
+    <lastmod>2015-12-31T11:47:42.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2011/06/06/diary-this-year/</loc>
+    <lastmod>2015-12-31T11:47:20.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2011/05/27/diary-peaceful-of-you/</loc>
+    <lastmod>2015-12-31T11:47:08.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2012/01/12/diary-not-like-me/</loc>
+    <lastmod>2015-12-31T11:46:42.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/03/23/diary-essay-record/</loc>
+    <lastmod>2015-12-31T11:46:30.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/08/22/diary-2015-08-22/</loc>
+    <lastmod>2015-12-31T11:45:54.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/05/01/diary-2013-05-01/</loc>
+    <lastmod>2015-12-31T11:45:28.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2011/05/19/diary-2011-05-19/</loc>
+    <lastmod>2015-12-31T11:45:14.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/01/02/diary-annual-summary-2014/</loc>
+    <lastmod>2015-12-31T11:44:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2014/01/01/diary-annual-summary-2013/</loc>
+    <lastmod>2015-12-31T11:44:46.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/01/02/diary-annual-summary-2012/</loc>
+    <lastmod>2015-12-31T11:44:33.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2011/12/31/diary-annual-summary-2011/</loc>
+    <lastmod>2015-12-31T11:44:20.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2012/07/03/diary-about-graduate/</loc>
+    <lastmod>2015-12-31T11:44:04.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2011/07/22/diary-about-fantasy/</loc>
+    <lastmod>2015-12-31T11:43:49.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2010/04/25/diary-a-lost-love-letter/</loc>
+    <lastmod>2015-12-31T11:43:30.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2014/01/11/virus-troj-taobao/</loc>
+    <lastmod>2015-12-31T11:41:08.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2014/09/02/virus-malware-driver-filter/</loc>
+    <lastmod>2015-12-31T11:37:43.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2012/06/07/study-english-topic-composition/</loc>
+    <lastmod>2015-12-31T11:34:18.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2012/10/27/study-english-kaoyan-composition/</loc>
+    <lastmod>2015-12-31T11:34:13.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2012/04/17/study-english-give-a-lecture/</loc>
+    <lastmod>2015-12-31T11:34:05.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/11/28/android-injection-xposed-usage/</loc>
     <lastmod>2015-12-30T09:31:02.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2015/05/11/4-android-reverse-clickbutton/</loc>
+    <loc>http://blog.idhyt.com/2015/05/11/android-reverse-clickbutton/</loc>
     <lastmod>2015-12-28T06:49:02.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2010/04/25/1-a-lost-love-letter/</loc>
-    <lastmod>2015-12-28T06:46:32.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2012/01/12/1-not-like-me/</loc>
-    <lastmod>2015-12-28T06:44:04.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2012/11/20/2-adobe-cve-2011-0609/</loc>
-    <lastmod>2015-12-28T06:42:51.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/03/21/2-adobe-cve-2013-0641/</loc>
-    <lastmod>2015-12-28T06:40:17.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/01/09/2-nvidia-elevate-privilege/</loc>
-    <lastmod>2015-12-28T06:39:21.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/01/16/2-git-conclusion/</loc>
-    <lastmod>2015-12-28T06:34:24.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/10/15/2-xss-bypass/</loc>
-    <lastmod>2015-12-28T06:31:38.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/04/21/2-sql-inject/</loc>
-    <lastmod>2015-12-28T06:31:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/08/13/5-python-challenge-21-27/</loc>
-    <lastmod>2015-12-28T06:22:22.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/08/10/5-python-challenge-11-20/</loc>
-    <lastmod>2015-12-28T06:21:21.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/08/07/5-python-challenge-0-10/</loc>
-    <lastmod>2015-12-28T06:17:48.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2011/06/27/1-to-be-old/</loc>
-    <lastmod>2015-12-28T06:10:40.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2011/05/27/1-peaceful-of-you/</loc>
-    <lastmod>2015-12-28T06:10:38.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/01/01/1-annual-summary-2013/</loc>
-    <lastmod>2015-12-28T06:10:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2011/06/06/1-this-year/</loc>
-    <lastmod>2015-12-28T06:10:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2011/07/22/1-about-fantasy/</loc>
-    <lastmod>2015-12-28T06:10:03.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/01/02/1-annual-summary-2012/</loc>
-    <lastmod>2015-12-28T06:09:54.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/01/02/1-annual-summary-2014/</loc>
-    <lastmod>2015-12-28T06:09:40.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2011/05/19/1-diary-2011-05-19/</loc>
-    <lastmod>2015-12-28T06:09:32.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/09/25/4-android-injection-xposed/</loc>
+    <loc>http://blog.idhyt.com/2015/09/25/android-injection-xposed/</loc>
     <lastmod>2015-12-28T02:20:50.000Z</lastmod>
   </url>
   
@@ -117,128 +237,13 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2015/10/31/4-android-adb-shell-command/</loc>
+    <loc>http://blog.idhyt.com/2015/10/31/android-adb-shell-command/</loc>
     <lastmod>2015-12-27T09:44:20.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2013/07/01/2-java-cve-2013-0422/</loc>
-    <lastmod>2015-12-27T08:57:09.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/05/08/4-android-netbeans-debug-smali/</loc>
+    <loc>http://blog.idhyt.com/2015/05/08/android-netbeans-debug-smali/</loc>
     <lastmod>2015-12-27T08:55:30.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/03/23/1-essay-record/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/11/18/3-virus-download/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/11/25/3-virus-infected-rmnet/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2012/12/18/2-alphanumeric-shellcode/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/12/03/3-virus-infected-tem81/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/11/29/3-virus-infected-word/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2011/06/12/1-wait-for-you/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/09/02/3-virus-malware-driver-filter/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/09/10/3-virus-malware-driver-hmbb/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/07/24/3-virus-malware-winrar/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/12/19/3-virus-troj-mutil/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/12/27/3-virus-infected-dnf/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/08/22/1-diary-2015-08-22/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/05/01/1-diary-2013-05-01/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/11/20/3-virus-troj-simple/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/01/11/3-virus-troj-taobao/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/categories/index.html</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/01/05/3-virus-infected-parite/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2011/12/31/1-annual-summary-2011/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2012/07/03/1-about-graduate/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2012/10/27/6-english-kaoyan-composition/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2012/04/17/6-english-give-a-lecture/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
   </url>
   
   <url>
@@ -252,12 +257,7 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2012/06/07/6-english-topic-composition/</loc>
-    <lastmod>2015-09-20T14:47:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/04/09/4-android-abusing-webview/</loc>
+    <loc>http://blog.idhyt.com/2015/04/09/android-abusing-webview/</loc>
     <lastmod>2015-04-11T03:11:11.000Z</lastmod>
   </url>
   
