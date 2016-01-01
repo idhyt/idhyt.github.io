@@ -1071,7 +1071,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #7c09c3;
+  background: #738b2d;
 }
 .links-of-friendly a {
   display: inline-block;
@@ -1089,7 +1089,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ccb690;
+  background: #ff32ff;
 }
 .sidebar-nav {
   margin: 0;
@@ -2232,20 +2232,25 @@ ul li {
 }
 #idhyt-surprise-ball {
   width: 100%;
-  height: 100%;
+  height: 100px;
   margin: 0;
+}
+@media (max-width: 767px) {
+  #idhyt-surprise-ball {
+    display: none;
+  }
 }
 #idhyt-surprise-ball-animation {
   width: 320px;
-  margin: 0 auto;
   position: absolute;
-  top: 0px;
-  right: 120px;
+  top: 50px;
+  left: 40%;
+  margin: 0 auto;
 }
-#idhyt-surprise-ball #idhyt-surprise-ball-animation span {
-  color: #333;
-  font-family: georgia;
-  font-size: 14px;
+@media (max-width: 767px) {
+  #idhyt-surprise-ball-animation {
+    display: none;
+  }
 }
 #idhyt-surprise-ball #idhyt-surprise-ball-animation .drag {
   text-shadow: #fff 0px 1px 0px;
@@ -2257,12 +2262,12 @@ ul li {
   font-size: 14px;
 }
 #idhyt-surprise-ball #idhyt-surprise-ball-animation .ball {
-  opacity: 0.7;
+  opacity: 0.6;
   background: #f00;
   width: 16px;
   height: 16px;
   border-radius: 12px;
-  z-index: 40;
+  z-index: auto;
   color: #f00;
   text-shadow: 0 0 0 #f00;
   text-align: center;
