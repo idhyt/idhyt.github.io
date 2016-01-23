@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.idhyt.com/2015/07/31/exploit-cve-2014-7911/</loc>
+    <lastmod>2016-01-23T08:29:04.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/08/31/exploit-privilege-escalation-by-uac/</loc>
+    <lastmod>2016-01-23T07:51:25.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.idhyt.com/2016/01/10/andorid-work-mode-cpu-gpu-io/</loc>
     <lastmod>2016-01-14T09:44:42.000Z</lastmod>
   </url>
