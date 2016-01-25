@@ -522,7 +522,7 @@ python challen
           
             
               <a class="post-title-link" href="/2015/08/01/exploit-cve-2014-7911-exp/" itemprop="url">
-                CVE-2014-7911安卓本地提权漏洞利用分析
+                CVE-2014-7911安卓本地提权漏洞利用
               </a>
             
           
@@ -576,7 +576,8 @@ python challen
         
           <span itemprop="articleBody">
             
-            在CVE-2014-7911安卓本地提权漏洞POC分析中，已经分析了漏洞的成因和触发时机。POC崩溃到mOrgue，从该地址处取值，所以从这个点开始控制流程。由于堆分配不可控，所以要让mOrgue指向的内存命中可控区域，这里需要采用堆喷技术。在控制流程之后要想使代码顺利执行，还需要过掉DEP和ASL
+            在CVE-2014-7911安卓本地提权漏洞分析中，已经分析了漏洞的成因和触发时机。POC崩溃到mOrgue，从该地址处取值，所以从这个点开始控制流程。由于堆分配不可控，所以要让mOrgue指向的内存命中可控区域，这里需要采用堆喷技术。在控制流程之后要想使代码顺利执行，还需要过掉DEP和ASLR。
+
             ...
           </span>
           <div class="post-more-link text-center">
@@ -614,7 +615,7 @@ python challen
           
             
               <a class="post-title-link" href="/2015/07/31/exploit-cve-2014-7911/" itemprop="url">
-                CVE-2014-7911安卓本地提权漏洞POC分析
+                CVE-2014-7911安卓本地提权漏洞分析
               </a>
             
           
