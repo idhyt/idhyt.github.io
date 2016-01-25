@@ -521,8 +521,100 @@ python challen
           
           
             
+              <a class="post-title-link" href="/2015/08/01/exlpoit-cve-2014-7911-exp/" itemprop="url">
+                CVE-2014-7911安卓本地提权漏洞利用分析
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-08-01T16:46:11+08:00" content="2015-08-01">
+            2015-08-01
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/expolit/" itemprop="url" rel="index">
+                  <span itemprop="name">expolit</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/08/01/exlpoit-cve-2014-7911-exp/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/01/exlpoit-cve-2014-7911-exp/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            在CVE-2014-7911安卓本地提权漏洞POC分析中，已经分析了漏洞的成因和触发时机。POC崩溃到mOrgue，从该地址处取值，所以从这个点开始控制流程。由于堆分配不可控，所以要让mOrgue指向的内存命中可控区域，这里需要采用堆喷技术。在控制流程之后要想使代码顺利执行，还需要过掉DEP和ASL
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/01/exlpoit-cve-2014-7911-exp/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/07/31/exploit-cve-2014-7911/" itemprop="url">
-                CVE-2014-7911
+                CVE-2014-7911安卓本地提权漏洞POC分析
               </a>
             
           
@@ -792,108 +884,11 @@ python challen
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/21/technic-sql-inject/" itemprop="url">
-                SQL注入测试思路
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-04-21T14:46:11+08:00" content="2015-04-21">
-            2015-04-21
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/technic/" itemprop="url" rel="index">
-                  <span itemprop="name">technic</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/04/21/technic-sql-inject/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/04/21/technic-sql-inject/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            SQL注入测试思路整理
-一.搜索可能有漏洞的网站利用google收集信息，可以搜索的关键词很多，网上有个术语，把这些称作“Google Dorks”
-inurl:index.php?id=
-inurl:gallery.php?id=
-inurl:article.php?id=
-inurl:pagei
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/21/technic-sql-inject/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/">&laquo;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">&raquo;</a>
   </nav>
 
  </div>
@@ -927,7 +922,7 @@ inurl:pagei
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
