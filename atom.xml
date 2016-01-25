@@ -766,8 +766,8 @@ template.<span class="symbol">dll:</span> <span class="constant">PE32</span> exe
   
   <entry>
     <title><![CDATA[CVE-2014-7911安卓本地提权漏洞利用分析]]></title>
-    <link href="http://blog.idhyt.com/2015/08/01/exlpoit-cve-2014-7911-exp/"/>
-    <id>http://blog.idhyt.com/2015/08/01/exlpoit-cve-2014-7911-exp/</id>
+    <link href="http://blog.idhyt.com/2015/08/01/exploit-cve-2014-7911-exp/"/>
+    <id>http://blog.idhyt.com/2015/08/01/exploit-cve-2014-7911-exp/</id>
     <published>2015-08-01T08:46:11.000Z</published>
     <updated>2016-01-25T05:42:41.000Z</updated>
     <content type="html"><![CDATA[<p>在<a href="http://blog.idhyt.com/2015/07/31/exploit-cve-2014-7911/">CVE-2014-7911安卓本地提权漏洞POC分析</a>中，已经分析了漏洞的成因和触发时机。<br>POC崩溃到mOrgue，从该地址处取值，所以从这个点开始控制流程。由于堆分配不可控，所以要让mOrgue指向的内存命中可控区域，这里需要采用堆喷技术。在控制流程之后要想使代码顺利执行，还需要过掉DEP和ASLR。</p>
