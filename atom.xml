@@ -769,7 +769,7 @@ template.<span class="symbol">dll:</span> <span class="constant">PE32</span> exe
     <link href="http://blog.idhyt.com/2015/08/01/exploit-cve-2014-7911-exp/"/>
     <id>http://blog.idhyt.com/2015/08/01/exploit-cve-2014-7911-exp/</id>
     <published>2015-08-01T08:46:11.000Z</published>
-    <updated>2016-01-25T07:33:13.000Z</updated>
+    <updated>2016-02-19T09:42:19.000Z</updated>
     <content type="html"><![CDATA[<p>在<a href="http://blog.idhyt.com/2015/07/31/exploit-cve-2014-7911/">CVE-2014-7911安卓本地提权漏洞分析</a>中，已经分析了漏洞的成因和触发时机。<br>POC崩溃到mOrgue，从该地址处取值，所以从这个点开始控制流程。由于堆分配不可控，所以要让mOrgue指向的内存命中可控区域，这里需要采用堆喷技术。在控制流程之后要想使代码顺利执行，还需要过掉DEP和ASLR。</p>
 <h2 id="Dakvik-Heap_Spray">Dakvik-Heap Spray</h2><p>堆喷数据一般由大量的堆块组成，每个堆块又由大量的滑板指令+shellcode组成，滑板指令的目的是让程序能跳转到shellcode中执行我们的代码，看漏洞最后执行的汇编代码是执行了blx r2操作，即跳转到r2处执行代码，而r2的值是由r0经过三级指针获取的，所以需要将布局的滑板指令覆盖到r0并且能够跳转到shellcode中。</p>
 <h3 id="堆块布局">堆块布局</h3><p>先看最终的堆块布局，如下图所示：<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2014-7911-exp-1.jpg" alt="exploit-cve-2014-7911-exp-1"></p>
@@ -851,7 +851,7 @@ ActivityManagerService.registerReceiver
     
       <category term="cve" scheme="http://blog.idhyt.com/tags/cve/"/>
     
-      <category term="expolit" scheme="http://blog.idhyt.com/categories/expolit/"/>
+      <category term="exploit" scheme="http://blog.idhyt.com/categories/exploit/"/>
     
   </entry>
   
@@ -860,7 +860,7 @@ ActivityManagerService.registerReceiver
     <link href="http://blog.idhyt.com/2015/07/31/exploit-cve-2014-7911/"/>
     <id>http://blog.idhyt.com/2015/07/31/exploit-cve-2014-7911/</id>
     <published>2015-07-31T15:28:11.000Z</published>
-    <updated>2016-01-25T06:20:06.000Z</updated>
+    <updated>2016-02-19T09:42:32.000Z</updated>
     <content type="html"><![CDATA[<h2 id="简介">简介</h2><p>CVE-2014-7911是由Jann Horn发现的一个有关安卓的提权漏洞，该漏洞允许恶意应用从普通应用权限提权到system用户执行命令，影响版本包括4.4以前所有的版本。该漏洞是一个非常有学习价值的漏洞，其涉及的知识非常广泛，包括Java序列化与反序列化、Dalvik GC机制、Android binder机制、heap spary、ROP、stack pivot。</p>
 <p>该漏洞的成因在于java.io.ObjectInputStream类在反序列化输入的数据时，并不验证其合法性，攻击者可以利用此漏洞构造恶意对象在sysem_server进程中执行任意代码并获取提升的权限。但是我google大部分关于这个漏洞的文章，没有一个分析文章能将漏洞的触发流程与这个点串起来的逻辑，或者说文章中根本就没有在提及这个点，这个过程发生在sysem_server处理Parcel数据的时候有个unparcel过程，下边会有详细的逻辑流程。</p>
 <h2 id="调试环境和工具">调试环境和工具</h2><p>nexus 5<br>android 4.4<br>android studio</p>
@@ -1023,7 +1023,7 @@ gBinderProxyOffsets.mOrgue = env-&gt;<span class="constant">GetFieldID(</span>cl
     
       <category term="cve" scheme="http://blog.idhyt.com/tags/cve/"/>
     
-      <category term="expolit" scheme="http://blog.idhyt.com/categories/expolit/"/>
+      <category term="exploit" scheme="http://blog.idhyt.com/categories/exploit/"/>
     
   </entry>
   
