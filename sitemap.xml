@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.idhyt.com/2016/02/26/exploit-cve-2014-3153/</loc>
+    <lastmod>2016-02-26T11:35:06.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.idhyt.com/2013/01/09/expolit-nvidia-elevate-privilege/</loc>
     <lastmod>2016-02-19T09:42:54.000Z</lastmod>
   </url>
