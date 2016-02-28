@@ -4,7 +4,7 @@
   <subtitle><![CDATA[云淡风轻]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.idhyt.com/"/>
-  <updated>2016-02-26T11:35:06.000Z</updated>
+  <updated>2016-02-26T11:35:16.000Z</updated>
   <id>http://blog.idhyt.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.idhyt.com/2016/02/26/exploit-cve-2014-3153/"/>
     <id>http://blog.idhyt.com/2016/02/26/exploit-cve-2014-3153/</id>
     <published>2016-02-26T09:15:11.000Z</published>
-    <updated>2016-02-26T11:35:06.000Z</updated>
+    <updated>2016-02-26T11:35:16.000Z</updated>
     <content type="html"><![CDATA[<h2 id="简介">简介</h2><p>漏洞是14年5月份爆，属于linux内核漏洞，影响范围非常广，包括linux系统（内核版本3.14.5之前）和andorid系统（系统版本4.4之前）。受影响的系统可能被直接DOS，精心设计可以获取root权限，如安卓root工具towel。</p>
 <p>该漏洞主要产生于内核的 Futex系统调用，漏洞利用了 futex_requeue，futex_lock_pi，futex_wait_requeue_pi三个函数存在的两个漏洞，通过巧妙的组合这三个系 统调用，攻击者可以造成futex变量有等待者，却没有拥有者，即所谓的野指针，通过函数栈填充，可以修改栈上的等待者rt_mutex中的数据，控制内核等待队列节点，通过插入节点的方式读写内核数据，达到提权目的。</p>
 <p>这个漏洞网上分析文章比较多，详见参考文章，这里只记录自己在分析过程中踩过的坑和几个漏洞利用的技术点。</p>
