@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.idhyt.com/2016/03/09/exploit-cve-2015-3636/</loc>
+    <lastmod>2016-03-13T15:38:21.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/03/13/exploit-cve-2015-1538/</loc>
+    <lastmod>2016-03-13T14:07:28.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.idhyt.com/about/index.html</loc>
     <lastmod>2016-02-28T17:46:25.000Z</lastmod>
   </url>

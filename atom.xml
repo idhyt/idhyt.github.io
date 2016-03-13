@@ -4,7 +4,7 @@
   <subtitle><![CDATA[云淡风轻]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.idhyt.com/"/>
-  <updated>2016-02-26T11:35:16.000Z</updated>
+  <updated>2016-03-13T14:07:28.000Z</updated>
   <id>http://blog.idhyt.com/</id>
   
   <author>
@@ -13,6 +13,165 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[CVE-2015-1538 libstagefright漏洞简略分析]]></title>
+    <link href="http://blog.idhyt.com/2016/03/13/exploit-cve-2015-1538/"/>
+    <id>http://blog.idhyt.com/2016/03/13/exploit-cve-2015-1538/</id>
+    <published>2016-03-13T13:49:11.000Z</published>
+    <updated>2016-03-13T14:07:28.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="漏洞分析">漏洞分析</h2><p>POC直接使用<a href="https://github.com/jduck/cve-2015-1538-1" target="_blank" rel="external">https://github.com/jduck/cve-2015-1538-1</a>生成的mp4文件，作者说明了这个exp并不通用，我的测试机为nexus-5-android-4.4，只能造成崩溃。<br>崩溃信息：</p>
+<pre><code><span class="number">03-13 13:19</span>:<span class="number">33.130 14267</span> 14267 I DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+<span class="number">03-13 13:19</span>:<span class="number">33.130 14267</span> 14267 I DEBUG   : Build fingerprint: 'google/hammerhead/hammerhead:4.4.4/KTU84P/<span class="number">1227136</span>:user/release-keys'
+<span class="number">03-13 13:19</span>:<span class="number">33.130 14267</span> 14267 I DEBUG   : Revision: '11'
+<span class="number">03-13 13:19</span>:<span class="number">33.130 14267</span> 14267 I DEBUG   : pid: 17874, tid: 17928, name: Binder_1  &gt;&gt;&gt; /system/bin/mediaserver &lt;&lt;&lt;
+<span class="number">03-13 13:19</span>:<span class="number">33.130 14267</span> 14267 I DEBUG   : signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr <span class="number">41d00010</span>
+<span class="number">03-13 13:19</span>:<span class="number">33.140 15745</span> 15836 W NativeCrashListener: Couldn't find ProcessRecord for pid 17874
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     r<span class="number">0 41d00010</span>  r<span class="number">1 00d00000</span>  r2 001ed3c9  r<span class="number">3 00000000</span>
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   : AM write failure (32 / Broken pipe)
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     r4 b<span class="number">5b40030</span>  r<span class="number">5 000000</span>da  r<span class="number">6 2a0480</span>a0  r<span class="number">7 00000a38</span>
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     r<span class="number">8 0000000</span>c  r9 b<span class="number">5b40034</span>  sl <span class="number">00000008</span>  fp <span class="number">2a0480a4</span>
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     ip <span class="number">41d00000</span>  sp b<span class="number">5b40010</span>  lr b697edaf  pc b697ed3a  cpsr <span class="number">000f0030</span>
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d0  <span class="number">000000100000</span>0079  d1  <span class="number">00000000000</span>00061
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d2  <span class="number">7472616b6</span>d6f6f64  d3  <span class="number">6d696e66</span><span class="number">6d6469a9</span>
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d4  <span class="number">42424242424242</span>42  d5  <span class="number">42424242424242</span>42
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d6  <span class="number">42424242424242</span>42  d7  <span class="number">42424242424242</span>42
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d8  <span class="number">00000000000</span>00000  d9  <span class="number">00000000000</span>00000
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d<span class="number">10 00000000</span><span class="number">00000000</span>  d<span class="number">11 00000000</span><span class="number">00000000</span>
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d<span class="number">12 00000000</span><span class="number">00000000</span>  d<span class="number">13 00000000</span><span class="number">00000000</span>
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d<span class="number">14 00000000</span><span class="number">00000000</span>  d<span class="number">15 00000000</span><span class="number">00000000</span>
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d16 3f96de83a904ab51  d<span class="number">17 3f50624</span>dd2f1a9fc
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d18 41cc<span class="number">35633580000</span>0  d19 3fc35fe<span class="number">27b800000</span>
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d20 3fc5533fc2a45f6a  d21 bf66be3f0c22dc9a
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d22 3fc2e2cedd55ea5c  d23 3fe<span class="number">00000000000</span>00
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d<span class="number">24 3f88b0</span>d<span class="number">283c30939</span>  d25 bf<span class="number">88b0d28a51</span>8506
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d<span class="number">26 00000000</span><span class="number">00000000</span>  d<span class="number">27 40000000</span><span class="number">00000000</span>
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d28 3ffda<span class="number">3a6245542</span>b4  d29 bfc4eaefa<span class="number">4251850</span>
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     d30 3ff<span class="number">00000000000</span>00  d31 3fe29d5df484a30a
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     scr <span class="number">60000010</span>
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   : 
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   : backtrace:
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     #00  pc 0007dd3a  /system/lib/libstagefright.so (androi<span class="number">d::</span>SampleTabl<span class="number">e::</span>setSampleToChunkParams(long long, unsigned int)+137)
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     #01  pc <span class="number">00062f8</span>d  /system/lib/libstagefright.so (androi<span class="number">d::</span>MPEG4Extractor<span class="number">::</span>parseChunk(long long*, int)+2816)
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     #02  pc <span class="number">0006271</span>f  /system/lib/libstagefright.so (androi<span class="number">d::</span>MPEG4Extractor<span class="number">::</span>parseChunk(long long*, int)+658)
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     #03  pc <span class="number">0006271</span>f  /system/lib/libstagefright.so (androi<span class="number">d::</span>MPEG4Extractor<span class="number">::</span>parseChunk(long long*, int)+658)
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     #04  pc <span class="number">0006271</span>f  /system/lib/libstagefright.so (androi<span class="number">d::</span>MPEG4Extractor<span class="number">::</span>parseChunk(long long*, int)+658)
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     #05  pc <span class="number">0006271</span>f  /system/lib/libstagefright.so (androi<span class="number">d::</span>MPEG4Extractor<span class="number">::</span>parseChunk(long long*, int)+658)
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     #06  pc <span class="number">0006271</span>f  /system/lib/libstagefright.so (androi<span class="number">d::</span>MPEG4Extractor<span class="number">::</span>parseChunk(long long*, int)+658)
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     #07  pc 00063aaf  /system/lib/libstagefright.so (androi<span class="number">d::</span>MPEG4Extractor<span class="number">::</span>readMetaData()+46)
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     #08  pc <span class="number">00063d6</span>d  /system/lib/libstagefright.so (androi<span class="number">d::</span>MPEG4Extractor<span class="number">::</span>getMetaData()+8)
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     #09  pc <span class="number">0007f695</span>  /system/lib/libstagefright.so (androi<span class="number">d::</span>StagefrightMetadataRetriever<span class="number">::</span>getFrameAtTime(long long, int)+28)
+<span class="number">03-13 13:19</span>:<span class="number">33.180 14267</span> 14267 I DEBUG   :     #10  pc <span class="number">00035945</span>  /system/lib/libmediaplayerservice.so (androi<span class="number">d::</span>MetadataRetrieverClient<span class="number">::</span>getFrameAtTime(long long, int)+64)
+...
+</code></pre><p>查看堆栈调用，最后崩溃在：android::SampleTable::setSampleToChunkParams(long long, unsigned int)+137，非法地址41d00010，改值与R0寄存器值相等，猜想对该寄存器操作导致。<br>ida反汇编libstagefright.so定位到该行代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.text:<span class="number">0007</span>DD2C loc_7DD2C                               ; CODE XREF: android::SampleTable::setSampleToChunkParams(<span class="keyword">long</span> <span class="keyword">long</span>,uint)+BCj</span><br><span class="line">.text:<span class="number">0007</span>DD2C                 LDR             R0, [R6,<span class="preprocessor">#<span class="number">8</span>]</span></span><br><span class="line">.text:<span class="number">0007</span>DD2E                 MOV.W           R10, <span class="preprocessor">#<span class="number">8</span></span></span><br><span class="line">.text:<span class="number">0007</span>DD32                 MUL.W           R7, R8, R5</span><br><span class="line">.text:<span class="number">0007</span>DD36                 LDRD.W          R2, R3, [R6,<span class="preprocessor">#<span class="number">0x20</span>]</span></span><br><span class="line">.text:<span class="number">0007</span>DD3A                 LDR             R1, [R0]     <span class="comment">// crash!!!</span></span><br><span class="line">.text:<span class="number">0007</span>DD3C                 MOV.W           R11, <span class="preprocessor">#<span class="number">0</span></span></span><br><span class="line">.text:<span class="number">0007</span>DD40                 ADDS.W          R10, R10, R2</span><br><span class="line">.text:<span class="number">0007</span>DD44                 STMEA.W         SP, &#123;R4,R8&#125;</span><br><span class="line">.text:<span class="number">0007</span>DD48                 ADC.W           R11, R11, R3</span><br><span class="line">.text:<span class="number">0007</span>DD4C                 ADDS.W          R2, R10, R7</span><br><span class="line">.text:<span class="number">0007</span>DD50                 ADC.W           R3, R11, <span class="preprocessor">#<span class="number">0</span></span></span><br><span class="line">.text:<span class="number">0007</span>DD54                 LDR             R1, [R1,<span class="preprocessor">#<span class="number">0x1C</span>]</span></span><br><span class="line">.text:<span class="number">0007</span>DD56                 BLX             R1    <span class="comment">// 跳转可控!!!</span></span><br><span class="line">.text:<span class="number">0007</span>DD58                 CMP             R0, <span class="preprocessor">#<span class="number">0xC</span></span></span><br><span class="line">.text:<span class="number">0007</span>DD5A                 BEQ             loc_7DD5E</span><br><span class="line">.text:<span class="number">0007</span>DD5C                 B               loc_7DD72</span><br></pre></td></tr></table></figure>
+<p>0007DD3A处执行了LDR R1, [R0]，获取R0寄存器的值，验证了该想法。注意下边BLX R1将跳转到R1之行代码，R1 ＝ [[R0]+0x1C],所以如果R0可控，则可控制代码执行流程。<br>R0＝41d00010，刚好是EXP中对喷的值sp_addr，所以构造好数据即可之行到shellcode中。</p>
+<p>对照源码(附带注释)：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">status_t</span> SampleTable::setSampleToChunkParams(</span><br><span class="line">        <span class="keyword">off_t</span> data_offset, <span class="keyword">size_t</span> data_size) &#123;</span><br><span class="line">    <span class="keyword">if</span> (mSampleToChunkOffset &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR_MALFORMED;</span><br><span class="line">    &#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">// 数据块偏移 </span></span><br><span class="line">    mSampleToChunkOffset = data_offset;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">// 小于8说明无数据（头部）</span></span><br><span class="line">    <span class="keyword">if</span> (data_size &lt; <span class="number">8</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR_MALFORMED;</span><br><span class="line">    &#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">// 获取size大小，前8个字节</span></span><br><span class="line">    <span class="keyword">uint8_t</span> header[<span class="number">8</span>];</span><br><span class="line">    <span class="keyword">if</span> (mDataSource-&gt;readAt(</span><br><span class="line">                data_offset, header, <span class="keyword">sizeof</span>(header)) &lt; (<span class="keyword">ssize_t</span>)<span class="keyword">sizeof</span>(header)) &#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR_IO;</span><br><span class="line">    &#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">// 高4位是否为0（version，flags）</span></span><br><span class="line">    <span class="keyword">if</span> (U32_AT(header) != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// Expected version = 0, flags = 0.</span></span><br><span class="line">        <span class="keyword">return</span> ERROR_MALFORMED;</span><br><span class="line">    &#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">// 获取低4位（Number Of Entries）</span></span><br><span class="line">    mNumSampleToChunkOffsets = U32_AT(&amp;header[<span class="number">4</span>]);</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">// 检测数据大小是否合法</span></span><br><span class="line">    <span class="keyword">if</span> (data_size &lt; <span class="number">8</span> + mNumSampleToChunkOffsets * <span class="number">12</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR_MALFORMED;</span><br><span class="line">    &#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">// 创建SampleToChunkEntry对象 size＝12</span></span><br><span class="line">    mSampleToChunkEntries =</span><br><span class="line">        <span class="keyword">new</span> SampleToChunkEntry[mNumSampleToChunkOffsets];</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">// 循环解析出每个SampleToChunkEntry数据</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">uint32_t</span> i = <span class="number">0</span>; i &lt; mNumSampleToChunkOffsets; ++i) &#123;</span><br><span class="line">        <span class="keyword">uint8_t</span> buffer[<span class="number">12</span>];</span><br><span class="line">        <span class="keyword">if</span> (mDataSource-&gt;readAt(</span><br><span class="line">                    mSampleToChunkOffset + <span class="number">8</span> + i * <span class="number">12</span>, buffer, <span class="keyword">sizeof</span>(buffer))</span><br><span class="line">                != (<span class="keyword">ssize_t</span>)<span class="keyword">sizeof</span>(buffer)) &#123;</span><br><span class="line">            <span class="keyword">return</span> ERROR_IO;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        CHECK(U32_AT(buffer) &gt;= <span class="number">1</span>);  <span class="comment">// chunk index is 1 based in the spec.</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment">// We want the chunk index to be 0-based.</span></span><br><span class="line">        mSampleToChunkEntries[i].startChunk = U32_AT(buffer) - <span class="number">1</span>;</span><br><span class="line">        mSampleToChunkEntries[i].samplesPerChunk = U32_AT(&amp;buffer[<span class="number">4</span>]);</span><br><span class="line">        mSampleToChunkEntries[i].chunkDesc = U32_AT(&amp;buffer[<span class="number">8</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后blx r1对应的代码为mDataSource-&gt;readAt()，调用了类DataSource的虚函数readAt，该类结构如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class DataSource : public RefBase &#123;</span><br><span class="line">+0  虚表指针    4</span><br><span class="line">+4  enmu Flag&#123;&#125; 12</span><br><span class="line">+10 sp&lt;DataSource&gt;  4</span><br><span class="line">+14 DataSource()&#123;&#125;  4</span><br><span class="line">+18 virtual status_t initCheck()    4</span><br><span class="line">+1c virtual ssize_t readAt(off_t offset, void *data, size_t size)</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以可以得出崩溃时R0为mDataSource指针，即堆喷时覆盖了mDataSource指针。</p>
+<p>再看setSampleToChunkParams函数调用来源：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) &#123;</span><br><span class="line">	...</span><br><span class="line">	case FOURCC('s', 't', 's', 'c'):</span><br><span class="line">        &#123;</span><br><span class="line">            status_t err =</span><br><span class="line">                mLastTrack-&gt;sampleTable-&gt;setSampleToChunkParams(</span><br><span class="line">                        data_offset, chunk_data_size);</span><br><span class="line"></span><br><span class="line">            if (err != OK) &#123;</span><br><span class="line">                return err;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            *offset += chunk_size;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在解析stsc类型的数据中调用了该函数，查看sampleTable类，在其＋8处刚好为setSampleToChunkParams函数，对照汇编最开始的LDR R0, [R6,#8]，可知此时R6为sampleTable指针。</p>
+<p>查看exp中stsc数据块内容<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2015-1538-1.png" alt=""></p>
+<p>再结合前边源码setSampleToChunkParams解析过程：</p>
+<p>1.检查数据块大小是否合法，即大于头部8个字节。</p>
+<p>2.读取的mNumSampleToChunkOffsets为0xc0000003，经过mul计算后0xc0000003＊0c＝0x900000024，由于32位乘法指令导致上溢位0x24。<br>data_size为数据类型stsc前四个字节再减去8个字节的头部，即为0x34-0x8＝0x2c，即通过了<code>data_size &lt; 8 + mNumSampleToChunkOffsets * 12</code>的判断。</p>
+<p>3.创建0xc0000003个SampleToChunkEntry对象，每个大小为12字节。</p>
+<p>4.循环解析每个SampleToChunkEntry数据，由于EXP中stsc数据大小为0x1200字节，去掉前8个字节，则实际循环次数为(0x1200 / 0xc) - 1 = 0x17F次，如果在循环期间能够覆盖sampleTable或者mDataSource则必然崩溃。溢出的数据会不断填充高地址，所以要保证new出来的SampleToChunkEntry地址比他们低。</p>
+<p>ida挂载调试，直接下断到<br>mSampleToChunkEntries = new SampleToChunkEntry[mNumSampleToChunkOffsets].<br>最后可以看到三个地址如下：<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2015-1538-2.png" alt=""><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2015-1538-3.png" alt=""></p>
+<p>加上在上级调用看到的mLastTrack地址，四个地址如下所示：</p>
+<pre><code>mSampleToChunkEntries       ＝ <span class="number">0xb7fb5358</span>
+mLastTrack                  = <span class="number">0xb7fb59d0</span>
+sampleTable                 = <span class="number">0xb7fb5a98</span>
+mDataSource                 = <span class="number">0xb7fb50a8</span>
+</code></pre><p>0xb7fb5a98 - 0xb7fb5358 = 0x740，所以只要溢出超过0x740字节就必定能够覆盖sampleTable地址上的内容，因此LDR R0, [R6,#8]后R0获取的并不是mDataSource而是stsc中的数据。</p>
+<p>但是如果只是覆盖了sampleTable地址，执行不到下边的blx r1就会发生崩溃，所以这种情况并不能控制代码执行流程。<br>在EXP中，通过覆盖Track对象的sampleTable指针，然后程序执行到Track对象的析构函数来控制流程。</p>
+<p>在调试中可以知道几个重要结构的地址分布：mSampleToChunkEntries &lt; Track &lt; sampleTable，看下Track结构：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Track &#123;</span><br><span class="line">     Track *next;</span><br><span class="line">     sp&lt;MetaData&gt; meta;</span><br><span class="line">     <span class="keyword">uint32_t</span> timescale;</span><br><span class="line">     sp&lt;SampleTable&gt; sampleTable;</span><br><span class="line">     <span class="keyword">bool</span> includes_expensive_metadata;</span><br><span class="line">     <span class="keyword">bool</span> skipTrack;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+<p>其中sampleTable指针位于Track＋0xC处，假如溢出覆盖到的地址为fake_addr,如果Track＋0xC &lt; fake_addr &lt; sampleTable，那么就能覆盖掉Track对象的sampleTable指针并不引起崩溃。<br>当trak数据块数据解析完后，会调用Track的析构函数delete：<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2015-1538-4.png" alt=""></p>
+<p>delete函数会调用android::RefBase::decStrong<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2015-1538-5.png" alt=""></p>
+<p>此时r0为sampleTable指针，利用方式和<a href="http://blog.idhyt.com/2015/08/01/exploit-cve-2014-7911-exp/">cve-2014-7911</a>相同。</p>
+<h2 id="漏洞利用">漏洞利用</h2><p>析构函数执行过后会跳到ROP中，rop布局好数据后先是调用mprotect函数将sp_addr地址长度为0x1000改为可执行权限，然后跳入shell_reverse_tcp代码中执行。</p>
+<p>这个过程中所有函数的调用通过SVC指令完成，类似于Intel CPU中的int 0x80中断，SVC指令会根据相应的调用号去执行相应的函数，这些编号定义在<code>include\arm\unistd.h</code>中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_restart_syscall (__NR_SYSCALL_BASE+ <span class="number">0</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_exit (__NR_SYSCALL_BASE+ <span class="number">1</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_fork (__NR_SYSCALL_BASE+ <span class="number">2</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_read (__NR_SYSCALL_BASE+ <span class="number">3</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_write (__NR_SYSCALL_BASE+ <span class="number">4</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_open (__NR_SYSCALL_BASE+ <span class="number">5</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_close (__NR_SYSCALL_BASE+ <span class="number">6</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_creat (__NR_SYSCALL_BASE+ <span class="number">8</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_link (__NR_SYSCALL_BASE+ <span class="number">9</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_unlink (__NR_SYSCALL_BASE+ <span class="number">10</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_execve (__NR_SYSCALL_BASE+ <span class="number">11</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_chdir (__NR_SYSCALL_BASE+ <span class="number">12</span>)</span></span><br></pre></td></tr></table></figure>
+<h2 id="影响">影响</h2><p>/system/core/rootdir/init.rc定义了mediaserver用户组权限</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">service media /system/bin/mediaserver <span class="number">511</span>    </span><br><span class="line"><span class="keyword">class</span> main    </span><br><span class="line">user media  </span><br><span class="line">group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm </span><br><span class="line">ioprio rt <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p>system/core/include/private/android_filesystem_config.h</p>
+<p>所以可以访问audio camera bluetooth。。。</p>
+<h2 id="总结">总结</h2><ol>
+<li>EXP利用MP4格式标准的其它Box申请了一些零碎的内存块创造内存间隙，在程序执行过程中这些零碎内存块很有可能被free，后面申请SampleToChunkEntry的内存就有可能出现在低地址，成功溢出到sampleTable指针并不造成崩溃。</li>
+<li>Heap Spray，通过tx3g Box堆喷2M数据，使其某一page出现在预测地址上。</li>
+<li>ROP和shell_reverse_tcp中的SVC调用，mprotect函数绕过dep保护。</li>
+<li>mp4文件格式解析流程。</li>
+<li>exp在实际测试中成功率很低，原因都是由于溢出数据覆盖掉了sampleTable地址的数据，导致调用mDataSorce时崩溃，原因参考<a href="http://huntcve.github.io/2015/12/16/debug-stagefright-exploit/" target="_blank" rel="external">一步一步调通stagefright exploit</a>。</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="漏洞分析">漏洞分析</h2><p>POC直接使用<a href="https://github.com/jduck/cve-2015-1538-1" target="_blank" rel="external">https://github.com/jduck/]]>
+    </summary>
+    
+      <category term="cve" scheme="http://blog.idhyt.com/tags/cve/"/>
+    
+      <category term="libstagefright" scheme="http://blog.idhyt.com/tags/libstagefright/"/>
+    
+      <category term="exploit" scheme="http://blog.idhyt.com/categories/exploit/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[CVE-2015-3636内核漏洞分析]]></title>
+    <link href="http://blog.idhyt.com/2016/03/09/exploit-cve-2015-3636/"/>
+    <id>http://blog.idhyt.com/2016/03/09/exploit-cve-2015-3636/</id>
+    <published>2016-03-09T15:07:11.000Z</published>
+    <updated>2016-03-13T15:38:21.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="漏洞简介">漏洞简介</h2><p>Linux kernel的ping套接字实现上存在释放后重利用漏洞，x86-64架构的本地用户利用此漏洞可造成系统崩溃，非x86-64架构的用户可提升其权限，pingpongroot就是利用该漏洞达到提权的效果，现在android-6.0以下的手机root工具靠的就是这个漏洞。</p>
+<h2 id="漏洞分析">漏洞分析</h2><p>详细的分析参考KeenTeam这篇文章<a href="https://www.blackhat.com/docs/us-15/materials/us-15-Xu-Ah-Universal-Android-Rooting-Is-Back-wp.pdf" target="_blank" rel="external">Own your Android! Yet Another Universal Root</a>。</p>
+<p>漏洞POC很简单，如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sockfd= socket(AF_INET, SOCK_DGRAM, IPPROTO_ICMP);  <span class="comment">// refcount =1;       </span></span><br><span class="line">structsockaddr addr = &#123; .sa_family = AF_INET &#125;;</span><br><span class="line"><span class="keyword">int</span> ret =connect(sockfd, &amp;addr, <span class="keyword">sizeof</span>(addr));  <span class="comment">// refcount ++;  创建hash</span></span><br><span class="line">structsockaddr _addr = &#123; .sa_family = AF_UNSPEC &#125;;</span><br><span class="line">ret =connect(sockfd, &amp;_addr, <span class="keyword">sizeof</span>(_addr));  <span class="comment">//删除hash；refcount --;</span></span><br><span class="line">ret =connect(sockfd, &amp;_addr, <span class="keyword">sizeof</span>(_addr)); <span class="comment">// bug导致继续删除hash；refcount --; refcount</span></span><br></pre></td></tr></table></figure>
+<p>简单的说就是当用户用ICMP socket和AF_UNSPEC为参数调用connect()时，系统会直接跳到disconnect(),删除当前sock对象的hash,并且让refcount递减一次，删除hash过程的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ping_unhash</span><span class="params">(<span class="keyword">struct</span> sock *sk)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">struct</span> inet_sock *isk = inet_sk(sk);</span><br><span class="line">	pr_debug(<span class="string">"ping_unhash(isk=%p,isk-&gt;num=%u)\n"</span>, isk, isk-&gt;inet_num);</span><br><span class="line">	<span class="keyword">if</span> (sk_hashed(sk)) &#123;</span><br><span class="line">		write_lock_bh(&amp;ping_table.lock);</span><br><span class="line">		hlist_nulls_del(&amp;sk-&gt;sk_nulls_node);</span><br><span class="line">		sock_put(sk);</span><br><span class="line">		isk-&gt;inet_num = <span class="number">0</span>;</span><br><span class="line">		isk-&gt;inet_sport = <span class="number">0</span>;</span><br><span class="line">		sock_prot_inuse_add(sock_net(sk), sk-&gt;sk_prot, -<span class="number">1</span>);</span><br><span class="line">		write_unlock_bh(&amp;ping_table.lock);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一次调用hlist_nulls_del删除hash后会将hlist_node.pprv=0x200200，然后再用相同的参数再调用一次connect()，因为hash已经被删除了，此时if语句应该返回FALSE，但是由于hlist_node.pprv = 0x200200 != null导致sk_hashed(sk)返回TRUE，导致refcount被多减了一次。因此，攻击者只需要创建一个ICMP socket，连续调用3个connect()（第一个connect()用来生成hash）,就可以把refcount置为0，从而释放sock对象导致UAF。</p>
+<h2 id="漏洞利用思路">漏洞利用思路</h2><ol>
+<li>填充PING socket objects，覆盖close指针。</li>
+<li>调用close(sockfd)获取控制权。</li>
+<li>泄漏内核栈获取thread_info结构。</li>
+<li>修改thread_info.addr_limit值为0xffffffff。</li>
+<li>修改thread_info.task.cred提权。</li>
+<li>由于0x200200地址并没有map，所以最开始要先在该地址map内存防止程序崩溃。</li>
+</ol>
+<p>在内核空间中，physmap和SLABs一般会处于不同的地方，physmap位于相对较高的地址，SLABs位于相对较低的地址，由于内核空间里physmap和SLABs靠得很近，可以通过先创建大量的socket对象抬高SLAB地址，exp中会先获取单个进程可创建的最大socket数max_fds，然后循环每个进程创建max_fds个正常的socket然后加上一个漏洞的vul_socket，最终生成了65000个正常的socket加上16个vul_socket。</p>
+<p>然后在用户空间不断map内存把数据映射到physmap，通过特殊标记判断内核空间physmap是否和SLAB重叠。<br>如何判断targeting vulnerable PING sock objects已经被physmap中的数据给覆盖？<br>每喷一个数据块，就调用一次targeting vulnerable PING sock objects的<code>ioctl(sockfd, SIOCGSTAMPNS, (struct timespec*))</code>函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sock_get_timestampns</span><span class="params">(<span class="keyword">struct</span> sock *sk, <span class="keyword">struct</span> timespec __user *userstamp)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">struct</span> timespec ts;</span><br><span class="line">    <span class="keyword">if</span> (!sock_flag(sk, SOCK_TIMESTAMP))</span><br><span class="line">        sock_enable_timestamp(sk, SOCK_TIMESTAMP);</span><br><span class="line">    ts = ktime_to_timespec(sk-&gt;sk_stamp);</span><br><span class="line">    <span class="keyword">if</span> (ts.tv_sec == -<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> -ENOENT;</span><br><span class="line">    <span class="keyword">if</span> (ts.tv_sec == <span class="number">0</span>) &#123;</span><br><span class="line">        sk-&gt;sk_stamp = ktime_get_real();</span><br><span class="line">        ts = ktime_to_timespec(sk-&gt;sk_stamp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> copy_to_user(userstamp, &amp;ts, <span class="keyword">sizeof</span>(ts)) ? -EFAULT : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数将泄漏出sk-&gt;sk_stamp这个值，我们可以通过对比这个值和之前填充的值来判断是否已经成功覆盖。</p>
+<p>最终效果如下：<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2015-3636-1.png" alt=""></p>
+<p>如果覆盖成功，将其他正常的socket对象释放掉，然后将vul_socket的sk-&gt;sk_prot-&gt;close函数指针覆盖掉，最终调用close函数，内核将调用sk-&gt;sk_prot-&gt;close，这个时候，sk_prot已经完全被控制，即sk_prot-&gt;close也被控，最终控制了内核空间的pc寄存器的值，控制了代码的执行流程。</p>
+<h2 id="补丁">补丁</h2><p><a href="https://github.com/torvalds/linux/commit/a134f083e79fb4c3d0a925691e732c56911b4326?diff=split" target="_blank" rel="external">漏洞补丁</a>比较简单，删除指针后将指针置NULL。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2015-3636-2.png" alt=""></p>
+<h2 id="总结">总结</h2><ol>
+<li><p>源码中查看实socket创建和close流程不容易找到调用关系，可编译goldfish内核进行调试。</p>
+</li>
+<li><p>实际在nexus5运行exp并不能触发漏洞，发现抬高过slab内存块之后进行循环map操作，一直没有找到重叠的部分导致while死循环，原因是作者在写exp时保留了系统运行的64M内存，而重叠的部分恰好是在这块内存中，将其尝试变小即可。</p>
+</li>
+<li><p>再给的exp中覆盖的close地址为用户空间地址<code>obtain_root_privilege_by_modify_task_cred</code>，该处用来修改线程cred信息并提权操作，在android5.0以后的版本中有PXN保护，并不允许内核执行用户层代码，所以需要构造ROP绕过。构造ROP的思路在KeenTeam的pdf中有详细说明，使用ROP意味着需要将内核栈转移到用户栈空间中，这种行为损坏SP寄存器并带来不确定因素，SP在内核代码执行期间比较关键，任何时候修改破坏是不明智的，所以其中使用的是更稳定的JOP。</p>
+</li>
+<li><p>理解SLUB内存管理机制和physmap。</p>
+</li>
+<li><p>KeenTeam文章中的利用思路，详细说明了为什么不通过sendmmsg()完成堆喷来覆盖，其中的一些思路和想法确实值得深思和学习。</p>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="漏洞简介">漏洞简介</h2><p>Linux kernel的ping套接字实现上存在释放后重利用漏洞，x86-64架构的本地用户利用此漏洞可造成系统崩溃，非x86-64架构的用户可提升其权限，pingpongroot就是利用该漏洞达到提权的效果，现在androi]]>
+    </summary>
+    
+      <category term="cve" scheme="http://blog.idhyt.com/tags/cve/"/>
+    
+      <category term="pingpongroot" scheme="http://blog.idhyt.com/tags/pingpongroot/"/>
+    
+      <category term="exploit" scheme="http://blog.idhyt.com/categories/exploit/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[CVE-2014-3153内核漏洞分析]]></title>
@@ -1584,136 +1743,6 @@ and (select count(*)</span> <span class="keyword">from</span> msysobjects)&gt;<s
     <![CDATA[<ul>
 <li><p>世界上最美的情话是，我喜欢的人，它正好也喜欢我]]>
     
-    </summary>
-    
-      <category term="无法描述" scheme="http://blog.idhyt.com/tags/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
-    
-      <category term="diary" scheme="http://blog.idhyt.com/categories/diary/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[git使用总结]]></title>
-    <link href="http://blog.idhyt.com/2015/01/16/technic-git-conclusion/"/>
-    <id>http://blog.idhyt.com/2015/01/16/technic-git-conclusion/</id>
-    <published>2015-01-16T13:46:33.000Z</published>
-    <updated>2015-12-31T11:52:09.000Z</updated>
-    <content type="html"><![CDATA[<p>windows下git使用总结</p>
-<h3 id="初始化配置Github">初始化配置Github</h3><ol>
-<li><p>下载msysgit并安装 : <a href="http://msysgit.github.io/" target="_blank" rel="external">http://msysgit.github.io/</a></p>
-</li>
-<li><p>github上创建一个项目，如SmartScript</p>
-</li>
-<li><p>初始化<br> 新建Github目录并进入：cd d:\work\Github<br> git init<br> git config –global user.name “usernme” （username：GitHub的用户名）<br> git config –global user.email  “emailName” （emailName：GitHub的注册邮箱）</p>
-</li>
-<li><p>安装ssh<br> 4.1 检查SSH公钥 : cd ~/.ssh 看看存不存在.ssh</p>
-<p> 4.2 生成SSH公钥 : ssh-keygen -t rsa -C “your_email@youremail.com”</p>
-<pre><code><span class="comment"># Creates a new ssh key using the provided email Generating public/private rsa key pair.</span>
-Enter <span class="built_in">file</span> <span class="operator">in</span> which <span class="built_in">to</span> save <span class="operator">the</span> key (/user/you/.ssh/id_rsa):
-</code></pre><p> 现在你可以看到，在自己的目录下，有一个.ssh目录，说明成功了</p>
-<p> 4.3 输入github密码</p>
-<pre><code>Enter passphrase (<span class="keyword">empty</span> <span class="keyword">for</span> no passphrase): [<span class="keyword">Type</span> a passphrase]
-Enter same passphrase again: [<span class="keyword">Type</span> passphrase again]
-这个时候输入你在github密码。
-然后在.ssh中可以看到
-Your identification <span class="keyword">has</span> been saved <span class="keyword">in</span> /home/you/.ssh/id_rsa.
-# Your <span class="keyword">public</span> key <span class="keyword">has</span> been saved <span class="keyword">in</span> /home/you/.ssh/id_rsa.pub.
-</code></pre><p> 4.4 添加SSH公钥到github</p>
-<pre><code>打开<span class="tag">github</span>，找到账户里面添加<span class="tag">SSH</span>，把<span class="tag">idrsa</span><span class="class">.pub</span>内容复制到<span class="tag">key</span>里面。
-</code></pre><p> 4.5 测试是否生效</p>
-<pre><code>使用命令： ssh -T git@github.com
-当你看到这些内容放入时候，直接yes
-The authenticity of host 'github.com (207.97.227.239)' can't be established.
-RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
-Are you sure you want to continue connecting (yes/no)?
-看到这个内容放入时候，说明就成功了。
-![<span class="link_label">tool-editor</span>](<span class="link_url">http://7xi9s3.com1.z0.glb.clouddn.com/git-conclusion-1.png</span>)
-</code></pre></li>
-<li><p>使用git add filename 将项目文件添加到库（如 git add “readme.txt”）<br> 也可以多文件夹设置，如在Github目录下创建文件夹Python并拷贝项目到该目录，然后CD 进入执行命令</p>
-</li>
-<li><p>使用git commit -m “first commit” 进行提交（”first commit” 相当于一个描述）</p>
-</li>
-<li><p>使用远程连接：git remote add origin git@github.com:username/SmartScript.git （username：GitHub上的用户名，SmartScript：我在GitHub上创建的仓库repository名）</p>
-</li>
-<li><p>输入命令“git push origin master”将源码推送到GitHub</p>
-</li>
-<li><p>在GitHub上仓库页面刷新即可看到你在本地创建并提交的文件</p>
-</li>
-</ol>
-<h3 id="删除Github上的文件(如_del-txt)">删除Github上的文件(如 del.txt)</h3><ol>
-<li>进入到对应的目录下 cd: D:\work\Github\SmartScript</li>
-<li>git rm –cached ”del.txt”</li>
-<li>git commit -m “del”</li>
-<li>git push origin master (失败先 git pull)<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/git-conclusion-2.png" alt="tool-editor"></li>
-<li>另外<br> 使用 git rm 命令即可，有两种选择,<br> 一种是 git rm –cached “文件路径”，不删除物理文件，仅将该文件从缓存中删除；<br> 一种是 git rm –f “文件路径”，不仅将该文件从缓存中删除，还会将物理文件删除（不会回收到垃圾桶）。<br> 如果删除文件夹，需要加-r参数<br> 如： git rm –f -r “文件夹名”</li>
-</ol>
-<h3 id="克隆一个项目下来">克隆一个项目下来</h3><p>git clone git@github.com:username/Hello.git（username：GitHub上的用户名，SmartScript：我在GitHub上创建的仓库repository名）</p>
-<h3 id="忽略文件-gitignore">忽略文件.gitignore</h3><ol>
-<li>进入要忽略的目录创建文件<br> touch  .gitignore     #创建gitignore隱藏文件</li>
-<li>vim .gitignore     #编辑文件，加入指定文件 </li>
-<li>git add . #就可以自动忽略掉指定的文件</li>
-<li>文件.gitignore的格式规范：<br>A：#为注释<br>B：可以使用shell所使用的正则表达式来进行模式匹配<br>C：匹配模式最后跟”/“说明要忽略的是目录<br>D：使用！取反（例如目录中包含  test.a，并且gitignore文件中包含  <em>.[oa]，如果在文件中加入 ！test.a   表明忽略除test.a文件以外的后缀名为.a或者.o的文件）<br>tmp.txt         //忽略tmp.txt
-</em>.log           //忽略所有log文件<br>tmp/<em>           //忽略tmp文件夹所有文件<br>log/**/</em>.log    //忽略log目录下的包括子目录下的所有log文件<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#下面是我的gitignore文件的内容 </span><br><span class="line">#忽略gitignore文件 </span><br><span class="line">.gitignore</span><br><span class="line">#忽略后缀名为.o和.a的文件 </span><br><span class="line">*.[oa]</span><br><span class="line">#忽略后缀名为.exe和.txt的文件 </span><br><span class="line">*.exe</span><br><span class="line">*.txt</span><br><span class="line">#显示指定忽略名称为main的文件 </span><br><span class="line">main</span><br><span class="line"></span><br><span class="line"># eg:c++ .gitignore</span><br><span class="line">*.sdf</span><br><span class="line">.gitignore</span><br><span class="line">Debug/*</span><br><span class="line">Release/*</span><br><span class="line">ipch/*</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="更新远程仓库代码到本地">更新远程仓库代码到本地</h3><ol>
-<li>查看远程仓库<br> git remote -v</li>
-<li>从远程获取最新版本到本地<br> git fetch origin master</li>
-<li>比较本地的仓库和远程参考的区别 （作参考，可不用执行该步）<br> git log -p master..  origin/master</li>
-<li>远程代码下载下来合并到本地仓库<br> git merge origin/master</li>
-<li>git add –p (patch模式)<br> eg: 修改了a,b,c文件<br> git add -p    //列出所有更改<br> y/a 应用<br> git commit -m “..”<br> …</li>
-</ol>
-<h3 id="关于可能出现的错误">关于可能出现的错误</h3><ol>
-<li><p>在执行<br> $ git remote addorigin git@github.com:defnngj/hello-world.git<br> 错误提示：fatal: remote origin already exists.<br> 解决办法：<br> $ git remote rm origin<br> 然后在执行：$ git remote add origin git@github.com:defnngj/hello-world.git 就不会报错误了</p>
-</li>
-<li><p>在执行<br> $ git push origin master<br> 错误提示：error:failed to push som refs to…….<br> 解决办法：<br> $ git pull origin master // 先把远程服务器github上面的文件拉下来，再push 上去。</p>
-</li>
-<li><p>遇到的问题:<br> update were rejected because the tip of your current branch is behind ….<br> 原因是远程的的代码库比我本地的代码库要新。<br> 所以需要在远程代码库pull一次下来。<br> 再修改代码。再push。</p>
-</li>
-<li><p>遇到遇到的问题:<br> change not staged for commit 通过add 和 checkout解决不了<br> git rm –cached <file> (git rm –cached test)<br> git add file (git add test/)</file></p>
-</li>
-</ol>
-<h3 id="git命令速查表">git命令速查表</h3><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/git-conclusion-4.png" alt="tool-editor"></p>
-<h3 id="git详细命令表">git详细命令表</h3><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/git-conclusion-5.png" alt="tool-editor"></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>windows下git使用总结</p>
-<h3 id="初始化配置Github">初始化配置Github</h3><ol>
-<li><p>下载msysgit并安装 : <a href="http://msysgit.github.io/" target="_blank" r]]>
-    </summary>
-    
-      <category term="git" scheme="http://blog.idhyt.com/tags/git/"/>
-    
-      <category term="technic" scheme="http://blog.idhyt.com/categories/technic/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[我的2014]]></title>
-    <link href="http://blog.idhyt.com/2015/01/02/diary-annual-summary-2014/"/>
-    <id>http://blog.idhyt.com/2015/01/02/diary-annual-summary-2014/</id>
-    <published>2015-01-01T19:51:11.000Z</published>
-    <updated>2015-12-31T18:39:14.000Z</updated>
-    <content type="html"><![CDATA[<p>&#160; &#160; &#160; &#160;12点，看着别人都是带着wife跨年，先不说这wife是不是自己的，可是我连个wifi都没有，网都连不上，完全不给刷存在感的机会，好心塞。跨年这种事吧，两种情况下才能有气氛，一种是情侣，先不说情侣是不是自己的（又来。。），另一种是身边还有一种单身的人一起热闹，第一种是个人问题，好吧，我个人有问题，第二种吧到了这种年纪，都是在晒孩子的，出了校门哪还有这群闲人啊，想想也是醉了。自己呆着打打游戏吧，总觉得有点可惜，出去看看吧，看的是别人在热闹，一个字，冷暖自知（威虎山还不错）。</p>
-<hr>
-
-<p>&#160; &#160; &#160; &#160;另起一行竟然打了个\n。。开始记事件，此刻应该来点音乐。。好，开始。从去年总结开始，过年回家在家呆了一个月，该玩的也玩了，该见的朋友也见了，好像该说的话也说了一点，不过没什么用，很多事情不是你努力就可以改变的，何况我也没有努力过。之后回学校，跟小伙伴们去了趟四姑娘山，想在回想起来还很清晰，当时是感冒加上高原反映加上精神有点亢奋是玩嗨了，这个写下来还是有点多，我还是去看看大神最后剪辑的视频回味一番就好了。看的好伤感啊，正如我毕业论文最后写的，光阴荏苒，岁月如歌，感谢走私团伙的每一位小伙伴，是你们让我拥有一个无比美好的研究生生活，你们的幽默诙谐，令我深深的难忘，你们的一颦一笑，都历历在目，能在这样一个环境中度过，是我极大的荣幸，太官方了哈哈，不过想想校园时光真的是无比美好呐。四姑娘山回来就是各种晃悠日子，每天写点论文，出去吃个饭，看个电影，周末还打个球啥的，那时候经常会想，哎呀，这一天一天没感觉啊，毕业了一定会很想念现在的日子吧，要珍惜每一天的生活，但是总是在拥有的时候，只是想着去珍惜，但却不知道如何去珍惜，就这么悄悄的失去了。离毕业就三个月了，好好珍惜，吃过饭上去打一把人机啊！离毕业就两个月了，好好珍惜，吃过饭打匹配啊！撸一把，撸一把写论文！撸一把刚好去吃饭！又被虐了，不开心！不开心了撸一把！离毕业就一个月了，好好珍惜，卧槽，要答辩了，论文写不完了！不撸了，写论文！好吧，撸一把真的写论文了！重复率xx%，毕不了业了！戒撸了！xx要去查重了，一群人围上去跟看小视频一样！现在想想脑子里都是8楼工作室各种回荡的声音，也是满满的回忆。最后大家都顺利毕业了，照了毕业照，吃了散伙饭，我也如愿的去了云南，虽然过程也是一波三折，虽然有点遗憾没能和黑豆女神在云南会和，但最后也是去了，也留下了奇思妙想的回忆，或许这比那些更加特别呢，是吧哈哈。。有机会还是要再去一趟云南，泸沽湖住个十天半个月的，如果有机会的话。</p>
-<hr>
-
-<p>&#160; &#160; &#160; &#160;至此，真的是又一次毕业了，青春又一次散场，虽然不能算是青春了，但是希望大家都永远年轻，永远热泪盈眶，永远心怀梦想，虽然我没什么梦想(感觉又再自黑)。之后回家在家呆了一周，去郑州见了朋友，来到了珠海，开始正式入职工作，感觉没有什么可以回忆的东西了，上班，吃饭，下班，睡觉。这种有规律的生活和学校无规律的生活最大的差别是什么，就是你去回忆学校的事情，你能想到很多很多，甚至很多小的细节，毕业从抽屉里扒出三年所有的发票电影票之类的东西，看着很多都能回想起来当时做了什么，跟谁，在哪里。而工作后的事情，回想半年的，好像没什么东西，就是工作，就好比每周去写周报，卧槽，这周我到底做了什么，每天都很忙，但是好像每天也没忙什么。这种感觉很奇妙，就好比心电图，之前你每天都是在上下波动的，你可以看到他在活跃，在生活，你想不到下一刻会有什么事情发生，是惊喜还是惊吓，忽然就平静下来，不在上下波动而变成一条缓慢向前的直线，虽然你看不到尽头，但是你能想到下一刻大概的轮廓，你没有了期待，没有思考的触点，甚至连梦想这种东西都没有去认真想过。</p>
-<hr>
-
-<p>&#160; &#160; &#160; &#160;我这种人平时也那么蒙蒙的，也不怎么知道主动联系人，发状态也是不正经的带着一些段子的味道，也只有在这安静的夜晚，静下心来才会想一些东西，不是不愿静，只是不想静，这种年纪不适合太伤感。就像毕业走的时候，本来就一个人送我，最后竟然辣么多人，我当时其实挺伤感的，因为我知道，一转身，一张张脸以后可能就再也见不到了，当时是多想拥抱一下，可惜下不去那手。最后我发现你们走的时候头都没回，我还想着你们一步三回头的看我几眼，你们竟然慌慌张张的赶着时间去吃自助餐！火车上收到你们的短信，真的是很不舍，要是不用工作该多好。</p>
-<hr>
-
-<p>&#160; &#160; &#160; &#160;写着写着还真是思绪乱飞有点伤感了，就此打住。今年就算过去了，刚毕业半年，去年一起来实习的小伙伴走了好几个，有的创业，有的跳槽，还有的纯粹是因为在公司得不到自己想要的而辞职，我只能羡慕他们，有梦想有心志，年轻有机会失败。我总会跟别人说工作可以就别读研浪费三年时间，其实对我来说帮助还是挺大的，因为我大学读的太渣了导致毕业找工作都是问题，有时想想如果没读研或许现在我都成家了吧，孩子可能都有了吧，不过可能混的比现在更差。人生没有重来，总会想着如果再来一次我会怎样怎样，其实如果再来一次，大部分人估计还是这样子吧。朋友说我淡薄，我觉得有点太高看我了，我不是淡薄，我只是能把我得不到的东西看淡，能为自己活的轻松找的借口而已，周围诱惑太多，真的能做到不被功名利禄诱惑的，我从内心相信这样的人是不存在的，而且在这之前，你得有被诱惑的资本，很明显，我没有。</p>
-<hr>
-
-<p>&#160; &#160; &#160; &#160;不知道如何结尾，就破天荒的给自己定个目标吧，算是给慢慢变老的心态打打鸡血，2015年，在技术上边某一方面要有突破，年中，知道自己想要什么，年底，确定何去何从。每年写年终总结写到最后的时候都在想，真快啊，明年这个时候会在哪里，身边会不会有个女朋友，然后每年都这么想下去了，按照此规律今年应该想着明年这个时候肯定没有女朋友。。又来。。。。真亦假假亦真，那就当她是个段子吧。</p>
-<p>&#160; &#160; &#160; &#160;See you next year! </p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>&#160; &#160; &#160; &#160;12点，看着别人都是带着wife跨年，先不说这wife是不是自己的，可是我连个wifi都没有，网都连不上，完全不给刷存在感的机会，好心塞。跨年这种事吧，两种情况下才能有气氛，一种是情侣，先不说情侣是不是自己的（又来。。）]]>
     </summary>
     
       <category term="无法描述" scheme="http://blog.idhyt.com/tags/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
