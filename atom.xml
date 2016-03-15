@@ -4,7 +4,7 @@
   <subtitle><![CDATA[云淡风轻]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.idhyt.com/"/>
-  <updated>2016-03-14T08:52:24.000Z</updated>
+  <updated>2016-03-15T11:04:38.000Z</updated>
   <id>http://blog.idhyt.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.idhyt.com/2016/03/13/exploit-cve-2015-1538/"/>
     <id>http://blog.idhyt.com/2016/03/13/exploit-cve-2015-1538/</id>
     <published>2016-03-13T13:49:11.000Z</published>
-    <updated>2016-03-14T08:52:24.000Z</updated>
+    <updated>2016-03-15T11:04:38.000Z</updated>
     <content type="html"><![CDATA[<h2 id="漏洞分析">漏洞分析</h2><p>POC直接使用<a href="https://github.com/jduck/cve-2015-1538-1" target="_blank" rel="external">https://github.com/jduck/cve-2015-1538-1</a>生成的mp4文件，作者说明了这个exp并不通用，我的测试机为nexus-5-android-4.4，只能造成崩溃。<br>崩溃信息：</p>
 <pre><code><span class="number">03-13 13:19</span>:<span class="number">33.130 14267</span> 14267 I DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
 <span class="number">03-13 13:19</span>:<span class="number">33.130 14267</span> 14267 I DEBUG   : Build fingerprint: 'google/hammerhead/hammerhead:4.4.4/KTU84P/<span class="number">1227136</span>:user/release-keys'
@@ -93,19 +93,47 @@ mDataSource                 = <span class="number">0xb7fb50a8</span>
 <p>其中sampleTable指针位于Track＋0xC处，假如溢出覆盖到的地址为fake_addr,如果Track＋0xC &lt; fake_addr &lt; sampleTable，那么就能覆盖掉Track对象的sampleTable指针并不引起崩溃。<br>当所有数据块数据解析完后，会调用MPEG4Extractor中的析构函数，遍历track链表执行delete操作。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2015-1538-4.jpg" alt=""></p>
 <p>delete函数会调用android::RefBase::decStrong<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2015-1538-5.png" alt=""></p>
 <p>此时r0为sampleTable指针，利用方式和<a href="http://blog.idhyt.com/2015/08/01/exploit-cve-2014-7911-exp/">cve-2014-7911</a>相同。</p>
-<h2 id="漏洞利用">漏洞利用</h2><p>析构函数执行过后会跳到ROP中，rop布局好数据后先是调用mprotect函数将sp_addr地址长度为0x1000改为可执行权限，然后跳入shell_reverse_tcp代码中执行。</p>
+<h2 id="可利用条件">可利用条件</h2><p>利用条件需要多次调试来确定，调试过程几个重要的地方：</p>
+<pre><code>// sony xperia S android <span class="number">4</span>.<span class="number">04</span>
+// 关闭aslr
+echo <span class="number">0</span> &gt; <span class="keyword">proc</span>/sys/kernel/randomize_va_space 
+
+// 断点
+trak：
+    /systembbstagefright.so+<span class="number">0x6CB68</span> ｜ _ZN7android14MPEG4Extractor10parseChunkEPxi+<span class="number">0x208</span>
+
+stsc:
+    _ZN7android11SampleTable22setSampleToChunkParamsExj
+    // (mSampleToChunkEntries = new <span class="type">SampleToChunkEntry</span>[mNumSampleToChunkOffsets];)
+    _ZN7android11SampleTable22setSampleToChunkParamsExj+<span class="number">0x66</span> 
+
+<span class="type">MPEG4Extractor</span>::~<span class="type">MPEG4Extractor</span>
+    _ZN7android14MPEG4ExtractorD1Ev
+
+decStrong:
+    _ZNK7android7RefBase9decStrongEPKv
+</code></pre><p>漏洞利用条件限制要几个点，｀trak1<code>，</code>trak2<code>，</code>sampleTable2<code>，</code>SampleToChunkEntry2`，<br>MPEG4Extractor在析构是通过trak链表遍历逐个删除，那么覆盖掉trak1或者trak2的sampleTable指针都可以控制程序流程。<br>为保证程序不崩，溢出的地址必须位于trak2和sampleTable2中间，所以可利用条件为：</p>
+<pre><code>SampleToChu<span class="label">nkEntry2</span> + overflowSize &lt; <span class="comment">(trak1 | trak2)</span> &lt; sampleTable<span class="number">2</span>
+</code></pre><p>上边条件需要多次调试来调整overflowSize大小。</p>
+<p>比如某次调试中发现：</p>
+<p>trak1 ＝ 0x2D3D8<br>trak2 = 0x2E458<br>SampleToChunkEntry2 = 0x2DB00<br>sampleTable2 = 0x2F010<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2015-1538-sampleTable2.png" alt=""></p>
+<p>sampleTable2 - SampleToChunkEntry2 = 0x1510<br>trak2 - SampleToChunkEntry2 = 0x958</p>
+<p>满足利用条件，即SampleToChunkEntry2溢出以后能够成功覆盖trak2并且程序不崩溃。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2015-1538-sampleToChunkEntry2.png" alt=""><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2015-1538-trak2.png" alt=""></p>
+<p>另外exp中的堆喷地址sp_addr需要调试去确定一个概率比较高的地址，libc.so:restore_core_regs地址也需要修改。</p>
+<h2 id="漏洞利用">漏洞利用</h2><p>析构函数执行过后会跳到ROP中，rop布局好数据后先是调用mprotect函数将sp_addr地址长度为0x1000改为可执行权限，然后跳入shell_reverse_tcp代码中执行，参考<a href="http://drops.wooyun.org/papers/10896" target="_blank" rel="external">CVE-2015-1538漏洞利用中的Shellcode分析</a>。</p>
 <p>这个过程中所有函数的调用通过SVC指令完成，类似于Intel CPU中的int 0x80中断，SVC指令会根据相应的调用号去执行相应的函数，这些编号定义在<code>include\arm\unistd.h</code>中。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_restart_syscall (__NR_SYSCALL_BASE+ <span class="number">0</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_exit (__NR_SYSCALL_BASE+ <span class="number">1</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_fork (__NR_SYSCALL_BASE+ <span class="number">2</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_read (__NR_SYSCALL_BASE+ <span class="number">3</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_write (__NR_SYSCALL_BASE+ <span class="number">4</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_open (__NR_SYSCALL_BASE+ <span class="number">5</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_close (__NR_SYSCALL_BASE+ <span class="number">6</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_creat (__NR_SYSCALL_BASE+ <span class="number">8</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_link (__NR_SYSCALL_BASE+ <span class="number">9</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_unlink (__NR_SYSCALL_BASE+ <span class="number">10</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_execve (__NR_SYSCALL_BASE+ <span class="number">11</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> __NR_chdir (__NR_SYSCALL_BASE+ <span class="number">12</span>)</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-cve-2015-1538-expsucce.png" alt=""></p>
 <h2 id="影响">影响</h2><p>/system/core/rootdir/init.rc定义了mediaserver用户组权限</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">service media /system/bin/mediaserver <span class="number">511</span>    </span><br><span class="line"><span class="keyword">class</span> main    </span><br><span class="line">user media  </span><br><span class="line">group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm </span><br><span class="line">ioprio rt <span class="number">4</span></span><br></pre></td></tr></table></figure>
-<p>system/core/include/private/android_filesystem_config.h</p>
-<p>所以可以访问audio camera bluetooth。。。</p>
+<p>system/core/include/private/android_filesystem_config.h<br>所以可以访问audio camera bluetooth。。。</p>
 <h2 id="总结">总结</h2><ol>
 <li>EXP利用MP4格式标准的其它Box申请了一些零碎的内存块创造内存间隙，在程序执行过程中这些零碎内存块很有可能被free，后面申请SampleToChunkEntry的内存就有可能出现在低地址，成功溢出到sampleTable指针并不造成崩溃。</li>
 <li>Heap Spray，通过tx3g Box堆喷2M数据，使其某一page出现在预测地址上。</li>
 <li>ROP和shell_reverse_tcp中的SVC调用，mprotect函数绕过dep保护。</li>
 <li>mp4文件格式解析流程。</li>
 <li>exp在实际测试中成功率很低，原因都是由于溢出数据覆盖掉了sampleTable地址的数据，导致调用mDataSorce时崩溃，原因参考<a href="http://huntcve.github.io/2015/12/16/debug-stagefright-exploit/" target="_blank" rel="external">一步一步调通stagefright exploit</a>。</li>
+<li>几个重要的内存地址的不确定性导致漏洞无法100%成功，只能不断调整堆喷地址和溢出大小来增加成功的概率，并且rop中重要跳转指令直接硬编码，无法绕过aslr。</li>
 </ol>
 ]]></content>
     <summary type="html">
