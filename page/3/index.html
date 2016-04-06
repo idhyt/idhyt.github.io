@@ -242,6 +242,99 @@
           
           
             
+              <a class="post-title-link" href="/2015/08/01/exploit-cve-2014-7911-exp/" itemprop="url">
+                CVE-2014-7911安卓本地提权漏洞利用
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-08-01T16:46:11+08:00" content="2015-08-01">
+            2015-08-01
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/exploit/" itemprop="url" rel="index">
+                  <span itemprop="name">exploit</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/08/01/exploit-cve-2014-7911-exp/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/01/exploit-cve-2014-7911-exp/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            在CVE-2014-7911安卓本地提权漏洞分析中，已经分析了漏洞的成因和触发时机。POC崩溃到mOrgue，从该地址处取值，所以从这个点开始控制流程。由于堆分配不可控，所以要让mOrgue指向的内存命中可控区域，这里需要采用堆喷技术。在控制流程之后要想使代码顺利执行，还需要过掉DEP和ASLR。
+
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/01/exploit-cve-2014-7911-exp/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/07/31/exploit-cve-2014-7911/" itemprop="url">
                 CVE-2014-7911安卓本地提权漏洞分析
               </a>
@@ -792,104 +885,6 @@ inurl:pagei
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/01/16/technic-git-conclusion/" itemprop="url">
-                git使用总结
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-01-16T21:46:33+08:00" content="2015-01-16">
-            2015-01-16
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/technic/" itemprop="url" rel="index">
-                  <span itemprop="name">technic</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/01/16/technic-git-conclusion/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/01/16/technic-git-conclusion/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            windows下git使用总结
-初始化配置Github
-下载msysgit并安装 : http://msysgit.github.io/
-
-github上创建一个项目，如SmartScript
-
-初始化 新建Github目录并进入：cd d:\work\Github git init git con
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/16/technic-git-conclusion/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -928,7 +923,7 @@ github上创建一个项目，如SmartScript
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">54</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
