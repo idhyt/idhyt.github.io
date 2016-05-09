@@ -41,7 +41,13 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="获取序列号：adb get-serialno
+<meta name="description" content="获取编译时间cat /proc/version
+
+内核崩溃cat /proc/last_kmsg
+
+获取硬件信息adb shell getprop | grep cpu
+
+获取序列号：adb get-serialno
 
 查看连接计算机的设备：adb devices
 
@@ -49,16 +55,18 @@
 
 多设备下连接目标设备：adb -s xxx shell
 
-重启机器：adb reboot
-
-重启到bootloader，即刷机模式：adb reboot bootloader
-
-重启到recovery，即恢复模式：adb reboot recov">
+重启机器：adb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="adb shell常用命令">
 <meta property="og:url" content="http://blog.idhyt.com/2015/10/31/android-adb-shell-command/index.html">
 <meta property="og:site_name" content="idhyt's blog">
-<meta property="og:description" content="获取序列号：adb get-serialno
+<meta property="og:description" content="获取编译时间cat /proc/version
+
+内核崩溃cat /proc/last_kmsg
+
+获取硬件信息adb shell getprop | grep cpu
+
+获取序列号：adb get-serialno
 
 查看连接计算机的设备：adb devices
 
@@ -66,15 +74,17 @@
 
 多设备下连接目标设备：adb -s xxx shell
 
-重启机器：adb reboot
-
-重启到bootloader，即刷机模式：adb reboot bootloader
-
-重启到recovery，即恢复模式：adb reboot recov">
-<meta property="og:updated_time" content="2015-12-27T09:44:20.000Z">
+重启机器：adb">
+<meta property="og:updated_time" content="2016-05-09T13:54:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="adb shell常用命令">
-<meta name="twitter:description" content="获取序列号：adb get-serialno
+<meta name="twitter:description" content="获取编译时间cat /proc/version
+
+内核崩溃cat /proc/last_kmsg
+
+获取硬件信息adb shell getprop | grep cpu
+
+获取序列号：adb get-serialno
 
 查看连接计算机的设备：adb devices
 
@@ -82,11 +92,7 @@
 
 多设备下连接目标设备：adb -s xxx shell
 
-重启机器：adb reboot
-
-重启到bootloader，即刷机模式：adb reboot bootloader
-
-重启到recovery，即恢复模式：adb reboot recov">
+重启机器：adb">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -304,6 +310,12 @@
 
       
         <span itemprop="articleBody"><ul>
+<li><p>获取编译时间<br><code>cat /proc/version</code></p>
+</li>
+<li><p>内核崩溃<br><code>cat /proc/last_kmsg</code></p>
+</li>
+<li><p>获取硬件信息<br><code>adb shell getprop | grep cpu</code></p>
+</li>
 <li><p>获取序列号：<br><code>adb get-serialno</code></p>
 </li>
 <li><p>查看连接计算机的设备：<br><code>adb devices</code></p>
@@ -328,9 +340,8 @@
 </li>
 </ul>
 <ul>
-<li>检查Service是否存在<br><code>adb shell service check phone</code></li>
-</ul>
-<ul>
+<li><p>检查Service是否存在<br><code>adb shell service check phone</code></p>
+</li>
 <li><p>获取机器MAC地址：<br><code>adb shell  cat /sys/class/net/wlan0/address</code></p>
 </li>
 <li><p>获取CPU序列号：<br><code>adb shell cat /proc/cpuinfo</code></p>
@@ -596,7 +607,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-count">28</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

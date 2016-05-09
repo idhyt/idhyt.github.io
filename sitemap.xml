@@ -2,8 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.idhyt.com/2015/10/31/android-adb-shell-command/</loc>
+    <lastmod>2016-05-09T13:54:03.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/05/09/exploit-kernel-symbol-usage/</loc>
+    <lastmod>2016-05-09T13:48:45.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.idhyt.com/2016/04/06/diary-work-harder/</loc>
-    <lastmod>2016-04-06T14:44:52.000Z</lastmod>
+    <lastmod>2016-04-06T14:56:20.000Z</lastmod>
   </url>
   
   <url>
@@ -27,22 +37,22 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2013/01/09/expolit-nvidia-elevate-privilege/</loc>
+    <loc>http://blog.idhyt.com/2013/01/09/exploit-nvidia-elevate-privilege/</loc>
     <lastmod>2016-02-19T09:42:54.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2013/03/21/expolit-cve-2013-0641/</loc>
+    <loc>http://blog.idhyt.com/2013/03/21/exploit-cve-2013-0641/</loc>
     <lastmod>2016-02-19T09:42:49.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2013/07/01/expolit-cve-2013-0422/</loc>
+    <loc>http://blog.idhyt.com/2013/07/01/exploit-cve-2013-0422/</loc>
     <lastmod>2016-02-19T09:42:44.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2012/11/20/expolit-cve-2011-0609/</loc>
+    <loc>http://blog.idhyt.com/2012/11/20/exploit-cve-2011-0609/</loc>
     <lastmod>2016-02-19T09:42:40.000Z</lastmod>
   </url>
   
@@ -197,11 +207,6 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2015/01/16/technic-git-conclusion/</loc>
-    <lastmod>2015-12-31T11:52:09.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.idhyt.com/2011/06/06/diary-this-year/</loc>
     <lastmod>2015-12-31T11:47:20.000Z</lastmod>
   </url>
@@ -264,11 +269,6 @@
   <url>
     <loc>http://blog.idhyt.com/2015/09/25/android-injection-xposed/</loc>
     <lastmod>2015-12-28T02:20:50.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/10/31/android-adb-shell-command/</loc>
-    <lastmod>2015-12-27T09:44:20.000Z</lastmod>
   </url>
   
   <url>
