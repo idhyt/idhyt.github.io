@@ -185,7 +185,7 @@ th {
 }
 body {
   position: relative;
-  font-family: Lato, "Microsoft Jhenghei", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-family: Monda, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-size: 16px;
   line-height: 1.7;
   color: #bbb;
@@ -670,7 +670,7 @@ td {
 .post .gist .gist-file .gist-meta {
   background: #1d1f21;
   color: #969896;
-  font: 13px Lato, "Microsoft Jhenghei", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font: 13px Monda, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   text-shadow: 0 0;
   padding: 0;
   margin-top: 1em;
@@ -1071,7 +1071,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #787414;
+  background: #ff96b3;
 }
 .links-of-friendly a {
   display: inline-block;
@@ -1089,7 +1089,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff3b20;
+  background: #2bee9f;
 }
 .sidebar-nav {
   margin: 0;
@@ -2254,11 +2254,10 @@ ul li {
   }
 }
 #idhyt-surprise-ball #idhyt-surprise-ball-animation .drag {
-  text-shadow: #fff 0px 1px 0px;
   font-variant: small-caps;
   letter-spacing: 2px;
   position: absolute;
-  color: #333;
+  color: #eee;
   font-family: georgia;
   font-size: 14px;
 }
@@ -10501,10 +10500,15 @@ ul li {
 .post code {
   background: none;
   color: #eee;
+  text-shadow: 0 0px #fff;
 }
 .post-nav-item a {
   color: #ddd;
 }
 .site-search input {
   border-bottom: 1px solid #fc6423;
+}
+.posts-collapse .post-title a {
+  color: #ccc;
+  border-bottom: none;
 }
