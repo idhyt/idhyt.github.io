@@ -1071,7 +1071,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff96b3;
+  background: #e46346;
 }
 .links-of-friendly a {
   display: inline-block;
@@ -1089,7 +1089,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #2bee9f;
+  background: #e290ff;
 }
 .sidebar-nav {
   margin: 0;
@@ -10511,4 +10511,11 @@ ul li {
 .posts-collapse .post-title a {
   color: #ccc;
   border-bottom: none;
+}
+.post-nav-item a:hover {
+  color: #87daff;
+}
+.post-nav-item a:hover:after {
+  color: #ff2a2a;
+  backgroud: #ff2a2a;
 }
