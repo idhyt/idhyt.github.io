@@ -4,7 +4,7 @@
   <subtitle><![CDATA[云淡风轻]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.idhyt.com/"/>
-  <updated>2016-05-11T12:27:58.000Z</updated>
+  <updated>2016-05-23T17:22:19.000Z</updated>
   <id>http://blog.idhyt.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.idhyt.com/2016/05/09/exploit-kernel-symbol-usage/"/>
     <id>http://blog.idhyt.com/2016/05/09/exploit-kernel-symbol-usage/</id>
     <published>2016-05-09T15:31:24.000Z</published>
-    <updated>2016-05-11T12:27:58.000Z</updated>
+    <updated>2016-05-23T17:22:19.000Z</updated>
     <content type="html"><![CDATA[<p>主要针对arm64，现在ida6.8并不支持arm64的反汇编，所以在定位代码过程中会很麻烦，而32位是直接可以f5对照源码看的。</p>
 <h2 id="获取内核符号表">获取内核符号表</h2><p>先放一个内核符号表的部分样子：</p>
 <pre><code>ffffffc<span class="number">000081000</span> do_undefinstr
@@ -51,10 +51,10 @@ ffffffc<span class="number">0000827c4</span> register_break_hook
 </code></pre><h3 id="有root权限">有root权限</h3><p>两条命令即可：</p>
 <pre><code>adb shell, echo <span class="number">0</span> &gt; /<span class="keyword">proc</span>/sys/kernel/kptr_restrict sysctl 
 adb pull /<span class="keyword">proc</span>/kallsyms kallsyms.txt
-</code></pre><h3 id="无root权限">无root权限</h3><p>1.获取kernel文件，解压rom包找到boot.img文件，然后<a href="https://github.com/idhyt/magic_lamp/blob/master/bootimg.py" target="_blank" rel="external">bootimg</a>提取kernel压缩文件，直接解压获取kernel文件。如果解压失败，用二进制文件打开，查找特征值<code>1F 8B 08</code>，删除之前数据保存并解压。</p>
-<p>2.使用<a href="https://github.com/idhyt/magic_lamp/tree/master/kallsymsprint-master" target="_blank" rel="external">kallsymsprint</a>获取，参数为kernel文件路径。</p>
-<p>3.懒人的方法，打包一个脚本搞定:)<a href="https://github.com/idhyt/magic_lamp/tree/master/dump_kallsyms" target="_blank" rel="external">dump_kallsyms</a>。</p>
-<h2 id="patch_selinux">patch selinux</h2><p>内核提权过程中，完成了addr_limit字段的patch之后，那么用户态就可以任意读写内核态了，但是如果系统的selinux使用的是enforcing模式，后续的提权过程需要pacth selinux。</p>
+</code></pre><h3 id="无root权限">无root权限</h3><p>1.获取kernel文件，解压rom包找到boot.img文件，然后<a href="https://github.com/idhyt/exploit_tools/blob/master/bootimg.py" target="_blank" rel="external">bootimg</a>提取kernel压缩文件，直接解压获取kernel文件。如果解压失败，用二进制文件打开，查找特征值<code>1F 8B 08</code>，删除之前数据保存并解压。</p>
+<p>2.使用<a href="https://github.com/idhyt/exploit_tools/tree/master/kallsymsprint-master" target="_blank" rel="external">kallsymsprint</a>获取，参数为kernel文件路径。</p>
+<p>3.懒人的方法，打包一个脚本<a href="https://github.com/idhyt/exploit_tools/tree/master/dump_kallsyms" target="_blank" rel="external">dump_kallsyms</a>搞定 : )</p>
+<h2 id="patch_selinux_mode">patch selinux mode</h2><p>内核提权过程中，完成了addr_limit字段的patch之后，那么用户态就可以任意读写内核态了，但是如果系统的selinux使用的是enforcing模式，后续的提权过程需要pacth selinux mode。</p>
 <p>源码中<code>#define selinux_enforcing 1</code>，该模式为<code>enforcing</code>，获得任意读写能力之后将其置0即可改为<code>permissive</code>。</p>
 <p>查找内核符号表，变量selinux_enforcing并没有导出地址(部分会有)，查找源码找到使用该值的地方，例如在<code>enforcing_setup</code>函数中：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">enforcing_setup</span><span class="params">(<span class="keyword">char</span> *str)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> enforcing;</span><br><span class="line">    <span class="keyword">if</span> (!kstrtoul(str, <span class="number">0</span>, &amp;enforcing))</span><br><span class="line">        selinux_enforcing = enforcing ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -114,7 +114,7 @@ adb pull /<span class="keyword">proc</span>/kallsyms kallsyms.txt
     <link href="http://blog.idhyt.com/2016/05/02/diary-stay-away-trip/"/>
     <id>http://blog.idhyt.com/2016/05/02/diary-stay-away-trip/</id>
     <published>2016-05-02T15:21:01.000Z</published>
-    <updated>2016-05-22T09:49:09.000Z</updated>
+    <updated>2016-05-22T09:50:33.000Z</updated>
     <content type="html"><![CDATA[<p>人生至少要有两次冲动，一为奋不顾身的爱情，一为说走就走的旅行，当然，这话不是我说的。</p>
 <p>每次出去都要计划好路线和攻略，希望整个旅行都在自己控制的时间段内完成，事实也确实如此。</p>
 <p>这一次，没有计划，没有攻略，没有目的，没有时间点，一个人，说走就走。<br><a id="more"></a></p>
