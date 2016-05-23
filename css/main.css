@@ -1071,7 +1071,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e46346;
+  background: #b988f2;
 }
 .links-of-friendly a {
   display: inline-block;
@@ -1089,7 +1089,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e290ff;
+  background: #00da63;
 }
 .sidebar-nav {
   margin: 0;
@@ -10515,7 +10515,7 @@ ul li {
 .post-nav-item a:hover {
   color: #87daff;
 }
-.post-nav-item a:hover:after {
-  color: #ff2a2a;
-  backgroud: #ff2a2a;
+.posts-expand .post-tags a:hover {
+  background: none;
+  color: #87daff;
 }
