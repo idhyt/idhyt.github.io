@@ -1071,7 +1071,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b988f2;
+  background: #ffe439;
 }
 .links-of-friendly a {
   display: inline-block;
@@ -1089,7 +1089,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #00da63;
+  background: #ff0d7e;
 }
 .sidebar-nav {
   margin: 0;
@@ -10518,4 +10518,11 @@ ul li {
 .posts-expand .post-tags a:hover {
   background: none;
   color: #87daff;
+}
+blockquote {
+  color: #ccc;
+}
+.blockquote-center::before,
+.blockquote-center::after {
+  background: none;
 }

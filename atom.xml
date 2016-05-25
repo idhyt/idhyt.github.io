@@ -4,7 +4,7 @@
   <subtitle><![CDATA[云淡风轻]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.idhyt.com/"/>
-  <updated>2016-05-23T17:22:19.000Z</updated>
+  <updated>2016-05-25T14:58:11.000Z</updated>
   <id>http://blog.idhyt.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.idhyt.com/2016/05/09/exploit-kernel-symbol-usage/"/>
     <id>http://blog.idhyt.com/2016/05/09/exploit-kernel-symbol-usage/</id>
     <published>2016-05-09T15:31:24.000Z</published>
-    <updated>2016-05-23T17:22:19.000Z</updated>
+    <updated>2016-05-25T14:58:11.000Z</updated>
     <content type="html"><![CDATA[<p>主要针对arm64，现在ida6.8并不支持arm64的反汇编，所以在定位代码过程中会很麻烦，而32位是直接可以f5对照源码看的。</p>
 <h2 id="获取内核符号表">获取内核符号表</h2><p>先放一个内核符号表的部分样子：</p>
 <pre><code>ffffffc<span class="number">000081000</span> do_undefinstr
@@ -64,8 +64,8 @@ adb pull /<span class="keyword">proc</span>/kallsyms kallsyms.txt
 <h2 id="patch_ioctl">patch ioctl</h2><p>在linux内核PXN开启且代码段只读开启的前提下，如果获得了任意地址写的能力,怎么提权呢，ret2user是不行了，安装一个syscall调用commit_creds也不行了，sys_call_table也是不能改的(引自网络)。一种思路是通过改写<code>ptmx_fops-&gt;unlocked_ioctl</code>指向rop，然后调用<code>/dev/ptmx</code>的ioctl即可跳入rop中执行。</p>
 <p>同样ptmx_fops在内核符号表中是没有导出的，如何确定该地址并修改unlocked_ioctl的指针。</p>
 <p>查看源码ptmx_fops使用的地方。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">pty_init</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    legacy_pty_init();</span><br><span class="line">    unix98_pty_init();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __<span class="function">init <span class="title">unix98_pty_init</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">/* Now create the /dev/ptmx special device */</span></span><br><span class="line">    tty_default_fops(&amp;ptmx_fops);</span><br><span class="line">    ptmx_fops.open = ptmx_open;</span><br><span class="line"></span><br><span class="line">    cdev_init(&amp;ptmx_cdev, &amp;ptmx_fops);</span><br><span class="line">    <span class="keyword">if</span> (cdev_add(&amp;ptmx_cdev, MKDEV(TTYAUX_MAJOR, <span class="number">2</span>), <span class="number">1</span>) ||</span><br><span class="line">        register_chrdev_region(MKDEV(TTYAUX_MAJOR, <span class="number">2</span>), <span class="number">1</span>, <span class="string">"/dev/ptmx"</span>) &lt; <span class="number">0</span>)</span><br><span class="line">        panic(<span class="string">"Couldn't register /dev/ptmx driver"</span>);</span><br><span class="line">    device_create(tty_class, <span class="literal">NULL</span>, MKDEV(TTYAUX_MAJOR, <span class="number">2</span>), <span class="literal">NULL</span>, <span class="string">"ptmx"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tty_default_fops</span><span class="params">(<span class="keyword">struct</span> file_operations *fops)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    *c = tty_fops;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在tty设备初始化时会将ptmx_fops赋值给fops指针，调用时候会通过该指针调相应的函数，其tty_fops定义为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">pty_init</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    legacy_pty_init();</span><br><span class="line">    unix98_pty_init();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __<span class="function">init <span class="title">unix98_pty_init</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">/* Now create the /dev/ptmx special device */</span></span><br><span class="line">    tty_default_fops(&amp;ptmx_fops);</span><br><span class="line">    ptmx_fops.open = ptmx_open;</span><br><span class="line"></span><br><span class="line">    cdev_init(&amp;ptmx_cdev, &amp;ptmx_fops);</span><br><span class="line">    <span class="keyword">if</span> (cdev_add(&amp;ptmx_cdev, MKDEV(TTYAUX_MAJOR, <span class="number">2</span>), <span class="number">1</span>) ||</span><br><span class="line">        register_chrdev_region(MKDEV(TTYAUX_MAJOR, <span class="number">2</span>), <span class="number">1</span>, <span class="string">"/dev/ptmx"</span>) &lt; <span class="number">0</span>)</span><br><span class="line">        panic(<span class="string">"Couldn't register /dev/ptmx driver"</span>);</span><br><span class="line">    device_create(tty_class, <span class="literal">NULL</span>, MKDEV(TTYAUX_MAJOR, <span class="number">2</span>), <span class="literal">NULL</span>, <span class="string">"ptmx"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tty_default_fops</span><span class="params">(<span class="keyword">struct</span> file_operations *fops)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    *fops = tty_fops;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在ptmx设备初始化时<code>tty_default_fops</code>会将指针tty_fops赋值给ptmx_fops，调用ptmx_fops的时候会通过tty_fops指针调相应的函数，其tty_fops定义为：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct</span> file_operations tty_fops = &#123;</span><br><span class="line">    .llseek     = no_llseek,</span><br><span class="line">    .read       = tty_read,</span><br><span class="line">    .write      = tty_write,</span><br><span class="line">    .poll       = tty_poll,</span><br><span class="line">    .unlocked_ioctl = tty_ioctl,</span><br><span class="line">    .compat_ioctl   = tty_compat_ioctl,</span><br><span class="line">    .open       = tty_open,</span><br><span class="line">    .release    = tty_release,</span><br><span class="line">    .fasync     = tty_fasync,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>最后会通过fops-&gt;unlocked_ioctl调用tty_ioctl.</p>
 <p>unix98_pty_init函数为inline类型，编译器编译时候会直接内联到调用函数中，所以从内核符号表中找到pty_init函数地址为<code>0xffffffc000d78e80</code>，然后进行反汇编：</p>
@@ -114,10 +114,11 @@ adb pull /<span class="keyword">proc</span>/kallsyms kallsyms.txt
     <link href="http://blog.idhyt.com/2016/05/02/diary-stay-away-trip/"/>
     <id>http://blog.idhyt.com/2016/05/02/diary-stay-away-trip/</id>
     <published>2016-05-02T15:21:01.000Z</published>
-    <updated>2016-05-22T09:50:33.000Z</updated>
-    <content type="html"><![CDATA[<p>人生至少要有两次冲动，一为奋不顾身的爱情，一为说走就走的旅行，当然，这话不是我说的。</p>
-<p>每次出去都要计划好路线和攻略，希望整个旅行都在自己控制的时间段内完成，事实也确实如此。</p>
-<p>这一次，没有计划，没有攻略，没有目的，没有时间点，一个人，说走就走。<br><a id="more"></a></p>
+    <updated>2016-05-25T16:16:35.000Z</updated>
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">人生至少要有两次冲动，一为奋不顾身的爱情，一为说走就走的旅行。</blockquote>
+
+<a id="more"></a>
+<p>当然，这话不是我说的。<br>每次出去都要计划好路线和攻略，希望整个旅行都在自己控制的时间段内完成，事实也确实如此。<br>这一次，没有计划，没有攻略，没有目的，没有时间点，一个人，说走就走。</p>
 <iframe src="https://www.google.com/maps/d/embed?mid=1ofAIHkM96BbJVMvnmqD4DrUNid4" width="640" height="480"></iframe>
 
 <p>上面是我大概去过的地方(google map如果看不到你懂得，参见第一张图)，原来每次出去玩都是奔着景点，造成的结果就是长途跋涉，身心疲惫。<br>后来跟着摄影爱好者加被帐篷爬各种野山的人出去几次后，看了很多美景。<br>像这样：<br><img src="http://o7keinrz4.bkt.clouddn.com/diary-stay-away-trip-01.jpg" alt="diary-stay-away-trip-01"><br><img src="http://o7keinrz4.bkt.clouddn.com/diary-stay-away-trip-06.jpg" alt="diary-stay-away-trip-06"></p>
@@ -139,9 +140,7 @@ adb pull /<span class="keyword">proc</span>/kallsyms kallsyms.txt
 <p>杭州过后就回去了，其实很想在苏杭一代多住几天，还想着去厦门和南京，毕竟已经在外边快一个月了，该滚回去搬砖了。<br><img src="http://o7keinrz4.bkt.clouddn.com/diary-stay-away-trip-21.jpg" alt="diary-stay-away-trip-21"></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>人生至少要有两次冲动，一为奋不顾身的爱情，一为说走就走的旅行，当然，这话不是我说的。</p>
-<p>每次出去都要计划好路线和攻略，希望整个旅行都在自己控制的时间段内完成，事实也确实如此。</p>
-<p>这一次，没有计划，没有攻略，没有目的，没有时间点，一个人，说走就走。<br>]]>
+    <![CDATA[<blockquote class="blockquote-center">人生至少要有两次冲动，一为奋不顾身的爱情，一为说走就走的旅行。</blockquote>]]>
     
     </summary>
     
@@ -156,8 +155,9 @@ adb pull /<span class="keyword">proc</span>/kallsyms kallsyms.txt
     <link href="http://blog.idhyt.com/2016/04/06/diary-work-harder/"/>
     <id>http://blog.idhyt.com/2016/04/06/diary-work-harder/</id>
     <published>2016-04-05T17:38:11.000Z</published>
-    <updated>2016-04-06T14:56:20.000Z</updated>
+    <updated>2016-05-25T16:28:48.000Z</updated>
     <content type="html"><![CDATA[<p>&#160; &#160; &#160; &#160;下山了，真的下山了，感谢陪伴我的小伙伴和充满基友的团队以及带过我的老大们还有智慧与美貌并存的神仙姐姐们，特别要感谢美丽的珠海，这个来了不想走的城市，真的离开了，却不知道如何道别。</p>
+<a id="more"></a>
 <hr>
 
 <p>&#160; &#160; &#160; &#160;刚毕业的学生大多是感性的，第一份工作都是存在很多感情吧，对这里的小伙伴有感情，对公司有感情，所以总是满怀期待的希望能够与公司共同成长，从金山网络到上市成为猎豹移动，公司的成长真的很快，可是我确停滞了，当我明确知道自己需要时间沉淀的时候，发现已经不能适应这里的环境了。算上实习差不多刚好两年，都说第一份工作最好做够三年，对于互联网这种企业文化， 可能三年真的是太久了，我等不了，怕再等下去真的要迷失在这个温柔的城市。工作的第一年总感觉自己是在滚雪球，体型是大了，可里边是空的，我一直迷失在这种自我感觉良好的状态之中，按时工作按时完成任务，晚上回家看了很多新鲜的事物，觉得很多东西都很好玩，错误的认为从对一个东西的不知到知是一个快速成长的过程。病毒，web漏洞，前端，各种编程语言还有一些奇奇怪怪的东西，仿佛看到了一片森林，然后迷失了方向，又回到大学毕业时候的状态，什么都会，确又什么都不会。做事情总是徘徊在第一步，第二步，第三步没有了，遇到问题停滞了。</p>
@@ -172,10 +172,8 @@ adb pull /<span class="keyword">proc</span>/kallsyms kallsyms.txt
 <p>&#160; &#160; &#160; &#160;离职办完，坐在卡位上看着空荡荡的桌子，真的特别蒙逼，仿佛追了一个妹子两年没追到又爱又恨，又仿佛做了一场关于成长的梦，可是这一切都在这个时间点结束了。怀念那夕阳下奔跑的金山网络，君子之交淡如水，离别是为了更好的重逢，一定要更加努力，共勉！</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>&#160; &#160; &#160; &#160;下山了，真的下山了，感谢陪伴我的小伙伴和充满基友的团队以及带过我的老大们还有智慧与美貌并存的神仙姐姐们，特别要感谢美丽的珠海，这个来了不想走的城市，真的离开了，却不知道如何道别。</p>
-<hr>
-
-<p>&#160; ]]>
+    <![CDATA[<p>&#160; &#160; &#160; &#160;下山了，真的下山了，感谢陪伴我的小伙伴和充满基友的团队以及带过我的老大们还有智慧与美貌并存的神仙姐姐们，特别要感谢美丽的珠海，这个来了不想走的城市，真的离开了，却不知道如何道别。</p>]]>
+    
     </summary>
     
       <category term="无法描述" scheme="http://blog.idhyt.com/tags/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
