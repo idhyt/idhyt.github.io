@@ -4,7 +4,7 @@
   <subtitle><![CDATA[云淡风轻]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.idhyt.com/"/>
-  <updated>2016-05-25T14:58:11.000Z</updated>
+  <updated>2016-06-08T18:21:14.000Z</updated>
   <id>http://blog.idhyt.com/</id>
   
   <author>
@@ -13,6 +13,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[进程描述符]]></title>
+    <link href="http://blog.idhyt.com/2016/06/09/exploit-process-descriptor/"/>
+    <id>http://blog.idhyt.com/2016/06/09/exploit-process-descriptor/</id>
+    <published>2016-06-08T17:46:11.000Z</published>
+    <updated>2016-06-08T18:21:14.000Z</updated>
+    <content type="html"><![CDATA[<p>漏洞利用的核心都是通过修改task_struct中的一些字段来达到任意地址读写和提权操作的。<br><a id="more"></a></p>
+<p>进程描述符task_struct数据结构包含了与一个进程相关的所有信息，在<code>kernel/include/linux/sched.h</code>中定义，其中有很多字段是通过预定义形式来定义填充在结构体中，所以在每个系统版本中其数据结构也会不同。</p>
+<p>把task_struct中的数据全部打印出来，会看到很多有趣的东西，这些特征可以用来定位重要的结构。</p>
+<h2 id="定位cred">定位cred</h2><p>漏洞提权过程中修改的cred.security信息，需要先定位到cred。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x4d0</span> = <span class="number">0xffffffc0461ce4d0</span>: <span class="number">0xffffffc0461ce4d0</span>    <span class="comment">// cpu_timers[0]</span></span><br><span class="line">+<span class="number">0x4d8</span> = <span class="number">0xffffffc0461ce4d8</span>: <span class="number">0xffffffc0461ce4d0</span></span><br><span class="line">+<span class="number">0x4e0</span> = <span class="number">0xffffffc0461ce4e0</span>: <span class="number">0xffffffc0461ce4e0</span>    <span class="comment">// cpu_timers[1]</span></span><br><span class="line">+<span class="number">0x4e8</span> = <span class="number">0xffffffc0461ce4e8</span>: <span class="number">0xffffffc0461ce4e0</span></span><br><span class="line">+<span class="number">0x4f0</span> = <span class="number">0xffffffc0461ce4f0</span>: <span class="number">0xffffffc0461ce4f0</span>    <span class="comment">// cpu_timers[2]</span></span><br><span class="line">+<span class="number">0x4f8</span> = <span class="number">0xffffffc0461ce4f8</span>: <span class="number">0xffffffc0461ce4f0</span></span><br><span class="line">+<span class="number">0x500</span> = <span class="number">0xffffffc0461ce500</span>: <span class="number">0xffffffc0101f4900</span>    <span class="comment">// real_cred </span></span><br><span class="line">+<span class="number">0x508</span> = <span class="number">0xffffffc0461ce508</span>: <span class="number">0xffffffc0101f4900</span>    <span class="comment">// cred </span></span><br><span class="line">+<span class="number">0x510</span> = <span class="number">0xffffffc0461ce510</span>: <span class="number">0x363130322d657663</span>    <span class="comment">// char comm[TASK_COMM_LEN]</span></span><br><span class="line">+<span class="number">0x518</span> = <span class="number">0xffffffc0461ce518</span>: <span class="number">0x652d333534322d</span></span><br></pre></td></tr></table></figure>
+<p>通过cpu_timers的特征就有了通用的定位方法，也是所有提权代码中都用到的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (task-&gt;cpu_timers[<span class="number">0</span>].next == task-&gt;cpu_timers[<span class="number">0</span>].prev &amp;&amp;</span><br><span class="line">    task-&gt;cpu_timers[<span class="number">1</span>].next == task-&gt;cpu_timers[<span class="number">1</span>].prev &amp;&amp;</span><br><span class="line">    task-&gt;cpu_timers[<span class="number">2</span>].next == task-&gt;cpu_timers[<span class="number">2</span>].prev &amp;&amp;</span><br><span class="line">    (<span class="keyword">unsigned</span> <span class="keyword">long</span>)task-&gt;cpu_timers[<span class="number">0</span>].next &gt; KERNEL_START &amp;&amp;</span><br><span class="line">    (<span class="keyword">unsigned</span> <span class="keyword">long</span>)task-&gt;cpu_timers[<span class="number">1</span>].next &gt; KERNEL_START &amp;&amp;</span><br><span class="line">    (<span class="keyword">unsigned</span> <span class="keyword">long</span>)task-&gt;cpu_timers[<span class="number">2</span>].next &gt; KERNEL_START &amp;&amp;</span><br><span class="line">    task-&gt;real_cred == task-&gt;cred &amp;&amp;</span><br><span class="line">    (<span class="keyword">unsigned</span> <span class="keyword">long</span>)task-&gt;cred &gt; KERNEL_START) &#123;</span><br><span class="line">    <span class="comment">// do something...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中<code>comm[TASK_COMM_LEN]</code>字段是进程名，也可以通过这个特征来找到cred，找到进程名的地址，然后减8(x64)就是cred的地址了。</p>
+<h2 id="遍历进程tasks">遍历进程tasks</h2><p>task_struct结构中定义了一个list_head类型的tasks。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">task_struct &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">struct</span> list_head tasks;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">ifdef</span> CONFIG_SMP</span></span><br><span class="line">    <span class="keyword">struct</span> plist_node pushable_tasks;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> list_head</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">struct</span> list_head *next;</span><br><span class="line">    <span class="keyword">struct</span> list_head *prev;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>list_head为一个双向链表，可以遍历到所有进程的tasks结构。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/exploit-process-descriptor-01.png" alt=""></p>
+<p>如何定位到tasks地址?</p>
+<p>tasks下边有个预定义变量pushable_tasks，在多核手机总是存在的，第一个值为优先级prio，打印出来，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x290</span> = <span class="number">0xffffffc0461ce290</span>: <span class="number">0xffffffc000ee05e0</span>    <span class="comment">// struct list_head tasks</span></span><br><span class="line">+<span class="number">0x298</span> = <span class="number">0xffffffc0461ce298</span>: <span class="number">0xffffffc0a98b2290</span></span><br><span class="line">+<span class="number">0x2a0</span> = <span class="number">0xffffffc0461ce2a0</span>: <span class="number">0x8c</span>    <span class="comment">// pushable_tasks.prio</span></span><br><span class="line">+<span class="number">0x2a8</span> = <span class="number">0xffffffc0461ce2a8</span>: <span class="number">0xffffffc0461ce2a8</span></span><br><span class="line">+<span class="number">0x2b0</span> = <span class="number">0xffffffc0461ce2b0</span>: <span class="number">0xffffffc0461ce2a8</span></span><br></pre></td></tr></table></figure>
+<p>在我目前所看到的值都为0x8c，因此可以通过该值来定位tasks地址。</p>
+<h2 id="bypass_selinux">bypass selinux</h2><p>在不考虑selinux保护的时候，提权只需要简单的将security.osid和security.sid置1，这样得到的只是kernel权限，并不是真正的init最高权限。<br>内核中u:r:kernel:s0始终为1，而u:r:init:s0是变化的，每个内核不同。<br>因此要获取该值就要先找到init进程的task_struct。</p>
+<p>如何定位init进程?</p>
+<h3 id="内核符号表导出">内核符号表导出</h3><p>在<code>/arch/arm/kernel/init_task.c</code>中定义有</p>
+<pre><code>struct task_struct init_task = INIT_TASK<span class="list">(<span class="keyword">init_task</span>)</span><span class="comment">;</span>
+</code></pre><p>有些内核会在内核符号表kallsyms中导出init_task地址。</p>
+<h3 id="遍历内核tasks">遍历内核tasks</h3><p>在漏洞利用提权过程中，获取的当前进程的task_struct，就能拿到tasks地址，然后遍历所有进程的tasks，通过comm判断是否为init进程。</p>
+<h3 id="暴力搜索">暴力搜索</h3><p>在task_struct结构中有个几个字段定义了进程的一些特性，其中kernel thread的一些特征值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> task_struct &#123;</span><br><span class="line">    <span class="keyword">volatile</span> <span class="keyword">long</span> state; <span class="comment">/* -1 unrunnable, 0 runnable, &gt;0 stopped */</span></span><br><span class="line">    <span class="keyword">void</span> *<span class="built_in">stack</span>; <span class="comment">// 2-page (8K) aligned address,栈指针，指向当前thread_info结构。</span></span><br><span class="line">    <span class="keyword">atomic_t</span> usage; <span class="comment">// 0x2</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> flags; <span class="comment">// 0x200000, I am a kernel thread</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>搜索范围可以通过<code>/proc/iomem</code>中的kernel data字段获取，通过这些特征值就可以找到内核进程swapper/0的task_struct结构。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (pos = begin; pos &lt; end; pos += <span class="keyword">sizeof</span>(<span class="keyword">unsigned</span> <span class="keyword">long</span>)) &#123;</span><br><span class="line">    <span class="keyword">if</span> ( task_struct_buf.<span class="built_in">stack</span> &amp; <span class="number">0x1ff</span> == <span class="number">0</span> &amp;&amp; </span><br><span class="line">         task_struct_buf.usage == <span class="number">0x2</span> &amp;&amp; </span><br><span class="line">         task_struct_buf.flags == <span class="number">0x200000</span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\tfound swapper/0 task_struct_address: %lp\n"</span>, pos);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后找到tasks依次遍历内核进程定位init进程。</p>
+<h2 id="父进程">父进程</h2><p>task_struct中通过<code>struct task_struct __rcu *real_parent</code>定义了该进程的父进程，通过如下方法可以将父进程改为init进程。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pid = fork();</span><br><span class="line">    <span class="keyword">if</span> (pid == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// do something...</span></span><br><span class="line">        <span class="comment">// my parent is init...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (pid &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="comment">// waitpid(pid, NULL, 0);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以也可以通过这种方法获取init进程的task_struct，至于其他的用处，对方不想说话并向你扔了一头猪。。。</p>
+<h2 id="内核栈">内核栈</h2><p>task_struct中<code>void *stack</code>指向当前进程的内核栈，进程通过alloc_thread_info函数分配它的内核栈，通过free_thread_info函数释放所分配的内核栈。</p>
+<p>Linux内核通过thread_union联合体来表示进程的内核栈，其中THREAD_SIZE宏的大小为8192。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> thread_union &#123;  </span><br><span class="line">    <span class="keyword">struct</span> thread_info thread_info;  </span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="built_in">stack</span>[THREAD_SIZE/<span class="keyword">sizeof</span>(<span class="keyword">long</span>)];  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>当进程从用户态切换到内核态时，进程的内核栈总是空的，所以ARM的sp寄存器指向这个栈的顶端。因此，内核能够轻易地通过sp寄存器获得当前正在CPU上运行的进程。<br>由于堆栈是向下增长的，esp和thread_info位于同一个8KB或者4KB的块当中，也就是thread_union的长度了。<br>如果是8KB，屏蔽esp的低13位就可以得到thread_info的地址，也就是8KB块的开始位置。4KB的话，就屏蔽低12位。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">struct</span> thread_info *<span class="title">current_thread_info</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">register</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> sp <span class="title">asm</span> <span class="params">(<span class="string">"sp"</span>)</span></span>;</span><br><span class="line">      <span class="keyword">return</span> (<span class="keyword">struct</span> thread_info *)(sp &amp; ~(THREAD_SIZE - <span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>汇编:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mov R2, <span class="preprocessor">#<span class="number">0xffffe000</span></span></span><br><span class="line">and R3, R2, esp  </span><br><span class="line"></span><br><span class="line">或 </span><br><span class="line"></span><br><span class="line">BIC R3, R2, <span class="preprocessor">#<span class="number">0x1FC0</span></span></span><br><span class="line">BIC R3, R3, <span class="preprocessor">#<span class="number">0x3F</span></span></span><br></pre></td></tr></table></figure>
+<p>thread_info结构中也有很多重要的字段，如进程描述符task，获取任意地址读写能力的addr_limit等。</p>
+<h2 id="待续">待续</h2><p>待更…</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>漏洞利用的核心都是通过修改task_struct中的一些字段来达到任意地址读写和提权操作的。<br>]]>
+    
+    </summary>
+    
+      <category term="task" scheme="http://blog.idhyt.com/tags/task/"/>
+    
+      <category term="thread" scheme="http://blog.idhyt.com/tags/thread/"/>
+    
+      <category term="exploit" scheme="http://blog.idhyt.com/categories/exploit/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[如何优雅的使用内核符号表]]></title>
@@ -1801,57 +1859,6 @@ Lpackage/name/ObjectName;表示类型，MethodName是方法名。III为参数（
     </summary>
     
       <category term="smali" scheme="http://blog.idhyt.com/tags/smali/"/>
-    
-      <category term="android" scheme="http://blog.idhyt.com/categories/android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Netbeans动态调试smali文件]]></title>
-    <link href="http://blog.idhyt.com/2015/05/08/android-netbeans-debug-smali/"/>
-    <id>http://blog.idhyt.com/2015/05/08/android-netbeans-debug-smali/</id>
-    <published>2015-05-08T13:11:11.000Z</published>
-    <updated>2015-12-27T08:55:30.000Z</updated>
-    <content type="html"><![CDATA[<p>通过修改apk包来实现动态调试smali文件。</p>
-<h2 id="调试工具">调试工具</h2><p><a href="https://netbeans.org/features/java/index.html" target="_blank" rel="external">Netbeans</a>java版本即可<br><a href="https://ibotpeaches.github.io/Apktool/" target="_blank" rel="external">apktool</a>解包打包<br><a href="https://code.google.com/p/signapk/downloads/list" target="_blank" rel="external">signapk</a>签名</p>
-<h2 id="生成可供调试的apk">生成可供调试的apk</h2><p>以app-release.apk说明</p>
-<h3 id="解包">解包</h3><pre><code>java -jar apktool<span class="class">.jar</span> d -d app-release<span class="class">.apk</span> 
-</code></pre><p>-d参数用于生成调试版本，最后边可加参数 -o out 解包到指定out目录</p>
-<h3 id="找到入口函数">找到入口函数</h3><p>通过查看AndroidManifest.xml获得入口activity，然后找到oncreate()函数。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-1.png" alt=""></p>
-<h3 id="添加调试代码">添加调试代码</h3><p>在入口函数代码</p>
-<pre><code>invoke-<span class="keyword">super</span> {p0, p1}, Landroid<span class="regexp">/app/</span>Activity;-&gt;onCreate(Landroid<span class="regexp">/os/</span>Bundle;)V
-</code></pre><p>添加调试代码</p>
-<pre><code>invoke-<span class="keyword">static</span> {}, Landroid<span class="regexp">/os/</span>Debug;-&gt;waitForDebugger()V
-</code></pre><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-2.png" alt="">    </p>
-<h3 id="重打包">重打包</h3><p>apktool重打包，命令</p>
-<pre><code>java -jar apktool<span class="class">.jar</span> <span class="tag">b</span> app-release -o debug.apk
-</code></pre><p>打包过后解包文件根目录会出现一个build目录（后期调试需要将其删除）</p>
-<h3 id="签名">签名</h3><pre><code><span class="tag">java</span> <span class="tag">-jar</span> "<span class="tag">signapk</span><span class="class">.jar</span>" "<span class="tag">testkey</span><span class="class">.x509</span><span class="class">.pem</span>" "<span class="tag">testkey</span><span class="class">.pk8</span>" <span class="tag">debug</span><span class="class">.apk</span> <span class="tag">debug-sign</span><span class="class">.apk</span>
-</code></pre><p>成功生成了一个支持调试的debug-sign.apk文件</p>
-<p>可以写一个批处理文件apksign.bat</p>
-<pre><code><span class="variable">@echo</span> off
-set PATH=<span class="variable">%CD</span><span class="variable">%;</span><span class="variable">%PATH</span><span class="variable">%;</span>
-java -jar <span class="string">"%~dp0signapk.jar"</span> <span class="string">"%~dp0testkey.x509.pem"</span> <span class="string">"%~dp0testkey.pk8"</span> <span class="variable">%1</span> <span class="variable">%2</span>
-</code></pre><p>签名时直接输入 signapk.bat old.apk new.apk</p>
-<h3 id="安装apk">安装apk</h3><p>虚拟机安装重新打包签名的调试debug-sign.apk，这里我用的虚拟机为genymotion</p>
-<h2 id="netbeans设置">netbeans设置</h2><p>1.删除out目录下的build文件夹</p>
-<p>2.打开netbeans，选择“文件”-“新建项目”-“基于现有源代码的java项目”<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-3.png" alt="">  </p>
-<p>3.在“项目文件夹处”选择apk解包目录<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-4.png" alt="">  </p>
-<p>4.在“源包文件夹”出选择解包目录下的smali文件夹<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-5.png" alt="">  </p>
-<p>5.点击完成，项目创建完毕</p>
-<p>6.在模拟器中运行刚刚安装的重新打包附带签名的debug-sign.apk，程序会处于挂起状态</p>
-<p>7.在netbeans中找到入口activity的oncreate函数，在刚才添加的调试代码下一行下代码断点<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-6.png" alt="">  </p>
-<p>8.在netbeans中，选择“调试”-“连接调试器”,设置如下<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-7.png" alt=""> </p>
-<p>连接过后程序会暂停到断点处，接下来就可以进行单步调试了。</p>
-<p>9.端口号可在DDMS中查看<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-8.png" alt=""> </p>
-<h2 id="参考">参考</h2><p><a href="http://0nly3nd.sinaapp.com/?p=576" target="_blank" rel="external">Netbeans 6.8 + apktool_2.0.0b9 动态调试smali文件</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>通过修改apk包来实现动态调试smali文件。</p>
-<h2 id="调试工具">调试工具</h2><p><a href="https://netbeans.org/features/java/index.html" target="_blank" rel="extern]]>
-    </summary>
-    
-      <category term="debug" scheme="http://blog.idhyt.com/tags/debug/"/>
     
       <category term="android" scheme="http://blog.idhyt.com/categories/android/"/>
     
