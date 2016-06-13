@@ -4,7 +4,7 @@
   <subtitle><![CDATA[云淡风轻]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.idhyt.com/"/>
-  <updated>2016-06-08T18:21:14.000Z</updated>
+  <updated>2016-06-08T18:21:53.000Z</updated>
   <id>http://blog.idhyt.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.idhyt.com/2016/06/09/exploit-process-descriptor/"/>
     <id>http://blog.idhyt.com/2016/06/09/exploit-process-descriptor/</id>
     <published>2016-06-08T17:46:11.000Z</published>
-    <updated>2016-06-08T18:21:14.000Z</updated>
+    <updated>2016-06-08T18:21:53.000Z</updated>
     <content type="html"><![CDATA[<p>漏洞利用的核心都是通过修改task_struct中的一些字段来达到任意地址读写和提权操作的。<br><a id="more"></a></p>
 <p>进程描述符task_struct数据结构包含了与一个进程相关的所有信息，在<code>kernel/include/linux/sched.h</code>中定义，其中有很多字段是通过预定义形式来定义填充在结构体中，所以在每个系统版本中其数据结构也会不同。</p>
 <p>把task_struct中的数据全部打印出来，会看到很多有趣的东西，这些特征可以用来定位重要的结构。</p>

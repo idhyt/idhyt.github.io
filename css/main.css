@@ -1071,7 +1071,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f760a2;
+  background: #f1ff90;
 }
 .links-of-friendly a {
   display: inline-block;
@@ -1089,7 +1089,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #5effff;
+  background: #1d3bf5;
 }
 .sidebar-nav {
   margin: 0;
@@ -2079,7 +2079,7 @@ ul li {
   }
 }
 .menu .menu-item a:hover {
-  background: #0684bd;
+  background: #e1e1e1;
 }
 .menu a::before {
   display: none;
@@ -2257,7 +2257,7 @@ ul li {
   font-variant: small-caps;
   letter-spacing: 2px;
   position: absolute;
-  color: #eee;
+  color: #555;
   font-family: georgia;
   font-size: 14px;
 }
@@ -2300,8 +2300,9 @@ ul li {
   -moz-animation: a2-translate 5s linear 0s 1 none, b2-translate 5s linear 5s 1 none, c2-translate 1.5s linear 10s 1 none, d2-translate 5s linear 11.5s 1 none, v2-translate 7s linear 16.5s 1 forwards;
 }
 #layer3Go {
-  -webkit-animation: a3-translate 5s linear 0s 1 none, b3-translate 5s linear 5s 1 none, c3-translate 1.5s linear 10s 1 none, d3-translate 5s linear 11.5s 1 none, v3-translate 7s linear 16.5s 1 none;
-  -moz-animation: a3-translate 5s linear 0s 1 none, b3-translate 5s linear 5s 1 none, c3-translate 1.5s linear 10s 1 none, d3-translate 5s linear 11.5s 1 none, v3-translate 7s linear 16.5s 1 none;
+  -webkit-animation: a3-translate 5s linear 0s 1 none, b3-translate 5s linear 5s 1 none, c3-translate 1.5s linear 10s 1 none, d3-translate 5s linear 11.5s 1 none, v3-translate 7s linear 16.5s 1 forwards;
+  -moz-animation: a3-translate 5s linear 0s 1 none, b3-translate 5s linear 5s 1 none, c3-translate 1.5s linear 10s 1 none, d3-translate 5s linear 11.5s 1 none, v3-translate 7s linear 16.5s 1 forwards;
+none
 }
 #layer4Go {
   -webkit-animation: a4-translate 5s linear 0s 1 none, b4-translate 5s linear 5s 1 none, c4-translate 1.5s linear 10s 1 none, d4-translate 5s linear 11.5s 1 none, v4-translate 7s linear 16.5s 1 forwards;
@@ -10497,6 +10498,9 @@ ul li {
     -moz-transform: matrix(1, 0, 0, 1, 175px, 133px);
   }
 }
+#idhyt-surprise-ball #idhyt-surprise-ball-animation .drag {
+  color: #eee;
+}
 .post code {
   background: none;
   color: #eee;
@@ -10506,7 +10510,7 @@ ul li {
   color: #ddd;
 }
 .site-search input {
-  border-bottom: 1px solid #fc6423;
+  border-bottom: 1px solid #87daff;
 }
 .posts-collapse .post-title a {
   color: #ccc;
@@ -10529,4 +10533,18 @@ blockquote {
 .powered-by a,
 .theme-info a {
   color: #999;
+}
+a:hover {
+  border-bottom-color: #87daff;
+}
+.menu .menu-item a:hover {
+  background: none;
+  color: #87daff;
+}
+.post-more-link a:hover {
+  border-bottom-color: #87daff;
+}
+.btn:hover {
+  color: #ddd;
+  background: none;
 }
