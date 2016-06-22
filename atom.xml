@@ -77,7 +77,7 @@
     <link href="http://blog.idhyt.com/2016/05/09/exploit-kernel-symbol-usage/"/>
     <id>http://blog.idhyt.com/2016/05/09/exploit-kernel-symbol-usage/</id>
     <published>2016-05-09T15:31:24.000Z</published>
-    <updated>2016-05-25T14:58:11.000Z</updated>
+    <updated>2016-06-22T15:48:14.000Z</updated>
     <content type="html"><![CDATA[<p>主要针对arm64，现在ida6.8并不支持arm64的反汇编，所以在定位代码过程中会很麻烦，而32位是直接可以f5对照源码看的。</p>
 <h2 id="获取内核符号表">获取内核符号表</h2><p>先放一个内核符号表的部分样子：</p>
 <pre><code>ffffffc<span class="number">000081000</span> do_undefinstr
@@ -111,7 +111,7 @@ ffffffc<span class="number">0000827c4</span> register_break_hook
 adb pull /<span class="keyword">proc</span>/kallsyms kallsyms.txt
 </code></pre><h3 id="无root权限">无root权限</h3><p>1.获取kernel文件，解压rom包找到boot.img文件，然后<a href="https://github.com/idhyt/exploit_tools/blob/master/bootimg.py" target="_blank" rel="external">bootimg</a>提取kernel压缩文件，直接解压获取kernel文件。如果解压失败，用二进制文件打开，查找特征值<code>1F 8B 08</code>，删除之前数据保存并解压。</p>
 <p>2.使用<a href="https://github.com/idhyt/exploit_tools/tree/master/kallsymsprint-master" target="_blank" rel="external">kallsymsprint</a>获取，参数为kernel文件路径。</p>
-<p>3.懒人的方法，打包一个脚本<a href="https://github.com/idhyt/exploit_tools/tree/master/dump_kallsyms" target="_blank" rel="external">dump_kallsyms</a>搞定 : )</p>
+<p>3.懒人的方法，打包一个脚本<a href="https://github.com/idhyt/dump_kallsyms" target="_blank" rel="external">dump_kallsyms</a>搞定 : )</p>
 <h2 id="patch_selinux_mode">patch selinux mode</h2><p>内核提权过程中，完成了addr_limit字段的patch之后，那么用户态就可以任意读写内核态了，但是如果系统的selinux使用的是enforcing模式，后续的提权过程需要pacth selinux mode。</p>
 <p>源码中<code>#define selinux_enforcing 1</code>，该模式为<code>enforcing</code>，获得任意读写能力之后将其置0即可改为<code>permissive</code>。</p>
 <p>查找内核符号表，变量selinux_enforcing并没有导出地址(部分会有)，查找源码找到使用该值的地方，例如在<code>enforcing_setup</code>函数中：</p>
@@ -498,7 +498,7 @@ decStrong:
     <link href="http://blog.idhyt.com/2016/03/09/exploit-cve-2015-3636/"/>
     <id>http://blog.idhyt.com/2016/03/09/exploit-cve-2015-3636/</id>
     <published>2016-03-09T15:07:11.000Z</published>
-    <updated>2016-06-14T03:53:34.000Z</updated>
+    <updated>2016-06-14T03:53:56.000Z</updated>
     <content type="html"><![CDATA[<h2 id="漏洞简介">漏洞简介</h2><p>Linux kernel的ping套接字实现上存在释放后重利用漏洞，x86-64架构的本地用户利用此漏洞可造成系统崩溃，非x86-64架构的用户可提升其权限，pingpongroot就是利用该漏洞达到提权的效果，现在android-6.0以下的手机root工具靠的就是这个漏洞。</p>
 <h2 id="漏洞分析">漏洞分析</h2><p>详细的分析参考KeenTeam这篇文章<a href="https://www.blackhat.com/docs/us-15/materials/us-15-Xu-Ah-Universal-Android-Rooting-Is-Back-wp.pdf" target="_blank" rel="external">Own your Android! Yet Another Universal Root</a>。</p>
 <p>漏洞POC很简单，如下：</p>

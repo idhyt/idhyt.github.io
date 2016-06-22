@@ -2,8 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.idhyt.com/about/index.html</loc>
+    <lastmod>2016-06-22T16:10:57.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/05/09/exploit-kernel-symbol-usage/</loc>
+    <lastmod>2016-06-22T15:48:14.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.idhyt.com/2016/03/09/exploit-cve-2015-3636/</loc>
-    <lastmod>2016-06-14T03:53:34.000Z</lastmod>
+    <lastmod>2016-06-14T03:53:56.000Z</lastmod>
   </url>
   
   <url>
@@ -22,11 +32,6 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2016/05/09/exploit-kernel-symbol-usage/</loc>
-    <lastmod>2016-05-25T14:58:11.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.idhyt.com/2015/10/31/android-adb-shell-command/</loc>
     <lastmod>2016-05-09T13:54:03.000Z</lastmod>
   </url>
@@ -34,11 +39,6 @@
   <url>
     <loc>http://blog.idhyt.com/2016/03/13/exploit-cve-2015-1538/</loc>
     <lastmod>2016-03-31T09:16:38.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/about/index.html</loc>
-    <lastmod>2016-02-28T17:46:25.000Z</lastmod>
   </url>
   
   <url>
