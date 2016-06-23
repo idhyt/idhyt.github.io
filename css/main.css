@@ -982,7 +982,7 @@ body {
   height: auto;
   border: 2px solid #333;
   padding: 2px;
-/* by idhyt*/
+/* circle head by idhyt */
   border-radius: 50%;
   -webkit-transition: 1.4s all;
   -moz-transition: 1.4s all;
@@ -991,13 +991,11 @@ body {
 /* end */
 }
 .site-author-image:hover {
-/* by idhyt */
-  background-color: #55dae1;
+  background-color: #87daff;
   -webkit-transform: rotate(360deg) scale(1.1);
   -moz-transform: rotate(360deg) scale(1.1);
   -ms-transform: rotate(360deg) scale(1.1);
   transform: rotate(360deg) scale(1.1);
-/* end */
 }
 .site-author-name {
   margin: 5px 0 0;
@@ -1071,7 +1069,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff52ff;
+  background: #ffa2ff;
 }
 .links-of-friendly a {
   display: inline-block;
@@ -1089,7 +1087,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #53fe00;
+  background: #cb2596;
 }
 .sidebar-nav {
   margin: 0;
