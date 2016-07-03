@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="theme-next use-motion theme-next-mala">
 <head>
@@ -219,9 +220,10 @@ python challenge 21invader.zip1234567Yes! This is really level 21 in here. And y
     </header>
 
     
+      
 
-    
-      <style type="text/css">
+      
+        <style type="text/css">
 
     .circle {
         width: 40px;
@@ -288,6 +290,7 @@ python challenge 21invader.zip1234567Yes! This is really level 21 in here. And y
             }
         }
     });
+
 /*
     $whitesmoke   = #f5f5f5
     $gainsboro    = #eee
@@ -322,11 +325,17 @@ python challenge 21invader.zip1234567Yes! This is really level 21 in here. And y
         $("#assist_btn").hide();
     }
 
+    $(function () {
+        $("#assist_btn").dblclick(function() {
+            switch_theme();
+        });
+    });
+
 </script>
 
 <div>
 
-    <button class="assist-btn circle" id="assist_btn" ondblclick="switch_theme()">
+    <button class="assist-btn circle" id="assist_btn">
         亮
     </button>
 
@@ -340,8 +349,9 @@ python challenge 21invader.zip1234567Yes! This is really level 21 in here. And y
 
 
 
-    
+      
 
+    
 
     <main id="main" class="main">
       <div class="main-inner">

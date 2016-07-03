@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="theme-next use-motion theme-next-mala">
 <head>
@@ -231,9 +232,10 @@ site: http:// www.xxx.com  inurl:php?id= //针对某个">
     </header>
 
     
+      
 
-    
-      <style type="text/css">
+      
+        <style type="text/css">
 
     .circle {
         width: 40px;
@@ -300,6 +302,7 @@ site: http:// www.xxx.com  inurl:php?id= //针对某个">
             }
         }
     });
+
 /*
     $whitesmoke   = #f5f5f5
     $gainsboro    = #eee
@@ -334,11 +337,17 @@ site: http:// www.xxx.com  inurl:php?id= //针对某个">
         $("#assist_btn").hide();
     }
 
+    $(function () {
+        $("#assist_btn").dblclick(function() {
+            switch_theme();
+        });
+    });
+
 </script>
 
 <div>
 
-    <button class="assist-btn circle" id="assist_btn" ondblclick="switch_theme()">
+    <button class="assist-btn circle" id="assist_btn">
         亮
     </button>
 
@@ -352,8 +361,9 @@ site: http:// www.xxx.com  inurl:php?id= //针对某个">
 
 
 
-    
+      
 
+    
 
     <main id="main" class="main">
       <div class="main-inner">

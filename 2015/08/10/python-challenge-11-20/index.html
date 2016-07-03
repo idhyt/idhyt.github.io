@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="theme-next use-motion theme-next-mala">
 <head>
@@ -223,9 +224,10 @@ python challenge 11http://www.pythonchallenge.com/pc/return/5808.html题目只�
     </header>
 
     
+      
 
-    
-      <style type="text/css">
+      
+        <style type="text/css">
 
     .circle {
         width: 40px;
@@ -292,6 +294,7 @@ python challenge 11http://www.pythonchallenge.com/pc/return/5808.html题目只�
             }
         }
     });
+
 /*
     $whitesmoke   = #f5f5f5
     $gainsboro    = #eee
@@ -326,11 +329,17 @@ python challenge 11http://www.pythonchallenge.com/pc/return/5808.html题目只�
         $("#assist_btn").hide();
     }
 
+    $(function () {
+        $("#assist_btn").dblclick(function() {
+            switch_theme();
+        });
+    });
+
 </script>
 
 <div>
 
-    <button class="assist-btn circle" id="assist_btn" ondblclick="switch_theme()">
+    <button class="assist-btn circle" id="assist_btn">
         亮
     </button>
 
@@ -344,8 +353,9 @@ python challenge 11http://www.pythonchallenge.com/pc/return/5808.html题目只�
 
 
 
-    
+      
 
+    
 
     <main id="main" class="main">
       <div class="main-inner">

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="theme-next use-motion theme-next-mala">
 <head>
@@ -211,9 +212,10 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
     </header>
 
     
+      
 
-    
-      <style type="text/css">
+      
+        <style type="text/css">
 
     .circle {
         width: 40px;
@@ -280,6 +282,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
             }
         }
     });
+
 /*
     $whitesmoke   = #f5f5f5
     $gainsboro    = #eee
@@ -314,11 +317,17 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
         $("#assist_btn").hide();
     }
 
+    $(function () {
+        $("#assist_btn").dblclick(function() {
+            switch_theme();
+        });
+    });
+
 </script>
 
 <div>
 
-    <button class="assist-btn circle" id="assist_btn" ondblclick="switch_theme()">
+    <button class="assist-btn circle" id="assist_btn">
         亮
     </button>
 
@@ -332,8 +341,9 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
 
 
 
-    
+      
 
+    
 
     <main id="main" class="main">
       <div class="main-inner">
