@@ -1069,7 +1069,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #5945fe;
+  background: #052dcf;
 }
 .links-of-friendly a {
   display: inline-block;
@@ -1087,7 +1087,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #5941b4;
+  background: #ffa81d;
 }
 .sidebar-nav {
   margin: 0;
@@ -2275,4 +2275,19 @@ a:hover {
 .btn:hover {
   color: #ddd;
   background: none;
+}
+@media (max-width: 767px) {
+  #idhyt-surprise-ball {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  #idhyt-surprise-ball-animation {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  #assist_btn {
+    display: none;
+  }
 }
