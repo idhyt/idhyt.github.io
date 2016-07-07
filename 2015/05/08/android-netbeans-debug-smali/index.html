@@ -58,15 +58,15 @@
 解包java -jar apktool.jar d -d app-release.apk 
 -d参数用于生成调试版本，最后边可加参数 -o out 解包到指定out目录
 找到入口函数通过查看AndroidMani">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-1.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-2.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-3.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-4.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-5.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-6.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-7.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-8.png">
-<meta property="og:updated_time" content="2015-12-27T08:55:30.000Z">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-1.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-2.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-3.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-4.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-5.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-6.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-7.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-8.png">
+<meta property="og:updated_time" content="2016-07-07T14:27:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netbeans动态调试smali文件">
 <meta name="twitter:description" content="通过修改apk包来实现动态调试smali文件。
@@ -428,12 +428,12 @@
 <h2 id="生成可供调试的apk">生成可供调试的apk</h2><p>以app-release.apk说明</p>
 <h3 id="解包">解包</h3><pre><code>java -jar apktool<span class="class">.jar</span> d -d app-release<span class="class">.apk</span> 
 </code></pre><p>-d参数用于生成调试版本，最后边可加参数 -o out 解包到指定out目录</p>
-<h3 id="找到入口函数">找到入口函数</h3><p>通过查看AndroidManifest.xml获得入口activity，然后找到oncreate()函数。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-1.png" alt=""></p>
+<h3 id="找到入口函数">找到入口函数</h3><p>通过查看AndroidManifest.xml获得入口activity，然后找到oncreate()函数。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-1.png" alt=""></p>
 <h3 id="添加调试代码">添加调试代码</h3><p>在入口函数代码</p>
 <pre><code>invoke-<span class="keyword">super</span> {p0, p1}, Landroid<span class="regexp">/app/</span>Activity;-&gt;onCreate(Landroid<span class="regexp">/os/</span>Bundle;)V
 </code></pre><p>添加调试代码</p>
 <pre><code>invoke-<span class="keyword">static</span> {}, Landroid<span class="regexp">/os/</span>Debug;-&gt;waitForDebugger()V
-</code></pre><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-2.png" alt="">    </p>
+</code></pre><p><img src="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-2.png" alt="">    </p>
 <h3 id="重打包">重打包</h3><p>apktool重打包，命令</p>
 <pre><code>java -jar apktool<span class="class">.jar</span> <span class="tag">b</span> app-release -o debug.apk
 </code></pre><p>打包过后解包文件根目录会出现一个build目录（后期调试需要将其删除）</p>
@@ -446,15 +446,15 @@ java -jar <span class="string">"%~dp0signapk.jar"</span> <span class="string">"%
 </code></pre><p>签名时直接输入 signapk.bat old.apk new.apk</p>
 <h3 id="安装apk">安装apk</h3><p>虚拟机安装重新打包签名的调试debug-sign.apk，这里我用的虚拟机为genymotion</p>
 <h2 id="netbeans设置">netbeans设置</h2><p>1.删除out目录下的build文件夹</p>
-<p>2.打开netbeans，选择“文件”-“新建项目”-“基于现有源代码的java项目”<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-3.png" alt="">  </p>
-<p>3.在“项目文件夹处”选择apk解包目录<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-4.png" alt="">  </p>
-<p>4.在“源包文件夹”出选择解包目录下的smali文件夹<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-5.png" alt="">  </p>
+<p>2.打开netbeans，选择“文件”-“新建项目”-“基于现有源代码的java项目”<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-3.png" alt="">  </p>
+<p>3.在“项目文件夹处”选择apk解包目录<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-4.png" alt="">  </p>
+<p>4.在“源包文件夹”出选择解包目录下的smali文件夹<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-5.png" alt="">  </p>
 <p>5.点击完成，项目创建完毕</p>
 <p>6.在模拟器中运行刚刚安装的重新打包附带签名的debug-sign.apk，程序会处于挂起状态</p>
-<p>7.在netbeans中找到入口activity的oncreate函数，在刚才添加的调试代码下一行下代码断点<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-6.png" alt="">  </p>
-<p>8.在netbeans中，选择“调试”-“连接调试器”,设置如下<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-7.png" alt=""> </p>
+<p>7.在netbeans中找到入口activity的oncreate函数，在刚才添加的调试代码下一行下代码断点<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-6.png" alt="">  </p>
+<p>8.在netbeans中，选择“调试”-“连接调试器”,设置如下<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-7.png" alt=""> </p>
 <p>连接过后程序会暂停到断点处，接下来就可以进行单步调试了。</p>
-<p>9.端口号可在DDMS中查看<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-netbeans-debug-smali-8.png" alt=""> </p>
+<p>9.端口号可在DDMS中查看<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-netbeans-debug-smali-8.png" alt=""> </p>
 <h2 id="参考">参考</h2><p><a href="http://0nly3nd.sinaapp.com/?p=576" target="_blank" rel="external">Netbeans 6.8 + apktool_2.0.0b9 动态调试smali文件</a></p>
 </span>
       
@@ -688,7 +688,7 @@ java -jar <span class="string">"%~dp0signapk.jar"</span> <span class="string">"%
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -702,7 +702,7 @@ java -jar <span class="string">"%~dp0signapk.jar"</span> <span class="string">"%
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

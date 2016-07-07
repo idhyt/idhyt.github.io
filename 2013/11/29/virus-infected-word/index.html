@@ -50,9 +50,9 @@
 <meta property="og:site_name" content="idhyt's blog">
 <meta property="og:description" content="感染型宏病毒行为分析
 病毒简介病毒运行后会拷贝自身到system32目录下并提升权限注入其他进程，之后创建大量线程用于终止杀软，远程下载，感染系统正常文件。1 释放自身到system32目录下，注入其他进程2 终止杀软3 远程下载文件不执行4 添加自启动，打开word和excel宏功能5 加密自身感染.doc和.xls文件6 遍历系统盘，U盘，网络资源进行感染，包括.exe，.doc和.xls，删">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-word-1.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-word-2.png">
-<meta property="og:updated_time" content="2015-12-31T11:57:34.000Z">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-word-1.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-word-2.png">
+<meta property="og:updated_time" content="2016-07-07T14:24:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="病毒分析-宏感染型">
 <meta name="twitter:description" content="感染型宏病毒行为分析
@@ -408,8 +408,8 @@
         <span itemprop="articleBody"><p>感染型宏病毒行为分析</p>
 <h2 id="病毒简介">病毒简介</h2><p>病毒运行后会拷贝自身到system32目录下并提升权限注入其他进程，之后创建大量线程用于终止杀软，远程下载，感染系统正常文件。<br>1 释放自身到system32目录下，注入其他进程<br>2 终止杀软<br>3 远程下载文件不执行<br>4 添加自启动，打开word和excel宏功能<br>5 加密自身感染.doc和.xls文件<br>6 遍历系统盘，U盘，网络资源进行感染，包括.exe，.doc和.xls，删除系统备份文件.gho<br>7 隐藏进程自身</p>
 <h2 id="运行过程">运行过程</h2><p>1.获取%system32%目录生成路径system32\blackice.exe 和system32\kernel.dll.<br>2.创建互斥体 blackicemutex，如果互斥体存在，则表明病毒已运行，退出.<br>3.提升进程权限SeDebugPrivilege.<br>4.%System32%目录下查找blackice.exe和kernel.dll，找不到则拷贝自身到该目录下并重命名为blackice.exe和kernel.dll，设置系统时间，设置文件属性为只读，隐藏，系统文件.<br>5.查找进程是否存在explorer.exe和taskmgr.exe，如果存在将自身注入该进程并运行.<br>6.创建大量线程实现其功能.</p>
-<h3 id="线程1_sub_401160_结束杀软">线程1 sub_401160 结束杀软</h3><p>1.枚举当前进程获取进程名，如果找到杀软进程，则调用TerminateThread将其结束<br>2.如果结束杀软失败，则获取该杀软进程模块基址，在该进程中依次申请0x1000字节并写入0xCC，从0x1000开始到0x80000000<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-word-1.png" alt=""></p>
-<h3 id="线程2_sub_4075F0_获取系统信息远程下载">线程2 sub_4075F0 获取系统信息远程下载</h3><p>1.从URL:<a href="http://fmtwld.zj.com/blackice3/url.txt下载配置文件到system32目录下的blackice.ini" target="_blank" rel="external">http://fmtwld.zj.com/blackice3/url.txt下载配置文件到system32目录下的blackice.ini</a><br>2.如果下载失败则延时1分钟从URL: <a href="http://fmtwld.vicp.net/blackice3/url.txt继续下载" target="_blank" rel="external">http://fmtwld.vicp.net/blackice3/url.txt继续下载</a><br>3.下载成功后从配置文件读取control节url字段（远程服务器地址）的数据并删除下载的配置文件<br>4.获取的系统信息（mac地址，端口，版本等）生成新的url发送给服务器<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-word-2.png" alt=""><br>5.从远程服务器下载新的配置文件读取url节区的string字段，并删除<br>6.如果该字段数据不为“notdown” 则从该字段获取文件名，从远程服务器下载该文件到system32目录下并调用Winexec执行，最后删除下载的配置文件<br>7.如果该字段数据为“notdown”则不进行下载文件</p>
+<h3 id="线程1_sub_401160_结束杀软">线程1 sub_401160 结束杀软</h3><p>1.枚举当前进程获取进程名，如果找到杀软进程，则调用TerminateThread将其结束<br>2.如果结束杀软失败，则获取该杀软进程模块基址，在该进程中依次申请0x1000字节并写入0xCC，从0x1000开始到0x80000000<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-word-1.png" alt=""></p>
+<h3 id="线程2_sub_4075F0_获取系统信息远程下载">线程2 sub_4075F0 获取系统信息远程下载</h3><p>1.从URL:<a href="http://fmtwld.zj.com/blackice3/url.txt下载配置文件到system32目录下的blackice.ini" target="_blank" rel="external">http://fmtwld.zj.com/blackice3/url.txt下载配置文件到system32目录下的blackice.ini</a><br>2.如果下载失败则延时1分钟从URL: <a href="http://fmtwld.vicp.net/blackice3/url.txt继续下载" target="_blank" rel="external">http://fmtwld.vicp.net/blackice3/url.txt继续下载</a><br>3.下载成功后从配置文件读取control节url字段（远程服务器地址）的数据并删除下载的配置文件<br>4.获取的系统信息（mac地址，端口，版本等）生成新的url发送给服务器<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-word-2.png" alt=""><br>5.从远程服务器下载新的配置文件读取url节区的string字段，并删除<br>6.如果该字段数据不为“notdown” 则从该字段获取文件名，从远程服务器下载该文件到system32目录下并调用Winexec执行，最后删除下载的配置文件<br>7.如果该字段数据为“notdown”则不进行下载文件</p>
 <h3 id="线程3_sub_4082F0_自启动">线程3 sub_4082F0  自启动</h3><p>1.从系统配置文件win.ini中获取节区windows下key=run的值，如果不存在，则将该值写入c:\WINDOWS\system32\blackice.exe<br>2.获取system32目录下配置文件system.ini中boot节区下key=shell的值，如果该文件不存在，则创建该文件并写入boot节区，key=shell的值为”Explorer.exe  C:\WINDOWS\system32\blackice.exe”<br>3.检测C:\WINDOWS\system32\目录下是否存在blackice.exe和kernel.dll，如果不存在则拷贝自身为该文件</p>
 <h3 id="线程4_sub_406900_感染-doc和-xls文件">线程4 sub_406900 感染.doc和.xls文件</h3><p>1.将自身map到内存<br>2.调用函数CLSIDFromProgID获取Excel.Application标识符获取其version（11.0）和quit<br>3.将注册表HKEY_CURRENT_USER\ software\microsoft\office \11.0（version）\word\security\子键level和AccessVBOM的键值置1，启动宏功能<br>4.将注册表HKEY_CURRENT_USER\ software\microsoft\excel\11.0（version）\office \security\子键level和AccessVBOM的键值置1，启动宏功能<br>5.释放子体book1.xls和Normal.dot文件<br>5.1 申请内存，写入自身加密写入<br>5.2 获取Excel.Application的StartupPath值即Excel的启动路径C:\Documents and Settings\Admin\Application Data\Microsoft\Excel\XLSTART\<br>5.3 检测该路径下是否存在book1.xls文件，如果存在则判断lines处字节是否为&lt;!!blackice&gt;，如果是的话则说明已经感染过则不进行感染<br>5.4 如果不存在book1.xls或者该文件lines处字节不为&lt;!!blackice&gt;则获取Add和SaveAs接口创建book1.xls文件<br>5.5 调用InsertLines属性将内存中生成的感染数据插入，最后调用save和quit属性保存并退出<br>6.用相同的方法，获取word的启动路径，生成包含加密数据的Normal.dot文件。<br>7.通过该方法，当用户打开任意word文档或者xls文档即可运行病毒</p>
 <h3 id="线程5_sub_408210_感染U盘">线程5 sub_408210 感染U盘</h3><p>1.在可移动磁盘中创建AUTORUN.INF文件<br>2.写入AutoRun节区，key = open值为blackice.exe达到自动自动运行blackice.exe的目的，并设置该文件为只读隐藏系统文件<br>3.查找可移动磁盘中是否存在blackice.exe文件，如果不存在则将自身拷贝过去并重命名blackice.exe，设置为只读隐藏系统文件<br>4.遍历进程文件目录下的所有文件，如果后缀为.doc和.xls，则执行线程4中释放book1.xls和Normal.dot过程<br>5.如果是exe则将感染数据写入其资源文件<br>5.1 先将exe文件map到内存，然后将感染数据插入其资源文件<br>5.2 将感染过的exe文件map到内存，检测PE头，检测其资源数据开头是否为&lt;!!blackice&gt;，5.3 如果是的话说明写入过感染数据，则添加新节区并设置节区属性为0xE0000020u（可执行属性），将该节区指向感染数据。<br>5.4 如果不是的话说明没有写入感染数据，不添加节区操作。<br>6.如果是.gho(系统备份)则删除该文件<br>7.注册一个watchusb窗口循环接受消息和派遣消息监控U盘感染</p>
@@ -647,7 +647,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -661,7 +661,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

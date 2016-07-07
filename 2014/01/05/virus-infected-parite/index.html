@@ -52,20 +52,20 @@
 <meta property="og:description" content="parite感染型病毒行为分析
 病毒信息文件类型：dll文件(PE)大小: 176128 字节MD5: 4F407B29D53E9EB54E22D096FCE82AA7加壳方式：UPX 0.80 - 1.24 DLL -&amp;gt; Markus &amp;amp; Laszlo编写语言：Borland C++ DLL Method 2
 病毒简介1.感染病毒通过在Explorer注册表下添加键值，导致Expl">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-1.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-2.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-3.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-4.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-5.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-6.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-7.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-8.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-9.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-10.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-11.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-12.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-13.jpg">
-<meta property="og:updated_time" content="2015-12-31T11:57:14.000Z">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-1.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-2.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-3.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-4.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-5.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-6.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-7.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-8.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-9.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-10.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-11.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-12.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-13.jpg">
+<meta property="og:updated_time" content="2016-07-07T14:24:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="病毒分析-parite感染型">
 <meta name="twitter:description" content="parite感染型病毒行为分析
@@ -423,25 +423,25 @@
 <h2 id="病毒信息">病毒信息</h2><p>文件类型：dll文件(PE)<br>大小: 176128 字节<br>MD5: 4F407B29D53E9EB54E22D096FCE82AA7<br>加壳方式：UPX 0.80 - 1.24 DLL -&gt; Markus &amp; Laszlo<br>编写语言：Borland C++ DLL Method 2</p>
 <h2 id="病毒简介">病毒简介</h2><p>1.感染病毒通过在Explorer注册表下添加键值，导致Explorer进程创建时会装载感染Dll去创建一个新的线程感染系统文件，包括感染硬盘exe和src文件，同时会去感染同域下的其他系统。</p>
 <p>2.同时在感染dll中Initiate函数，通过HOOK文件操作函数和注入全局钩子，监控并注入其他进程进行感染操作。</p>
-<h2 id="感染过程">感染过程</h2><h3 id="检测感染文件加载模块">检测感染文件加载模块</h3><p>检测加载感染病毒dll文件的进程是否为explorer.exe，如果不是则直接退出。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-1.jpg" alt=""></p>
-<h3 id="检测感染环境">检测感染环境</h3><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-2.jpg" alt=""></p>
+<h2 id="感染过程">感染过程</h2><h3 id="检测感染文件加载模块">检测感染文件加载模块</h3><p>检测加载感染病毒dll文件的进程是否为explorer.exe，如果不是则直接退出。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-1.jpg" alt=""></p>
+<h3 id="检测感染环境">检测感染环境</h3><p><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-2.jpg" alt=""></p>
 <p>1检测程序是否处于调试模式，如果是则退出</p>
-<p>2创建互斥体Residented，保证系统中只运行一个感染进程。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-3.jpg" alt=""></p>
+<p>2创建互斥体Residented，保证系统中只运行一个感染进程。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-3.jpg" alt=""></p>
 <p>3加载病毒感染模块</p>
 <p>4删除临时目录下的临时文件</p>
-<p>5将感染dll文件添加新键值PINF写入注册表中随Explorer启动加载Software\Microsoft\Windows\CurrentVersion\Explorer<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-4.jpg" alt=""></p>
-<p>6.注册全局消息钩子，系统关机注销前将自身正常退出<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-5.jpg" alt=""></p>
-<h3 id="创建感染线程">创建感染线程</h3><p>1.创建感染过滤文件列表：<br>readbook.exe，rundll32.exe，\dllcache\目录下.exe和.src文件不进行感染<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-6.jpg" alt=""></p>
-<p>2.创建感染文件结构体InfectFileStruct，并初始化<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-7.jpg" alt=""></p>
-<p>3.获取系统磁盘列表，如果是硬盘或可移动磁盘，进行感染<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-8.jpg" alt=""></p>
+<p>5将感染dll文件添加新键值PINF写入注册表中随Explorer启动加载Software\Microsoft\Windows\CurrentVersion\Explorer<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-4.jpg" alt=""></p>
+<p>6.注册全局消息钩子，系统关机注销前将自身正常退出<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-5.jpg" alt=""></p>
+<h3 id="创建感染线程">创建感染线程</h3><p>1.创建感染过滤文件列表：<br>readbook.exe，rundll32.exe，\dllcache\目录下.exe和.src文件不进行感染<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-6.jpg" alt=""></p>
+<p>2.创建感染文件结构体InfectFileStruct，并初始化<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-7.jpg" alt=""></p>
+<p>3.获取系统磁盘列表，如果是硬盘或可移动磁盘，进行感染<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-8.jpg" alt=""></p>
 <p>4.检测是否为PE文件</p>
 <p>5.检测该文件是否被感染，感染标志为节区名，节名规则</p>
 <pre><code>.[<span class="link_label">x-6</span>][<span class="link_reference">x-3</span>][<span class="link_label">x</span>][<span class="link_reference">xxoo</span>]
-</code></pre><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-9.jpg" alt=""></p>
-<p>6.如果没有被感染过，则进行感染，获取文件信息，写入感染文件结构体InfectFileStruct中<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-10.jpg" alt=""></p>
-<p>7.修改PE头信息(节区数)，添加感染节区，写入加密代码DecodeProc(用于解码感染dll文件并加载执行感染过程)，修改程序入口代码优先执行DecodeProc代码，将感染dll加入导入表。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-11.jpg" alt=""></p>
-<p>8.对局域网进行感染<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-12.jpg" alt=""></p>
-<h3 id="初始化函数_Initiate">初始化函数 Initiate</h3><p>1.HOOK文件操作函数对文件进行感染<br>2.注册全局钩子，将DLL注入有CALLWNDPROC的进程进行感染<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infected-parite-13.jpg" alt=""></p>
+</code></pre><p><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-9.jpg" alt=""></p>
+<p>6.如果没有被感染过，则进行感染，获取文件信息，写入感染文件结构体InfectFileStruct中<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-10.jpg" alt=""></p>
+<p>7.修改PE头信息(节区数)，添加感染节区，写入加密代码DecodeProc(用于解码感染dll文件并加载执行感染过程)，修改程序入口代码优先执行DecodeProc代码，将感染dll加入导入表。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-11.jpg" alt=""></p>
+<p>8.对局域网进行感染<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-12.jpg" alt=""></p>
+<h3 id="初始化函数_Initiate">初始化函数 Initiate</h3><p>1.HOOK文件操作函数对文件进行感染<br>2.注册全局钩子，将DLL注入有CALLWNDPROC的进程进行感染<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infected-parite-13.jpg" alt=""></p>
 <h2 id="查杀修复方式">查杀修复方式</h2><p>1.检测系统是否存在互斥体Residented</p>
 <p>2.删掉注册表Software\Microsoft\Windows\CurrentVersion\Explorer键值PINF</p>
 <p>3.重启exploere.exe进程（结束，启动）</p>
@@ -679,7 +679,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -693,7 +693,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

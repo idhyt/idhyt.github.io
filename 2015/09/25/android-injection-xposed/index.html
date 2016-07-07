@@ -52,12 +52,12 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
 <meta property="og:description" content="概述Xposed是针对Android平台的动态劫持项目，源码github
 主要模块说明如下：Xposed：Xposed的C++部分，主要是用来替换/system/bin/app_process，并为XposedBridge提供JNI方法。
 XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且提供对基于Xposed框架的Modules的管理。在安装XposedIn">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-1.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-2.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-3e.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-4.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-5.jpg">
-<meta property="og:updated_time" content="2015-12-28T02:20:50.000Z">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-1.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-2.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-3e.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-4.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-5.jpg">
+<meta property="og:updated_time" content="2016-07-07T14:27:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓注入框架Xposed分析与简单应用">
 <meta name="twitter:description" content="概述Xposed是针对Android平台的动态劫持项目，源码github
@@ -438,7 +438,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
 </tr>
 </tbody>
 </table>
-<h3 id="源码分析">源码分析</h3><h4 id="XposedInstaller">XposedInstaller</h4><p>通过<code>/XposedInstaller/AndroidManifest.xml</code>看出主activity为WelcomeActivity，<br>主要实现了界面加载，添加功能图标和描述信息Item，如Install, Modules, Download等。<br>选择Framework后进入界面<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-1.jpg" alt="android-xposed-1"></p>
+<h3 id="源码分析">源码分析</h3><h4 id="XposedInstaller">XposedInstaller</h4><p>通过<code>/XposedInstaller/AndroidManifest.xml</code>看出主activity为WelcomeActivity，<br>主要实现了界面加载，添加功能图标和描述信息Item，如Install, Modules, Download等。<br>选择Framework后进入界面<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-1.jpg" alt="android-xposed-1"></p>
 <p>我们直接找到install代码，install代码定位的简单方法：<br>先点击install进入安装界面，然后在输入adb命令查看当前最顶层activity，就可以定位到代码。</p>
 <p>adb 查看最上层成activity名字<br>linux: <code>adb shell dumpsys activity | grep &quot;mFocusedActivity&quot;</code><br>windows: <code>adb shell dumpsys activity | findstr &quot;mFocusedActivity&quot;</code></p>
 <p>最后定位到install代码位于InstallerFragment中，代码及注释如下：</p>
@@ -446,7 +446,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
 <h4 id="为什么要替换app_process">为什么要替换app_process</h4><p>在android的源码中的init.rc文件可以看到</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">service zygote /system/bin/app_process -Xzygote /system/bin –zygote –start-system-server</span><br><span class="line">socket zygote stream <span class="number">666</span> </span><br><span class="line">onrestart write /sys/android_power/request_state wake</span><br><span class="line">onrestart write /sys/power/state on</span><br><span class="line">onrestart restart media</span><br><span class="line">onrestart restart netd</span><br></pre></td></tr></table></figure>
 <p>app_process是andriod app的启动程序，该注入框架通过替换/system/bin/app_process程序控制zygote进程，使得app_process在启动过程中会加载XposedBridge.jar这个jar包，从而完成对Zygote进程及其创建的Dalvik虚拟机的劫持。与采取传统的Inhook方式<a href="http://www.mulliner.org/android/feed/mulliner_dbi_hitb_kul2013.pdf" target="_blank" rel="external">Dynamic Dalvik Instrumentation</a>相比，Xposed在开机的时候完成对所有的Hook Function的劫持，在原Function执行的前后加上自定义代码。</p>
-<h4 id="为什么要控制zygote进程">为什么要控制zygote进程</h4><p>在Android系统中，应用程序进程都是由Zygote进程孵化出来的，而Zygote进程是由Init进程启动的。Zygote进程在启动时会创建一个Dalvik虚拟机实例，每当它孵化一个新的应用程序进程时，都会将这个Dalvik虚拟机实例复制到新的应用程序进程里面去，从而使得每一个应用程序进程都有一个独立的Dalvik虚拟机实例。所以如果选择对Zygote进程Hook，则能够达到针对系统上所有的应用程序进程Hook，即一个全局Hook。这也是Xposed选择替换app_process的原因。如下图所示：<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-2.jpg" alt="hook-before-after"></p>
+<h4 id="为什么要控制zygote进程">为什么要控制zygote进程</h4><p>在Android系统中，应用程序进程都是由Zygote进程孵化出来的，而Zygote进程是由Init进程启动的。Zygote进程在启动时会创建一个Dalvik虚拟机实例，每当它孵化一个新的应用程序进程时，都会将这个Dalvik虚拟机实例复制到新的应用程序进程里面去，从而使得每一个应用程序进程都有一个独立的Dalvik虚拟机实例。所以如果选择对Zygote进程Hook，则能够达到针对系统上所有的应用程序进程Hook，即一个全局Hook。这也是Xposed选择替换app_process的原因。如下图所示：<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-2.jpg" alt="hook-before-after"></p>
 <p>Zygote进程在启动的过程中，除了会创建一个Dalvik虚拟机实例之外，还会将Java运行时库加载到进程中来，以及注册一些Android核心类的JNI方法来前面创建的Dalvik虚拟机实例中去。注意，一个应用程序进程被Zygote进程孵化出来的时候，不仅会获得Zygote进程中的Dalvik虚拟机实例拷贝，还会与Zygote一起共享Java运行时库。这也就是可以将XposedBridge这个jar包加载到每一个Android应用程序中的原因。XposedBridge有一个私有的Native（JNI）方法hookMethodNative，这个方法也在app_process中使用。这个函数提供一个方法对象利用Java的Reflection机制来对内置方法覆写。</p>
 <h4 id="Hook/Replace">Hook/Replace</h4><p>Xposed 框架中真正起作用的是对方法的hook。在Repackage技术中，如果要对APK做修改，则需要修改Smali代码中的指令。而另一种动态修改指令的技术需要在程序运行时基于匹配搜索来替换smali代码，但因为方法声明的多样性与复杂性，这种方法也比较复杂。</p>
 <p>总结Hook运行过程如下：</p>
@@ -474,9 +474,9 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
 <p>5.编写插件代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.idhyt.xposedexample;</span><br><span class="line"><span class="keyword">import</span> de.robv.android.xposed.IXposedHookLoadPackage;</span><br><span class="line"><span class="keyword">import</span> de.robv.android.xposed.XposedBridge;</span><br><span class="line"><span class="keyword">import</span> de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XposedExample</span> <span class="keyword">implements</span> <span class="title">IXposedHookLoadPackage</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleLoadPackage</span><span class="params">(<span class="keyword">final</span> LoadPackageParam lpparam)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        XposedBridge.log(<span class="string">"Loaded app: "</span> + lpparam.packageName);</span><br><span class="line">        XposedBridge.log(<span class="string">"this is a test by idhyt"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>6.在assets文件夹(如果不存在就创建)下新建file写入插件启动入口:<br><code>com.idhyt.xposedexample.XposedExample</code></p>
-<p>整个工程目录如下所示:<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-3e.jpg" alt="project-dir"></p>
-<p>7.运行之后 会在虚拟机中看到我们的插件已经安装到xposed模块里边，然后勾选重启系统。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-4.jpg" alt="install-ok"></p>
-<p>8.重启过后，加入过滤规则“loaded app”，在logcat窗口会看到我们的输出日志信息，你打开应用也会显示加载的应用包名。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-xposed-5.jpg" alt="logcat-out"></p>
+<p>整个工程目录如下所示:<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-3e.jpg" alt="project-dir"></p>
+<p>7.运行之后 会在虚拟机中看到我们的插件已经安装到xposed模块里边，然后勾选重启系统。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-4.jpg" alt="install-ok"></p>
+<p>8.重启过后，加入过滤规则“loaded app”，在logcat窗口会看到我们的输出日志信息，你打开应用也会显示加载的应用包名。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-5.jpg" alt="logcat-out"></p>
 <h3 id="xposed用法详解">xposed用法详解</h3><p>移步：<a href="http://blog.idhyt.com/2015/11/28/4-android-injection-xposed-usage/">安卓注入框架Xposed用法详解</a></p>
 </span>
       
@@ -710,7 +710,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -724,7 +724,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

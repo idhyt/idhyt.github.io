@@ -54,16 +54,16 @@
 调试环境：Windows XP SP3, OD, IDA, 010Editor等
 病毒简介该病毒程序运行后会先创建一个正常的游戏进程，之后会在系统目录下生成一个驱动文件并加载，该驱动文件用于劫持用户访问的淘宝，京东，当当等网站，将其重定向事先设计好的网站从而获取利益，该驱动模块可以从指定的URL自动下载过滤规则和更新驱动文件，并搜集用户系统信息发送到服务器。
 病毒运行">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-1.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-2.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-3.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-4.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-5.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-6.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-7.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-8.jpg">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-9.jpg">
-<meta property="og:updated_time" content="2015-12-31T11:41:08.000Z">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-1.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-2.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-3.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-4.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-5.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-6.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-7.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-8.jpg">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-9.jpg">
+<meta property="og:updated_time" content="2016-07-07T14:25:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="病毒分析-淘宝客">
 <meta name="twitter:description" content="淘宝客病毒分析，附带驱动过滤
@@ -445,20 +445,20 @@
 <span class="symbol">http:</span>/<span class="regexp">/xml.btplay.net:83/union</span><span class="regexp">/uploads/</span><span class="number">27</span>/<span class="number">27</span>.dat
 <span class="symbol">http:</span>/<span class="regexp">/xml.btplay.net:83/union</span><span class="regexp">/uploads/</span><span class="number">27</span>/<span class="number">27</span>.ini
 <span class="symbol">http:</span>/<span class="regexp">/xml.btplay.net:83/union</span><span class="regexp">/uploads/</span><span class="number">27</span>/<span class="number">27</span>.conf
-</code></pre><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-1.jpg" alt="">  </p>
+</code></pre><p><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-1.jpg" alt="">  </p>
 <h3 id="加载驱动服务">加载驱动服务</h3><p>调用BD0000.dll函数InstallDriver加载驱动服务<br>1.打开注册表HKLM\SYSTEM\CurrentControlSet\Control\NetSafe</p>
 <p>2.遍历该注册表子键，清除注册表中netsafe.sys的相关键值，并尝试将C:\WINDOWS\system32\目录下的NetSafe.sys移除</p>
 <p>3.将临时文件目录下的Mfc42w.dll拷贝到C:\WINDOWS\system32\mfc42w.dll</p>
-<p>4.打开注册表HKLM\SYSTEM\CurrentControlSet\Services生成一个mfc42w的子项，并生成四个子键，注册为驱动服务，如下所示：<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-2.jpg" alt="">  </p>
+<p>4.打开注册表HKLM\SYSTEM\CurrentControlSet\Services生成一个mfc42w的子项，并生成四个子键，注册为驱动服务，如下所示：<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-2.jpg" alt="">  </p>
 <p>5获取ZwLoadDriver函数地址，提升权限，然后调用该函数ZwLoadDriver加载驱动服务mfc42w.dll</p>
 <h3 id="关闭驱动保护-1">关闭驱动保护</h3><p>1.在C:\DOCUME~1\Admin\LOCALS~1\Temp\目录下生成大小为0x6b14的文件safeini.cfg并设置文件属性为隐藏</p>
 <p>2.调用0xBD000.DLL函数LoadConfig创建驱动过滤规则文件并关闭驱动保护<br>2.1打开驱动服务\.\NetSafe0，调用 DeviceIoControl向驱动发送消息，IoControlCode = 8000280C，从驱动中读取字符串mfc42w，之后将以该字符串为名在目录C:\WINDOWS\system32\下创建一个驱动过滤规则文件mfc42w.dat<br>2.2从C:\DOCUME~1\Admin\LOCALS~1\Temp\safeini.cfg 文件中读取0x14字节数据对标志位进行检测。<br>2.3打开驱动服务\.\NetSafe0，调用 DeviceIoControl向驱动发送消息，IoControlCode =80002810，关闭驱动保护。<br>2.4将C:\DOCUME~1\Admin\LOCALS~1\Temp\safeini.cfg文件复制到<br>C:\WINDOWS\system32\目录下，并重命名为mfc42w.dat。</p>
 <h3 id="解密驱动过滤规则">解密驱动过滤规则</h3><p>解密驱动过滤规则到内核内存池中<br>1.打开驱动服务\.\NetSafe0，提升权限，调用 DeviceIoControl向驱动发送消息，IoControlCode = 80002808</p>
 <p>2.该驱动派遣函数使用了代码混淆技术，最后会调用ZwCreateFile函数打开生成的mfc42w.dat文件</p>
-<p>3.调用ZwWriteFile从该文件中读取前0x14字节数据，检验头四个字节是否为0x6E736374h即文件标志tcsn，如果不是则表明文件被修改或者不是自身文件，则直接退出<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-3.jpg" alt="">   </p>
+<p>3.调用ZwWriteFile从该文件中读取前0x14字节数据，检验头四个字节是否为0x6E736374h即文件标志tcsn，如果不是则表明文件被修改或者不是自身文件，则直接退出<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-3.jpg" alt="">   </p>
 <p>4.调用ZwWriteFile函数将前0x14字节之后的0x6B00字节数据读到申请的堆块中</p>
-<p>5.调用函数ExAllocatePool在内核中分配0x6b01字节大小的堆块初始化0，将0x6B00字节数据内容解密存放在该堆块中，解密的数据为驱动过滤规则<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-4.jpg" alt=""><br>Dump出来如下所示（部分）<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-5.jpg" alt=""> </p>
-<p>6.遍历解密出的数据得到版本号等信息存放到一个结构体中<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-6.jpg" alt="">   </p>
+<p>5.调用函数ExAllocatePool在内核中分配0x6b01字节大小的堆块初始化0，将0x6B00字节数据内容解密存放在该堆块中，解密的数据为驱动过滤规则<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-4.jpg" alt=""><br>Dump出来如下所示（部分）<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-5.jpg" alt=""> </p>
+<p>6.遍历解密出的数据得到版本号等信息存放到一个结构体中<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-6.jpg" alt="">   </p>
 <h3 id="访问远程服务器">访问远程服务器</h3><p>获取系统信息按照指定的格式访问链接<br>1.调用函数GetAdapterslnfo获取当前MAC地址，并判断是否为0.0.0.0</p>
 <p>2.调用函数GetVolumeInformationA和GetDiskFreeSpaceExA 获取系统C盘的剩余磁盘信息<br>3.按照格式</p>
 <pre><code>http:<span class="regexp">//xml</span>.btplay.net:<span class="number">83</span>/union/<span class="keyword">index</span>.php/setup/add?mac=<span class="variable">%s</span>&amp;disk=<span class="variable">%s</span>&amp;cCapity=<span class="variable">%s</span>&amp;userId=<span class="variable">%d</span>&amp;cpu=<span class="variable">%s</span>&amp;<span class="keyword">rand</span>=<span class="variable">%d</span>
@@ -472,7 +472,7 @@
 <pre><code><span class="number">80002808</span>h：用于解密驱动过滤规则
 <span class="number">8000280</span>Ch：获取驱动规则文件名
 <span class="number">80002810</span>h：关闭驱动保护
-</code></pre><h3 id="驱动更新">驱动更新</h3><p>创建线程：mfc42w+0x92a0用于更新驱动过滤规则和驱动文件<br>该线程创建了三个事件sub_190D0，sub_18F00，sub_1D9D0，三个线程的激活时间为系统运行超过6小时，12小时，2小时<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-7.jpg" alt="">   </p>
+</code></pre><h3 id="驱动更新">驱动更新</h3><p>创建线程：mfc42w+0x92a0用于更新驱动过滤规则和驱动文件<br>该线程创建了三个事件sub_190D0，sub_18F00，sub_1D9D0，三个线程的激活时间为系统运行超过6小时，12小时，2小时<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-7.jpg" alt="">   </p>
 <p>1.事件sub_190D0系统运行超过6小时激活该事件，更新驱动过滤规则<br>1.1读取REGISTRY\MACHINE\SYSTEM\CurrentControlSet\Control\Network子键AuthenticationC和SecurityC的键值，解密出Url地址</p>
 <pre><code><span class="constant">AuthenticationC-</span>---&gt;<span class="symbol">http:</span>/<span class="regexp">/xml.btplay.net:83/union</span><span class="regexp">/uploads/</span><span class="number">27</span>/<span class="number">27</span>.xml
 <span class="constant">SecurityC-</span>---&gt;<span class="symbol">http:</span>/<span class="regexp">/xml.btplay.net:83/union</span><span class="regexp">/uploads/</span><span class="number">27</span>/<span class="number">27</span>.dat
@@ -488,10 +488,10 @@
 </code></pre><p>向指定的服务器</p>
 <pre><code>d<span class="class">.nsonly</span><span class="class">.com</span>:<span class="number">83</span>发送数据，接受远程命令
 </code></pre><p>3.4接受的命令如果是Ctrl则在注册表REGISTRY\MACHINE\SYSTEM\CurrentControlSet\Control写入logEvent，如果是UpDriver则升级驱动，如果是UpConfig则升级驱动过滤规则文件</p>
-<h3 id="记录系统启动次数和驱动安装信息">记录系统启动次数和驱动安装信息</h3><p>在注册表REGISTRY\MACHINE\SYSTEM\CurrentControlSet\Control创建子键Base和Bounds，其中Base记录开机次数，bound写入驱动文件安装时间<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-8.jpg" alt=""></p>
+<h3 id="记录系统启动次数和驱动安装信息">记录系统启动次数和驱动安装信息</h3><p>在注册表REGISTRY\MACHINE\SYSTEM\CurrentControlSet\Control创建子键Base和Bounds，其中Base记录开机次数，bound写入驱动文件安装时间<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-8.jpg" alt=""></p>
 <h3 id="创建tcp过滤设备">创建tcp过滤设备</h3><p>1.打开驱动设备\Device\Tcp，调用函数IoGetDeviceObjectPointer，IoCreateDevice，IoAttachDeviceToDeviceStack创建过滤TCP驱动，向TCP驱动上层中插入自己的TCP过滤驱动</p>
 <p>2.当有http的GET或POST数据时，会触发线程mfc42w+0x92a0的事件，根据驱动过滤规则生成新的数据，之后通过函数IoGetRelatedDeviceObject和IoBuildDeviceIoControlRequest重建一个IRP请求，调用ZwCreateFile函数打开对应的驱动设备\Device\Tcp，然后发送给目标驱动</p>
-<h3 id="自保护">自保护</h3><p>创建线程：mfc42w+0x7560保护驱动自身注册表信息。<br>循环检测驱动注册表是否已创建，如果不存在，则创建，创建方式同功能函数  Autorii 相同，在注册表\System\ControlSet001\Services\mfc42w下生成驱动服务所需的四个子项<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-troj-driver-9.jpg" alt=""></p>
+<h3 id="自保护">自保护</h3><p>创建线程：mfc42w+0x7560保护驱动自身注册表信息。<br>循环检测驱动注册表是否已创建，如果不存在，则创建，创建方式同功能函数  Autorii 相同，在注册表\System\ControlSet001\Services\mfc42w下生成驱动服务所需的四个子项<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-troj-driver-9.jpg" alt=""></p>
 </span>
       
     </div>
@@ -728,7 +728,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -742,7 +742,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

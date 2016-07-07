@@ -2,6 +2,176 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.idhyt.com/2016/06/09/exploit-process-descriptor/</loc>
+    <lastmod>2016-07-07T14:47:40.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/07/07/exploit-cve-2015-1805/</loc>
+    <lastmod>2016-07-07T14:45:17.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2011/06/06/diary-this-year/</loc>
+    <lastmod>2016-07-07T14:42:41.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/05/11/android-reverse-clickbutton/</loc>
+    <lastmod>2016-07-07T14:27:36.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/05/08/android-netbeans-debug-smali/</loc>
+    <lastmod>2016-07-07T14:27:28.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/09/25/android-injection-xposed/</loc>
+    <lastmod>2016-07-07T14:27:22.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/11/28/android-injection-xposed-usage/</loc>
+    <lastmod>2016-07-07T14:27:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/01/10/andorid-work-mode-cpu-gpu-io/</loc>
+    <lastmod>2016-07-07T14:26:54.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2014/01/11/virus-troj-taobao/</loc>
+    <lastmod>2016-07-07T14:25:28.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/11/20/virus-troj-simple/</loc>
+    <lastmod>2016-07-07T14:25:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/12/19/virus-troj-mutil/</loc>
+    <lastmod>2016-07-07T14:25:09.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2014/07/24/virus-malware-winrar/</loc>
+    <lastmod>2016-07-07T14:25:03.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2014/09/10/virus-malware-driver-hmbb/</loc>
+    <lastmod>2016-07-07T14:24:56.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2014/09/02/virus-malware-driver-filter/</loc>
+    <lastmod>2016-07-07T14:24:50.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/11/29/virus-infected-word/</loc>
+    <lastmod>2016-07-07T14:24:43.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/12/03/virus-infected-tem81/</loc>
+    <lastmod>2016-07-07T14:24:36.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/11/25/virus-infected-rmnet/</loc>
+    <lastmod>2016-07-07T14:24:28.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2014/01/05/virus-infected-parite/</loc>
+    <lastmod>2016-07-07T14:24:17.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/12/27/virus-infected-dnf/</loc>
+    <lastmod>2016-07-07T14:24:09.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/11/18/virus-download/</loc>
+    <lastmod>2016-07-07T14:24:01.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/04/21/technic-sql-inject/</loc>
+    <lastmod>2016-07-07T14:23:11.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2012/12/18/technic-alphanumeric-shellcode/</loc>
+    <lastmod>2016-07-07T14:20:50.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/08/13/python-challenge-21-27/</loc>
+    <lastmod>2016-07-07T14:14:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/08/10/python-challenge-11-20/</loc>
+    <lastmod>2016-07-07T14:14:08.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/08/07/python-challenge-0-10/</loc>
+    <lastmod>2016-07-07T14:14:00.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/03/13/exploit-cve-2015-1538/</loc>
+    <lastmod>2016-07-07T14:08:59.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/03/15/exploit-cve-2015-3864/</loc>
+    <lastmod>2016-07-07T14:07:28.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/03/21/exploit-cve-2013-0641/</loc>
+    <lastmod>2016-07-07T14:00:02.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2012/11/20/exploit-cve-2011-0609/</loc>
+    <lastmod>2016-07-07T13:58:36.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/08/01/exploit-cve-2014-7911-exp/</loc>
+    <lastmod>2016-07-07T13:53:14.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/08/31/exploit-privilege-escalation-by-uac/</loc>
+    <lastmod>2016-07-07T13:46:59.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/03/09/exploit-cve-2015-3636/</loc>
+    <lastmod>2016-07-07T13:46:41.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/02/26/exploit-cve-2014-3153/</loc>
+    <lastmod>2016-07-07T13:46:25.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2013/07/01/exploit-cve-2013-0422/</loc>
+    <lastmod>2016-07-07T13:46:02.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.idhyt.com/about/index.html</loc>
     <lastmod>2016-06-22T16:11:37.000Z</lastmod>
   </url>
@@ -9,16 +179,6 @@
   <url>
     <loc>http://blog.idhyt.com/2016/05/09/exploit-kernel-symbol-usage/</loc>
     <lastmod>2016-06-22T15:48:14.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2016/03/09/exploit-cve-2015-3636/</loc>
-    <lastmod>2016-06-14T03:53:56.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2016/06/09/exploit-process-descriptor/</loc>
-    <lastmod>2016-06-08T18:21:53.000Z</lastmod>
   </url>
   
   <url>
@@ -37,43 +197,13 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2016/03/13/exploit-cve-2015-1538/</loc>
-    <lastmod>2016-03-31T09:16:38.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2016/02/26/exploit-cve-2014-3153/</loc>
-    <lastmod>2016-02-26T11:35:16.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.idhyt.com/2013/01/09/exploit-nvidia-elevate-privilege/</loc>
     <lastmod>2016-02-19T09:42:54.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2013/03/21/exploit-cve-2013-0641/</loc>
-    <lastmod>2016-02-19T09:42:49.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/07/01/exploit-cve-2013-0422/</loc>
-    <lastmod>2016-02-19T09:42:44.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2012/11/20/exploit-cve-2011-0609/</loc>
-    <lastmod>2016-02-19T09:42:40.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.idhyt.com/2015/07/31/exploit-cve-2014-7911/</loc>
     <lastmod>2016-02-19T09:42:32.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/08/01/exploit-cve-2014-7911-exp/</loc>
-    <lastmod>2016-02-19T09:42:19.000Z</lastmod>
   </url>
   
   <url>
@@ -84,16 +214,6 @@
   <url>
     <loc>http://blog.idhyt.com/2010/04/25/diary-a-lost-love-letter/</loc>
     <lastmod>2016-01-23T09:38:36.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/08/31/exploit-privilege-escalation-by-uac/</loc>
-    <lastmod>2016-01-23T07:51:25.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2016/01/10/andorid-work-mode-cpu-gpu-io/</loc>
-    <lastmod>2016-01-14T09:44:42.000Z</lastmod>
   </url>
   
   <url>
@@ -137,88 +257,8 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2015/08/13/python-challenge-21-27/</loc>
-    <lastmod>2015-12-31T12:08:27.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/08/10/python-challenge-11-20/</loc>
-    <lastmod>2015-12-31T12:07:34.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/08/07/python-challenge-0-10/</loc>
-    <lastmod>2015-12-31T12:07:21.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/11/20/virus-troj-simple/</loc>
-    <lastmod>2015-12-31T11:58:16.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/12/19/virus-troj-mutil/</loc>
-    <lastmod>2015-12-31T11:58:10.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/07/24/virus-malware-winrar/</loc>
-    <lastmod>2015-12-31T11:57:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/09/10/virus-malware-driver-hmbb/</loc>
-    <lastmod>2015-12-31T11:57:52.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/11/29/virus-infected-word/</loc>
-    <lastmod>2015-12-31T11:57:34.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/12/03/virus-infected-tem81/</loc>
-    <lastmod>2015-12-31T11:57:28.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/11/25/virus-infected-rmnet/</loc>
-    <lastmod>2015-12-31T11:57:22.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/01/05/virus-infected-parite/</loc>
-    <lastmod>2015-12-31T11:57:14.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/12/27/virus-infected-dnf/</loc>
-    <lastmod>2015-12-31T11:57:08.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/11/18/virus-download/</loc>
-    <lastmod>2015-12-31T11:57:00.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2012/12/18/technic-alphanumeric-shellcode/</loc>
-    <lastmod>2015-12-31T11:56:10.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.idhyt.com/2014/10/15/technic-xss-bypass/</loc>
     <lastmod>2015-12-31T11:53:23.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/04/21/technic-sql-inject/</loc>
-    <lastmod>2015-12-31T11:53:10.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2011/06/06/diary-this-year/</loc>
-    <lastmod>2015-12-31T11:47:20.000Z</lastmod>
   </url>
   
   <url>
@@ -247,16 +287,6 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2014/01/11/virus-troj-taobao/</loc>
-    <lastmod>2015-12-31T11:41:08.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/09/02/virus-malware-driver-filter/</loc>
-    <lastmod>2015-12-31T11:37:43.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.idhyt.com/2012/06/07/study-english-topic-composition/</loc>
     <lastmod>2015-12-31T11:34:18.000Z</lastmod>
   </url>
@@ -267,32 +297,12 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2015/11/28/android-injection-xposed-usage/</loc>
-    <lastmod>2015-12-30T09:31:02.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/05/11/android-reverse-clickbutton/</loc>
-    <lastmod>2015-12-28T06:49:02.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/09/25/android-injection-xposed/</loc>
-    <lastmod>2015-12-28T02:20:50.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/05/08/android-netbeans-debug-smali/</loc>
-    <lastmod>2015-12-27T08:55:30.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/404.html</loc>
+    <loc>http://blog.idhyt.com/tags/index.html</loc>
     <lastmod>2015-09-20T14:47:19.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/tags/index.html</loc>
+    <loc>http://blog.idhyt.com/404.html</loc>
     <lastmod>2015-09-20T14:47:19.000Z</lastmod>
   </url>
   

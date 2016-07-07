@@ -56,10 +56,10 @@
 病毒简介病毒运行后会生成进91C7DF6D.cfg和91C7DF6D.dll两个文件，用作盗取用户数据发送到指定的URL地址。该过程会终止杀软进程，修改注册表信息自动运行，最后自删除。
 主要功能模块流程图
 运行过程创建线程,进入线程执行,获取开机运行时间病毒如果伪装成conime.exe，ctfmo">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-steal-s1-1.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-steal-s1-2.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-steal-s1-3.png">
-<meta property="og:updated_time" content="2015-12-31T11:58:16.000Z">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-steal-s1-1.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-steal-s1-2.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-steal-s1-3.png">
+<meta property="og:updated_time" content="2016-07-07T14:25:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="病毒分析-简单盗号木马">
 <meta name="twitter:description" content="一个简单的盗号木马简略分析
@@ -418,13 +418,13 @@
         <span itemprop="articleBody"><p>一个简单的盗号木马简略分析</p>
 <h2 id="调试环境">调试环境</h2><p>Windows xp sp3，Olldbg，010editor</p>
 <h2 id="病毒简介">病毒简介</h2><p>病毒运行后会生成进91C7DF6D.cfg和91C7DF6D.dll两个文件，用作盗取用户数据发送到指定的URL地址。该过程会终止杀软进程，修改注册表信息自动运行，最后自删除。</p>
-<h2 id="主要功能模块流程图">主要功能模块流程图</h2><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-steal-s1-1.png" alt=""></p>
+<h2 id="主要功能模块流程图">主要功能模块流程图</h2><p><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-steal-s1-1.png" alt=""></p>
 <h2 id="运行过程">运行过程</h2><h3 id="创建线程,进入线程执行,获取开机运行时间">创建线程,进入线程执行,获取开机运行时间</h3><p>病毒如果伪装成conime.exe，ctfmon.exe，explorer.exe中任何一个进程运行，则从C:\WINDOWS\system32\dllcache找到该进程并启动[^autorun]。</p>
 <h3 id="创建91C7DF6D-cfg文件并写入数据">创建91C7DF6D.cfg文件并写入数据</h3><p>1.生成路径 C:\WINDOWS\system32\91C7DF6D.cfg 返回长度0x20<br>2.创建91C7DF6D.cfg文件。<br>3.从病毒文件偏移0x5A08处读取0x5c字节的数据，并格式化为”%02X”格式即0xB8字节将0xB8字节数据后边加上”\r\n\r\n”写入91C7DF6D.cfg文件中。</p>
 <h3 id="创建91C7DF6D-dll文件并写入数据">创建91C7DF6D.dll文件并写入数据</h3><p>1.生成路径 C:\WINDOWS\system32\91C7DF6D.dll 返回长度0x20<br>2.创建91C7DF6D.dll文件。<br>3.从病毒文件偏移0x2204处读取0x3800字节数据写入91C7DF6D.dll文件中<br> 从病毒文件偏移0x5A08处读取0x60字节数据写入91C7DF6D.dll文件中</p>
 <h3 id="写入注册表设置自启动">写入注册表设置自启动</h3><p>将91C7DF6D-AEF5-4136-9252-AF030D7A5931 添加到注册表  Software\microsoft\windows\currentversion\Explorer\shellexecutehooks\下随系统Explorer.exe启动。</p>
 <h3 id="查找game-exe进程并终止它">查找game.exe进程并终止它</h3><p>1.将系统进程枚举，之后进行MD5加密计算。<br>2.将计算值与game.exe进程MD5值AF9C0104867ED2841389167E775B8332比较，如果相同则终止它</p>
-<h3 id="删除verclsid-exe，创建注册表">删除verclsid.exe，创建注册表</h3><p>1.查找文件 C:\WINDOWS\system32\VErCLSiD.exe ，如果找到删除，防止自创建CLSID时verclsid.exe认证。<br>2.在HKEY_CLASSES_ROOT下创建注册表新子项：CLsID{91C7DF6D-AEF5-4136-9252-AF030D7A5931}\InprocServer32，值为91C7DF6D.dll和ThreadingModel<br>在Software\microsoft\windows\currentversion\Explorer\shellexecutehooks创建注册表{91C7DF6D-AEF5-4136-9252-AF030D7A5931}值为Apartment<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-steal-s1-2.png" alt=""></p>
+<h3 id="删除verclsid-exe，创建注册表">删除verclsid.exe，创建注册表</h3><p>1.查找文件 C:\WINDOWS\system32\VErCLSiD.exe ，如果找到删除，防止自创建CLSID时verclsid.exe认证。<br>2.在HKEY_CLASSES_ROOT下创建注册表新子项：CLsID{91C7DF6D-AEF5-4136-9252-AF030D7A5931}\InprocServer32，值为91C7DF6D.dll和ThreadingModel<br>在Software\microsoft\windows\currentversion\Explorer\shellexecutehooks创建注册表{91C7DF6D-AEF5-4136-9252-AF030D7A5931}值为Apartment<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-steal-s1-2.png" alt=""></p>
 <h3 id="注册表操作，设置为自启动">注册表操作，设置为自启动</h3><p>1.打开注册表SOFTWARE{9184057B-D51B-4C2A-B779-EB4F548E9FDA}，如果该注册表不存在，则退出<br>2.如果该注册表存在，则枚举注册表下的所有子项并删除。<br>3.在注册表目录HKEY_LOCAL_MACHINE创建新子项SOFTWARE{9184057B-D51B-4C2A-B779-EB4F548E9FDA}<br>4.将当前进程设置为SeBackupPrivilege权限（备份注册表），删除liv<em>.tmp文件<br>5.将注册表Software\microsoft\windows\currentversion\Explorer所有项及子项备份到临时文件liv</em>.tmp文件中。<br>6.将当前进程设置为SeRestorePrivilege权限（还原注册表），从liv<em>.tmp临时文件中恢复注册表信息。<br>7.打开注册表ShellExecuteHooks\SOFTWARE{9184057B-D51B-4C2A-B779-EB4F548E9FDA}设置值的名称为｛91C7DF6D-AEF5-4136-9252-AF030D7A5931}<br>8.调用函数RegFlushKey将修改信息写入磁盘<br>9.删除临时文件liv</em>.tmp，重复一次操作确保修改注册表成功。</p>
 <h3 id="加载91C7DF6D-dll运行s200函数">加载91C7DF6D.dll运行s200函数</h3><p>1.调用函数RegQueryValueExA查看注册表Software\microsoft\windows\currentversion\Explorer\shellexecutehooks{91C7DF6D-AEF5-4136-9252-AF030D7A5931}是否存在。<br>2.如果存在，则加载91C7DF6D.dll（功能见0xD）运行s200函数(功能见0xE)。<br>3.如果不存在，重复步骤0x6中的创建注册表操作</p>
 <h3 id="自保护">自保护</h3><p>获取系统运行时间与0x61CC6C3(大约28.5分钟)，如果小于等于,重复设置自启动操作，总共重复三次，每次延时1s</p>
@@ -480,7 +480,7 @@ D7DB952BB0FA044F2B9A22FEADB37973 tqat.<span class="function"><span class="title"
 )
 </code></pre><p>4.创建线程0x10003481<br>4.1 解密出URL：<a href="http://www.y0uku1.com/cia/bike.asp，方法同线程0x100021d9" target="_blank" rel="external">http://www.y0uku1.com/cia/bike.asp，方法同线程0x100021d9</a><br>4.2 生成新的URL：<a href="http://www.y0uku1.com/cia/mb.asp" target="_blank" rel="external">http://www.y0uku1.com/cia/mb.asp</a><br>4.3 通过函数GetComputerNameA得到计算机名字<br>4.4 按照格式”?A=%s&amp;c=%s&amp;u=%s”生成新的URL <a href="http://www.y0uku1.com/cia/mb.asp?A=putip&amp;c=TEST-D43880C7BB&amp;u=" target="_blank" rel="external">http://www.y0uku1.com/cia/mb.asp?A=putip&amp;c=TEST-D43880C7BB&amp;u=</a><br>4.5 从URL中读取数据，过程同线程0x100021d9中的0x3<br>4.6 延时10秒退出。</p>
 <p>5.在当前进程中查找特征值<br>5.1 通过IsbadReadPtr函数判断进程基址开始的0x1000字节是否具有访问权限。<br>5.2 如果具有访问权将0x1000字节的数据读到内存中，然后与特征值匹配，如果找到特征值，则返回偏移量，之后加上基址得到绝对地址。<br>5.3 如果查找不到特征值则继续从进程中拷贝数据，每次0x1000字节，知道将当前进程搜索完。</p>
-<p>6.设置Hook函数, 记录键盘数据发送的指定的链接地址。<br>该处举例子说明，如果在当前进程0x400004出找到了特征值，则将该处改为jmp 3F0000，在3F0000处代码为jmp 100037E8，这样当游戏进程启动时就会跳转到dll里边执行相应的操作，执行完之后再跳回去。如下图所示：<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-steal-s1-3.png" alt=""></p>
+<p>6.设置Hook函数, 记录键盘数据发送的指定的链接地址。<br>该处举例子说明，如果在当前进程0x400004出找到了特征值，则将该处改为jmp 3F0000，在3F0000处代码为jmp 100037E8，这样当游戏进程启动时就会跳转到dll里边执行相应的操作，执行完之后再跳回去。如下图所示：<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-steal-s1-3.png" alt=""></p>
 <h4 id="线程0x100021d9功能：解密url，下载数据">线程0x100021d9功能：解密url，下载数据</h4><p>1.解密URL<br>1.1 读取91C7DF6D.dll文件中数据，去掉\r\n<br>1.2 DB2C93C09AD60F3BC9A2C35EDF1D148220000002200000072F18A7B04B578B3FCDA357BEAB38D0A2BAB9D6453B534ADEA82796BB1A3C81E69F572F18A7B04B578B3FCDA357BEAB38D0A2BAB9D6453B534ADEA82796BB1A3C81E69F5<br>1.3 将偏移0x18处开始的0x22个的数据分别与前0x10字节的数据相异或，再与0x37相异或得到解密的URL地址为<a href="http://www.y0uku1.com/cia/bike.asp" target="_blank" rel="external">http://www.y0uku1.com/cia/bike.asp</a></p>
 <p>2.生成最终URL<br>2.1 获取cfg文件的前六个字节数据2DB2C9进行MD5加密，得到长度为0x10，然后再按照”%02X”格式生成0x20大小的数据18CE4D37773396E1332CCEAD3196AF50<br>2.2 最后按照一定的格式生成最终的URL链接：<br><a href="http://www.y0uku1.com/cia/bike.asp?Re=&amp;s=&amp;A=&amp;P=&amp;MB=&amp;wwwww=v&amp;H=&amp;PIN=&amp;R=&amp;RG=-1&amp;M=-1&amp;M1=-1&amp;mac=&amp;RG1=-1&amp;Z=:18CE4D37773396E1332CCEAD3196AF50" target="_blank" rel="external">http://www.y0uku1.com/cia/bike.asp?Re=&amp;s=&amp;A=&amp;P=&amp;MB=&amp;wwwww=v&amp;H=&amp;PIN=&amp;R=&amp;RG=-1&amp;M=-1&amp;M1=-1&amp;mac=&amp;RG1=-1&amp;Z=:18CE4D37773396E1332CCEAD3196AF50</a></p>
 <p>3.访问链接下载数据<br>3.1 加载wininet.dll找到InternetOpenUrl函数地址<br>3.2 打开本地目录C:\Windows\System32\下的wininet.dll文件，然后从偏移0x14E5A处读取0x10字节数据，判断是否与得到的InternetOpenUrl函数地址不相同，则将InternetOpenUrl函数地址写入该处，之后调用InternetOpenUrl函数打开链接<a href="http://www.y0uku1.com/cia/mb.asp?A=putip&amp;c=TEST-D43880C7BB&amp;u=" target="_blank" rel="external">http://www.y0uku1.com/cia/mb.asp?A=putip&amp;c=TEST-D43880C7BB&amp;u=</a><br>下载数据，大小为0x104字节。<br>3.3 延时2分钟，然后循环下载数据。</p>
@@ -716,7 +716,7 @@ D7DB952BB0FA044F2B9A22FEADB37973 tqat.<span class="function"><span class="title"
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -730,7 +730,7 @@ D7DB952BB0FA044F2B9A22FEADB37973 tqat.<span class="function"><span class="title"
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

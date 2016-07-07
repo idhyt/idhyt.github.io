@@ -52,19 +52,19 @@
 <meta property="og:description" content="感染型病毒rmnet简略行为分析
 调试环境Windows xp sp3，Olldbg，010editor
 病毒简介该程序运行后，先自检测是否为C\Program Files\Microsoft\DesktopLayer.exe，然后后台创建ie进程并注入，最终遍历系统磁盘和可移动盘感染后缀为exe,dll,html,htm的文件，并感染可移动磁盘（U盘）。同时与远程服务器进行通信，下载程序并执行。">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-1.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-2.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-6.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-7.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-8.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-9.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-10.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-3.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-4.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-5.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-11.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-12.png">
-<meta property="og:updated_time" content="2015-12-31T11:57:22.000Z">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-1.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-2.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-6.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-7.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-8.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-9.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-10.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-3.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-4.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-5.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-11.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-12.png">
+<meta property="og:updated_time" content="2016-07-07T14:24:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="病毒分析-rmnet感染型">
 <meta name="twitter:description" content="感染型病毒rmnet简略行为分析
@@ -423,9 +423,9 @@
 <h2 id="病毒简介">病毒简介</h2><p>该程序运行后，先自检测是否为C\Program Files\Microsoft\DesktopLayer.exe，然后后台创建ie进程并注入，最终遍历系统磁盘和可移动盘感染后缀为exe,dll,html,htm的文件，并感染可移动磁盘（U盘）。同时与远程服务器进行通信，下载程序并执行。<br>该病毒母体文件代码被混淆，无法用ida和od调试，通过行为监控得知其注入ie进程，因此将其注入代码从ie进程中dump出来进行分析。</p>
 <h2 id="运行过程">运行过程</h2><h3 id="自检测">自检测</h3><p>检测自身是否在C\Program Files\Microsoft\DesktopLayer.exe，不是的话拷贝自身到该目录下重新运行</p>
 <h3 id="绕过防火墙">绕过防火墙</h3><p>创建IEXPLORE.EXE进程，设置为后台运行，将自身注入到IE进程中运行，因此可以绕过本地防火墙与远程服务器进行通信。</p>
-<h3 id="自启动">自启动</h3><p>创建线程Thread_1 设置自启动<br>获取注册表Software\Microsoft\Windows NT\CurrentVersion\Winlogon\userinit键值，判断自身是否在其键值中，不存在将自身写入该键值，设置开机自启动<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-1.png" alt=""></p>
-<h3 id="远程下载数据">远程下载数据</h3><p>1.线程Thread_2 测试网络链接<br>不断访问google.com:80，bing.com:80，yahoo.com:80测试网络是否正常。<br>2.线程Thread_3 记录系统时间<br>循环写入系统时间，60秒循环一次，写入文件C:\Program Files\Internet Explorer\dmlconf.dat<br>3.线程Thread_4 与远程服务器连接，下载数据<br>与远程服务器443端口，域名为fget-career.com建立通信，不断从服务器下载文件并调用ShellexecuteA执行。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-2.png" alt=""></p>
-<h3 id="Hook函数ZwWriteVirtualMemory">Hook函数ZwWriteVirtualMemory</h3><p>1.HOOK过程如下图所示<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-6.png" alt=""><br>2.之后通过函数FindFirstFileA查找文件C:\WINDOWS\system32\svchost.exe<br>3.调用CreateProcess函数创建过进程svchost.exe之后就会跳入HOOK代码中执行。</p>
+<h3 id="自启动">自启动</h3><p>创建线程Thread_1 设置自启动<br>获取注册表Software\Microsoft\Windows NT\CurrentVersion\Winlogon\userinit键值，判断自身是否在其键值中，不存在将自身写入该键值，设置开机自启动<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-1.png" alt=""></p>
+<h3 id="远程下载数据">远程下载数据</h3><p>1.线程Thread_2 测试网络链接<br>不断访问google.com:80，bing.com:80，yahoo.com:80测试网络是否正常。<br>2.线程Thread_3 记录系统时间<br>循环写入系统时间，60秒循环一次，写入文件C:\Program Files\Internet Explorer\dmlconf.dat<br>3.线程Thread_4 与远程服务器连接，下载数据<br>与远程服务器443端口，域名为fget-career.com建立通信，不断从服务器下载文件并调用ShellexecuteA执行。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-2.png" alt=""></p>
+<h3 id="Hook函数ZwWriteVirtualMemory">Hook函数ZwWriteVirtualMemory</h3><p>1.HOOK过程如下图所示<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-6.png" alt=""><br>2.之后通过函数FindFirstFileA查找文件C:\WINDOWS\system32\svchost.exe<br>3.调用CreateProcess函数创建过进程svchost.exe之后就会跳入HOOK代码中执行。</p>
 <h3 id="执行HOOK代码，注入dll">执行HOOK代码，注入dll</h3><p>1.调用函数ZwQueryInformationProcess获取进程信息，+0x8处存放进程进程信息指针PVOID ProcessInformation。</p>
 <pre><code>NTSTATUS WINAPI ZwQueryInformationProcess(
   <span class="number">__</span><span class="keyword">in</span>          HANDLE ProcessHandle,
@@ -442,17 +442,17 @@
     ULONG_PTR UniqueProcessId<span class="comment">;</span>
     PVOID Reserved3<span class="comment">;</span>
 } PROCESS_BASIC_INFORMATION<span class="comment">;</span>
-</code></pre><p>3.PEB结构+0x8处存放着进程基址。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-7.png" alt=""></p>
+</code></pre><p>3.PEB结构+0x8处存放着进程基址。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-7.png" alt=""></p>
 <p>4.从0x10000000开始，循环在当前进程和目标进程（svchost.exe）申请相同的地址空间，每次增加0x1000，检测是否可用，直到0x30000000结束，得到相同的地址空间（0x20020000）。</p>
 <p>5.之后将注入dll在本进程中申请的空间中（0x20020000）进行区段重定位，之后直接拷贝到目标进程相同的地址空间中（0x20020000）。这样注入目标进程运行后就不需要重定位了。</p>
 <h3 id="自检测-1">自检测</h3><p>1.判断互斥体对象Global\SYSTEM_DEMETRA_MAIN是否存在，如果不存在则通过注册表找到IE路径打开IE。<br>2.恢复HOOK函数</p>
 <h3 id="注入dll">注入dll</h3><p>1.通过CreateFileMappingA函数生成一个名字为Global\SYSTEM_DEMETRA_MAIN的文件映射对象<br>2.通过MapViewOfFile() 将0x7C00大小的dll文件映射到当前进程。<br>3.之后将该dll文件注入到svchost进程中，过程同0x3和0x4。<br>4.等待10秒之后调用UnmapViewOfFile释放映射对象。</p>
 <h2 id="注入的两个DLL文件">注入的两个DLL文件</h2><p>405825.DLL和410A25.dll</p>
-<h3 id="远控">远控</h3><p>1.判断进程目录下是否存在complete.dat文件<br>2.获取固定盘卷序列号，系统版本号，平台等信息<br>3.在进程同目录下创建dmlconf.dat文件，通过GetSystemTimeAsFileTime获取系统文件时间写入文件中。<br>4.创建线程0x10008E60实现自启动。<br>创建一个死循环，1秒循环次，在注册表Software\Microsoft\WindowsNT\CurrentVersion<br>\Winlogon的Userinit键值项里数值数据C:\WINDOWS\system32\userinit.exe,后边增加新键值c:\program files\microsoft\desktoplayer.exe，无限循环。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-8.png" alt=""><br>Userinit.exe是Windows操作系统一个关键进程。用于管理不同的启动顺序。<br>5.创建线程10008858检测网络<br>5.1创建非阻塞模式的socket<br>5.2通过函数Connect不断访问链接google.com:80<br>5.3通过select函数监视网页能否被访问。<br>6.创建线程10008A51记录系统文件时间<br>创建一个死循环，1分钟循环1次，在进程同目录的dmlconf.dat文件中写入系统文件时间。<br>7.线程1000687B和10008B3F实现远程截屏，关机等操作<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-9.png" alt=""><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-10.png" alt=""></p>
-<h3 id="感染磁盘">感染磁盘</h3><h4 id="感染pe文件">感染pe文件</h4><p>线程Thread_5 感染磁盘文件，遍历系统磁盘和可移动盘，对盘符下的所有exe，dll，html，htm文件进行感染。感染之前先判断磁盘剩余空间，磁盘剩余空间大于0x80000才进行感染。<br>遍历磁盘和可移动盘，感染Exe和dll：先检测是否存在节区.rmnet，如果存在表明感染过，不进行感染。如果不存在，在最后一个节中增加增加新节.rmnet，设置块属性为0xE0000020即可写代码段，并将入口指向该节区。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-3.png" alt=""></p>
-<h4 id="感染html文件">感染html文件</h4><p>遍历磁盘和可移动盘，感染Html和Htm文件：先读取文件最后9个字节，看是否为，如果是的话表明感染过，不进行感染。如果不是则进行感染，将携带病毒自身数据的VB脚本文件写入文件最后。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-4.png" alt=""><br>一旦打开Html文件，该脚本会释放一个svchost.exe（写入的病毒自身）运行并对计算机进行感染。</p>
-<h4 id="感染可移动磁盘">感染可移动磁盘</h4><p>线程Thread_6 感染可移动磁盘，在可移动盘创建autorun.inf文件，获取其大小，如果大于3则读取其中前3个字节，如果是RmN，则表明感染过，不进行感染。<br>如果不存在，同目录下创建RECYCLER\ S-1-5-21-1454471165-515967899-682003330-1003文件目录，属性设置为只读，隐藏，在该目录下生成YBakjuc.exe文件，写入数据（病毒自身）。<br>在autorun.inf文件中写入数据，插如U盘自动运行病毒文件YBakjuc.exe。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-5.png" alt=""></p>
-<h3 id="HOOK">HOOK</h3><p>1.创建线程StartAddress,HOOK函数ZwResumeThread 和 ExitProcess。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-11.png" alt=""><br>2.创建线程0x10006606进入HOOK代码。循环判断是否存在互斥体Global\SYSTEM_DEMETRA_SHUTDOWN，如果存在恢复HOOK函数。<br>3.HOOK代码通过 OpenFileMappingA函数生成一个名字为Global\SYSTEM_DEMETRA_LIST的文件映射对象，之后将该文件注入到除自己所有的进程当中。注入方式和母体相同。<br>4.创建互斥对象Global\SYSTEM_DEMETRA_CONTROL。创建成功则创建线程0x10004523。<br>5.线程0x10004523每5秒循环一次通过Process32First和Process32Next枚举所有进程，将dll注入到除自己所有的进程中。注入方式同母体相同。<br>6.通过CreateRemoteThread函数创建远程线程在其他进程中运行。<br>7.HOOK网络传输函数<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-infection-rmnet-12.png" alt=""></p>
+<h3 id="远控">远控</h3><p>1.判断进程目录下是否存在complete.dat文件<br>2.获取固定盘卷序列号，系统版本号，平台等信息<br>3.在进程同目录下创建dmlconf.dat文件，通过GetSystemTimeAsFileTime获取系统文件时间写入文件中。<br>4.创建线程0x10008E60实现自启动。<br>创建一个死循环，1秒循环次，在注册表Software\Microsoft\WindowsNT\CurrentVersion<br>\Winlogon的Userinit键值项里数值数据C:\WINDOWS\system32\userinit.exe,后边增加新键值c:\program files\microsoft\desktoplayer.exe，无限循环。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-8.png" alt=""><br>Userinit.exe是Windows操作系统一个关键进程。用于管理不同的启动顺序。<br>5.创建线程10008858检测网络<br>5.1创建非阻塞模式的socket<br>5.2通过函数Connect不断访问链接google.com:80<br>5.3通过select函数监视网页能否被访问。<br>6.创建线程10008A51记录系统文件时间<br>创建一个死循环，1分钟循环1次，在进程同目录的dmlconf.dat文件中写入系统文件时间。<br>7.线程1000687B和10008B3F实现远程截屏，关机等操作<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-9.png" alt=""><br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-10.png" alt=""></p>
+<h3 id="感染磁盘">感染磁盘</h3><h4 id="感染pe文件">感染pe文件</h4><p>线程Thread_5 感染磁盘文件，遍历系统磁盘和可移动盘，对盘符下的所有exe，dll，html，htm文件进行感染。感染之前先判断磁盘剩余空间，磁盘剩余空间大于0x80000才进行感染。<br>遍历磁盘和可移动盘，感染Exe和dll：先检测是否存在节区.rmnet，如果存在表明感染过，不进行感染。如果不存在，在最后一个节中增加增加新节.rmnet，设置块属性为0xE0000020即可写代码段，并将入口指向该节区。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-3.png" alt=""></p>
+<h4 id="感染html文件">感染html文件</h4><p>遍历磁盘和可移动盘，感染Html和Htm文件：先读取文件最后9个字节，看是否为，如果是的话表明感染过，不进行感染。如果不是则进行感染，将携带病毒自身数据的VB脚本文件写入文件最后。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-4.png" alt=""><br>一旦打开Html文件，该脚本会释放一个svchost.exe（写入的病毒自身）运行并对计算机进行感染。</p>
+<h4 id="感染可移动磁盘">感染可移动磁盘</h4><p>线程Thread_6 感染可移动磁盘，在可移动盘创建autorun.inf文件，获取其大小，如果大于3则读取其中前3个字节，如果是RmN，则表明感染过，不进行感染。<br>如果不存在，同目录下创建RECYCLER\ S-1-5-21-1454471165-515967899-682003330-1003文件目录，属性设置为只读，隐藏，在该目录下生成YBakjuc.exe文件，写入数据（病毒自身）。<br>在autorun.inf文件中写入数据，插如U盘自动运行病毒文件YBakjuc.exe。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-5.png" alt=""></p>
+<h3 id="HOOK">HOOK</h3><p>1.创建线程StartAddress,HOOK函数ZwResumeThread 和 ExitProcess。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-11.png" alt=""><br>2.创建线程0x10006606进入HOOK代码。循环判断是否存在互斥体Global\SYSTEM_DEMETRA_SHUTDOWN，如果存在恢复HOOK函数。<br>3.HOOK代码通过 OpenFileMappingA函数生成一个名字为Global\SYSTEM_DEMETRA_LIST的文件映射对象，之后将该文件注入到除自己所有的进程当中。注入方式和母体相同。<br>4.创建互斥对象Global\SYSTEM_DEMETRA_CONTROL。创建成功则创建线程0x10004523。<br>5.线程0x10004523每5秒循环一次通过Process32First和Process32Next枚举所有进程，将dll注入到除自己所有的进程中。注入方式同母体相同。<br>6.通过CreateRemoteThread函数创建远程线程在其他进程中运行。<br>7.HOOK网络传输函数<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-infection-rmnet-12.png" alt=""></p>
 </span>
       
     </div>
@@ -685,7 +685,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -699,7 +699,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

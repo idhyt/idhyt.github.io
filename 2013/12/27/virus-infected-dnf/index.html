@@ -52,16 +52,16 @@
 <meta property="og:description" content="virut感染型盗号木马简略分析(DNF假面盗号木马)
 病毒简介该木马运行后母体会在%System32%\目录下释放多个病毒文件并感染系统正常rasapi32.dll，之后在系统添加自己的网络传输协议并优先于系统对应的正常服务，当用户有访问网络行为就会触发该病毒运行。病毒运行后会关闭windows系统保护，结束掉杀软，找到DNF游戏进程，获取游戏帐号信息通过代理服务器发送给远程洗信者。
 母体释放的">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-1.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-2.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-3.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-4.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-5.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-6.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-7.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-8.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-9.png">
-<meta property="og:updated_time" content="2015-12-31T11:57:08.000Z">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-1.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-2.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-3.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-4.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-5.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-6.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-7.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-8.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-9.png">
+<meta property="og:updated_time" content="2016-07-07T14:24:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="病毒分析-virut感染型盗号木马">
 <meta name="twitter:description" content="virut感染型盗号木马简略分析(DNF假面盗号木马)
@@ -428,27 +428,27 @@
 释放后的文件名: dlsp.dll
 资源文件<span class="number">4</span>: 文件偏移<span class="number">0x2A100</span>处size=<span class="number">0xE000</span>
 释放后的文件名: keepdaili.exe和qqsockdaili.exe
-</code></pre><p>3在%System32%\目录下创建文件dllinject.tmp并写入创建的随机文件名0AFG.dll，子文件加载此dll时会从该文件中读取dll名。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-1.png" alt=""></p>
-<h3 id="LSP劫持">LSP劫持</h3><p>1枚举当前系统可用协议，注册四个网络传输协议并设置优先于系统协议，当有网络访问时会优先调用注册的协议链实现病毒自身功能<br>1.1调用函数WSCEnumProtocols初始化一个协议信息结构LPWSAPROTOCOL_INFOW用作分层提供者<br>1.2 调用函数WSCInstallProvider注册传输协议服务提供者dlsp.dll（母体释放）<br>1.3调用函数WSCEnumProtocols初始化一个协议信息结构LPWSAPROTOCOL_INFOW用作协议链并添加四个协议，并调用WSCInstallProvider安装这个协议链<br>Layered IP,Layered TCP/IP over[MSAFD Tcpip [TCP/IP]],Layered UDP/IP over[MSAFD Tcpip [UDP/IP]],Layered RAW/IP over[MSAFD Tcpip [RAW/IP]]<br>1.4 调用函数WSCWriteProviderOrder将新安装的协议链目录条目放在最上面<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-2.png" alt=""></p>
+</code></pre><p>3在%System32%\目录下创建文件dllinject.tmp并写入创建的随机文件名0AFG.dll，子文件加载此dll时会从该文件中读取dll名。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-1.png" alt=""></p>
+<h3 id="LSP劫持">LSP劫持</h3><p>1枚举当前系统可用协议，注册四个网络传输协议并设置优先于系统协议，当有网络访问时会优先调用注册的协议链实现病毒自身功能<br>1.1调用函数WSCEnumProtocols初始化一个协议信息结构LPWSAPROTOCOL_INFOW用作分层提供者<br>1.2 调用函数WSCInstallProvider注册传输协议服务提供者dlsp.dll（母体释放）<br>1.3调用函数WSCEnumProtocols初始化一个协议信息结构LPWSAPROTOCOL_INFOW用作协议链并添加四个协议，并调用WSCInstallProvider安装这个协议链<br>Layered IP,Layered TCP/IP over[MSAFD Tcpip [TCP/IP]],Layered UDP/IP over[MSAFD Tcpip [UDP/IP]],Layered RAW/IP over[MSAFD Tcpip [RAW/IP]]<br>1.4 调用函数WSCWriteProviderOrder将新安装的协议链目录条目放在最上面<br><img src="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-2.png" alt=""></p>
 <h3 id="自保护">自保护</h3><p>1调用函数FindFirstFileA检测文件%System32%\rasapi32.dll.bak是否存在，存在则表示感染过，则不进行感染。</p>
 <p>2获取进程%System32%\winlogon.exe句柄，保护该进程不被结束<br>2.1检测系统平台号是否为2（2000/xp/2003/2008/Vista/ net）不是则直接退出<br>2.2检测操作系统主版本号是否小于4，如果小于4则直接退出<br>2.3枚举系统当前正在运行的进程并依次获得当前的进程路径判断是否为<br>%System32%，如果是的话获得进程全路径判断是为%System32%\winlogon.exe<br>2.4如果是winlogon.exe进程则获得进程ID，打开进程句柄调用函数NtQuerySystemInformation传递0x10号参数获得系统句柄信息<br>2.5遍历该句柄信息数组得到%System32%\winlogon.exe调用的句柄，调用DuplicateHandle获取句柄，调用函数NtQueryObject获取句柄名，判断是否为WINDOWS\SYSTEM32或WINNT\SYSTEM32，如果是的话再调用DuplicateHandle将句柄dump到当前母体进程。<br>2.6内核对象的句柄会在新进程中，产生一条记录，并且该内核对象计数增加，内核对象在所有引用未删除时不会销毁，因此将句柄dump到母体进程可以防止其进程被结束掉。</p>
 <h3 id="关闭系统保护">关闭系统保护</h3><p>1根据系统版本的不同读取%System32\sfc_os.dll或%System32\sfc.dll读取到内存中，在.text段查找字符串8B C6 A3 3B 如果找到，将8B C5改为90 90，NOP掉系统保护函数。</p>
 <p>2将%System32\sfc_os.dll重命名为trash5D88E78(trash后边数字为系统运行时间)<br>将修改的数据恢复到%System32\sfc_os.dll文件即完成对sfc_os.dll的修改。</p>
 <p>3打开注册表”SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon”生成两个子键<br>“SFCDisable” = 0xFFFFFF9D和SFCScan”= 0</p>
 <p>4其中”SFCDisable” = 0xFFFFFF9D， 0xFFFFFF9D表示彻底关闭，1为关闭但下次提示开启，2为仅下次启动时关闭，4为开启但提示关闭。”SFCScan”= 0  0 = 禁用, 1 = 启动时扫描, 2 = 扫描一次</p>
-<h3 id="dll劫持">dll劫持</h3><p>1.感染%System32%\rasapi32.dll文件<br>1.1将%System32%目录下的文件rasapi32.dll（正常文件）拷贝到同目录下并且重命名为rasapi32.dll.bak1<br>1.2重命名rasapi32.dll（正常文件）文件为rasapi32.bak(正常文件)<br>1.3感染rasapi32.dll.bak1，添加新节360写入一段shellcode，并将入口点该为该节。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-3.png" alt=""><br>1.4将%System32%\dllcache\目录下的文件rasapi32.dll（正常文件）重命名为rasapi32.dll.gaga（正常文件）<br>1.5将感染的文件rasapi32.dll.bak1拷贝到%System32%\dllcache\目录下并重命名为rasapi32.dll（被感染的文件）<br>1.6将%System32%\dllcache\目录下感染的文件rasapi32.dll拷贝到%System32%目录下，至此即完成了感染%System32%\rasapi32.dll文件的过程。</p>
+<h3 id="dll劫持">dll劫持</h3><p>1.感染%System32%\rasapi32.dll文件<br>1.1将%System32%目录下的文件rasapi32.dll（正常文件）拷贝到同目录下并且重命名为rasapi32.dll.bak1<br>1.2重命名rasapi32.dll（正常文件）文件为rasapi32.bak(正常文件)<br>1.3感染rasapi32.dll.bak1，添加新节360写入一段shellcode，并将入口点该为该节。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-3.png" alt=""><br>1.4将%System32%\dllcache\目录下的文件rasapi32.dll（正常文件）重命名为rasapi32.dll.gaga（正常文件）<br>1.5将感染的文件rasapi32.dll.bak1拷贝到%System32%\dllcache\目录下并重命名为rasapi32.dll（被感染的文件）<br>1.6将%System32%\dllcache\目录下感染的文件rasapi32.dll拷贝到%System32%目录下，至此即完成了感染%System32%\rasapi32.dll文件的过程。</p>
 <p>2.被感染的rasapi32.dll文件<br>从PEB结构找到kerner32.dll地址，遍历找到GetProAddress函数，之后获取LoadLibrary地址，调用LoadLibrary去加载母体释放的dlsp.dll，之后跳到OEP去实现dll自身功能。</p>
-<h3 id="自删除">自删除</h3><p>在母体当前路径生成updataself.bat文件，写入0x5E字节数据并调用WinExec执行实现自删除。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-4.png" alt=""></p>
+<h3 id="自删除">自删除</h3><p>在母体当前路径生成updataself.bat文件，写入0x5E字节数据并调用WinExec执行实现自删除。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-4.png" alt=""></p>
 <h2 id="母体释放的dlsp-dll功能">母体释放的dlsp.dll功能</h2><h3 id="加载释放子体">加载释放子体</h3><p>获取c:\windows\system32\dllinject.tmp文件中保存的随机名称dll名字OAFG，调用LoadLibrary将其加载。</p>
 <h3 id="HOOK网络函数进行网络劫持">HOOK网络函数进行网络劫持</h3><p>dlsp.dll中WSPStartup函数功能<br>1.母体中将其注册的协议链目录条目放在最上面，所以当有网络访问时会优先调用该函数。</p>
-<p>2.该函数首先会获取WSPPROC_TABLE结构，之后检测调用进程是否为DNF.exe进程，如果是的话，HOOK掉 WSPPROC_TABLE偏移+0x5C处的WSPSend函数。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-5.png" alt=""></p>
-<p>3.hook函数sub_100013F0功能实现截获WSPSend函数发送的数据包并存放到C:\windows\system32\DNFP.TMP<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-6.png" alt=""></p>
-<h2 id="随机生成的OAFG-dll功能">随机生成的OAFG.dll功能</h2><p>1获取当前加载模块，判断该模块是否为杀软模块，如果是的话调用exit函数退出该模块。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-7.png" alt=""></p>
+<p>2.该函数首先会获取WSPPROC_TABLE结构，之后检测调用进程是否为DNF.exe进程，如果是的话，HOOK掉 WSPPROC_TABLE偏移+0x5C处的WSPSend函数。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-5.png" alt=""></p>
+<p>3.hook函数sub_100013F0功能实现截获WSPSend函数发送的数据包并存放到C:\windows\system32\DNFP.TMP<br><img src="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-6.png" alt=""></p>
+<h2 id="随机生成的OAFG-dll功能">随机生成的OAFG.dll功能</h2><p>1获取当前加载模块，判断该模块是否为杀软模块，如果是的话调用exit函数退出该模块。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-7.png" alt=""></p>
 <p>2遍历进程是否存在进程keepdaili.exe（功能见Func1），如果不存在则调用Winexec运行该进程。</p>
 <p>3判断当前加载进程如果是DNF.exe，则执行Func2执行释放文件功能函数，调用Func3函数获取最后一次登陆的游戏大区写入DNFP.TMP文件中，之后执行Func4解密出URL并将获取到的游戏信息按照格式填写到NNFP.TMP文件中。</p>
 <p>4如果不是DNF.exe则检测是否为qqlogin.exe进程，如果是则调用Winexec隐藏运行DNFGame.exe(母体释放)，完成动态检测登陆界面获取账户信息等操作，之后创建线程10s循环一次从C:\windows\system32\DNFP.TMP文件读取URL地址，调用InternetReadFile从该URL处下载数据。下载成功之后结束掉qqlogin.exe进程。</p>
 <p>5如果不是qqlogin.exe进程则判断是否为DNFChina.exe进程，如果是则执行Func1执行释放文件功能函数，删除DNF_CHINA.cfg配置文件，该文件中记录登陆的游戏角色等信息，之后创建线程执行Func6隐藏Button按钮。</p>
-<h2 id="func1:_qqsockdaili功能">func1: qqsockdaili功能</h2><h3 id="远控">远控</h3><p>1获取C:\windows\system32\DNFP.TMP中的URL<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-8.png" alt=""></p>
+<h2 id="func1:_qqsockdaili功能">func1: qqsockdaili功能</h2><h3 id="远控">远控</h3><p>1获取C:\windows\system32\DNFP.TMP中的URL<br><img src="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-8.png" alt=""></p>
 <p>2遍历进程查找是否存在qqsockdaili.exe进程，如果存在则调用TerminateProcess将其结束</p>
 <p>3调用Winexec（qqsockdaili.exe 8881 127.0.0.1:8090）添加参数重新打开qqsockdaili.exe</p>
 <p>4通过InternetReadFile读取命令：</p>
@@ -462,7 +462,7 @@
 <p>3如果是GET，HEAD和POST则向代理服务器5000端口发送Http请求，通过代理服务器与远程洗信者建立链接，如果是CONECT则直接与远程洗信者80端口发送Http请求进行链接。</p>
 <p>4通过send函数输入账户密码登陆代理服务器。</p>
 <p>5通过easy2game代理给远程洗信者发送帐号密码，进行洗号</p>
-<h2 id="Func2_释放文件">Func2 释放文件</h2><p>功能函数sub_10003251，LSP劫持<br>1获取当前进程路径，之后检测该目录下是否存在母体释放的几个文件（dllinject.tmp，dss.txt，OAFG.dll，DNFgame.exe，dlsp.dll，rasapi32.dll），如果不存在，则从%System32%\目录下拷贝过来。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/troj-dnf-9.png" alt=""></p>
+<h2 id="Func2_释放文件">Func2 释放文件</h2><p>功能函数sub_10003251，LSP劫持<br>1获取当前进程路径，之后检测该目录下是否存在母体释放的几个文件（dllinject.tmp，dss.txt，OAFG.dll，DNFgame.exe，dlsp.dll，rasapi32.dll），如果不存在，则从%System32%\目录下拷贝过来。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/troj-dnf-9.png" alt=""></p>
 <p>2打开创建注册表</p>
 <pre><code>HKEY_LOCAL_MACHINE<span class="command">\SYSTEM</span><span class="command">\CurrentControlSet</span><span class="command">\Services</span><span class="command">\WinSock</span>2<span class="command">\Parameters</span><span class="command">\Protocol</span>_Catalog9<span class="command">\Catalog</span>_Entries\000000000001
 </code></pre><p>子键PackedCatalogItem获取其键值，判断协议链是否为自己的dlsp.dll，如果不是则调用Winexec执行%System32%\dss.txt（母体）将其修改为自己的dlsp.dll</p>
@@ -725,7 +725,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -739,7 +739,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

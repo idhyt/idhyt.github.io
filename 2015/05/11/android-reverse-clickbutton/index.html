@@ -52,9 +52,9 @@
 <meta property="og:description" content="安卓逆向笔记,熟悉smali语法和函数调用一个按钮程序,实现功能：点击 - 弹窗 - 退出
 源码主功能代码
 123456789101112131415161718192021@Overrideprotected void onCreate(Bundle savedInstanceState) &amp;#123;    super.onCreate(savedInstanceState);    setC">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-reverse-clickbutton_1.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/android-reverse-clickbutton_2.png">
-<meta property="og:updated_time" content="2015-12-28T06:49:02.000Z">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-reverse-clickbutton_1.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-reverse-clickbutton_2.png">
+<meta property="og:updated_time" content="2016-07-07T14:27:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓逆向学习笔记-ClickButton">
 <meta name="twitter:description" content="安卓逆向笔记,熟悉smali语法和函数调用一个按钮程序,实现功能：点击 - 弹窗 - 退出
@@ -412,7 +412,7 @@
 <h2 id="源码">源码</h2><p>主功能代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.activity_click_button);</span><br><span class="line">    Button button = (Button)findViewById(R.id.click_me);</span><br><span class="line">    button.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">            AlertDialog.Builder alert = <span class="keyword">new</span> AlertDialog.Builder(ClickButton.<span class="keyword">this</span>);</span><br><span class="line">            alert.setTitle(<span class="string">"hello world"</span>);</span><br><span class="line">            alert.setPositiveButton(<span class="string">"exit"</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() &#123;</span><br><span class="line">                <span class="annotation">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>&#123;</span><br><span class="line">                    dialog.dismiss();</span><br><span class="line">                    ClickButton.<span class="keyword">this</span>.finish();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            alert.show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>点击 - 弹窗 - 退出, 功能如下图所示：</p>
-<p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-reverse-clickbutton_1.png" alt=""></p>
+<p><img src="http://o9xrwsn0z.bkt.clouddn.com/android-reverse-clickbutton_1.png" alt=""></p>
 <p>xml布局</p>
 <pre><code>&lt;RelativeLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span>
     xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span> android:layout_width=<span class="string">"match_parent"</span>
@@ -432,7 +432,7 @@
         android:layout_height=<span class="string">"wrap_content"</span>
         android:layout_below=<span class="string">"<span class="variable">@+</span>id/textView"</span> /&gt;
 &lt;<span class="regexp">/RelativeLayout&gt;</span>
-</code></pre><h2 id="反编译">反编译</h2><p>apktool反编译成smali文件或者直接用apkIDE(apk改之理)打开，会自动进行反编译，如下图所示<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/android-reverse-clickbutton_2.png" alt=""></p>
+</code></pre><h2 id="反编译">反编译</h2><p>apktool反编译成smali文件或者直接用apkIDE(apk改之理)打开，会自动进行反编译，如下图所示<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-reverse-clickbutton_2.png" alt=""></p>
 <p>主要看主类ClickButton.smali，还有ClickButton$1.smali, ClickButton$1$1.smali两个文件。<br>这两个文件是匿名内部类的Smali代码，由于没有名字，所以编译后只能用$XXX来区分。</p>
 <h2 id="逆向分析">逆向分析</h2><h3 id="主类文件头部分">主类文件头部分</h3><p>1-3行定义的是基本信息，参照着前边的源码，很容易对应起来。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.class <span class="keyword">public</span> Lcom/reverse/idhyt/androidreverse/ClickButton;</span><br><span class="line">.<span class="keyword">super</span> Landroid/app/Activity;</span><br><span class="line">.source <span class="string">"ClickButton.java"</span></span><br></pre></td></tr></table></figure>
@@ -836,7 +836,7 @@ Lpackage/name/ObjectName;表示类型，MethodName是方法名。III为参数（
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -850,7 +850,7 @@ Lpackage/name/ObjectName;表示类型，MethodName是方法名。III为参数（
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

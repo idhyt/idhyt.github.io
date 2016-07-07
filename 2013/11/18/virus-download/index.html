@@ -54,11 +54,11 @@
 调试环境Windows xp sp3，Olldbg，010editor
 病毒简介病毒运行之后会从恶意网站中下载配置文件，并从配置文件中读取更多的链接下载恶意程序并将其运行，过程中会隐藏系统保护文件窗口，修改系统时间使卡巴斯基失效。
 运行过程查找伪装进程并将其启动病毒如果伪装成conime.exe，ctfmon.exe，explorer.exe中任何一个进程运行，则从C">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-downloader-1.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-downloader-2.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-downloader-3.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/virus-downloader-4.png">
-<meta property="og:updated_time" content="2015-12-31T11:57:00.000Z">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-downloader-1.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-downloader-2.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-downloader-3.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/virus-downloader-4.png">
+<meta property="og:updated_time" content="2016-07-07T14:24:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="病毒分析-简单下载者">
 <meta name="twitter:description" content="一个简单的下载者病毒简略分析
@@ -419,11 +419,11 @@
 <h2 id="运行过程">运行过程</h2><h3 id="查找伪装进程并将其启动">查找伪装进程并将其启动</h3><p>病毒如果伪装成conime.exe，ctfmon.exe，explorer.exe中任何一个进程运行，则从C:\WINDOWS\system32\dllcache找到该进程并启动。</p>
 <pre><code>1.其中conime.exe，ctfmon.exe为输入法相关进程，explorer.exe为桌面进程，C:<span class="command">\WINDOWS</span><span class="command">\system</span>32<span class="command">\dllcache</span>为一个备用的重要系统文件库，里边存放着大部分动态链接库.dll和可执行文件.exe，如果C:<span class="command">\WINDOWS</span><span class="command">\system</span>32目录下的文件丢失，则系统自动从dllcache文件库中恢复过去。
 2.如果病毒伪装成explorer.exe并覆盖掉C:<span class="command">\WINDOWS</span>目录下系统本身的explorer.exe，则会随着系统自动启动，取而代之的是桌面无法启动，因此从dllcache目录下找到explorer.exe并启动它。同理如果病毒覆盖掉C:<span class="command">\WINDOWS</span><span class="command">\system</span>32目录下的conime.exe，ctfmon.exe以后，当系统调用该进程时，为了保证程序功能正常使用而不被用户察觉到，就需要从dllcache文件下启动相应的进程。
-</code></pre><h3 id="隐藏windows文件保护窗口">隐藏windows文件保护窗口</h3><p>病毒创建线程，该线程每隔50ms检测一下是否存在”windows文件保护”窗口，如下图所示，如有存在就将其隐藏。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-downloader-1.png" alt=""><br>当系统重要文件被删除或者替换以后，系统就会弹出windows文件保护窗口，因此病毒需要将该窗口隐藏。</p>
+</code></pre><h3 id="隐藏windows文件保护窗口">隐藏windows文件保护窗口</h3><p>病毒创建线程，该线程每隔50ms检测一下是否存在”windows文件保护”窗口，如下图所示，如有存在就将其隐藏。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-downloader-1.png" alt=""><br>当系统重要文件被删除或者替换以后，系统就会弹出windows文件保护窗口，因此病毒需要将该窗口隐藏。</p>
 <h3 id="生成临时文件，判断病毒是否已经执行">生成临时文件，判断病毒是否已经执行</h3><p>1.获取系统临时文件路径C:\DOCUME~1\Admin\LOCALS~1\Temp\<br>判断C:\DOCUME~1\Admin\LOCALS~1\Temp~wupcai文件是否存在。<br>2.若该文件不存在则创建并写入8个字节99999999（大约167分钟）。<br>3.若该文件存在则获取系统启动后运行时间与该文件前8个字节进行比较，如果启动时间大于167分钟则标明该病毒已经运行不再继续执行，并将该启动时间写入~wupcai文件中。如果启动时间小于167分，则将启动时间写入~wupcai文件中并继续执行。</p>
-<h3 id="验证文件完整性，读取加密的url地址">验证文件完整性，读取加密的url地址</h3><p>首先对病毒文件的完整性进行检测<br>1读取病毒文件偏移0x3F0处进行判断，该处存放着文件的大小，如果不为0则继续。<br>2读取文件偏移0x23FC处数据，判断是否为0xFFFEFDFC，如果是则继续。<br>3读取偏移0x23F8处数据与病毒文件大小作比较，如果小于则继续。<br>最后从文件偏移0x2370处读取0x88个字节数据，这些数据为加密过的url地址。<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-downloader-2.png" alt=""></p>
-<h3 id="解密url地址，下载配置文件">解密url地址，下载配置文件</h3><p>1.首先对加密过的url进行解密，解密方式为：将0x88个数据依次循环右移（N,R,D,G,B,N）次，6个字节为一个循环。<br>2.解密出url地址为：DLPY<a href="http://new.749571.com/new.txt，并对url头DLPY进行验证并下载文件new.txt" target="_blank" rel="external">http://new.749571.com/new.txt，并对url头DLPY进行验证并下载文件new.txt</a>.<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-downloader-3.png" alt=""></p>
-<h3 id="针对卡巴斯基的免杀">针对卡巴斯基的免杀</h3><p>查找卡巴斯基进程avp.exe，如果找到，将系统时间改为2001年11月1日<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/virus-downloader-4.png" alt=""><br>卡巴斯基要想正常运行，首先要对用户的key文件进行校验，看是否过期。<br>卡巴斯基校验key的合法性是通过本地时间来校验，系统时间一旦被病毒修改为非授权时间，key文件立即失效，从而导致卡巴斯基无法升级无法正常使用。</p>
+<h3 id="验证文件完整性，读取加密的url地址">验证文件完整性，读取加密的url地址</h3><p>首先对病毒文件的完整性进行检测<br>1读取病毒文件偏移0x3F0处进行判断，该处存放着文件的大小，如果不为0则继续。<br>2读取文件偏移0x23FC处数据，判断是否为0xFFFEFDFC，如果是则继续。<br>3读取偏移0x23F8处数据与病毒文件大小作比较，如果小于则继续。<br>最后从文件偏移0x2370处读取0x88个字节数据，这些数据为加密过的url地址。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-downloader-2.png" alt=""></p>
+<h3 id="解密url地址，下载配置文件">解密url地址，下载配置文件</h3><p>1.首先对加密过的url进行解密，解密方式为：将0x88个数据依次循环右移（N,R,D,G,B,N）次，6个字节为一个循环。<br>2.解密出url地址为：DLPY<a href="http://new.749571.com/new.txt，并对url头DLPY进行验证并下载文件new.txt" target="_blank" rel="external">http://new.749571.com/new.txt，并对url头DLPY进行验证并下载文件new.txt</a>.<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-downloader-3.png" alt=""></p>
+<h3 id="针对卡巴斯基的免杀">针对卡巴斯基的免杀</h3><p>查找卡巴斯基进程avp.exe，如果找到，将系统时间改为2001年11月1日<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-downloader-4.png" alt=""><br>卡巴斯基要想正常运行，首先要对用户的key文件进行校验，看是否过期。<br>卡巴斯基校验key的合法性是通过本地时间来校验，系统时间一旦被病毒修改为非授权时间，key文件立即失效，从而导致卡巴斯基无法升级无法正常使用。</p>
 <h3 id="生成病毒文件并执行">生成病毒文件并执行</h3><p>在系统临时文件目录下边创建tmp<em>.tmp文件，从new.txt文件oo字段读取e0~e49个链接分别将数据下载到tmp</em>.tmp文件中并执行，总共执行0x32个tmp文件。</p>
 <h3 id="检测运行环境">检测运行环境</h3><p>查找卡巴斯基进程avp.exe，如果存在，修改系统时间使其失效。查看是否存在”windows系统保护窗口”，如果存在，将其隐藏。</p>
 </span>
@@ -658,7 +658,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -672,7 +672,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

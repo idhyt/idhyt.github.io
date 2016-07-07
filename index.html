@@ -3431,6 +3431,94 @@
           
           
             
+              <a class="post-title-link" href="/2016/07/07/exploit-cve-2015-1805/" itemprop="url">
+                CVE-2015-1805
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-07-07T21:42:11+08:00" content="2016-07-07">
+            2016-07-07
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/exploit/" itemprop="url" rel="index">
+                  <span itemprop="name">exploit</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/07/07/exploit-cve-2015-1805/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/07/exploit-cve-2015-1805/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>在linux 内核3.16版本之前的fs/pipe.c当中，由于pipe_read和pipe_write没有考虑到拷贝过程中数据没有同步的一些临界情况,造成了拷贝越界的问题，因此有可能导致系统crash以及系统权限提升。这种漏洞又称之为”I/O vector array overrun”。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/07/exploit-cve-2015-1805/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2016/06/09/exploit-process-descriptor/" itemprop="url">
                 进程描述符
               </a>
@@ -3670,7 +3758,7 @@ ffffff
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://o7keinrz4.bkt.clouddn.com/diary-stay-away-trip-00.jpg" rel="gallery_ciq6lzgzn0048r26i1p8bywpr"
+                 href="http://o7keinrz4.bkt.clouddn.com/diary-stay-away-trip-00.jpg" rel="gallery_ciqcfhjul004hxt6i1sb5rb1w"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://o7keinrz4.bkt.clouddn.com/diary-stay-away-trip-00.jpg" itemprop="contentUrl"/>
               </a>
@@ -3807,6 +3895,98 @@ ffffff
           
           
             
+              <a class="post-title-link" href="/2016/03/15/exploit-cve-2015-3864/" itemprop="url">
+                CVE-2015-3864
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-03-15T22:06:11+08:00" content="2016-03-15">
+            2016-03-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/exploit/" itemprop="url" rel="index">
+                  <span itemprop="name">exploit</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/03/15/exploit-cve-2015-3864/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/15/exploit-cve-2015-3864/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            cve-2015-3864是cve-2015-1538同系列中的另外一个漏洞，利用的是解析tx3g中整型上溢，google公布的exploit-38226中通过利用jemalloc的特性对内存进行巧妙的布局，溢出后基本能100%覆盖到MPEG4DataSource的虚表指针。2016年3月18号No
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/15/exploit-cve-2015-3864/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2016/03/13/exploit-cve-2015-1538/" itemprop="url">
                 CVE-2015-1538 libstagefright漏洞分析
               </a>
@@ -3889,197 +4069,11 @@ ffffff
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2016/03/09/exploit-cve-2015-3636/" itemprop="url">
-                CVE-2015-3636内核漏洞分析
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2016-03-09T23:07:11+08:00" content="2016-03-09">
-            2016-03-09
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/exploit/" itemprop="url" rel="index">
-                  <span itemprop="name">exploit</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/03/09/exploit-cve-2015-3636/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/09/exploit-cve-2015-3636/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            漏洞简介Linux kernel的ping套接字实现上存在释放后重利用漏洞，x86-64架构的本地用户利用此漏洞可造成系统崩溃，非x86-64架构的用户可提升其权限，pingpongroot就是利用该漏洞达到提权的效果，现在android-6.0以下的手机root工具靠的就是这个漏洞。
-漏洞分析详细
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/09/exploit-cve-2015-3636/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2016/02/26/exploit-cve-2014-3153/" itemprop="url">
-                CVE-2014-3153内核漏洞分析
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2016-02-26T17:15:11+08:00" content="2016-02-26">
-            2016-02-26
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/exploit/" itemprop="url" rel="index">
-                  <span itemprop="name">exploit</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/02/26/exploit-cve-2014-3153/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/02/26/exploit-cve-2014-3153/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            简介漏洞是14年5月份爆，属于linux内核漏洞，影响范围非常广，包括linux系统（内核版本3.14.5之前）和andorid系统（系统版本4.4之前）。受影响的系统可能被直接DOS，精心设计可以获取root权限，如安卓root工具towel。
-该漏洞主要产生于内核的 Futex系统调用，漏洞利用
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/26/exploit-cve-2014-3153/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
   </nav>
 
  </div>
@@ -4113,7 +4107,7 @@ ffffff
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -4127,7 +4121,7 @@ ffffff
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
