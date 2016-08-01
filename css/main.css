@@ -1069,7 +1069,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #0f5b5b;
+  background: #f62883;
 }
 .links-of-friendly a {
   display: inline-block;
@@ -1087,7 +1087,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #6cfc25;
+  background: #69d90e;
 }
 .sidebar-nav {
   margin: 0;
@@ -2290,4 +2290,7 @@ a:hover {
   #assist_btn {
     display: none;
   }
+}
+.footer {
+  min-height: 30px;
 }
