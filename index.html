@@ -3373,18 +3373,19 @@
     var a_tag = {color: "#222"};
     var header = { background: "#f5f5f5"};
     var logo_line_i = {background: "#222"};
-    var post_code = {background: "#eee", color: "#222"};
+    // var post_code = {background: "#eee", color: "#222"};
 
     function switch_theme() {
         $("body").css(body);
-        $("a:not('.links-of-author-item a, .site-state-item a, .site-state-posts a, .feed-link a, .motion-element a, .post-tags a')").css(a_tag);
+        $("a:not('.links-of-author-item a, .site-state-item a, .site-state-posts a, .feed-link a, .motion-element a, .post-tags a, .show-commit-cls a, #donate_board a')").css(a_tag);
         $(".header, .footer").css(header);
         $(".logo-line-before i, .logo-line-after i").css(logo_line_i);
-        $(".post code").css(post_code);
+        //$(".post code").css(post_code);
         $("#idhyt-surprise-ball #idhyt-surprise-ball-animation .drag").css(a_tag);
         $(".post-title-link, .posts-expand .post-meta, .post-comments-count, .disqus-comment-count, .post-category a, .post-nav-next a, .post-nav-item a").css(a_tag);
         
-        $("#assist_btn").hide();
+        // $("code").css({color: '#c5c8c6', background: '#1d1f21'});
+        $("#assist_btn").hide(1500);
     }
 
     $(function () {
@@ -3758,7 +3759,7 @@ ffffff
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://o7keinrz4.bkt.clouddn.com/diary-stay-away-trip-00.jpg" rel="gallery_cirj6wykz004h546i0248k64u"
+                 href="http://o7keinrz4.bkt.clouddn.com/diary-stay-away-trip-00.jpg" rel="gallery_cirm5j0n7004hpd6iea5hyj9l"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://o7keinrz4.bkt.clouddn.com/diary-stay-away-trip-00.jpg" itemprop="contentUrl"/>
               </a>
@@ -4280,7 +4281,7 @@ ffffff
             display: inline-block;
             color: #ddd;
             font: 14px/2 "Microsoft Yahei";
-            background-color: #444;
+            background: #444;
             padding: 1px 5px;
             border-bottom: none;
             // background:url("data:image/svg+xml;base64,PD94bWwgdm3Mz4=") no-repeat 0 50%
@@ -4289,7 +4290,7 @@ ffffff
         .show-commit-cls a:hover { 
             // background-position: 0px -82px;
             color: #87daff;
-            background-color:#333;
+            background: none;
         }
 
         .show-commit-dsp {
