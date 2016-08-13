@@ -755,7 +755,7 @@ body {
   width: 700px;
 }
 .main {
-  padding-bottom: 150px;
+  padding-bottom: 130px;
 }
 .main-inner {
   margin: 0 auto;
@@ -772,7 +772,7 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  min-height: 50px;
+  min-height: 30px;
 }
 .footer-inner {
   margin: 20px auto;
@@ -1069,7 +1069,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f62883;
+  background: #4d86ff;
 }
 .links-of-friendly a {
   display: inline-block;
@@ -1087,7 +1087,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #69d90e;
+  background: #37d90d;
 }
 .sidebar-nav {
   margin: 0;
@@ -2290,7 +2290,4 @@ a:hover {
   #assist_btn {
     display: none;
   }
-}
-.footer {
-  min-height: 30px;
 }

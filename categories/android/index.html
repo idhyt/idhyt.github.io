@@ -738,37 +738,66 @@
 
       <script type="text/javascript">
 
-        var disqus_loaded = false;
+        // var disqus_loaded = false;
 
         var show_btn = 
           '<div class="show-commit-cls">  \
             <a id="show_commit_btn" class="show-commit-btn" href="javascript:;" title="评论">评论/查看评论</a>  \
             <div id="show_commit_dsp" class="show-commit-dsp"> Disqus评论可能被墙</div> \
           </div>';
-        var comments = document.getElementById("comments");
-        comments.insertAdjacentHTML("beforeBegin", show_btn);
+        var t_comments = document.getElementById("comments");
+        t_comments.insertAdjacentHTML("beforeBegin", show_btn);
 
         $('.show-commit-dsp').hide();
 
+        // define duoshuoQuery
+        var duoshuo_shortname = 'idhyt';
+        var duoshuoQuery = {short_name: duoshuo_shortname};
+
         document.getElementById('show_commit_btn').onclick = function() {
-          if (!disqus_loaded) {
-            disqus_loaded = true;
+          // if (!disqus_loaded) 
+          {
+            // disqus_loaded = true;
             $('.show-commit-btn').hide();
 
-            run_disqus_script('count.js');
-            
-
-            if (disqus_forbid && $('.show-commit-dsp').css("display") == "none") {
-              $('.show-commit-dsp').show(1500);
+            // if google forbid, not load disqus.
+            if (!disqus_forbid) {
+              run_disqus_script('count.js');
+              
             }
 
-          }
+            // else load duoshuo.
+            else if (disqus_forbid) {
+              if ($('.show-commit-dsp').css("display") == "none") {
+                $('.show-commit-dsp').show(1500);
+              }
 
+              // if google forbid then load duoshuo
+              if (duoshuo_shortname) {
+                (function() {
+                  var ds = document.createElement('script');
+                  ds.type = 'text/javascript';
+                  ds.async = true;
+                  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                  ds.charset = 'UTF-8';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+              }
+              var duoshuo_comment = 
+                '<div class="ds-thread" \
+                    data-thread-key="categories/android/index.html" \
+                    data-title="" data-url="">  \
+                </div>';
+              t_comments.insertAdjacentHTML("afterBegin", duoshuo_comment);
+            }
+          }
         }
 
       </script>
-
+      <!--
       <img src="https://lh4.googleusercontent.com/-lOxRXbE0_FM/V59i2VnJDxI/AAAAAAAAAAg/f2MXiY-UaAc7_f1rJXOtpQ1lbNjqRF0MQCL0B/w142-h135/disqus.jpg" style="display: none" onload="google_allow()" onerror="google_forbid()"/>
+      -->
+      <img src="http://disqus.com/api/users/avatars/disqus_api.jpg" style="display: none" onload="google_allow()" onerror="google_forbid()"/>
 
     
 
