@@ -1069,7 +1069,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #4d86ff;
+  background: #17fff1;
 }
 .links-of-friendly a {
   display: inline-block;
@@ -1087,7 +1087,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #37d90d;
+  background: #75cf4a;
 }
 .sidebar-nav {
   margin: 0;
@@ -2217,7 +2217,6 @@ ul li {
 }
 .footer-inner {
   margin: 0 auto;
-  text-align: left;
 }
 @media (max-width: 767px) {
   .footer-inner {
@@ -2259,7 +2258,8 @@ blockquote {
   background: none;
 }
 .powered-by a,
-.theme-info a {
+.theme-info a,
+.busuanzi-info a {
   color: #999;
 }
 a:hover {
