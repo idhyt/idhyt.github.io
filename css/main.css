@@ -1069,7 +1069,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #17fff1;
+  background: #58df3e;
 }
 .links-of-friendly a {
   display: inline-block;
@@ -1087,7 +1087,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #75cf4a;
+  background: #ffff26;
 }
 .sidebar-nav {
   margin: 0;
@@ -2238,6 +2238,7 @@ ul li {
 }
 .site-search input {
   border-bottom: 1px solid #87daff;
+  color: #ddd;
 }
 .posts-collapse .post-title a {
   color: #ccc;
