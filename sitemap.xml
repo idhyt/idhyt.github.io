@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.idhyt.com/2016/09/04/exploit-perf_event-vul/</loc>
+    <lastmod>2016-09-05T15:06:01.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.idhyt.com/about/index.html</loc>
     <lastmod>2016-08-16T16:17:52.000Z</lastmod>
   </url>
