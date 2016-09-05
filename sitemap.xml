@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.idhyt.com/2015/09/25/android-injection-xposed/</loc>
+    <lastmod>2016-09-05T15:23:41.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/11/28/android-injection-xposed-usage/</loc>
+    <lastmod>2016-09-05T15:23:39.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.idhyt.com/2016/09/04/exploit-perf_event-vul/</loc>
     <lastmod>2016-09-05T15:06:01.000Z</lastmod>
   </url>
@@ -39,16 +49,6 @@
   <url>
     <loc>http://blog.idhyt.com/2015/05/08/android-netbeans-debug-smali/</loc>
     <lastmod>2016-07-07T14:27:28.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/09/25/android-injection-xposed/</loc>
-    <lastmod>2016-07-07T14:27:22.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/11/28/android-injection-xposed-usage/</loc>
-    <lastmod>2016-07-07T14:27:16.000Z</lastmod>
   </url>
   
   <url>

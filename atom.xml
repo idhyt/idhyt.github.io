@@ -935,8 +935,8 @@ sd卡：
     <link href="http://blog.idhyt.com/2015/11/28/android-injection-xposed-usage/"/>
     <id>http://blog.idhyt.com/2015/11/28/android-injection-xposed-usage/</id>
     <published>2015-11-27T17:11:11.000Z</published>
-    <updated>2016-07-07T14:27:16.000Z</updated>
-    <content type="html"><![CDATA[<p>&#160;&#160;&#160;&#160;之前<a href="http://blog.idhyt.com/2015/09/25/4-android-injection-xposed/">安卓注入框架Xposed分析与简单应用</a>只是简单的了解了一下xposed框架，知道如何hook函数，并没有深入去使用，也不知道这个框架能用到哪种程度，最近详细的总结了下，简单来说就是，没有hook不到的地方，只有你想不到的地方。</p>
+    <updated>2016-09-05T15:23:39.000Z</updated>
+    <content type="html"><![CDATA[<p>&#160;&#160;&#160;&#160;之前<a href="http://blog.idhyt.com/2015/09/25/android-injection-xposed/">安卓注入框架Xposed分析与简单应用</a>只是简单的了解了一下xposed框架，知道如何hook函数，并没有深入去使用，也不知道这个框架能用到哪种程度，最近详细的总结了下，简单来说就是，没有hook不到的地方，只有你想不到的地方。</p>
 <h2 id="接管系统所有广播包">接管系统所有广播包</h2><p>&#160;&#160;&#160;&#160;在Android四大组件中，Broadcast是一种广泛运用的在应用程序之间传输信息的机制。而BroadcastReceiver 是对发送出来的Broadcast进行过滤接受并响应的一类组件。应用通过BroadcastReceiver对一个外部的事件做出响应，这是非常有意思的，当开机，锁屏等外部事件到来的时候，可以利用BroadcastReceiver进行相应的处理。如果你能接管所有的广播包，基本上就接管了整个系统的信息传输过程。广播包也是频繁唤醒手机的一个重要原因，通过管理这些广播包，可以达到省电效果。</p>
 <p>通过阅读源代码中<br><a href="http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/5.1.1_r1/com/android/server/firewall/IntentFirewall.java#IntentFirewall" target="_blank" rel="external">IntentFirewall</a>这个类，126行代码开始有一些以<code>check</code>开头的方法，说明如下:</p>
 <pre><code>This is called from ActivityManager to<span class="instruction"> check </span>if a start activity intent should be allowed. It is assumed the caller is already holding the global ActivityManagerService lock.
@@ -978,7 +978,7 @@ sd卡：
 <h2 id="总结">总结</h2><p>&#160;&#160;&#160;&#160;xposed框架不仅能够hook任意你想hook的函数，并且自身也有一个很大的特点，就是一旦用户安装并启用，你所有的操作都不需要任何权限就可实现。基于xposed框架的优秀应用也特别多，比如著名的省电应用<code>绿色守护</code>。再如有一些app对敏感数据进行加密，加密算法又很复杂，那么通过hook解密函数就可以轻松的拿到明文。xposed框架的奇妙之处远远不仅于此，国外也有人对其进行二次封装作出了更神奇的用法，例如<a href="https://github.com/seebye/XClasses" target="_blank" rel="external">XClasses</a>，如果你有什么奇淫技巧，我只想对你说四个字，请带上我！</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>&#160;&#160;&#160;&#160;之前<a href="http://blog.idhyt.com/2015/09/25/4-android-injection-xposed/">安卓注入框架Xposed分析与简单应用</a>只是简单的了解了一下xposed框]]>
+    <![CDATA[<p>&#160;&#160;&#160;&#160;之前<a href="http://blog.idhyt.com/2015/09/25/android-injection-xposed/">安卓注入框架Xposed分析与简单应用</a>只是简单的了解了一下xposed框架，]]>
     </summary>
     
       <category term="xposed" scheme="http://blog.idhyt.com/tags/xposed/"/>
@@ -1197,7 +1197,7 @@ sd卡：
     <link href="http://blog.idhyt.com/2015/09/25/android-injection-xposed/"/>
     <id>http://blog.idhyt.com/2015/09/25/android-injection-xposed/</id>
     <published>2015-09-24T18:29:11.000Z</published>
-    <updated>2016-07-07T14:27:22.000Z</updated>
+    <updated>2016-09-05T15:23:41.000Z</updated>
     <content type="html"><![CDATA[<h3 id="概述">概述</h3><p>Xposed是针对Android平台的动态劫持项目，源码<a href="https://github.com/rovo89" target="_blank" rel="external">github</a></p>
 <h4 id="主要模块说明如下：">主要模块说明如下：</h4><p><strong>Xposed</strong>：Xposed的C++部分，主要是用来替换/system/bin/app_process，并为XposedBridge提供JNI方法。</p>
 <p><strong>XposedInstaller</strong>：Xposed的安装包，负责配置Xposed工作的环境并且提供对基于Xposed框架的Modules的管理。在安装XposedInstaller之后，app_process与XposedBridge.jar放置在了/data/data/de.robv.android.xposed.installer。</p>
@@ -1264,7 +1264,7 @@ sd卡：
 <p>整个工程目录如下所示:<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-3e.jpg" alt="project-dir"></p>
 <p>7.运行之后 会在虚拟机中看到我们的插件已经安装到xposed模块里边，然后勾选重启系统。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-4.jpg" alt="install-ok"></p>
 <p>8.重启过后，加入过滤规则“loaded app”，在logcat窗口会看到我们的输出日志信息，你打开应用也会显示加载的应用包名。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-5.jpg" alt="logcat-out"></p>
-<h3 id="xposed用法详解">xposed用法详解</h3><p>移步：<a href="http://blog.idhyt.com/2015/11/28/4-android-injection-xposed-usage/">安卓注入框架Xposed用法详解</a></p>
+<h3 id="xposed用法详解">xposed用法详解</h3><p>移步：<a href="http://blog.idhyt.com/2015/11/28/android-injection-xposed-usage/">安卓注入框架Xposed用法详解</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="概述">概述</h3><p>Xposed是针对Android平台的动态劫持项目，源码<a href="https://github.com/rovo89" target="_blank" rel="external">github</a></p>
