@@ -4,7 +4,7 @@
   <subtitle><![CDATA[云淡风轻]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.idhyt.com/"/>
-  <updated>2016-11-09T16:03:54.000Z</updated>
+  <updated>2016-11-09T16:45:22.000Z</updated>
   <id>http://blog.idhyt.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.idhyt.com/2016/11/09/exploit-kernel-security-flaws/"/>
     <id>http://blog.idhyt.com/2016/11/09/exploit-kernel-security-flaws/</id>
     <published>2016-11-09T15:28:11.000Z</published>
-    <updated>2016-11-09T16:03:54.000Z</updated>
+    <updated>2016-11-09T16:45:22.000Z</updated>
     <content type="html"><![CDATA[<p>About a month ago, when I was looking at the android kernle source code, I found a strange logic, it could trigger the device crash by bypassing the detection logic. I test it in Nexus 4 and the security patch level is 20161005.</p>
 <p>The last_kmsg:</p>
 <pre><code>[  <span class="number">510.188720</span>] Unable <span class="keyword">to</span> handle kernel paging request at virtual address <span class="number">40404040</span>
@@ -59,7 +59,7 @@
 No errors detected
 Boot info:
 Last boot reason: kernel_panic
-</code></pre><p>so I write a <a href="https://github.com/idhyt/android_kernel_poc/blob/master/no_fix/wlan_hdd_wext.c" target="_blank" rel="external">poc</a> and report this security issue to google.</p>
+</code></pre><p>so I write a <a href="https://github.com/idhyt/android_kernel_poc/blob/master/no_fix/wlan_hdd_wext.c" target="_blank" rel="external">POC</a> and report this security issue to google.</p>
 <p>Soon, I received a reply.</p>
 <pre><code>Hey,
 
