@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.idhyt.com/2016/11/09/exploit-kernel-security-flaws/</loc>
+    <lastmod>2016-11-09T16:03:54.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.idhyt.com/2016/10/24/exploit-cve-2016-5195/</loc>
-    <lastmod>2016-10-25T13:39:02.000Z</lastmod>
+    <lastmod>2016-11-09T15:56:28.000Z</lastmod>
   </url>
   
   <url>
