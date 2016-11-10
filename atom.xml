@@ -4,7 +4,7 @@
   <subtitle><![CDATA[云淡风轻]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.idhyt.com/"/>
-  <updated>2016-11-10T05:23:35.000Z</updated>
+  <updated>2016-11-10T05:23:36.000Z</updated>
   <id>http://blog.idhyt.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.idhyt.com/2016/11/09/exploit-kernel-security-flaws/"/>
     <id>http://blog.idhyt.com/2016/11/09/exploit-kernel-security-flaws/</id>
     <published>2016-11-09T15:28:11.000Z</published>
-    <updated>2016-11-10T05:23:35.000Z</updated>
+    <updated>2016-11-10T05:23:36.000Z</updated>
     <content type="html"><![CDATA[<p>About a month ago, when I was looking at the android kernle source code, I found a strange logic, it could trigger the device crash by bypassing the detection logic. I test it in Nexus 4 and the security patch level is 20161005.</p>
 <a id="more"></a>
 <p>The last_kmsg:</p>
@@ -1425,7 +1425,7 @@ sd卡：
     <link href="http://blog.idhyt.com/2015/08/31/exploit-privilege-escalation-by-uac/"/>
     <id>http://blog.idhyt.com/2015/08/31/exploit-privilege-escalation-by-uac/</id>
     <published>2015-08-31T14:41:11.000Z</published>
-    <updated>2016-11-10T05:24:02.000Z</updated>
+    <updated>2016-11-10T05:24:04.000Z</updated>
     <content type="html"><![CDATA[<h2 id="背景">背景</h2><p>UAC(User Account Control，用户帐户控制)是微软为提高系统安全而在Windows Vista中引入的新技术，它要求用户在执行可能会影响计算机运行的操作或执行更改影响其他用户的设置的操作之前，提供权限或管理员‌密码。也就是说一旦用户允许启动的应用程序通过UAC验证，那么这个程序也就有了管理员权限。如果我们通过某种方式劫持了通过用户UAC验证的程序，那么相应的我们的程序也就实现了提权的过程。</p>
 <a id="more"></a>
 <h2 id="提权过程概述">提权过程概述</h2><p>首先我们找到目标程序，查找其动态加载的dll文件然后将其替换掉，插入我们包含shellcode的dll文件，这样用户在安装此文件的时候就会调用我们的dll文件，并执行我们的shellcode代码。同时为了防止程序崩掉导致我们的代码退出，采用注入的方式保证shellcode的稳定执行。在此过程中，如果目标程序请求UAC权限，对于用户来说这是一个正常的安装文件，一旦通过UAC验证，相应我们的shellcode也完成了提权过程。替换安装包dll文件这种行为太过于敏感，其实最后实现的方式是找到目标程序需要加载的，并且当前目录又不存在的需要联网下载的dll文件，我们只需要在该目录下放一个同名dll文件即可。</p>
