@@ -11,7 +11,7 @@
 <h3 id="针对卡巴斯基的免杀">针对卡巴斯基的免杀</h3><p>查找卡巴斯基进程avp.exe，如果找到，将系统时间改为2001年11月1日<br><img src="http://o9xrwsn0z.bkt.clouddn.com/virus-downloader-4.png" alt=""><br>卡巴斯基要想正常运行，首先要对用户的key文件进行校验，看是否过期。<br>卡巴斯基校验key的合法性是通过本地时间来校验，系统时间一旦被病毒修改为非授权时间，key文件立即失效，从而导致卡巴斯基无法升级无法正常使用。</p>
 <h3 id="生成病毒文件并执行">生成病毒文件并执行</h3><p>在系统临时文件目录下边创建tmp<em>.tmp文件，从new.txt文件oo字段读取e0~e49个链接分别将数据下载到tmp</em>.tmp文件中并执行，总共执行0x32个tmp文件。</p>
 <h3 id="检测运行环境">检测运行环境</h3><p>查找卡巴斯基进程avp.exe，如果存在，修改系统时间使其失效。查看是否存在”windows系统保护窗口”，如果存在，将其隐藏。</p>
-</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://blog.idhyt.com/2013/11/18/virus-download/" data-id="cixf0fys0001fam6iwrtmpm76" class="article-share-link">Share</a><div class="tags"><a href="/tags/下载/">下载</a></div><div class="post-nav"><a href="/2013/11/20/virus-troj-simple/" class="pre">病毒分析-简单盗号木马</a><a href="/2013/07/01/exploit-cve-2013-0422/" class="next">CVE-2013-0422</a></div><div id="disqus_thread"><script>var disqus_shortname = 'idhyt';
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://blog.idhyt.com/2013/11/18/virus-download/" data-id="cixf0i3dd001fc46i31j5n6xv" class="article-share-link">Share</a><div class="tags"><a href="/tags/下载/">下载</a></div><div class="post-nav"><a href="/2013/11/20/virus-troj-simple/" class="pre">病毒分析-简单盗号木马</a><a href="/2013/07/01/exploit-cve-2013-0422/" class="next">CVE-2013-0422</a></div><div id="disqus_thread"><script>var disqus_shortname = 'idhyt';
 var disqus_identifier = '2013/11/18/virus-download/';
 var disqus_title = '病毒分析-简单下载者';
 var disqus_url = 'http://blog.idhyt.com/2013/11/18/virus-download/';
