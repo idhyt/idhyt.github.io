@@ -33,7 +33,7 @@
 <span class="keyword">lea</span> <span class="literal">eax</span>,sc   //sc为存放shellcode的数组
 <span class="keyword">call</span> <span class="literal">eax</span>
 </code></pre><p>在执行过第二行mov ebp,esp后，sc的地址就飞了，我当时想的是，汇编代码已经是最底层的代码了，两句汇编代码之间出问题，而且至始至终都没有用sc，这样错误该怎么找？最后调试很多次，是在vs里边查看汇编代码才发现，在一大堆c语言源码嵌入汇编代码，数组sc的指针是存放在[ebp+xx]处，所以在mov ebp,esp后自然sc的地址就飞了。</p>
-</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://blog.idhyt.com/2012/12/18/technic-alphanumeric-shellcode/" data-id="cixeyw1dg001wtm6i5yb4fnpd" class="article-share-link">Share</a><div class="tags"><a href="/tags/shellcode/">shellcode</a></div><div class="post-nav"><a href="/2013/01/02/diary-annual-summary-2012/" class="pre">我的2012</a><a href="/2012/11/20/exploit-cve-2011-0609/" class="next">CVE-2011-0609</a></div><div id="disqus_thread"><script>var disqus_shortname = 'idhyt';
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://blog.idhyt.com/2012/12/18/technic-alphanumeric-shellcode/" data-id="cixf0fyse001wam6iv5en06qo" class="article-share-link">Share</a><div class="tags"><a href="/tags/shellcode/">shellcode</a></div><div class="post-nav"><a href="/2013/01/02/diary-annual-summary-2012/" class="pre">我的2012</a><a href="/2012/11/20/exploit-cve-2011-0609/" class="next">CVE-2011-0609</a></div><div id="disqus_thread"><script>var disqus_shortname = 'idhyt';
 var disqus_identifier = '2012/12/18/technic-alphanumeric-shellcode/';
 var disqus_title = '纯字母数字shellcode编码';
 var disqus_url = 'http://blog.idhyt.com/2012/12/18/technic-alphanumeric-shellcode/';
