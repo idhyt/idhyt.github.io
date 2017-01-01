@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.idhyt.com/2017/01/01/diary-annual-summary-2016/</loc>
+    <lastmod>2017-01-01T17:56:40.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.idhyt.com/2016/10/26/exploit-illegal-access-caused-by-an-empty-list/</loc>
     <lastmod>2016-11-16T04:41:03.000Z</lastmod>
   </url>
