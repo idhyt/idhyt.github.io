@@ -59,7 +59,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
 <meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-3e.jpg">
 <meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-4.jpg">
 <meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/android-xposed-5.jpg">
-<meta property="og:updated_time" content="2016-11-14T15:39:47.000Z">
+<meta property="og:updated_time" content="2017-01-02T09:07:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓注入框架Xposed分析与简单应用">
 <meta name="twitter:description" content="概述Xposed是针对Android平台的动态劫持项目，源码github
@@ -418,7 +418,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
 <h4 id="主要模块说明如下：">主要模块说明如下：</h4><p><strong>Xposed</strong>：Xposed的C++部分，主要是用来替换/system/bin/app_process，并为XposedBridge提供JNI方法。</p>
 <p><strong>XposedInstaller</strong>：Xposed的安装包，负责配置Xposed工作的环境并且提供对基于Xposed框架的Modules的管理。在安装XposedInstaller之后，app_process与XposedBridge.jar放置在了/data/data/de.robv.android.xposed.installer。</p>
 <p><strong>XposedBridge.jar</strong>：XposedBridge.jar是Xposed提供的jar文件，负责在Native层与FrameWork层进行交互。/system/bin/app_process进程启动过程中会加载该jar包，其它的Modules的开发与运行都是基于该jar包的。注意：XposedBridge.jar文件本质上是由XposedBridge生成的APK文件更名而来，查看该工程目录下的install.bat</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /d %~dp0&#10;dir bin\XposedBridge.apk&#10;adb push bin\XposedBridge.apk /data/data/de.robv.android.xposed.installer/bin/XposedBridge.jar.newversion&#10;pause</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /d %~dp0</span><br><span class="line">dir bin\XposedBridge.apk</span><br><span class="line">adb push bin\XposedBridge.apk /data/data/de.robv.android.xposed.installer/bin/XposedBridge.jar.newversion</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
 <p><strong>XposedMods</strong>：使用Xposed开发的一些Modules，其中AppSettings是一个可以进行权限动态管理的应用</p>
 <h4 id="Xposed框架的基本运行环境如下：">Xposed框架的基本运行环境如下：</h4><table>
 <thead>
