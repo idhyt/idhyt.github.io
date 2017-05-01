@@ -402,7 +402,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
             <a href="/2015/09/25/android-injection-xposed/#comments" itemprop="discussionUrl">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/25/android-injection-xposed/" itemprop="commentsCount"></span>
             </a>
-          </span>
+            </span>
           
         
       </div>
@@ -666,8 +666,6 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
  </div>
 
         
-
-        
           <div class="comments" id="comments">
             
               <div id="disqus_thread">
@@ -768,7 +766,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
             <p class="site-author-name">Links</p>
             
               <span class="links-of-author-item">
-              <a href="http://blog.idhyt.com/about/" target="_blank">访客</a>
+              <a href="http://blog.idhyt.com/about/" target="_blank">About</a>
               </span>
             
           
@@ -835,9 +833,6 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
   
   
     
-    
-
-
   
     <script type="text/javascript">
       var disqus_shortname = 'idhyt';
@@ -901,8 +896,6 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
         var disqus_false_text = "Disqus评论可能被墙";
 
         
-              disqus_false_text = "Disqus评论可能被墙，尝试加载多说。";
-        
         
         var show_btn = 
           '<div class="show-commit-cls">  \
@@ -914,9 +907,11 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
 
         $('.show-commit-dsp').hide();
 
+        <!--
         // define duoshuoQuery
-        var duoshuo_shortname = 'idhyt';
+        var duoshuo_shortname = '';
         var duoshuoQuery = {short_name: duoshuo_shortname};
+        -->
 
         document.getElementById('show_commit_btn').onclick = function() {
           // if (!disqus_loaded) 
@@ -931,7 +926,7 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
                 run_disqus_script('embed.js');
               
             }
-
+            <!--
             // else load duoshuo.
             else if (disqus_forbid) {
               if ($('.show-commit-dsp').css("display") == "none") {
@@ -956,20 +951,16 @@ XposedInstaller：Xposed的安装包，负责配置Xposed工作的环境并且�
                 </div>';
               t_comments.insertAdjacentHTML("afterBegin", duoshuo_comment);
             }
+            -->
           }
         }
 
       </script>
-      <!--
-      <img src="https://lh4.googleusercontent.com/-lOxRXbE0_FM/V59i2VnJDxI/AAAAAAAAAAg/f2MXiY-UaAc7_f1rJXOtpQ1lbNjqRF0MQCL0B/w142-h135/disqus.jpg" style="display: none" onload="google_allow()" onerror="google_forbid()"/>
-      -->
       <img src="http://disqus.com/api/users/avatars/disqus_api.jpg" style="display: none" onload="google_allow()" onerror="google_forbid()"/>
 
     
 
   
-
-
 
 
 

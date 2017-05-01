@@ -414,7 +414,7 @@ python challenge 11http://www.pythonchallenge.com/pc/return/5808.html题目只�
             <a href="/2015/08/10/python-challenge-11-20/#comments" itemprop="discussionUrl">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/10/python-challenge-11-20/" itemprop="commentsCount"></span>
             </a>
-          </span>
+            </span>
           
         
       </div>
@@ -662,8 +662,6 @@ python challenge 11http://www.pythonchallenge.com/pc/return/5808.html题目只�
  </div>
 
         
-
-        
           <div class="comments" id="comments">
             
               <div id="disqus_thread">
@@ -764,7 +762,7 @@ python challenge 11http://www.pythonchallenge.com/pc/return/5808.html题目只�
             <p class="site-author-name">Links</p>
             
               <span class="links-of-author-item">
-              <a href="http://blog.idhyt.com/about/" target="_blank">访客</a>
+              <a href="http://blog.idhyt.com/about/" target="_blank">About</a>
               </span>
             
           
@@ -831,9 +829,6 @@ python challenge 11http://www.pythonchallenge.com/pc/return/5808.html题目只�
   
   
     
-    
-
-
   
     <script type="text/javascript">
       var disqus_shortname = 'idhyt';
@@ -897,8 +892,6 @@ python challenge 11http://www.pythonchallenge.com/pc/return/5808.html题目只�
         var disqus_false_text = "Disqus评论可能被墙";
 
         
-              disqus_false_text = "Disqus评论可能被墙，尝试加载多说。";
-        
         
         var show_btn = 
           '<div class="show-commit-cls">  \
@@ -910,9 +903,11 @@ python challenge 11http://www.pythonchallenge.com/pc/return/5808.html题目只�
 
         $('.show-commit-dsp').hide();
 
+        <!--
         // define duoshuoQuery
-        var duoshuo_shortname = 'idhyt';
+        var duoshuo_shortname = '';
         var duoshuoQuery = {short_name: duoshuo_shortname};
+        -->
 
         document.getElementById('show_commit_btn').onclick = function() {
           // if (!disqus_loaded) 
@@ -927,7 +922,7 @@ python challenge 11http://www.pythonchallenge.com/pc/return/5808.html题目只�
                 run_disqus_script('embed.js');
               
             }
-
+            <!--
             // else load duoshuo.
             else if (disqus_forbid) {
               if ($('.show-commit-dsp').css("display") == "none") {
@@ -952,20 +947,16 @@ python challenge 11http://www.pythonchallenge.com/pc/return/5808.html题目只�
                 </div>';
               t_comments.insertAdjacentHTML("afterBegin", duoshuo_comment);
             }
+            -->
           }
         }
 
       </script>
-      <!--
-      <img src="https://lh4.googleusercontent.com/-lOxRXbE0_FM/V59i2VnJDxI/AAAAAAAAAAg/f2MXiY-UaAc7_f1rJXOtpQ1lbNjqRF0MQCL0B/w142-h135/disqus.jpg" style="display: none" onload="google_allow()" onerror="google_forbid()"/>
-      -->
       <img src="http://disqus.com/api/users/avatars/disqus_api.jpg" style="display: none" onload="google_allow()" onerror="google_forbid()"/>
 
     
 
   
-
-
 
 
 
