@@ -1,0 +1,1101 @@
+
+<!doctype html>
+<html class="theme-next use-motion theme-next-mala">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+  <meta name="google-site-verification" content="DRmBBL5LYsJ_2wCsJIYYsBfu8hVW8DQYzmpqGMp-njU" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="水中月.镜中花.浮华一片苍凉.." />
+
+
+
+  <meta name="keywords" content="syscall," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idhyt's blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="Test123456789101112131415161718192021@staticmethoddef get_syscall_from_file(file_full_path, func_list):    &quot;&quot;&quot;    SYSCALL_DEFINE2(xxx)    :param file_full_path: source file full path    :param func_li">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android SYSCALL_DEFINE">
+<meta property="og:url" content="http://blog.idhyt.com/2017/05/12/android-syscall-define/index.html">
+<meta property="og:site_name" content="idhyt's blog">
+<meta property="og:description" content="Test123456789101112131415161718192021@staticmethoddef get_syscall_from_file(file_full_path, func_list):    &quot;&quot;&quot;    SYSCALL_DEFINE2(xxx)    :param file_full_path: source file full path    :param func_li">
+<meta property="og:updated_time" content="2018-03-28T09:14:18.718Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android SYSCALL_DEFINE">
+<meta name="twitter:description" content="Test123456789101112131415161718192021@staticmethoddef get_syscall_from_file(file_full_path, func_list):    &quot;&quot;&quot;    SYSCALL_DEFINE2(xxx)    :param file_full_path: source file full path    :param func_li">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mala',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> Android SYSCALL_DEFINE | idhyt's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71783676-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5228d77c5752954f270fcca0908555af";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">云淡风轻</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            About
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'sVJDxDCDcUGeK1KkM6zN','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    
+      
+
+      
+        <style type="text/css">
+
+    .circle {
+        width: 40px;
+        height: 40px;
+        background: #555 no-repeat;
+        cursor: move;
+    }
+
+    .assist-btn {
+        position: fixed;
+        top: 50％;
+        left: 10px;
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 50px;
+        outline: none;
+        border: none;
+        color: #87daff;
+    }
+
+</style>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+<script type="text/javascript">
+    // 浮动圆点展开与收缩
+    /*
+    $(function () {
+        var assist_box = $('.assist-box');
+        $('#assist_btn').hover(function () {
+            assist_box.stop().show(300);
+        }, function () {
+            assist_box.stop().hide(150);
+        })
+    });
+    */  
+    //浮动圆点拖动
+    $(function () {
+        var box = document.getElementById('assist_btn');
+        box.onmousedown = function (event) {
+            var e = event || window.event,
+                t = e.target || e.srcElement,
+                // 鼠标按下时的坐标x1,y1
+                x1 = e.clientX,
+                y1 = e.clientY,
+                //鼠标按下时的左右偏移量
+                dragLeft = this.offsetLeft,
+                dragTop = this.offsetTop;
+
+            document.onmousemove = function (event) {
+                var e = event || window.event,
+                    t = e.target || e.srcElement,
+                    // 鼠标移动时的动态坐标
+                    x2 = e.clientX,
+                    y2 = e.clientY,
+                    // 鼠标移动时的坐标的变化量
+                    x = x2 - x1,
+                    y = y2 - y1;
+                box.style.left = (dragLeft + x) + 'px';
+                box.style.top = (dragTop + y) + 'px';
+            }
+
+            document.onmouseup = function () {
+                this.onmousemove = null;
+            }
+        }
+    });
+
+/*
+    $whitesmoke   = #f5f5f5
+    $gainsboro    = #eee
+    $gray-lighter = #ddd
+    $grey-light   = #ccc
+    $grey         = #bbb
+    $grey-dark    = #999
+    $grey-dim     = #666
+    $black-light  = #555
+    $black-deep   = #222
+    $red          = #ff2a2a
+    $blue-bright  = #87daff
+    $blue         = #0684bd
+    $blue-deep    = #262a30
+*/
+    // white theme
+    var body = {color: "#555", background: "white"};
+    var a_tag = {color: "#222"};
+    var header = { background: "#f5f5f5"};
+    var logo_line_i = {background: "#222"};
+    // var post_code = {background: "#eee", color: "#222"};
+
+    function switch_theme() {
+        $("body").css(body);
+        $("a:not('.links-of-author-item a, .site-state-item a, .site-state-posts a, .feed-link a, .motion-element a, .post-tags a, .show-commit-cls a, #donate_board a')").css(a_tag);
+        $(".header, .footer").css(header);
+        $(".logo-line-before i, .logo-line-after i").css(logo_line_i);
+        //$(".post code").css(post_code);
+        $("#idhyt-surprise-ball #idhyt-surprise-ball-animation .drag").css(a_tag);
+        $(".post-title-link, .posts-expand .post-meta, .post-comments-count, .disqus-comment-count, .post-category a, .post-nav-next a, .post-nav-item a").css(a_tag);
+        
+        // $("code").css({color: '#c5c8c6', background: '#1d1f21'});
+        $("#assist_btn").hide(1500);
+    }
+
+    $(function () {
+        $("#assist_btn").dblclick(function() {
+            switch_theme();
+        });
+    });
+
+</script>
+
+<div>
+
+    <button class="assist-btn circle" id="assist_btn" title="双击切换">
+        亮
+    </button>
+
+</div>
+
+
+
+
+
+
+
+
+
+      
+
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Android SYSCALL_DEFINE
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2017-05-12T09:01:11+08:00" content="2017-05-12">
+            2017-05-12
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; In
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/android/" itemprop="url" rel="index">
+                  <span itemprop="name">android</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2017/05/12/android-syscall-define/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/05/12/android-syscall-define/" itemprop="commentsCount"></span>
+            </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><a id="more"></a>
+<h2 id="Test">Test</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="decorator">@staticmethod</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_syscall_from_file</span><span class="params">(file_full_path, func_list)</span>:</span></span><br><span class="line">    <span class="string">"""</span><br><span class="line">    SYSCALL_DEFINE2(xxx)</span><br><span class="line">    :param file_full_path: source file full path</span><br><span class="line">    :param func_list: used to return</span><br><span class="line">    :return: ["SYSCALL_DEFINE(xxx)", "SYSCALL_DEFINE1(xxx)", ...]</span><br><span class="line">    """</span></span><br><span class="line">    regex_proc = <span class="string">r"((?&lt;=[\s:~])\**SYSCALL_DEFINE\d*\s*\(([\(\w\)\s,&lt;&gt;\[\].=&amp;':/*]*?)\).*(const)?\s*(?=&#123;))"</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> isinstance(file_full_path, str) <span class="keyword">or</span> <span class="keyword">not</span> isinstance(func_list, list):</span><br><span class="line">        <span class="keyword">raise</span> TypeError</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> open(file_full_path, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">            content = f.read()</span><br><span class="line">            result = re.finditer(regex_proc, content)</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> result:</span><br><span class="line">                syscall_define = i.group(<span class="number">0</span>).replace(<span class="string">"\n"</span>, <span class="string">""</span>).replace(<span class="string">"\t"</span>, <span class="string">""</span>).strip()</span><br><span class="line">                func_list.append(syscall_define)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(str(e))</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br><span class="line">621</span><br><span class="line">622</span><br><span class="line">623</span><br><span class="line">624</span><br><span class="line">625</span><br><span class="line">626</span><br><span class="line">627</span><br><span class="line">628</span><br><span class="line">629</span><br><span class="line">630</span><br><span class="line">631</span><br><span class="line">632</span><br><span class="line">633</span><br><span class="line">634</span><br><span class="line">635</span><br><span class="line">636</span><br><span class="line">637</span><br><span class="line">638</span><br><span class="line">639</span><br><span class="line">640</span><br><span class="line">641</span><br><span class="line">642</span><br><span class="line">643</span><br><span class="line">644</span><br><span class="line">645</span><br><span class="line">646</span><br><span class="line">647</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">msm/arch/alpha/kernel/osf_sys.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(osf_brk, unsigned long, brk)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(osf_set_program_attributes, unsigned long, text_start,unsigned long, text_len, unsigned long, bss_start,unsigned long, bss_len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(osf_getdirentries, unsigned int, fd,struct osf_dirent __user *, dirent, unsigned int, count,long __user *, basep)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(osf_mmap, unsigned long, addr, unsigned long, len,unsigned long, prot, unsigned long, flags, unsigned long, fd,unsigned long, off)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(osf_statfs, const char __user *, pathname,struct osf_statfs __user *, buffer, unsigned long, bufsiz)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(osf_fstatfs, unsigned long, fd,struct osf_statfs __user *, buffer, unsigned long, bufsiz)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(osf_mount, unsigned long, typenr, const char __user *, path,int, flag, void __user *, data)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(osf_utsname, char __user *, name)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(getpagesize)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(getdtablesize)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(osf_getdomainname, char __user *, name, int, namelen)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(osf_proplist_syscall, enum pl_code, code,union pl_args __user *, args)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(osf_sigstack, struct sigstack __user *, uss,struct sigstack __user *, uoss)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(osf_sysinfo, int, command, char __user *, buf, long, count)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(osf_getsysinfo, unsigned long, op, void __user *, buffer,unsigned long, nbytes, int __user *, start, void __user *, arg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(osf_setsysinfo, unsigned long, op, void __user *, buffer,unsigned long, nbytes, int __user *, start, void __user *, arg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(osf_gettimeofday, struct timeval32 __user *, tv,struct timezone __user *, tz)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(osf_settimeofday, struct timeval32 __user *, tv,struct timezone __user *, tz)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(osf_getitimer, int, which, struct itimerval32 __user *, it)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(osf_setitimer, int, which, struct itimerval32 __user *, in,struct itimerval32 __user *, out)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(osf_utimes, const char __user *, filename,struct timeval32 __user *, tvs)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(osf_select, int, n, fd_set __user *, inp, fd_set __user *, outp,fd_set __user *, exp, struct timeval32 __user *, tvp)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(osf_getrusage, int, who, struct rusage32 __user *, ru)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(osf_wait4, pid_t, pid, int __user *, ustatus, int, options,struct rusage32 __user *, ur)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(osf_usleep_thread, struct timeval32 __user *, sleep,struct timeval32 __user *, remain)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(old_adjtimex, struct timex32 __user *, txc_p)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(osf_readv, unsigned long, fd,const struct iovec __user *, vector, unsigned long, count)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(osf_writev, unsigned long, fd,const struct iovec __user *, vector, unsigned long, count)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/alpha/kernel/signal.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(osf_sigprocmask, int, how, unsigned long, newmask)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(osf_sigaction, int, sig,const struct osf_sigaction __user *, act,struct osf_sigaction __user *, oact)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(rt_sigaction, int, sig, const struct sigaction __user *, act,struct sigaction __user *, oact,size_t, sigsetsize, void __user *, restorer)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(sigsuspend, old_sigset_t, mask)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/blackfin/kernel/sys_bfin.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(cacheflush, unsigned long, addr, unsigned long, len, int, op)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/c6x/kernel/process.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(c6x_clone, struct pt_regs *, regs)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(c6x_execve, const char __user *, name,const char __user *const __user *, argv,const char __user *const __user *, envp,struct pt_regs *, regs)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/mips/kernel/linux32.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(32_mmap2, unsigned long, addr, unsigned long, len,unsigned long, prot, unsigned long, flags, unsigned long, fd,unsigned long, pgoff)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(32_truncate64, const char __user *, path,unsigned long, __dummy, unsigned long, a2, unsigned long, a3)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(32_ftruncate64, unsigned long, fd, unsigned long, __dummy,unsigned long, a2, unsigned long, a3)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(32_llseek, unsigned int, fd, unsigned int, offset_high,unsigned int, offset_low, loff_t __user *, result,unsigned int, origin)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(32_pread, unsigned long, fd, char __user *, buf, size_t, count,unsigned long, unused, unsigned long, a4, unsigned long, a5)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(32_pwrite, unsigned int, fd, const char __user *, buf,size_t, count, u32, unused, u64, a4, u64, a5)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(32_sched_rr_get_interval, compat_pid_t, pid,struct compat_timespec __user *, interval)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(32_ipc, u32, call, long, first, long, second, long, third,unsigned long, ptr, unsigned long, fifth)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(32_ipc, u32, call, int, first, int, second, int, third,u32, ptr, u32, fifth)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(n32_semctl, int, semid, int, semnum, int, cmd, u32, arg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(n32_msgsnd, int, msqid, u32, msgp, unsigned int, msgsz,int, msgflg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(n32_msgrcv, int, msqid, u32, msgp, size_t, msgsz,int, msgtyp, int, msgflg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(32_personality, unsigned long, personality)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(32_sendfile, long, out_fd, long, in_fd,compat_off_t __user *, offset, s32, count)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(32_fanotify_mark, int, fanotify_fd, unsigned int, flags,u64, a3, u64, a4, int, dfd, const char  __user *, pathname)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(32_futex, u32 __user *, uaddr, int, op, u32, val,struct compat_timespec __user *, utime, u32 __user *, uaddr2,u32, val3)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/mips/kernel/signal.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(sigaction, int, sig, const struct sigaction __user *, act,struct sigaction __user *, oact)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/mips/kernel/signal32.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(32_sigaction, long, sig, const struct sigaction32 __user *, act,struct sigaction32 __user *, oact)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(32_rt_sigaction, int, sig,const struct sigaction32 __user *, act,struct sigaction32 __user *, oact, unsigned int, sigsetsize)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(32_rt_sigprocmask, int, how, compat_sigset_t __user *, set,compat_sigset_t __user *, oset, unsigned int, sigsetsize)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(32_rt_sigpending, compat_sigset_t __user *, uset,unsigned int, sigsetsize)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(32_rt_sigqueueinfo, int, pid, int, sig,compat_siginfo_t __user *, uinfo)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(32_waitid, int, which, compat_pid_t, pid,     compat_siginfo_t __user *, uinfo, int, options,     struct compat_rusage __user *, uru)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/mips/kernel/syscall.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(mips_mmap, unsigned long, addr, unsigned long, len,unsigned long, prot, unsigned long, flags, unsigned long,fd, off_t, offset)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(mips_mmap2, unsigned long, addr, unsigned long, len,unsigned long, prot, unsigned long, flags, unsigned long, fd,unsigned long, pgoff)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(set_thread_area, unsigned long, addr)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(cachectl, char *, addr, int, nbytes, int, op)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/mips/mm/cache.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(cacheflush, unsigned long, addr, unsigned long, bytes,unsigned int, cache)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/powerpc/platforms/cell/spu_syscalls.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(spu_create, const char __user *, name, unsigned int, flags,umode_t, mode, int, neighbor_fd)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/s390/kernel/process.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(fork)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(clone, unsigned long, newsp, unsigned long, clone_flags,int __user *, parent_tidptr, int __user *, child_tidptr)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(vfork)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(execve, const char __user *, name,const char __user *const __user *, argv,const char __user *const __user *, envp)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/s390/kernel/signal.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(sigsuspend, int, history0, int, history1, old_sigset_t, mask)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(sigaction, int, sig, const struct old_sigaction __user *, act,struct old_sigaction __user *, oact)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(sigaltstack, const stack_t __user *, uss,stack_t __user *, uoss)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(sigreturn)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(rt_sigreturn)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/s390/kernel/sys_s390.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(mmap2, struct s390_mmap_arg_struct __user *, arg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(s390_ipc, uint, call, int, first, unsigned long, second,unsigned long, third, void __user *, ptr)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(s390_personality, unsigned int, personality)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(s390_fadvise64, int, fd, u32, offset_high, u32, offset_low,size_t, len, int, advice)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(s390_fadvise64_64, struct fadvise64_64_args __user *, args)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(s390_fallocate)(int fd, int mode, loff_t offset,       u32 len_high, u32 len_low)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/sparc/kernel/sys_sparc_64.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(sparc_pipe_real, struct pt_regs *, regs)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(sparc_ipc, unsigned int, call, int, first, unsigned long, second,unsigned long, third, void __user *, ptr, long, fifth)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(sparc64_personality, unsigned long, personality)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(mmap, unsigned long, addr, unsigned long, len,unsigned long, prot, unsigned long, flags, unsigned long, fd,unsigned long, off)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(64_munmap, unsigned long, addr, size_t, len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(64_mremap, unsigned long, addr,unsigned long, old_len,unsigned long, new_len, unsigned long, flags,unsigned long, new_addr)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(getdomainname, char __user *, name, int, len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(utrap_install, utrap_entry_t, type,utrap_handler_t, new_p, utrap_handler_t, new_d,utrap_handler_t __user *, old_p,utrap_handler_t __user *, old_d)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(rt_sigaction, int, sig, const struct sigaction __user *, act,struct sigaction __user *, oact, void __user *, restorer,size_t, sigsetsize)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/tile/kernel/process.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(clone, unsigned long, clone_flags, unsigned long, newsp,void __user *, parent_tidptr, void __user *, child_tidptr,struct pt_regs *, regs)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(execve, const char __user *, path,const char __user *const __user *, argv,const char __user *const __user *, envp,struct pt_regs *, regs)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/tile/kernel/signal.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(sigaltstack, const stack_t __user *, uss,stack_t __user *, uoss, struct pt_regs *, regs)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(rt_sigreturn, struct pt_regs *, regs)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/tile/kernel/sys.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(flush_cache)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(mmap2, unsigned long, addr, unsigned long, len,unsigned long, prot, unsigned long, flags,unsigned long, fd, unsigned long, off_4k)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(mmap, unsigned long, addr, unsigned long, len,unsigned long, prot, unsigned long, flags,unsigned long, fd, off_t, offset)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/tile/mm/fault.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(cmpxchg_badaddr, unsigned long, address,struct pt_regs *, regs)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/unicore32/kernel/sys.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(mmap2, unsigned long, addr, unsigned long, len,unsigned long, prot, unsigned long, flags,unsigned long, fd, unsigned long, off_4k)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/arch/x86/kernel/sys_x86_64.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(mmap, unsigned long, addr, unsigned long, len,unsigned long, prot, unsigned long, flags,unsigned long, fd, unsigned long, off)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/drivers/pci/syscall.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(pciconfig_read, unsigned long, bus, unsigned long, dfn,unsigned long, off, unsigned long, len, void __user *, buf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(pciconfig_write, unsigned long, bus, unsigned long, dfn,unsigned long, off, unsigned long, len, void __user *, buf)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/aio.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(io_setup, unsigned, nr_events, aio_context_t __user *, ctxp)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(io_destroy, aio_context_t, ctx)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(io_submit, aio_context_t, ctx_id, long, nr,struct iocb __user * __user *, iocbpp)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(io_cancel, aio_context_t, ctx_id, struct iocb __user *, iocb,struct io_event __user *, result)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(io_getevents, aio_context_t, ctx_id,long, min_nr,long, nr,struct io_event __user *, events,struct timespec __user *, timeout)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/buffer.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(bdflush, int, func, long, data)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/dcache.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(getcwd, char __user *, buf, unsigned long, size)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/dcookies.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(lookup_dcookie)(u64 cookie64, char __user * buf, size_t len)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/eventfd.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(eventfd2, unsigned int, count, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(eventfd, unsigned int, count)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/eventpoll.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(epoll_create1, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(epoll_create, int, size)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,struct epoll_event __user *, event)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(epoll_wait, int, epfd, struct epoll_event __user *, events,int, maxevents, int, timeout)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(epoll_pwait, int, epfd, struct epoll_event __user *, events,int, maxevents, int, timeout, const sigset_t __user *, sigmask,size_t, sigsetsize)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/exec.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(uselib, const char __user *, library)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/fcntl.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(dup3, unsigned int, oldfd, unsigned int, newfd, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(dup2, unsigned int, oldfd, unsigned int, newfd)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(dup, unsigned int, fildes)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(fcntl, unsigned int, fd, unsigned int, cmd, unsigned long, arg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(fcntl64, unsigned int, fd, unsigned int, cmd,unsigned long, arg)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/fhandle.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(name_to_handle_at, int, dfd, const char __user *, name,struct file_handle __user *, handle, int __user *, mnt_id,int, flag)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(open_by_handle_at, int, mountdirfd,struct file_handle __user *, handle,int, flags)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/filesystems.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(sysfs, int, option, unsigned long, arg1, unsigned long, arg2)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/ioctl.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(ioctl, unsigned int, fd, unsigned int, cmd, unsigned long, arg)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/ioprio.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(ioprio_set, int, which, int, who, int, ioprio)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(ioprio_get, int, which, int, who)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/locks.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(flock, unsigned int, fd, unsigned int, cmd)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/namei.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(mknodat, int, dfd, const char __user *, filename, umode_t, mode,unsigned, dev)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(mknod, const char __user *, filename, umode_t, mode, unsigned, dev)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(mkdirat, int, dfd, const char __user *, pathname, umode_t, mode)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(mkdir, const char __user *, pathname, umode_t, mode)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(rmdir, const char __user *, pathname)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(unlinkat, int, dfd, const char __user *, pathname, int, flag)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(unlink, const char __user *, pathname)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(symlinkat, const char __user *, oldname,int, newdfd, const char __user *, newname)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(symlink, const char __user *, oldname, const char __user *, newname)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(linkat, int, olddfd, const char __user *, oldname,int, newdfd, const char __user *, newname, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(link, const char __user *, oldname, const char __user *, newname)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(renameat, int, olddfd, const char __user *, oldname,int, newdfd, const char __user *, newname)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(rename, const char __user *, oldname, const char __user *, newname)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/namespace.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(umount, char __user *, name, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(oldumount, char __user *, name)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(mount, char __user *, dev_name, char __user *, dir_name,char __user *, type, unsigned long, flags, void __user *, data)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(pivot_root, const char __user *, new_root,const char __user *, put_old)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/open.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(truncate, const char __user *, path, long, length)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(ftruncate, unsigned int, fd, unsigned long, length)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(truncate64)(const char __user * path, loff_t length)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(ftruncate64)(unsigned int fd, loff_t length)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(fallocate)(int fd, int mode, loff_t offset, loff_t len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(faccessat, int, dfd, const char __user *, filename, int, mode)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(access, const char __user *, filename, int, mode)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(chdir, const char __user *, filename)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(fchdir, unsigned int, fd)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(chroot, const char __user *, filename)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(fchmod, unsigned int, fd, umode_t, mode)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(fchmodat, int, dfd, const char __user *, filename, umode_t, mode)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(chmod, const char __user *, filename, umode_t, mode)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(chown, const char __user *, filename, uid_t, user, gid_t, group)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(fchownat, int, dfd, const char __user *, filename, uid_t, user,gid_t, group, int, flag)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(lchown, const char __user *, filename, uid_t, user, gid_t, group)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(fchown, unsigned int, fd, uid_t, user, gid_t, group)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(open, const char __user *, filename, int, flags, umode_t, mode)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(openat, int, dfd, const char __user *, filename, int, flags,umode_t, mode)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(creat, const char __user *, pathname, umode_t, mode)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(close, unsigned int, fd)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(vhangup)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/pipe.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(pipe2, int __user *, fildes, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(pipe, int __user *, fildes)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/read_write.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(lseek, unsigned int, fd, off_t, offset, unsigned int, origin)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(llseek, unsigned int, fd, unsigned long, offset_high,unsigned long, offset_low, loff_t __user *, result,unsigned int, origin)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(read, unsigned int, fd, char __user *, buf, size_t, count)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(write, unsigned int, fd, const char __user *, buf,size_t, count)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(pread64)(unsigned int fd, char __user *buf,size_t count, loff_t pos)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(pwrite64)(unsigned int fd, const char __user *buf, size_t count, loff_t pos)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(readv, unsigned long, fd, const struct iovec __user *, vec,unsigned long, vlen)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(writev, unsigned long, fd, const struct iovec __user *, vec,unsigned long, vlen)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(preadv, unsigned long, fd, const struct iovec __user *, vec,unsigned long, vlen, unsigned long, pos_l, unsigned long, pos_h)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(pwritev, unsigned long, fd, const struct iovec __user *, vec,unsigned long, vlen, unsigned long, pos_l, unsigned long, pos_h)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(sendfile, int, out_fd, int, in_fd, off_t __user *, offset, size_t, count)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(sendfile64, int, out_fd, int, in_fd, loff_t __user *, offset, size_t, count)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/readdir.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(old_readdir, unsigned int, fd,struct old_linux_dirent __user *, dirent, unsigned int, count)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(getdents, unsigned int, fd,struct linux_dirent __user *, dirent, unsigned int, count)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(getdents64, unsigned int, fd,struct linux_dirent64 __user *, dirent, unsigned int, count)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/select.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(select, int, n, fd_set __user *, inp, fd_set __user *, outp,fd_set __user *, exp, struct timeval __user *, tvp)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(pselect6, int, n, fd_set __user *, inp, fd_set __user *, outp,fd_set __user *, exp, struct timespec __user *, tsp,void __user *, sig)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(old_select, struct sel_arg_struct __user *, arg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(poll, struct pollfd __user *, ufds, unsigned int, nfds,int, timeout_msecs)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(ppoll, struct pollfd __user *, ufds, unsigned int, nfds,struct timespec __user *, tsp, const sigset_t __user *, sigmask,size_t, sigsetsize)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/signalfd.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(signalfd4, int, ufd, sigset_t __user *, user_mask,size_t, sizemask, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(signalfd, int, ufd, sigset_t __user *, user_mask,size_t, sizemask)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/splice.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(vmsplice, int, fd, const struct iovec __user *, iov,unsigned long, nr_segs, unsigned int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(splice, int, fd_in, loff_t __user *, off_in,int, fd_out, loff_t __user *, off_out,size_t, len, unsigned int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(tee, int, fdin, int, fdout, size_t, len, unsigned int, flags)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/stat.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(stat, const char __user *, filename,struct __old_kernel_stat __user *, statbuf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(lstat, const char __user *, filename,struct __old_kernel_stat __user *, statbuf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(fstat, unsigned int, fd, struct __old_kernel_stat __user *, statbuf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(newstat, const char __user *, filename,struct stat __user *, statbuf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(newlstat, const char __user *, filename,struct stat __user *, statbuf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(newfstatat, int, dfd, const char __user *, filename,struct stat __user *, statbuf, int, flag)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(newfstat, unsigned int, fd, struct stat __user *, statbuf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(readlinkat, int, dfd, const char __user *, pathname,char __user *, buf, int, bufsiz)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(readlink, const char __user *, path, char __user *, buf,int, bufsiz)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(stat64, const char __user *, filename,struct stat64 __user *, statbuf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(lstat64, const char __user *, filename,struct stat64 __user *, statbuf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(fstat64, unsigned long, fd, struct stat64 __user *, statbuf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(fstatat64, int, dfd, const char __user *, filename,struct stat64 __user *, statbuf, int, flag)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/statfs.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(statfs, const char __user *, pathname, struct statfs __user *, buf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(statfs64, const char __user *, pathname, size_t, sz, struct statfs64 __user *, buf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(fstatfs, unsigned int, fd, struct statfs __user *, buf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(fstatfs64, unsigned int, fd, size_t, sz, struct statfs64 __user *, buf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(ustat, unsigned, dev, struct ustat __user *, ubuf)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/sync.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(sync)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(syncfs, int, fd)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(fsync, unsigned int, fd)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(fdatasync, unsigned int, fd)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(sync_file_range)(int fd, loff_t offset, loff_t nbytes,unsigned int flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(sync_file_range2)(int fd, unsigned int flags, loff_t offset, loff_t nbytes)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/timerfd.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(timerfd_create, int, clockid, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(timerfd_settime, int, ufd, int, flags,const struct itimerspec __user *, utmr,struct itimerspec __user *, otmr)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(timerfd_gettime, int, ufd, struct itimerspec __user *, otmr)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/utimes.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(utime, char __user *, filename, struct utimbuf __user *, times)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(utimensat, int, dfd, const char __user *, filename,struct timespec __user *, utimes, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(futimesat, int, dfd, const char __user *, filename,struct timeval __user *, utimes)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(utimes, char __user *, filename,struct timeval __user *, utimes)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/xattr.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(setxattr, const char __user *, pathname,const char __user *, name, const void __user *, value,size_t, size, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(lsetxattr, const char __user *, pathname,const char __user *, name, const void __user *, value,size_t, size, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(fsetxattr, int, fd, const char __user *, name,const void __user *,value, size_t, size, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(getxattr, const char __user *, pathname,const char __user *, name, void __user *, value, size_t, size)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(lgetxattr, const char __user *, pathname,const char __user *, name, void __user *, value, size_t, size)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(fgetxattr, int, fd, const char __user *, name,void __user *, value, size_t, size)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(listxattr, const char __user *, pathname, char __user *, list,size_t, size)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(llistxattr, const char __user *, pathname, char __user *, list,size_t, size)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(flistxattr, int, fd, char __user *, list, size_t, size)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(removexattr, const char __user *, pathname,const char __user *, name)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(lremovexattr, const char __user *, pathname,const char __user *, name)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(fremovexattr, int, fd, const char __user *, name)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/notify/fanotify/fanotify_user.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(fanotify_init, unsigned int, flags, unsigned int, event_f_flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(fanotify_mark)(int fanotify_fd, unsigned int flags,      __u64 mask, int dfd,      const char  __user * pathname)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/notify/inotify/inotify_user.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(inotify_init1, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(inotify_init)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(inotify_add_watch, int, fd, const char __user *, pathname,u32, mask)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(inotify_rm_watch, int, fd, __s32, wd)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/fs/quota/quota.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(quotactl, unsigned int, cmd, const char __user *, special,qid_t, id, void __user *, addr)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/ipc/mqueue.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(mq_open, const char __user *, u_name, int, oflag, umode_t, mode,struct mq_attr __user *, u_attr)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(mq_unlink, const char __user *, u_name)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(mq_timedsend, mqd_t, mqdes, const char __user *, u_msg_ptr,size_t, msg_len, unsigned int, msg_prio,const struct timespec __user *, u_abs_timeout)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(mq_timedreceive, mqd_t, mqdes, char __user *, u_msg_ptr,size_t, msg_len, unsigned int __user *, u_msg_prio,const struct timespec __user *, u_abs_timeout)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(mq_notify, mqd_t, mqdes,const struct sigevent __user *, u_notification)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(mq_getsetattr, mqd_t, mqdes,const struct mq_attr __user *, u_mqstat,struct mq_attr __user *, u_omqstat)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/ipc/msg.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(msgget, key_t, key, int, msgflg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(msgctl, int, msqid, int, cmd, struct msqid_ds __user *, buf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(msgsnd, int, msqid, struct msgbuf __user *, msgp, size_t, msgsz,int, msgflg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(msgrcv, int, msqid, struct msgbuf __user *, msgp, size_t, msgsz,long, msgtyp, int, msgflg)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/ipc/sem.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(semget, key_t, key, int, nsems, int, semflg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(semctl)(int semid, int semnum, int cmd, union semun arg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(semtimedop, int, semid, struct sembuf __user *, tsops,unsigned, nsops, const struct timespec __user *, timeout)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(semop, int, semid, struct sembuf __user *, tsops,unsigned, nsops)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/ipc/shm.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(shmget, key_t, key, size_t, size, int, shmflg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(shmctl, int, shmid, int, cmd, struct shmid_ds __user *, buf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(shmat, int, shmid, char __user *, shmaddr, int, shmflg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(shmdt, char __user *, shmaddr)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/ipc/syscall.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(ipc, unsigned int, call, int, first, unsigned long, second,unsigned long, third, void __user *, ptr, long, fifth)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/acct.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(acct, const char __user *, name)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/capability.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(capget, cap_user_header_t, header, cap_user_data_t, dataptr)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(capset, cap_user_header_t, header, const cap_user_data_t, data)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/exec_domain.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(personality, unsigned int, personality)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/exit.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(exit, int, error_code)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(exit_group, int, error_code)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(waitid, int, which, pid_t, upid, struct siginfo __user *,infop, int, options, struct rusage __user *, ru)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(wait4, pid_t, upid, int __user *, stat_addr,int, options, struct rusage __user *, ru)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(waitpid, pid_t, pid, int __user *, stat_addr, int, options)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/fork.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(set_tid_address, int __user *, tidptr)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(unshare, unsigned long, unshare_flags)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/futex.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(set_robust_list, struct robust_list_head __user *, head,size_t, len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(get_robust_list, int, pid,struct robust_list_head __user * __user *, head_ptr,size_t __user *, len_ptr)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(futex, u32 __user *, uaddr, int, op, u32, val,struct timespec __user *, utime, u32 __user *, uaddr2,u32, val3)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/groups.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(getgroups, int, gidsetsize, gid_t __user *, grouplist)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(setgroups, int, gidsetsize, gid_t __user *, grouplist)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/hrtimer.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(nanosleep, struct timespec __user *, rqtp,struct timespec __user *, rmtp)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/itimer.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(getitimer, int, which, struct itimerval __user *, value)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(setitimer, int, which, struct itimerval __user *, value,struct itimerval __user *, ovalue)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/kexec.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(kexec_load, unsigned long, entry, unsigned long, nr_segments,struct kexec_segment __user *, segments, unsigned long, flags)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/module.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(delete_module, const char __user *, name_user,unsigned int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(init_module, void __user *, umod,unsigned long, len, const char __user *, uargs)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/nsproxy.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(setns, int, fd, int, nstype)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/posix-timers.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(timer_create, const clockid_t, which_clock,struct sigevent __user *, timer_event_spec,timer_t __user *, created_timer_id)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(timer_gettime, timer_t, timer_id,struct itimerspec __user *, setting)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(timer_getoverrun, timer_t, timer_id)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(timer_settime, timer_t, timer_id, int, flags,const struct itimerspec __user *, new_setting,struct itimerspec __user *, old_setting)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(timer_delete, timer_t, timer_id)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(clock_settime, const clockid_t, which_clock,const struct timespec __user *, tp)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(clock_gettime, const clockid_t, which_clock,struct timespec __user *,tp)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(clock_adjtime, const clockid_t, which_clock,struct timex __user *, utx)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(clock_getres, const clockid_t, which_clock,struct timespec __user *, tp)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(clock_nanosleep, const clockid_t, which_clock, int, flags,const struct timespec __user *, rqtp,struct timespec __user *, rmtp)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/printk.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(syslog, int, type, char __user *, buf, int, len)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/ptrace.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(ptrace, long, request, long, pid, unsigned long, addr,unsigned long, data)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/seccomp.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(seccomp, unsigned int, op, unsigned int, flags, const char __user *, uargs)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/signal.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(restart_syscall)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(rt_sigprocmask, int, how, sigset_t __user *, nset,sigset_t __user *, oset, size_t, sigsetsize)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(rt_sigpending, sigset_t __user *, set, size_t, sigsetsize)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(rt_sigtimedwait, const sigset_t __user *, uthese,siginfo_t __user *, uinfo, const struct timespec __user *, uts,size_t, sigsetsize)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(kill, pid_t, pid, int, sig)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(tgkill, pid_t, tgid, pid_t, pid, int, sig)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(tkill, pid_t, pid, int, sig)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(rt_sigqueueinfo, pid_t, pid, int, sig,siginfo_t __user *, uinfo)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(rt_tgsigqueueinfo, pid_t, tgid, pid_t, pid, int, sig,siginfo_t __user *, uinfo)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(sigpending, old_sigset_t __user *, set)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(sigprocmask, int, how, old_sigset_t __user *, nset,old_sigset_t __user *, oset)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(rt_sigaction, int, sig,const struct sigaction __user *, act,struct sigaction __user *, oact,size_t, sigsetsize)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(sgetmask)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(ssetmask, int, newmask)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(signal, int, sig, __sighandler_t, handler)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(pause)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(rt_sigsuspend, sigset_t __user *, unewset, size_t, sigsetsize)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/sys.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(setpriority, int, which, int, who, int, niceval)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(getpriority, int, which, int, who)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(reboot, int, magic1, int, magic2, unsigned int, cmd,void __user *, arg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(setregid, gid_t, rgid, gid_t, egid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(setgid, gid_t, gid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(setreuid, uid_t, ruid, uid_t, euid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(setuid, uid_t, uid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(setresuid, uid_t, ruid, uid_t, euid, uid_t, suid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(getresuid, uid_t __user *, ruid, uid_t __user *, euid, uid_t __user *, suid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(setresgid, gid_t, rgid, gid_t, egid, gid_t, sgid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(getresgid, gid_t __user *, rgid, gid_t __user *, egid, gid_t __user *, sgid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(setfsuid, uid_t, uid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(setfsgid, gid_t, gid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(times, struct tms __user *, tbuf)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(setpgid, pid_t, pid, pid_t, pgid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(getpgid, pid_t, pid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(getpgrp)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(getsid, pid_t, pid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(setsid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(newuname, struct new_utsname __user *, name)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(uname, struct old_utsname __user *, name)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(olduname, struct oldold_utsname __user *, name)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(sethostname, char __user *, name, int, len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(gethostname, char __user *, name, int, len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(setdomainname, char __user *, name, int, len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(getrlimit, unsigned int, resource, struct rlimit __user *, rlim)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(old_getrlimit, unsigned int, resource,struct rlimit __user *, rlim)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(prlimit64, pid_t, pid, unsigned int, resource,const struct rlimit64 __user *, new_rlim,struct rlimit64 __user *, old_rlim)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(setrlimit, unsigned int, resource, struct rlimit __user *, rlim)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(getrusage, int, who, struct rusage __user *, ru)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(umask, int, mask)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(prctl, int, option, unsigned long, arg2, unsigned long, arg3,unsigned long, arg4, unsigned long, arg5)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(getcpu, unsigned __user *, cpup, unsigned __user *, nodep,struct getcpu_cache __user *, unused)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/sysctl_binary.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(sysctl, struct __sysctl_args __user *, args)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/time.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(time, time_t __user *, tloc)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(stime, time_t __user *, tptr)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(gettimeofday, struct timeval __user *, tv,struct timezone __user *, tz)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(settimeofday, struct timeval __user *, tv,struct timezone __user *, tz)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(adjtimex, struct timex __user *, txc_p)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/timer.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(alarm, unsigned int, seconds)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(getpid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(getppid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(getuid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(geteuid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(getgid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(getegid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(gettid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(sysinfo, struct sysinfo __user *, info)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/uid16.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(chown16, const char __user *, filename, old_uid_t, user, old_gid_t, group)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(lchown16, const char __user *, filename, old_uid_t, user, old_gid_t, group)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(fchown16, unsigned int, fd, old_uid_t, user, old_gid_t, group)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(setregid16, old_gid_t, rgid, old_gid_t, egid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(setgid16, old_gid_t, gid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(setreuid16, old_uid_t, ruid, old_uid_t, euid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(setuid16, old_uid_t, uid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(setresuid16, old_uid_t, ruid, old_uid_t, euid, old_uid_t, suid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(getresuid16, old_uid_t __user *, ruid, old_uid_t __user *, euid, old_uid_t __user *, suid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(setresgid16, old_gid_t, rgid, old_gid_t, egid, old_gid_t, sgid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(getresgid16, old_gid_t __user *, rgid, old_gid_t __user *, egid, old_gid_t __user *, sgid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(setfsuid16, old_uid_t, uid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(setfsgid16, old_gid_t, gid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(getgroups16, int, gidsetsize, old_gid_t __user *, grouplist)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(setgroups16, int, gidsetsize, old_gid_t __user *, grouplist)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(getuid16)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(geteuid16)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(getgid16)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(getegid16)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/events/core.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(perf_event_open,struct perf_event_attr __user *, attr_uptr,pid_t, pid, int, cpu, int, group_fd, unsigned long, flags)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/kernel/sched/core.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(nice, int, increment)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(sched_setscheduler, pid_t, pid, int, policy,struct sched_param __user *, param)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(sched_setparam, pid_t, pid, struct sched_param __user *, param)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(sched_getscheduler, pid_t, pid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(sched_getparam, pid_t, pid, struct sched_param __user *, param)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(sched_setaffinity, pid_t, pid, unsigned int, len,unsigned long __user *, user_mask_ptr)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(sched_getaffinity, pid_t, pid, unsigned int, len,unsigned long __user *, user_mask_ptr)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(sched_yield)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(sched_get_priority_max, int, policy)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(sched_get_priority_min, int, policy)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(sched_rr_get_interval, pid_t, pid,struct timespec __user *, interval)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/fadvise.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(fadvise64_64)(int fd, loff_t offset, loff_t len, int advice)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(fadvise64)(int fd, loff_t offset, size_t len, int advice)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/filemap.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE(readahead)(int fd, loff_t offset, size_t count)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/fremap.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,unsigned long, prot, unsigned long, pgoff, unsigned long, flags)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/madvise.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(madvise, unsigned long, start, size_t, len_in, int, behavior)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/mempolicy.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(mbind, unsigned long, start, unsigned long, len,unsigned long, mode, unsigned long __user *, nmask,unsigned long, maxnode, unsigned, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(set_mempolicy, int, mode, unsigned long __user *, nmask,unsigned long, maxnode)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(migrate_pages, pid_t, pid, unsigned long, maxnode,const unsigned long __user *, old_nodes,const unsigned long __user *, new_nodes)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(get_mempolicy, int __user *, policy,unsigned long __user *, nmask, unsigned long, maxnode,unsigned long, addr, unsigned long, flags)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/migrate.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(move_pages, pid_t, pid, unsigned long, nr_pages,const void __user * __user *, pages,const int __user *, nodes,int __user *, status, int, flags)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/mincore.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(mincore, unsigned long, start, size_t, len,unsigned char __user *, vec)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/mlock.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(mlock, unsigned long, start, size_t, len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(munlock, unsigned long, start, size_t, len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(mlockall, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE0(munlockall)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/mmap.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(brk, unsigned long, brk)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(mmap_pgoff, unsigned long, addr, unsigned long, len,unsigned long, prot, unsigned long, flags,unsigned long, fd, unsigned long, pgoff)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(old_mmap, struct mmap_arg_struct __user *, arg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(munmap, unsigned long, addr, size_t, len)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/mprotect.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(mprotect, unsigned long, start, size_t, len,unsigned long, prot)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/mremap.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,unsigned long, new_len, unsigned long, flags,unsigned long, new_addr)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/msync.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(msync, unsigned long, start, size_t, len, int, flags)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/nommu.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(brk, unsigned long, brk)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(mmap_pgoff, unsigned long, addr, unsigned long, len,unsigned long, prot, unsigned long, flags,unsigned long, fd, unsigned long, pgoff)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(old_mmap, struct mmap_arg_struct __user *, arg)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(munmap, unsigned long, addr, size_t, len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,unsigned long, new_len, unsigned long, flags,unsigned long, new_addr)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/process_vm_access.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(process_vm_readv, pid_t, pid, const struct iovec __user *, lvec,unsigned long, liovcnt, const struct iovec __user *, rvec,unsigned long, riovcnt,unsigned long, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(process_vm_writev, pid_t, pid,const struct iovec __user *, lvec,unsigned long, liovcnt, const struct iovec __user *, rvec,unsigned long, riovcnt,unsigned long, flags)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/mm/swapfile.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE1(swapoff, const char __user *, specialfile)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/net/socket.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(socket, int, family, int, type, int, protocol)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(socketpair, int, family, int, type, int, protocol,int __user *, usockvec)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(bind, int, fd, struct sockaddr __user *, umyaddr, int, addrlen)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(listen, int, fd, int, backlog)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(accept4, int, fd, struct sockaddr __user *, upeer_sockaddr,int __user *, upeer_addrlen, int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(accept, int, fd, struct sockaddr __user *, upeer_sockaddr,int __user *, upeer_addrlen)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(connect, int, fd, struct sockaddr __user *, uservaddr,int, addrlen)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(getsockname, int, fd, struct sockaddr __user *, usockaddr,int __user *, usockaddr_len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(getpeername, int, fd, struct sockaddr __user *, usockaddr,int __user *, usockaddr_len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(sendto, int, fd, void __user *, buff, size_t, len,unsigned, flags, struct sockaddr __user *, addr,int, addr_len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(send, int, fd, void __user *, buff, size_t, len,unsigned, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE6(recvfrom, int, fd, void __user *, ubuf, size_t, size,unsigned, flags, struct sockaddr __user *, addr,int __user *, addr_len)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(setsockopt, int, fd, int, level, int, optname,char __user *, optval, int, optlen)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(getsockopt, int, fd, int, level, int, optname,char __user *, optval, int __user *, optlen)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(shutdown, int, fd, int, how)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(sendmsg, int, fd, struct msghdr __user *, msg, unsigned, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(sendmmsg, int, fd, struct mmsghdr __user *, mmsg,unsigned int, vlen, unsigned int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE3(recvmsg, int, fd, struct msghdr __user *, msg,unsigned int, flags)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(recvmmsg, int, fd, struct mmsghdr __user *, mmsg,unsigned int, vlen, unsigned int, flags,struct timespec __user *, timeout)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE2(socketcall, int, call, unsigned long __user *, args)"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">msm/security/keys/keyctl.c</span>": <span class="value">[</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(add_key, const char __user *, _type,const char __user *, _description,const void __user *, _payload,size_t, plen,key_serial_t, ringid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE4(request_key, const char __user *, _type,const char __user *, _description,const char __user *, _callout_info,key_serial_t, destringid)"</span>,</span><br><span class="line">    <span class="string">"SYSCALL_DEFINE5(keyctl, int, option, unsigned long, arg2, unsigned long, arg3,unsigned long, arg4, unsigned long, arg5)"</span></span><br><span class="line">  ]</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/syscall/" rel="tag">#syscall</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/17/android-proposing-new-kernel-attack-technique/" rel="next">Proposing new kernel attack technique</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div>
+      
+        <style type="text/css">
+
+    .donate_bar {
+        text-align: center;
+        margin-top : 5%;
+    }
+
+    .donate_bar.hidden {
+        display:none;
+    }
+/*
+    .donate_bar a.btn_donate {
+        display: inline-block;
+        width: 82px;
+        height: 82px;
+        margin-left:auto;
+        margin-right:auto;
+
+        background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat;
+        _background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat; 
+
+        -webkit-transition: background 0s;
+        -moz-transition: background 0s;
+        -o-transition: background 0s;
+        -ms-transition: background 0s;
+        transition: background 0s;
+    }
+*/
+    .donate_bar a.btn_donate:hover { 
+        // background-position: 0px -82px;
+        color: #87daff
+    }
+
+    .donate_bar .donate_txt {
+        display: block;
+        color: #9d9d9d;
+        font: 14px/2 "Microsoft Yahei";
+    }
+
+    .bold { 
+        font-weight: bold; 
+    }
+
+    .post-donate a {
+        border-bottom: 0px;
+    }
+
+    #donate_guide table {
+        border: none;
+    }
+
+    #donate_guide td {
+        border-bottom: none;
+        border-right: none;
+        background: #333333;
+        valign: top;
+    }
+
+</style>
+
+
+
+    
+
+    <div class ="post-donate">
+        <div id="donate_board" class="donate_bar center">
+              <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏">赏</a>
+              <span id="donate_txt" class="donate_txt">
+                   
+                        仅仅是一个功能
+                   
+              </span>
+            <br>
+        </div>  
+  
+        <div id="donate_guide" class="donate_bar center hidden">
+            <!--
+            
+                <a href="http://o7keinrz4.bkt.clouddn.com/alipay.jpg" title="支付宝打赏" class="fancybox" rel="article0" 
+                    style="float:left;margin-left:25%;margin-right:10px;">
+                    <img src="http://o7keinrz4.bkt.clouddn.com/alipay.jpg" title="" height="164px" width="164px">
+                </a> 
+              
+
+            
+                <a href="http://o7keinrz4.bkt.clouddn.com/wechat.jpg" title="微信打赏" class="fancybox" rel="article0"
+                    style="margin-right:30%">
+                    <img src="http://o7keinrz4.bkt.clouddn.com/wechat.jpg" title="" height="164px" width="164px">
+                </a>
+            
+            -->
+            <table>
+                <tr>
+                    <td>
+                        
+                            <a href="http://o7keinrz4.bkt.clouddn.com/alipay.jpg" title="支付宝打赏" class="fancybox" rel="article0" 
+                                style="float:left;margin-left:25%;margin-right:10px;">
+                                <img src="http://o7keinrz4.bkt.clouddn.com/alipay.jpg" title="" height="164px" width="164px">
+                            </a> 
+                         
+                    </td>
+                    <td>
+                        
+                            <a href="http://o7keinrz4.bkt.clouddn.com/wechat.jpg" title="微信打赏" class="fancybox" rel="article0"
+                                style="margin-right:30%">
+                                <img src="http://o7keinrz4.bkt.clouddn.com/wechat.jpg" title="" height="164px" width="164px">
+                            </a>
+                        
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <script type="text/javascript">
+            document.getElementById('btn_donate').onclick = function() {
+                $('#donate_board').addClass('hidden');
+                // $('#donate_guide').removeClass('hidden');
+                $('#donate_guide').show(2000);
+            }
+
+        </script>
+    </div>
+
+    
+
+
+      
+    </div>
+
+    <div class="post-spread">
+      
+        <div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="idhyt" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">idhyt</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">水中月.镜中花.浮华一片苍凉..</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">categories</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/idhyt" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/idhyt3r" target="_blank">Twitter</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/idhyt" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/idhyt" target="_blank">ZhiHu</a>
+              </span>
+            
+          
+        </div>
+
+        <div class="links-of-friendly motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.idhyt.com/about/" target="_blank">About</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Test"><span class="nav-number">1.</span> <span class="nav-text">Test</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2011 - 
+  <span itemprop="copyrightYear">2018
+  </span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idhyt
+  </span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme by <a class="theme-link" href="http://blog.idhyt.com">idhyt</a>.<a class="theme-link" href="https://github.com/idhyt/hexo-theme-next/tree/magiclamp">Mala</a>
+</div>
+
+<!-- busuanzi -->
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+  
+    <script type="text/javascript">
+      var disqus_shortname = 'idhyt';
+      var disqus_identifier = '2017/05/12/android-syscall-define/';
+      var disqus_title = 'Android SYSCALL_DEFINE';
+      var disqus_url = 'http://blog.idhyt.com/2017/05/12/android-syscall-define/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      var disqus_forbid = true;
+      function google_forbid() {
+        disqus_forbid = true;
+      }
+
+      function google_allow() {
+        disqus_forbid = false;
+      }
+
+    </script>
+
+    
+
+      <style type="text/css">
+        .show-commit-btn {
+            text-align: center;
+            margin-top: 5%;
+            display: inline-block;
+            color: #ddd;
+            font: 14px/2 "Microsoft Yahei";
+            background: #444;
+            padding: 1px 5px;
+            border-bottom: none;
+            // background:url("data:image/svg+xml;base64,PD94bWwgdm3Mz4=") no-repeat 0 50%
+            // background:url("http//xxxx.gif") no-repeat 0 
+        }
+        .show-commit-cls a:hover { 
+            // background-position: 0px -82px;
+            color: #87daff;
+            background: none;
+        }
+
+        .show-commit-dsp {
+            text-align: center;
+            font: 14px/2 "Microsoft Yahei";
+            color: #ddd;
+            margin-top: 5%;
+        }
+      </style>
+
+
+      <script type="text/javascript">
+
+        // var disqus_loaded = false;
+
+        var disqus_false_text = "Disqus评论可能被墙";
+
+        
+        
+        var show_btn = 
+          '<div class="show-commit-cls">  \
+            <a id="show_commit_btn" class="show-commit-btn" href="javascript:;" title="评论">评论/查看评论</a>  \
+            <div id="show_commit_dsp" class="show-commit-dsp"> ' + disqus_false_text + 
+            '</div> </div>';
+        var t_comments = document.getElementById("comments");
+        t_comments.insertAdjacentHTML("beforeBegin", show_btn);
+
+        $('.show-commit-dsp').hide();
+
+        <!--
+        // define duoshuoQuery
+        var duoshuo_shortname = '';
+        var duoshuoQuery = {short_name: duoshuo_shortname};
+        -->
+
+        document.getElementById('show_commit_btn').onclick = function() {
+          // if (!disqus_loaded) 
+          {
+            // disqus_loaded = true;
+            $('.show-commit-btn').hide();
+
+            // if google forbid, not load disqus.
+            if (!disqus_forbid) {
+              run_disqus_script('count.js');
+              
+                run_disqus_script('embed.js');
+              
+            }
+            <!--
+            // else load duoshuo.
+            else if (disqus_forbid) {
+              if ($('.show-commit-dsp').css("display") == "none") {
+                $('.show-commit-dsp').show(1500);
+              }
+              
+              // if google forbid then load duoshuo
+              if (duoshuo_shortname) {
+                (function() {
+                  var ds = document.createElement('script');
+                  ds.type = 'text/javascript';
+                  ds.async = true;
+                  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                  ds.charset = 'UTF-8';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+              }
+              var duoshuo_comment = 
+                '<div class="ds-thread" \
+                    data-thread-key="2017/05/12/android-syscall-define/" \
+                    data-title="Android SYSCALL_DEFINE" data-url="http://blog.idhyt.com/2017/05/12/android-syscall-define/">  \
+                </div>';
+              t_comments.insertAdjacentHTML("afterBegin", duoshuo_comment);
+            }
+            -->
+          }
+        }
+
+      </script>
+      <img src="http://disqus.com/api/users/avatars/disqus_api.jpg" style="display: none" onload="google_allow()" onerror="google_forbid()"/>
+
+    
+
+  
+
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

