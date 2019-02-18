@@ -52,9 +52,9 @@
 <meta property="og:site_name" content="idhyt's blog">
 <meta property="og:description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;在android的sdk中封装了webView控件,在webView下有一个非常特殊的接口函数addJavascriptInterface,利用这个接口函数可实现穿透webkit控制android 本机。
 简介&amp;#160; &amp;#160; &amp;#160; &amp;#160;Webview是Android用于浏览网页的组件，它的接口函数addJavascr">
-<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/webview-1.png">
-<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/webview-2.png">
-<meta property="og:image" content="http://o9xrwsn0z.bkt.clouddn.com/webview-3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/tech/webview-1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/tech/webview-2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/tech/webview-3.png">
 <meta property="og:updated_time" content="2015-04-11T03:11:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebView组件远程代码执行漏洞">
@@ -418,11 +418,11 @@
 <h4 id="3-_MainActivity-java添加关键代码">3. MainActivity.java添加关键代码</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.activity_main);</span><br><span class="line">    <span class="comment">// add webview func</span></span><br><span class="line">    WebView webview = (WebView)findViewById(R.id.webView);</span><br><span class="line">    webview.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</span><br><span class="line">    webview.loadUrl(<span class="string">"http://info.idhyt.xyz/vultest/checkwebview.html"</span>);<span class="string">");</span></span><br></pre></td></tr></table></figure>
 <p><br></p>
 <h4 id="4-_测试页面">4. 测试页面</h4><p>&#160; &#160; &#160; &#160;<a href="http://idhyt.sinaapp.com/vultest/checkwebview.html" target="_blank" rel="external">webview漏洞测试页面</a><br>&#160; &#160; &#160; &#160;<a href="http://idhyt.sinaapp.com/vultest/webviewexp.html" target="_blank" rel="external">webview漏洞利用页面</a><br><br></p>
-<h4 id="5-_测试结果">5. 测试结果</h4><p>&#160; &#160; &#160; &#160;在没有使用addJavascriptInterface接口函数的情况下，<br>也会存在远程代码执行漏洞，原因是webview组件默认调用”searchBoxJavaBridge_”对象。<br>&#160; &#160; &#160; &#160;<img src="http://o9xrwsn0z.bkt.clouddn.com/webview-1.png" alt=""></p>
+<h4 id="5-_测试结果">5. 测试结果</h4><p>&#160; &#160; &#160; &#160;在没有使用addJavascriptInterface接口函数的情况下，<br>也会存在远程代码执行漏洞，原因是webview组件默认调用”searchBoxJavaBridge_”对象。<br>&#160; &#160; &#160; &#160;<img src="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/tech/webview-1.png" alt=""></p>
 <p>&#160; &#160; &#160; &#160;当使用addJavascriptInterface接口函数时，代码改为<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">WebView webview = (WebView)findViewById(R.id.webView);</span><br><span class="line">webview.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</span><br><span class="line">webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(<span class="keyword">true</span>);</span><br><span class="line">webview.addJavascriptInterface(<span class="keyword">new</span> test(), <span class="string">"test"</span>);</span><br><span class="line">webview.loadUrl(<span class="string">"http://info.idhyt.xyz/vultest/checkwebview.html"</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">    <span class="comment">//do something...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>&#160; &#160; &#160; &#160;测试结果<br>&#160; &#160; &#160; &#160;<img src="http://o9xrwsn0z.bkt.clouddn.com/webview-2.png" alt=""></p>
+<p>&#160; &#160; &#160; &#160;测试结果<br>&#160; &#160; &#160; &#160;<img src="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/tech/webview-2.png" alt=""></p>
 <p>&#160; &#160; &#160; &#160;可以看到，即便test类没有具体实现代码，也一样会触发漏洞。<br><br></p>
-<h3 id="漏洞检测">漏洞检测</h3><p>&#160; &#160; &#160; &#160;通过编写静态扫描器过滤出可能存在问题的apk，方法是通过apktool将apk文件反编译成smali,之后进行暴力搜索关键字。<br>&#160; &#160; &#160; &#160;<img src="http://o9xrwsn0z.bkt.clouddn.com/webview-3.png" alt=""><br><br><br>其中用到的几个关键的正则:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">获取类名</span><br><span class="line"><span class="string">r"^\.class.+(Lcom.+);"</span></span><br><span class="line">获取所有method</span><br><span class="line"><span class="string">r"(\.method[\s\S]*?\.end *method)"</span></span><br><span class="line">获取method方法类型</span><br><span class="line"><span class="string">r"^\.method.+ +(\w+) *\("</span></span><br><span class="line">获取method中的.line</span><br><span class="line"><span class="string">r"\.line([\s\S]*?)(?=(\.line))"</span></span><br><span class="line">获取指定的调用函数</span><br><span class="line"><span class="string">r"setJavaScriptEnabled|addJavascriptInterface"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="漏洞检测">漏洞检测</h3><p>&#160; &#160; &#160; &#160;通过编写静态扫描器过滤出可能存在问题的apk，方法是通过apktool将apk文件反编译成smali,之后进行暴力搜索关键字。<br>&#160; &#160; &#160; &#160;<img src="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/tech/webview-3.png" alt=""><br><br><br>其中用到的几个关键的正则:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">获取类名</span><br><span class="line"><span class="string">r"^\.class.+(Lcom.+);"</span></span><br><span class="line">获取所有method</span><br><span class="line"><span class="string">r"(\.method[\s\S]*?\.end *method)"</span></span><br><span class="line">获取method方法类型</span><br><span class="line"><span class="string">r"^\.method.+ +(\w+) *\("</span></span><br><span class="line">获取method中的.line</span><br><span class="line"><span class="string">r"\.line([\s\S]*?)(?=(\.line))"</span></span><br><span class="line">获取指定的调用函数</span><br><span class="line"><span class="string">r"setJavaScriptEnabled|addJavascriptInterface"</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="防范">防范</h3><ul>
 <li>使用removeJavascriptInterface(“searchBoxJavaBridge<em>“)移除searchBoxJavaBridge</em>对象<br>1.重构WebView控件(WebViewEx)</li>
 </ul>
@@ -558,16 +558,16 @@
         <div id="donate_guide" class="donate_bar center hidden">
             <!--
             
-                <a href="http://o7keinrz4.bkt.clouddn.com/alipay.jpg" title="支付宝打赏" class="fancybox" rel="article0" 
+                <a href="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/daily/alipay.jpg" title="支付宝打赏" class="fancybox" rel="article0" 
                     style="float:left;margin-left:25%;margin-right:10px;">
-                    <img src="http://o7keinrz4.bkt.clouddn.com/alipay.jpg" title="" height="164px" width="164px">
+                    <img src="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/daily/alipay.jpg" title="" height="164px" width="164px">
                 </a> 
               
 
             
-                <a href="http://o7keinrz4.bkt.clouddn.com/wechat.jpg" title="微信打赏" class="fancybox" rel="article0"
+                <a href="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/daily/wechat.jpg" title="微信打赏" class="fancybox" rel="article0"
                     style="margin-right:30%">
-                    <img src="http://o7keinrz4.bkt.clouddn.com/wechat.jpg" title="" height="164px" width="164px">
+                    <img src="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/daily/wechat.jpg" title="" height="164px" width="164px">
                 </a>
             
             -->
@@ -575,17 +575,17 @@
                 <tr>
                     <td>
                         
-                            <a href="http://o7keinrz4.bkt.clouddn.com/alipay.jpg" title="支付宝打赏" class="fancybox" rel="article0" 
+                            <a href="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/daily/alipay.jpg" title="支付宝打赏" class="fancybox" rel="article0" 
                                 style="float:left;margin-left:25%;margin-right:10px;">
-                                <img src="http://o7keinrz4.bkt.clouddn.com/alipay.jpg" title="" height="164px" width="164px">
+                                <img src="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/daily/alipay.jpg" title="" height="164px" width="164px">
                             </a> 
                          
                     </td>
                     <td>
                         
-                            <a href="http://o7keinrz4.bkt.clouddn.com/wechat.jpg" title="微信打赏" class="fancybox" rel="article0"
+                            <a href="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/daily/wechat.jpg" title="微信打赏" class="fancybox" rel="article0"
                                 style="margin-right:30%">
-                                <img src="http://o7keinrz4.bkt.clouddn.com/wechat.jpg" title="" height="164px" width="164px">
+                                <img src="https://raw.githubusercontent.com/idhyt/dummyimg/master/blogs/daily/wechat.jpg" title="" height="164px" width="164px">
                             </a>
                         
                     </td>
