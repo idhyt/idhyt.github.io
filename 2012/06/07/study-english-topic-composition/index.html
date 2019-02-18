@@ -394,7 +394,7 @@
             <a href="/2012/06/07/study-english-topic-composition/#comments" itemprop="discussionUrl">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2012/06/07/study-english-topic-composition/" itemprop="commentsCount"></span>
             </a>
-            </span>
+          </span>
           
         
       </div>
@@ -589,7 +589,9 @@
 	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
 	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
 </div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+    window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
       
     </div>
@@ -603,8 +605,9 @@
               <div id="disqus_thread">
                 <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
               </div>
+            <!--
             
-          </div>
+            -->
         
       </div>
 
@@ -746,7 +749,7 @@
 </div>
 
 <div class="theme-info">
-  Theme by <a class="theme-link" href="http://blog.idhyt.com">idhyt</a>.<a class="theme-link" href="https://github.com/idhyt/hexo-theme-next/tree/magiclamp">Mala</a>
+  Theme by <a class="theme-link" href="https://idhyt.github.io">idhyt</a>.<a class="theme-link" href="https://github.com/idhyt/hexo-theme-next/tree/magiclamp">Mala</a>
 </div>
 
 <!-- busuanzi -->
@@ -765,136 +768,26 @@
   
   
     
-  
-    <script type="text/javascript">
-      var disqus_shortname = 'idhyt';
-      var disqus_identifier = '2012/06/07/study-english-topic-composition/';
-      var disqus_title = '话题作文模版';
-      var disqus_url = 'http://blog.idhyt.com/2012/06/07/study-english-topic-composition/';
 
-      function run_disqus_script(disqus_script){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
+  <script type="text/javascript">
+    var disqus_shortname = 'idhyt';
+    var disqus_identifier = '2012/06/07/study-english-topic-composition/';
+    var disqus_title = '话题作文模版';
+    var disqus_url = 'http://blog.idhyt.com/2012/06/07/study-english-topic-composition/';
 
-      var disqus_forbid = true;
-      function google_forbid() {
-        disqus_forbid = true;
-      }
+    function run_disqus_script(disqus_script){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }
 
-      function google_allow() {
-        disqus_forbid = false;
-      }
-
-    </script>
-
+    run_disqus_script('count.js');
     
-
-      <style type="text/css">
-        .show-commit-btn {
-            text-align: center;
-            margin-top: 5%;
-            display: inline-block;
-            color: #ddd;
-            font: 14px/2 "Microsoft Yahei";
-            background: #444;
-            padding: 1px 5px;
-            border-bottom: none;
-            // background:url("data:image/svg+xml;base64,PD94bWwgdm3Mz4=") no-repeat 0 50%
-            // background:url("http//xxxx.gif") no-repeat 0 
-        }
-        .show-commit-cls a:hover { 
-            // background-position: 0px -82px;
-            color: #87daff;
-            background: none;
-        }
-
-        .show-commit-dsp {
-            text-align: center;
-            font: 14px/2 "Microsoft Yahei";
-            color: #ddd;
-            margin-top: 5%;
-        }
-      </style>
-
-
-      <script type="text/javascript">
-
-        // var disqus_loaded = false;
-
-        var disqus_false_text = "Disqus评论可能被墙";
-
-        
-        
-        var show_btn = 
-          '<div class="show-commit-cls">  \
-            <a id="show_commit_btn" class="show-commit-btn" href="javascript:;" title="评论">评论/查看评论</a>  \
-            <div id="show_commit_dsp" class="show-commit-dsp"> ' + disqus_false_text + 
-            '</div> </div>';
-        var t_comments = document.getElementById("comments");
-        t_comments.insertAdjacentHTML("beforeBegin", show_btn);
-
-        $('.show-commit-dsp').hide();
-
-        <!--
-        // define duoshuoQuery
-        var duoshuo_shortname = '';
-        var duoshuoQuery = {short_name: duoshuo_shortname};
-        -->
-
-        document.getElementById('show_commit_btn').onclick = function() {
-          // if (!disqus_loaded) 
-          {
-            // disqus_loaded = true;
-            $('.show-commit-btn').hide();
-
-            // if google forbid, not load disqus.
-            if (!disqus_forbid) {
-              run_disqus_script('count.js');
-              
-                run_disqus_script('embed.js');
-              
-            }
-            <!--
-            // else load duoshuo.
-            else if (disqus_forbid) {
-              if ($('.show-commit-dsp').css("display") == "none") {
-                $('.show-commit-dsp').show(1500);
-              }
-              
-              // if google forbid then load duoshuo
-              if (duoshuo_shortname) {
-                (function() {
-                  var ds = document.createElement('script');
-                  ds.type = 'text/javascript';
-                  ds.async = true;
-                  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                  ds.charset = 'UTF-8';
-                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-                })();
-              }
-              var duoshuo_comment = 
-                '<div class="ds-thread" \
-                    data-thread-key="2012/06/07/study-english-topic-composition/" \
-                    data-title="话题作文模版" data-url="http://blog.idhyt.com/2012/06/07/study-english-topic-composition/">  \
-                </div>';
-              t_comments.insertAdjacentHTML("afterBegin", duoshuo_comment);
-            }
-            -->
-          }
-        }
-
-      </script>
-      <img src="http://disqus.com/api/users/avatars/disqus_api.jpg" style="display: none" onload="google_allow()" onerror="google_forbid()"/>
-
+      run_disqus_script('embed.js');
     
-
-  
-
-
+  </script>
 
   
   
