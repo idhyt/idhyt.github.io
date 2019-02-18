@@ -2,6 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.idhyt.com/2015/08/01/exploit-cve-2014-7911-exp/</loc>
+    <lastmod>2019-02-18T04:04:47.061Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/09/25/android-injection-xposed/</loc>
+    <lastmod>2019-02-18T04:04:42.677Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/11/28/android-injection-xposed-usage/</loc>
+    <lastmod>2019-02-18T04:04:37.838Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2015/07/31/exploit-cve-2014-7911/</loc>
+    <lastmod>2019-02-18T04:04:32.117Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/03/13/exploit-cve-2015-1538/</loc>
+    <lastmod>2019-02-18T04:04:27.950Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.idhyt.com/2016/03/15/exploit-cve-2015-3864/</loc>
+    <lastmod>2019-02-18T04:04:00.978Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.idhyt.com/2017/05/12/android-syscall-define/</loc>
     <lastmod>2018-03-28T09:14:18.718Z</lastmod>
   </url>
@@ -47,21 +77,6 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2015/07/31/exploit-cve-2014-7911/</loc>
-    <lastmod>2017-01-02T09:08:57.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/08/01/exploit-cve-2014-7911-exp/</loc>
-    <lastmod>2017-01-02T09:08:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2015/09/25/android-injection-xposed/</loc>
-    <lastmod>2017-01-02T09:07:33.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.idhyt.com/2016/01/10/andorid-work-mode-cpu-gpu-io/</loc>
     <lastmod>2017-01-02T09:03:13.000Z</lastmod>
   </url>
@@ -69,11 +84,6 @@
   <url>
     <loc>http://blog.idhyt.com/2016/02/26/exploit-cve-2014-3153/</loc>
     <lastmod>2017-01-02T09:00:09.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2016/03/13/exploit-cve-2015-1538/</loc>
-    <lastmod>2017-01-02T08:59:09.000Z</lastmod>
   </url>
   
   <url>
@@ -117,11 +127,6 @@
   </url>
   
   <url>
-    <loc>http://blog.idhyt.com/2015/11/28/android-injection-xposed-usage/</loc>
-    <lastmod>2016-09-05T15:23:39.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.idhyt.com/2016/06/09/exploit-process-descriptor/</loc>
     <lastmod>2016-07-07T14:47:40.000Z</lastmod>
   </url>
@@ -149,11 +154,6 @@
   <url>
     <loc>http://blog.idhyt.com/2015/08/07/python-challenge-0-10/</loc>
     <lastmod>2016-07-07T14:14:00.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.idhyt.com/2016/03/15/exploit-cve-2015-3864/</loc>
-    <lastmod>2016-07-07T14:07:28.000Z</lastmod>
   </url>
   
   <url>
